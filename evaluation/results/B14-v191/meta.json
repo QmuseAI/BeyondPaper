@@ -1,0 +1,24 @@
+{
+ "run_id": "B14-v191",
+ "paper_id": "B14",
+ "variant": "blind",
+ "version": "v1.9.1",
+ "saved": "2026-11-16",
+ "source_file": "../pages/B14-v191.txt",
+ "note": "",
+ "n_findings": 40,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 16,
+  "grey": 20,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 16,
+  "grey": 20,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

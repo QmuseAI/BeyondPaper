@@ -1,0 +1,24 @@
+{
+ "run_id": "B09-v1116p",
+ "paper_id": "B09",
+ "variant": "clean",
+ "version": "v1.11.6",
+ "saved": "2026-11-18",
+ "source_file": "../pages/B09-v1116p.c4.json",
+ "note": "",
+ "n_findings": 47,
+ "truncated": false,
+ "counts": {
+  "red": 6,
+  "yellow": 10,
+  "grey": 27,
+  "green": 4
+ },
+ "counts_reported": {
+  "red": 6,
+  "yellow": 10,
+  "grey": 27,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

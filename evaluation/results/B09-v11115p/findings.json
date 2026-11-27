@@ -1,0 +1,337 @@
+{
+ "paper": {
+  "title": "Measuring the effects of exercise in neuromuscular disorders: a systematic review and meta-analyses",
+  "doi": "10.12688/wellcomeopenres.15825.2",
+  "journal": "Wellcome Open Research 2020"
+ },
+ "counts": {
+  "red": 7,
+  "yellow": 9,
+  "grey": 24,
+  "green": 5
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 13,
+   "archive_ok": 0,
+   "port_gap": 9,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 6
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 48
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "claims_scan": "problem",
+   "abstract_vs_body": "problem",
+   "param_mismatch": "problem",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "problem"
+  },
+  "claims_scan": "claims_scan.py: 1 candidate, Abstract I2 58.5% vs Table 2/Heterogeneity 58.05% for STS (seconds); recorded as red number_mismatch in llm.findings.json",
+  "abstract_vs_body": "Abstract lists STS (seconds) p=0.04 among outcomes that detected change, but Table 2 CI -1.31 to 0.03 includes 0; abstract I2 58.5% vs 58.05% in Table 2",
+  "param_mismatch": "Methods: REML random-effects model; code/forest.R before-after rma() calls pass no method= (metafor default), only the between-group call passes method=REML",
+  "figure_data_mismatch": "Table 1/Table 2 study counts and patient Ns match the rows of data/Ex.vs.NonEx.csv and data/Pre.Post.csv per outcome (checked in stage 4 adapter); stored figures are the authors' own output",
+  "phantom_experiment": "Paper reports a power analysis (199/34/15 participants, 80% power, 5% alpha) and Egger's regression intercept, but no script in code/ performs either; code/ only draws forest, funnel and ADL plots"
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2 vs Results text",
+   "evidence": "'STS seconds SMD before-after' is reported with different values. Table 2: -0.5 SMD | Results text: -0.67 SMD. Agreeing reports: 1 location(s) [Table 2] vs 1 [Results text].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'STS seconds SMD before-after' is correct (-0.5 SMD or -0.67 SMD)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Table 2 vs Abstract",
+   "evidence": "'I2 STS seconds' is reported with different values. Table 2: 58.05 % | Abstract: 58.5 %. Agreeing reports: 1 location(s) [Table 2] vs 1 [Abstract].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'I2 STS seconds' is correct (58.05 % or 58.5 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "p. 4, line 91",
+   "evidence": "'-0.67 [95% CI -1.31, 0.03]; p=0.04) ( Figure 8), and rise from sup': The 95% CI [-1.31, 0.03] includes the null value 0, but the reported p is = 0.04; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "stat_decision_error",
+     "location": "Results text (p.4) and Table 2, STS (seconds)",
+     "severity": "red",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': The 95% CI [-0.23, -0.11] excludes the null value 0, but the reported p is = 0.46; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': Estimate -0.06 lies outside its own 95% CI [-0.23, -0.11].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "stat_inconsistency",
+     "location": "Results text (p.4) vs Table 2, Creatine kinase",
+     "severity": "red",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F5"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Abstract vs Table 2 / Heterogeneity, I2 for STS (seconds)",
+   "evidence": "Abstract: 'I²=58·5%'; Table 2 and Heterogeneity section: I²=58.05%. Same outcome, same analysis.",
+   "source": "llm",
+   "question_for_authors": "Which I² value is correct, 58.5% or 58.05%?",
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Results, Before versus after exercise training (p.4) vs Table 2, row 'STS (seconds)'",
+   "evidence": "Results text: 'STS (seconds) (SMD -0.67 [95% CI -1.31, 0.03]; p=0.04)'; Table 2 same outcome: SMD -0.50, 95% CI -1.31, 0.03, p=0.04. The CI is identical in both places, so the estimate differs (-0.67 vs -0.50) while the interval does not.",
+   "source": "llm",
+   "question_for_authors": "Which SMD is correct for STS (seconds), -0.67 or -0.50, and does the CI belong to it?",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 15) vs body (paper.md line 151)",
+   "evidence": "The Abstract gives 58.5 ('...Substantial I ^2 statistic heterogeneity was revealed for STS (seconds) ( I²=58.5%; p=0.04) and citrate synthase ( I²=70.9...'); the body never states 58.5. The body sentence about the same quantity (shared words: citrate, heterogeneity, seconds, synthase) gives 58.05: '...We noted no evidence of heterogeneity with the exception of I ^2 statistically significant heterogeneity for STS (seconds) ( I²=58.05%; p=0.04) and citrate synthase ( I²=70.90%; p=0.002) ( Table 2)....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 58.5 (Abstract) or 58.05 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Methods",
+   "evidence": "The paper names Egger's test (\"…tion bias was assessed via funnel plots with trim and fill, and estimated using Egger’s regression intercept ^[16]. The quality of evidence for outcomes was rated us…\"), but no matching call (/regtest|egger/) was found outside comments in 5 code file(s). Same pattern at 1 more place(s): MCID and power analysis (p.4) vs code/.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Where in the released code is the Egger's test performed?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "MCID and power analysis (p.4) vs code/"
+   ],
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "MCID and power analysis (p.4) vs code/",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "p. 4, line 175",
+   "evidence": "'04 | 0.29 | 111.08 | S | 32.21 | 6.99 | (7.11 to 6.86)': interval (7.11 to 6.86) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Table 3, 6MWT % change 95% CI",
+    "Table 3, Fatigue Severity Scale % change 95% CI"
+   ],
+   "merged": [
+    {
+     "type": "stat_inconsistency",
+     "location": "Table 3, 6MWT % change 95% CI",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    },
+    {
+     "type": "stat_inconsistency",
+     "location": "Table 3, Fatigue Severity Scale % change 95% CI",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 179",
+   "evidence": "'8 | -0.65 | 3.50 | M | -2.27 | -23.80 | (-15.19 to -32.4)': interval (-15.19 to -32.4) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "ghost",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/funnel.R:17",
+   "evidence": "The loop starting at line 15 reads datS, the per-iteration variable of the loop at line 4; this loop's own per-iteration variable is datR. It uses the value left over from the earlier loop.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Should line 17 use datR instead of datS?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "llm",
+   "type": "methods_code_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Data analysis (Methods) vs code/funnel.R",
+   "evidence": "Methods: 'Publication bias was assessed via funnel plots with trim and fill, and estimated using Egger's regression intercept'. The released code (code/funnel.R) calls funnel() and trimfill() but no regtest()/Egger intercept is computed anywhere in code/.",
+   "source": "llm",
+   "question_for_authors": "Where is the Egger regression intercept computed, and what are its values?",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F13"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Data analysis (Methods)",
+   "evidence": "Methods state a REML random-effects model, but code/forest.R calls rma(measure=\"SMD\", ...) for the before-after analyses without method=, so metafor's default estimator (not REML) is used there; only the between-group call passes method=\"REML\".",
+   "source": "llm",
+   "question_for_authors": "Was the before-after meta-analysis run with REML or with metafor's default estimator?",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F14"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C6"
+   ],
+   "location": "Data analysis (Methods) vs code/forest.R:6",
+   "evidence": "Methods state a REML random-effects model; the before-after rma() calls in code/forest.R pass no method= argument, so metafor's default estimator is used, while only the between-group call (forest.R:35) passes method=REML.",
+   "source": "llm",
+   "question_for_authors": "Was the before-after meta-analysis run with REML or with metafor's default estimator?",
+   "judgement_key": "param_mismatch",
+   "verified_by": "bp_work/checks/V11.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F15",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "code/funnel.R:17 (exercise vs usual-care funnel loop)",
+   "evidence": "In the usual-care funnel loop, datR <- funneldata.R[[i]] is followed by escalc(..., data=datS), where datS is the per-iteration variable left over from the before-after loop at line 4; the escalc result is then discarded and rma() is called on datR, so the stored funnel plots (Figure.a30, a32, a35) are drawn from the usual-care data but the escalc step uses the wrong frame. The paper's publication-bias statement ('funnel plots suggested no evidence of publication bias') rests on these plots.",
+   "source": "llm",
+   "question_for_authors": "Were the usual-care funnel plots (Extended data Figures 30-35) produced with the intended data frame?",
+   "verified_by": "bp_work/checks/V10.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F16"
+  }
+ ]
+}

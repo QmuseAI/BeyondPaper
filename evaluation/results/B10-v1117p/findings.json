@@ -1,0 +1,224 @@
+{
+ "paper": {
+  "title": "A Delphi Study to Strengthen Research-Methods Training in Undergraduate Psychology Programs",
+  "doi": "not reported"
+ },
+ "counts": {
+  "red": 2,
+  "yellow": 1,
+  "grey": 12,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 0,
+   "port_gap": 2,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 1
+  }
+ },
+ "multiverse": {
+  "robustness": 0.3333333333333333,
+  "baseline_holds": false,
+  "breaking_changes": [
+   {
+    "fork": "threshold",
+    "value": "0.7",
+    "holds": true,
+    "effect": 5
+   },
+   {
+    "fork": "rule",
+    "value": "collapsed_nonstudent",
+    "holds": true,
+    "effect": 1
+   }
+  ],
+  "n_ok": 18
+ },
+ "judgement_checks": {
+  "param_mismatch": "Methods (Definition of consensus, p.3): consensus = >=70% essential in each nonstudent group, and if a group has <12 participants require 75% across all nonstudent ratings collapsed. Code manuscript.Rmd:157 sets consensus = perc_essential >= 0.75 per group and manuscript.Rmd:327-330 requires noStudents & academic & instructor all TRUE; no 70% rule and no <12-participant rule appears in the code. Paper also says a 75% threshold is commonly used and 'we felt this was a balanced approach' while the preregistered definition is 70%.",
+  "figure_data_mismatch": "Fig. 2 flowchart numbers are computed in R (manuscript.Rmd:830-860) and manually inserted into a PowerPoint (flowchart.PNG); the PNG is an image with no stored numeric source, so the flowchart counts cannot be checked against the data. Table 2 values are stored in results/table2_verbatim.csv and match the paper's Table 2 rows (78 rows; 26/8/44).",
+  "phantom_experiment": "Methods describe three sensitivity analyses (rounds, instructor vs academic, initial 170 vs final 103) and a 75%-all-four-groups sensitivity analysis. results/sensitivity/round1_round2.csv, instructor_academic.csv and final_all.csv exist and are produced by manuscript.Rmd:540-700; the all-four-groups sensitivity analysis has no code chunk and no stored output (not reported). Thematic analysis is qualitative and has no code, as expected.",
+  "abstract_vs_body": "Abstract (p.1): 'Of 78 items included in the consensus process, 38 reached consensus'. Body (Results, Delphi-item ratings, p.4): 26 items reached consensus in Round 1 and 8 in Round 2 = 34; stored results/all/0.main_table.csv has consensus TRUE 27 + consensus.1 TRUE 7 = 34 and results/table2_verbatim.csv has 26 '1' + 8 '2' = 34. Abstract 38 vs body 34.",
+  "claims_scan": "claims_scan candidate #0 (yellow, number_mismatch, Abstract line 12 vs body line 423): confirmed as the same 38-vs-34 conflict recorded under abstract_vs_body; the body sentence 'Consensus was reached for 34 items' is the sum 26+8 and the stored table2_verbatim.csv gives 26+8=34, so the Abstract's 38 is the outlier. No second claims_scan candidate."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "Abstract, Results, Participants vs Results, Participants",
+   "evidence": "'n participants (final sample)' is reported with different values. Abstract: 103 participants | Results, Participants: 113 participants. Agreeing reports: 2 location(s) [Abstract, Results, Participants] vs 1 [Results, Participants].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "Abstract, Results, Delphi-item ratings vs Results, Delphi-item ratings (26+8)",
+   "evidence": "'n items reaching consensus' is reported with different values. Abstract: 38 items | Results, Delphi-item ratings (26+8): 34 items. Agreeing reports: 2 location(s) [Abstract, Results, Delphi-item ratings] vs 1 [Results, Delphi-item ratings (26+8)].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 12) vs body (paper.md line 423)",
+   "evidence": "The Abstract gives 38 ('...Of 78 items included in the consensus process, 38 reached consensus....'); the body never states 38. The body sentence about the same quantity (shared words: consensus, items, reached) gives 34: '...Consensus was reached for 34 items....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "id": "F4",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (our Python port) vs paper.md Abstract and Results (no stored participant table)",
+   "evidence": "Our re-computation of 'n participants final sample' gives 116 (bp_work/adapter.py (our Python port)), but the authors' stored output (paper.md Abstract and Resu"
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (our Python port) vs bp_work/results/table2_verbatim.csv (78 rows)",
+   "evidence": "Our re-computation of 'n items in consensus process' gives 79 (bp_work/adapter.py (our Python port)), but the authors' stored output (bp_work/results/table2_ver"
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (our Python port of manuscript.Rmd)",
+   "evidence": "Re-computed 'n items reaching consensus (stored main_table)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Survey, line 85",
+   "evidence": "'e their level of agreement to 72 items on a scale from 1 to 9 in whi': 72 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a denominat"
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 4, Sec. Thematic analysis of the open-ended ques, line 323",
+   "evidence": "'ic items, 30 participants for 82 suggested items, and 73 participants regardin': 82 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "41 count mentions read; 3 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F10",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F11",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/manuscript.Rmd:661",
+   "evidence": "2 data-exclusion step(s): filter@661, filter@797. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results, Participants; code/manuscript.Rmd:41,78-90",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. pilot user_ids and attention-check failures removed in code; the paper'"
+  },
+  {
+   "id": "F13",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Recommendations",
+   "evidence": "Claim C4 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F14",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Methods, Definition of consensus (p.3) vs code/manuscript.Rmd:157,327-330",
+   "evidence": "Methods: consensus = >=70% essential in each nonstudent group, with 75% across collapsed nonstudent ratings when a group has <12 participants. Code: consensus =",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ]
+  },
+  {
+   "id": "F15",
+   "module": "multiverse",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "baseline universe",
+   "evidence": "With the paper's own choices the claim 'A substantial minority of the 78 Delphi items reaches consensus (>=34 of 78)' does not hold on re-run (effect = -1.0). [",
+   "severity_reasons": [
+    "port_rerun"
+   ]
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "2 multiply-reported quantities agree across locations; 0 re-computed values match the paper."
+  }
+ ]
+}

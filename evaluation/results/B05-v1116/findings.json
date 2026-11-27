@@ -1,0 +1,180 @@
+{
+ "paper": {
+  "title": "A Delphi Study to Strengthen Research-Methods Training in Undergraduate Psychology Programs",
+  "doi": "not reported in paper.md",
+  "venue": "Advances in Methods and Practices in Psychological Science (2024)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 11,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 7,
+   "port_gap": 2,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Sensitivity Analyses, p.4 vs bp_work/results/final/0.main_table.csv (rows with non-NA consensus.1 = 52; rows with both consensus and consensus.1 non-NA = 45)",
+   "evidence": "The paper reports 'n items in both rounds' = 47 items (Sensitivity Analyses, p.4); the authors' own stored output (bp_work/results/final/0.main_table.csv (rows with non-NA consensus.1 = 52; rows with both consensus and consensus.1 non-NA = 45)) gives 45. Our re-run gives 52, which matches neither. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n items in both rounds' (47), given that bp_work/results/final/0.main_table.csv (rows with non-NA consensus.1 = 52; rows with both consensus and consensus.1 non-NA = 45) gives 45?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim '34 of 78 items reach consensus (26 in Round 1, 8 in Round 2)' holds in 58% of 24 universes. Single changes that flip it: threshold=0.8.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under threshold=0.8?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "id": "F3",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (Python port of manuscript.Rmd, our re-run) vs bp_work/results/table2_verbatim.csv (Consensus column count)",
+   "evidence": "Our re-computation of 'n items reaching consensus in Round 1' gives 28 (bp_work/adapter.py (Python port of manuscript.Rmd, our re-run)), but the authors' stored output (bp_work/results/table2_verbatim.csv (Consensus colu"
+  },
+  {
+   "id": "F4",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (Python port, our re-run) vs bp_work/results/table2_verbatim.csv (78 rows)",
+   "evidence": "Our re-computation of 'n items in consensus process' gives 79 (bp_work/adapter.py (Python port, our re-run)), but the authors' stored output (bp_work/results/table2_verbatim.csv (78 rows)) gives 78, which matches the pap"
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Survey, line 85",
+   "evidence": "'e their level of agreement to 72 items on a scale from 1 to 9 in whi': 72 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a denominator elsewhere). A typo, or a different subgroup?"
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 4, Sec. Thematic analysis of the open-ended ques, line 323",
+   "evidence": "'ic items, 30 participants for 82 suggested items, and 73 participants regardin': 82 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a denominator elsewhere). A typo, or a different subgroup?"
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "40 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F8",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment (Dockerfile / environment file).]",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F9",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/manuscript.Rmd:661",
+   "evidence": "2 data-exclusion step(s): filter@661, filter@797. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F10",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Method, p.3",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis; the sample is a convenience sample of the UK psychology community."
+  },
+  {
+   "id": "F11",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Sensitivity Analyses, p.4",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F12",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Definition of consensus, p.3",
+   "evidence": "Claim C7 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F13",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract p.1; Recommendations for Research-Methods Education, p.5-6",
+   "evidence": "Claim C9 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "1 multiply-reported quantities agree across locations; 9 re-computed values match the paper."
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "counts": {
+  "red": 1,
+  "yellow": 3,
+  "grey": 24,
+  "green": 4
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 0,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2, Results p.2, Discussion p.3 vs Abstract",
+   "evidence": "'specificity CarbaDetector internal' is reported with different values. Table 2: 85.0 % | Abstract: 84.4 %. Agreeing reports: 3 location(s) [Table 2, Results p.2, Discussion p.3] vs 1 [Abstract].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'specificity CarbaDetector internal' is correct (85.0 % or 84.4 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Abstract vs Table 2 / Results p.2 / Discussion p.3"
+   ],
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract vs Table 2 / Results p.2 / Discussion p.3",
+     "severity": "red",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods p.5",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> not_reported. Zone diameters were measured manually; no blinding of the reader to WGS results is stated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were blinding and randomisation of samples/animals/patients used and described?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "ledger",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/",
+   "evidence": "Artifact A2 (code) is referred to by the paper but not provided.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Can the code 'code/' be shared?",
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods p.5 vs Supplementary Data 1 sheet 'Table 2'",
+   "evidence": "Methods p.5: 'the final cutoff being 0.6, meaning that samples were predicted as negative, if a probability of more than 60% was determined'. Table 2 CarbaDetector column (TP 230, TN 125, FP 22, FN 8) is identical to the 'random forest expanded sensitive' column of Supplementary Data 1 sheet 'Table 2' (230/125/22/8), so the stored predictions are the ones behind the table; the direction of the 0.6 rule (negative if p>0.6) is the opposite of the stated aim of raising sensitivity and is not verifiable without the code.",
+   "source": "llm",
+   "question_for_authors": "Does the 0.6 cut-off classify p>0.6 as negative or as positive, and which column of Supplementary Data 1 holds the CarbaDetector predictions?",
+   "judgement_key": "param_mismatch",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4"
+  }
+ ]
+}

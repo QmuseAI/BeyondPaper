@@ -1,0 +1,609 @@
+{
+ "paper": {
+  "title": "A New Feature Expansion Technique Combined with Shunt Gated Recurrent Unit Neural Network for Epileptic Seizure Diagnosis",
+  "authors": [
+   "Baoyou Zheng",
+   "Zhiping Wang"
+  ],
+  "doi": "not reported (full text not obtained; see bp_out/assumptions.md)",
+  "full_text_available": false
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 26,
+  "grey": 17,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "The proposed PCC-WFE feature-expansion technique improves the classification performance of traditional classifiers on the UCI Epileptic Seizure Recognition dataset (Dataset 2 = raw 178 features + 1 PCC-WFE feature vs Dataset 1 = raw 178 features).",
+   "location": "capsule README (code/README.md); capsule fig_5.py (paper Fig. 5 box plots)",
+   "light": "yellow",
+   "findings": [
+    "F19",
+    "F20",
+    "F21",
+    "F22",
+    "F25",
+    "F26",
+    "F36",
+    "F41",
+    "F42",
+    "F43"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "The proposed SGRU (shunt/residual GRU) classifier outperforms a plain GRU classifier on both datasets (ACC, Se, PPV).",
+   "location": "capsule fig_6.py (paper Fig. 6, Dataset 1) and fig_8.py (paper Fig. 8, Dataset 2)",
+   "light": "yellow",
+   "findings": [
+    "F21",
+    "F22",
+    "F23",
+    "F24",
+    "F25",
+    "F37",
+    "F41",
+    "F42"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "SGRU on the PCC-WFE-expanded dataset (Dataset 2) is the best configuration, reaching ~97.4% accuracy.",
+   "location": "capsule fig_5.py Acc55 array; fig_8.py",
+   "light": "yellow",
+   "findings": [
+    "F21",
+    "F22",
+    "F23",
+    "F24",
+    "F25",
+    "F38",
+    "F41",
+    "F42"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "The PCC-WFE feature is a Pearson-correlation-weighted sum of the 178 raw EEG channels, i.e. a single new feature added to the raw feature set.",
+   "location": "code/PCC_WFE.py:9-45",
+   "light": "grey",
+   "findings": [
+    "F39"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "The dataset is the UCI Epileptic Seizure Recognition dataset (11,500 samples, 178 features, 5 classes collapsed to 2).",
+   "location": "capsule README; data/Epileptic Seizure Recognition.csv",
+   "light": "grey",
+   "findings": [
+    "F40"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py:65-67",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. MinMaxScaler fitted on the full 11,500 rows before CV; the PCC-WFE feature is computed from all labels.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:51-52",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. No inclusion/exclusion rules; all 11,500 rows used, labels collapsed y>1 -> 0.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/.py",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule anywhere in the capsule.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "id": "F5"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:39; code/SGRU_GRU_Kfold.py:49",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> not_reported. KFold(10) without shuffle, no grouping by patient/segment; the UCI file is ordered by class and each patient contributes 500 consecutive segments.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)?",
+   "file": "ghost.findings.json",
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:16-30",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> not_reported. Fixed untuned hyperparameters for all classifiers; no search, so no test-set tuning, but also no tuning effort for baselines.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)?",
+   "file": "ghost.findings.json",
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "data/Epileptic Seizure Recognition.csv",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No de-duplication; the UCI segments are non-overlapping by construction but this is not stated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were duplicates and near-duplicates between training and test sets removed?",
+   "file": "ghost.findings.json",
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py:9-45",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. No negative control for the PCC-WFE feature (e.g. random weights, shuffled labels, or the same feature computed inside the training fold).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?",
+   "file": "ghost.findings.json",
+   "id": "F9"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No seed set; single run per configuration.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "id": "F10"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:17",
+   "evidence": "XGBClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F11"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:29",
+   "evidence": "RandomForestClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F12"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/RawData_ML_Kfold.py:17",
+   "evidence": "XGBClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F13"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/RawData_ML_Kfold.py:29",
+   "evidence": "RandomForestClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F14"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/pca_test.py:23",
+   "evidence": "XGBClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F15"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/pca_test.py:35",
+   "evidence": "RandomForestClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F16"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:23",
+   "evidence": "XGBClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F17"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:35",
+   "evidence": "RandomForestClassifier(...) called without random_state.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "id": "F18"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_out/x5_paired_check.json (our re-run of the capsule pipeline)",
+   "evidence": "Executed next experiment X5 on the released data: the PCC-WFE feature changes accuracy by +0.00009 (XGBoost), +0.00087 (RF), +0.00017 (DT) and -0.00026 (SVM) relative to the raw 178 features, while the per-fold SD of accuracy is 0.0043-0.0080, i.e. 5-90x larger than the effect. The capsule reports only means, so the Dataset 2 > Dataset 1 comparison cannot be separated from fold-to-fold noise with the released numbers.",
+   "source": "llm",
+   "question_for_authors": "Can the per-fold accuracies for Dataset 1 and Dataset 2 be provided so that a paired test across folds can be run?",
+   "file": "llm.findings.json",
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_out/paper_agent/paper_agent.py whatif split=group (re-run of the capsule pipeline)",
+   "evidence": "Paper-agent what-if on the released data: with GroupKFold(10) over pseudo-patient groups (row//500) the PCC-WFE feature gives acc_pcc 0.93257 vs acc_none 0.93283, i.e. the feature is 0.00026 accuracy WORSE than the raw 178 features, while the paper's own split gives +0.00009. The claim 'Dataset 2 > Dataset 1' therefore reverses under a patient-grouped split.",
+   "source": "llm",
+   "question_for_authors": "Does the PCC-WFE gain survive a split that keeps all segments of a patient in one fold?",
+   "file": "llm.findings.json",
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "grouped_split_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/NewData_ML_Kfold.py:39; code/SGRU_GRU_Kfold.py:49",
+   "evidence": "KFold(n_splits=10) without shuffle splits the 11,500 rows in file order. The UCI Epileptic Seizure Recognition dataset is 5 classes x 500 segments x 23 patients (23 x 500 = 11,500), and the file is ordered by class, so consecutive rows come from the same patient. The capsule never groups by patient or segment, so segments of the same patient can fall in both training and test folds.",
+   "source": "llm",
+   "question_for_authors": "Were the folds grouped by patient/segment, and how does accuracy change with a patient-grouped split?",
+   "file": "llm.findings.json",
+   "id": "F21"
+  },
+  {
+   "module": "llm",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/PCC_WFE.py:65-67",
+   "evidence": "MinMaxScaler(feature_range=(-1,1)) is fitted on the full 11,500-row matrix (including the PCC-WFE feature, which is itself computed from the labels of all rows via pc(X, y_data)) before the 10-fold split, so test-fold information enters the scaling and the new feature. The effect on accuracy is not quantified in the capsule.",
+   "source": "llm",
+   "question_for_authors": "Was the scaler and the PCC-WFE feature recomputed inside each training fold?",
+   "file": "llm.findings.json",
+   "id": "F22"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "code/SGRU_GRU_Kfold.py (whole file); code/run:5-9",
+   "evidence": "The capsule's master script code/run executes only NewData_ML_Kfold.py and the fig_*.py scripts; SGRU_GRU_Kfold.py (the only code that trains SGRU and GRU) is never called, and results/output contains no SGRU/GRU log. The SGRU/GRU numbers exist only as hard-coded literals in fig_6.py:8 and fig_8.py:7, so the neural-network experiment has no stored output behind it in the capsule.",
+   "source": "llm",
+   "question_for_authors": "Where is the console log or saved history of the SGRU/GRU 10-fold runs that produced the numbers in Figs. 6 and 8?",
+   "file": "llm.findings.json",
+   "id": "F23"
+  },
+  {
+   "module": "llm",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "code/SGRU_GRU_Kfold.py:14-41,80-83; code/NewData_ML_Kfold.py:16-30",
+   "evidence": "No random seed is set anywhere in the capsule (no np.random.seed, random_state=, or keras seed). Keras weight initialisation, dropout and the RandomForest/DecisionTree/XGBoost learners are therefore stochastic, yet the paper reports single point estimates (e.g. SGRU ACC 97.33% / 97.43%) without a seed or a spread across repeated runs.",
+   "source": "llm",
+   "question_for_authors": "Which seed(s) produced the reported SGRU/GRU and tree-ensemble numbers, and what is the run-to-run spread?",
+   "file": "llm.findings.json",
+   "id": "F24"
+  },
+  {
+   "module": "llm",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/SGRU_GRU_Kfold.py:83 and :151 (validation_data=(x_test, y_test))",
+   "evidence": "In both SGRU loops the test fold is passed to Keras as validation_data during training, so the fold used for the reported ACC/Se/PPV is also the fold that drives the training-time validation metric. No early stopping or checkpoint selection is used, so the reported score is not selected on the test fold, but the training loop does observe it every epoch.",
+   "source": "llm",
+   "question_for_authors": "Was the test fold used only for monitoring, or was any model/epoch selection based on it?",
+   "file": "llm.findings.json",
+   "id": "F25"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim C1 (PCC-WFE feature improves accuracy over the raw 178 features) holds in 42% of the 66 universes that completed (200 of 216 grid points run, 16 s per universe, 642 s wall time). The effect is tiny: baseline effect = +0.00009 accuracy (0.93122 vs 0.93113 for XGBoost), and the specification curve spans -0.0015 to +0.0015 accuracy. Single deviations from the paper's choices that flip the claim: split=shuffle (effect -0.00009), split=group (-0.00027), model=svm (-0.00026). Marginal hold rates: split kfold 56%, shuffle 53%, group 21%; model svm 63%, xgboost 47%, rf 38%, dt 24%; scale global 41% vs fold 44%. The negative control (random-weight feature) never holds, so the PCC weights are not worse than chance but the gain over no feature is within fold-to-fold noise (per-fold SD ~0.005-0.008).",
+   "source": "script:multiverse.py",
+   "question_for_authors": "What is the accuracy difference between Dataset 1 and Dataset 2 for each classifier, with its fold-to-fold spread, and does it survive a shuffled or patient-grouped split?",
+   "file": "multiverse.findings.json",
+   "id": "F26"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "capsule README (code/README.md); capsule fig_5.py (paper Fig. 5 box plots)",
+   "evidence": "Claim C1 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "id": "F36"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "capsule fig_6.py (paper Fig. 6, Dataset 1) and fig_8.py (paper Fig. 8, Dataset 2)",
+   "evidence": "Claim C2 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "id": "F37"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "capsule fig_5.py Acc55 array; fig_8.py",
+   "evidence": "Claim C3 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "id": "F38"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "code/PCC_WFE.py:9-45",
+   "evidence": "Claim C4 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "id": "F39"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "capsule README; data/Epileptic Seizure Recognition.csv",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "id": "F40"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "bp_work/paper.md (whole file); capsule metadata/metadata.yml",
+   "evidence": "The published article could not be retrieved in this run (4 web searches for the exact title, the author names, 'shunt gated recurrent unit' and 'PCC-WFE' returned no matching record). No abstract, Methods, Results or Discussion text is available, so every paper-level claim in this ledger is reconstructed from the capsule (README, code, stored log, hard-coded figure data).",
+   "source": "llm",
+   "question_for_authors": "Please provide the DOI or a PDF of the published article so that the reported numbers can be checked against the text.",
+   "file": "llm.findings.json",
+   "id": "F41"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/NewData_ML_Kfold.py:51-52; code/SGRU_GRU_Kfold.py:63-64",
+   "evidence": "Labels are collapsed with Y[Y>1]=0, i.e. the 4 non-seizure classes (eyes open, eyes closed, hippocampal formation, seizure-free interval) are merged into one negative class. The capsule gives no per-class breakdown, so the reported ACC/Se/PPV cannot be separated from the class imbalance (2,300 positive vs 9,200 negative rows).",
+   "source": "llm",
+   "question_for_authors": "Can the per-class (5-class) confusion matrix be provided?",
+   "file": "llm.findings.json",
+   "id": "F42"
+  },
+  {
+   "module": "llm",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_out/repro_status.json; code/NewData_ML_Kfold.py:16-30",
+   "evidence": "Our scikit-learn 1.9.1 / xgboost 3.2.0 port reproduces DT (0.9239 vs 0.9239) and RF (0.9440 vs 0.9432) but not XGBoost (0.9311 vs 0.9513) or SVM (0.9673 vs 0.878) on Dataset 1, and the same on Dataset 2. The authors' stored log agrees with the paper, so this is a port gap (xgboost 0.90 vs 3.2.0 defaults; sklearn SVC gamma default 'scale' vs 0.19-era behaviour), not a paper error. Consequence: the SVM row of the paper's comparison cannot be checked with our port, and our SVM is the strongest classifier (0.967) where the paper reports the weakest (0.878).",
+   "source": "llm",
+   "question_for_authors": "Which scikit-learn and xgboost versions produced the SVM and XGBoost rows, and what gamma did the SVM use?",
+   "file": "llm.findings.json",
+   "id": "F43"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 8 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "id": "F44"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "0 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "id": "F45"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 6,
+   "archive_ok": 2,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.42424242424242425,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "split",
+    "value": "shuffle",
+    "holds": false,
+    "effect": -8.695652173906776e-05
+   },
+   {
+    "fork": "split",
+    "value": "group",
+    "holds": false,
+    "effect": -0.00026666666666685934
+   },
+   {
+    "fork": "model",
+    "value": "svm",
+    "holds": false,
+    "effect": -0.0002608695652174253
+   }
+  ],
+  "n_ok": 66
+ },
+ "top_experiment": "X5"
+}

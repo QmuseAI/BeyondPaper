@@ -1,0 +1,24 @@
+{
+ "run_id": "B07-v11116p",
+ "paper_id": "B07",
+ "variant": "injected",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B07-v11116p.c4.json",
+ "note": "new account; DeepSeek V4 Pro throughout; c4 sha256 8198503e (red/yellow full); pitfall-atlas zip lacked atlas/ data in this run (prior/match skipped)",
+ "n_findings": 24,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 4,
+  "grey": 16,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 4,
+  "grey": 16,
+  "green": 2
+ },
+ "reproduction": "full"
+}

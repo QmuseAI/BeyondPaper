@@ -1,0 +1,445 @@
+{
+ "paper": {
+  "title": "DAPPER Correlation and Survival (capsule 3894632; capsule README + stored results used as paper text)",
+  "doi": "not reported"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 9,
+  "grey": 13,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "Radiomic, microbiome and clinical features are correlated with one another in the DAPPER LMS cohort; the correlation spreadsheet can be sorted by strength, significance and correlation type.",
+   "location": "README (page 1); results/correlation_results.csv",
+   "light": "yellow",
+   "findings": [
+    "F8",
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "A reduced feature set derived from the correlation analysis is the input to the survival analysis.",
+   "location": "README (page 1); results/reduced-feature-set.csv",
+   "light": "yellow",
+   "findings": [
+    "F8"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "Univariate Cox models for PFS identify clinical features (best RECIST response, Gr1/Gr2 toxicities, Gr3 toxicities) as associated with PFS after FDR adjustment.",
+   "location": "results/dp_survival.nb.html pfs_results (page 2)",
+   "light": "yellow",
+   "findings": [
+    "F5",
+    "F6",
+    "F7",
+    "F9",
+    "F20"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "No radiomic principal component is significantly associated with PFS (all p.adjust > 0.68).",
+   "location": "results/dp_survival.nb.html pfs_results (page 2)",
+   "light": "yellow",
+   "findings": [
+    "F5",
+    "F6",
+    "F9",
+    "F20",
+    "F22"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "No microbiome feature (Shannon diversity or species relative abundance) is significantly associated with PFS (all p.adjust > 0.68).",
+   "location": "results/dp_survival.nb.html pfs_results (page 2)",
+   "light": "yellow",
+   "findings": [
+    "F5",
+    "F6",
+    "F9",
+    "F20"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The same univariate Cox pipeline is applied to overall survival (OS) and produces a second results data frame.",
+   "location": "README (page 1); code/dp_survival.Rmd (OS chunk)",
+   "light": "grey",
+   "findings": [
+    "F19"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Features are mean/sd normalized before modelling and p-values are FDR-adjusted across all tested features.",
+   "location": "code/dp_survival.Rmd; page 3",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier definition or removal rule is stated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py (PCA)",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No random seed; PCA sign convention not stated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "results/dp_survival.nb.html",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. No negative control (e.g. permuted outcome) for the radiomic/microbiome features.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Was any negative control (permuted outcome or shuffled features) run for the radiomic and microbiome screens?",
+   "file": "ghost.findings.json",
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "code/dp_survival.Rmd (covariates <- covariates[-1]) vs results/dp_survival.nb.html",
+   "evidence": "The R notebook drops the first two columns of reduced-feature-set.csv (index column and 'Age') from the covariate list, so Age is never tested; the stored table has 39 rows for 41 candidate columns.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Was Age intentionally excluded from the univariate Cox models, and why?",
+   "file": "ghost.findings.json",
+   "id": "F5"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "code/dp_survival.Rmd (p.adjust over 39 tests) vs data/clinical/survival.csv",
+   "evidence": "FDR adjustment is applied over the 39 univariate tests only. The same capsule also runs 819 pairwise correlation tests (results/correlation_results.csv) on the same 30 subjects, and the reduced feature set is chosen from that screen before the survival models are fitted.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Should the FDR family include the 819 correlation tests that selected the features entering the survival models?",
+   "file": "ghost.findings.json",
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "results/dp_survival.nb.html (Best.Response.RECISTv1, Gr3.Toxicities)",
+   "evidence": "Best response (RECIST) and toxicity grades are post-baseline, on-treatment variables, yet they are entered as baseline covariates in univariate Cox models of PFS (PFS_time_RECISTv1).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were response and toxicity measured before the PFS event time in every subject (landmark analysis), or can the association be partly tautological?",
+   "file": "ghost.findings.json",
+   "id": "F7"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "location": "README (page 1) vs code/scripts/functionals.py",
+   "evidence": "README says the correlation spreadsheet can be sorted by 'correlation type (e.g., correlation between imaging feature and microbiome feature versus microbiome-microbiome)', but functionals.py computes one pooled matrix and writes a single 'r-Value' column without a correlation-type label.",
+   "source": "llm",
+   "question_for_authors": "Which column of correlation_results.csv encodes the correlation type described in the README?",
+   "file": "llm.findings.json",
+   "id": "F8"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "bp_out/multiverse_results.csv (15 evaluable universes of a 36-universe grid)",
+   "evidence": "Baseline (authors' choices: covariates without Age, BH-FDR, no outlier rule, post-baseline covariates kept) holds: padj Best.Response=0.0215, padj Gr3=0.0215, min padj radiomic=0.747. The claim holds in 8/15 evaluable universes (53%). Breaking changes: dropping subjects with |z|>3 on any continuous feature raises padj Best.Response/Gr3 to 0.059 (fails); Bonferroni instead of BH also fails at |z|>3 (0.119/0.098); with no correction and |z|>2.5 the minimum radiomic padj falls to 0.010, so a radiomic component becomes nominally significant. The 12 universes with post_baseline=drop are not evaluable because they remove the two features the claim is about.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "How sensitive are the two FDR-significant PFS associations to the exclusion of a single influential subject and to the choice of correction?",
+   "file": "multiverse.findings.json",
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "bp_work/code/port/cox_port.py vs results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'p.adjust Best.Response.RECISTv1 (PFS)' gives 0.022 (bp_work/code/port/cox_port.py), but the authors' stored output (results/dp_survival.nb.html) gives 0.02145; the stored output agrees with the paper, so this is our port's problem, not a paper finding.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "repro_status.json",
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "bp_work/code/port/cox_port.py vs results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'p.adjust Gr3.Toxicities (PFS)' gives 0.022, the authors' stored output gives 0.02145; stored output agrees with the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "repro_status.json",
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "bp_work/code/port/cox_port.py vs results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'p.adjust Gr1.Gr2.Toxicities (PFS)' gives 0.9991, the authors' stored output gives 0.0377; stored output agrees with the paper, so the discrepancy is in our lifelines port.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "repro_status.json",
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "bp_work/code/port/cox_port.py vs results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'p.adjust Component.2 (PFS)' gives 0.7022, the authors' stored output gives 0.6825; stored output agrees with the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "repro_status.json",
+   "id": "F13"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "bp_work/code/port/cox_port.py (covariates after R's covariates[-1]) vs results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'n features tested (PFS)' gives 40, the authors' stored output gives 39; stored output agrees with the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "repro_status.json",
+   "id": "F14"
+  },
+  {
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py:100",
+   "evidence": "2 data-exclusion step(s): dropna@100, dropna@101. Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "How many subjects are removed by the dropna steps, and were they removed before or after feature selection?",
+   "file": "leakage.findings.json",
+   "id": "F15"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "README.md; metadata/metadata.yml",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. Capsule data are the DAPPER trial data; no version/DOI/accession is given.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Which data version/accession underlies the capsule tables?",
+   "file": "ghost.findings.json",
+   "id": "F16"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py:100-101 (dropna); results/reduced-feature-set.csv",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. 30 subjects enter the analysis; the exclusion steps from the trial cohort to these 30 are not reported.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How many DAPPER patients were excluded before the 30 analysed subjects, and why?",
+   "file": "ghost.findings.json",
+   "id": "F17"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "results/dp_survival.nb.html",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis; n=30 with 28 PFS events and 39-40 tests.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "What detectable hazard ratio does n=30 with 28 PFS events give after FDR correction?",
+   "file": "ghost.findings.json",
+   "id": "F18"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "README (page 1) vs results/dp_survival.nb.html",
+   "evidence": "README states the survival notebook 'generates two dataframes' for OS and PFS, and code/dp_survival.Rmd contains an OS chunk, but the stored notebook output contains only the PFS table.",
+   "source": "llm",
+   "question_for_authors": "Where is the OS results table, and what does it show?",
+   "file": "llm.findings.json",
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "data/clinical/survival.csv (n=30) vs results/dp_survival.nb.html",
+   "evidence": "All univariate models use 30 subjects (28 PFS events, 13 OS events) and 39-40 covariates are tested; the capsule reports no power calculation, no confidence-interval method and no proportional-hazards check.",
+   "source": "llm",
+   "question_for_authors": "Were proportional-hazards assumptions checked for the two significant PFS models?",
+   "file": "llm.findings.json",
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/scripts/functionals.py (correlateFeatures)",
+   "evidence": "The correlation matrix mixes Cramer's V (categorical-categorical), point-biserial (mixed) and Pearson/Spearman coefficients in one 'r-Value' column and one p-value column, so the 819 tests are not on a common scale.",
+   "source": "llm",
+   "question_for_authors": "How should a reader compare a Cramer's V with a Pearson r in the same sorted spreadsheet?",
+   "file": "llm.findings.json",
+   "id": "F21"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "code/scripts/functionals.py (PCA) / code/correlation.py",
+   "evidence": "Radiomic features are reduced by PCA (10 components) with no random seed and no statement of the PCA implementation or sign convention; component signs therefore cannot be matched across runs.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which PCA implementation and sign convention were used for the 10 radiomic components?",
+   "file": "leakage.findings.json",
+   "id": "F22"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities disagree across locations; 5 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers_crosscheck.findings.json",
+   "id": "F23"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "0 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "id": "F24"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 5,
+   "archive_ok": 0,
+   "port_gap": 5,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5333333333333333,
+  "baseline_holds": true,
+  "breaking_changes": null,
+  "n_ok": 15
+ },
+ "top_experiment": "X1"
+}

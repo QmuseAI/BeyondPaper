@@ -1,0 +1,116 @@
+{
+ "paper": "Chen et al. 2024 Nat Commun 15:1657 (metabolomics ML)",
+ "items": [
+  {
+   "id": "1.1",
+   "mechanism": "methods_code_mismatch",
+   "types": [
+    "param_mismatch",
+    "phantom_experiment",
+    "number_mismatch",
+    "missing_info"
+   ],
+   "match_any": [
+    "0.005"
+   ],
+   "description": "Methods L1 coefficient 0.01; code alpha=0.005",
+   "status": "verified"
+  },
+  {
+   "id": "1.2",
+   "mechanism": "train_test_overlap",
+   "types": [
+    "split_overlap",
+    "leakage_risk",
+    "test_set_reuse",
+    "missing_info",
+    "grouped_split_risk"
+   ],
+   "match_any": [
+    "discovery_set",
+    "discovery set",
+    "426"
+   ],
+   "description": "discovery_set.xlsx has 426 rows incl. all 142 test samples; features selected with test data",
+   "status": "verified"
+  },
+  {
+   "id": "1.3",
+   "mechanism": "selection_on_test",
+   "types": [
+    "test_set_reuse",
+    "leakage_risk",
+    "split_overlap",
+    "fragile_conclusion"
+   ],
+   "match_any": [
+    "prognos",
+    "perm.fit",
+    "xtest",
+    "top 28",
+    "28 features",
+    "28 metabolites",
+    "c-index"
+   ],
+   "description": "prognosis model: permutation importance fitted on test set; n features chosen on test c-index",
+   "status": "verified"
+  },
+  {
+   "id": "1.4",
+   "mechanism": "wrong_output_file",
+   "types": [
+    "duplicate_output",
+    "missing_artifact",
+    "number_mismatch",
+    "figure_data_mismatch"
+   ],
+   "match_any": [
+    "external-test",
+    "external_test",
+    "external test",
+    "pred_score4",
+    "duplicate"
+   ],
+   "description": "external-test prediction file is a copy of the test-set file (cell 13)",
+   "status": "verified"
+  },
+  {
+   "id": "1.5",
+   "mechanism": "interval_mislabel",
+   "types": [
+    "param_mismatch",
+    "stat_inconsistency",
+    "number_mismatch",
+    "missing_info"
+   ],
+   "match_any": [
+    "90%",
+    "90 %",
+    "90% ci",
+    "percentile",
+    "5th"
+   ],
+   "description": "CI() returns 5th-95th percentiles (90%) labelled 95% CI",
+   "status": "verified"
+  },
+  {
+   "id": "1.6",
+   "mechanism": "unverified",
+   "types": [
+    "number_mismatch",
+    "rerun_mismatch",
+    "not_reproduced"
+   ],
+   "match_any": [
+    "0.217",
+    "0.317",
+    "0.165",
+    "ca19-9",
+    "ca72-4"
+   ],
+   "description": "tumour marker sensitivities not reproducible; cut-offs may differ",
+   "status": "unverified"
+  }
+ ],
+ "key": "P01"
+}

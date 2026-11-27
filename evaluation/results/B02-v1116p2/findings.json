@@ -1,0 +1,397 @@
+{
+ "paper": {
+  "title": "Metabolomic machine learning predictor for diagnosis and prognosis of gastric cancer",
+  "doi": "10.1038/s41467-024-46080-7",
+  "year": 2024,
+  "journal": "Nature Communications"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 1,
+  "yellow": 8,
+  "grey": 23,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 12,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 2,
+   "not_run": 0,
+   "unmatched": 2
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Methods, Diagnostic prediction model (p.5) vs code/GC-diagnosis-model/run.ipynb cell 6 output: test, normal-patients (array([0., 1.]), array([94, 48])) = 142 rows",
+   "evidence": "The paper reports 'n test set (Cohort 1)' = 152 participants (Methods, Diagnostic prediction model (p.5)); the authors' own stored output (code/GC-diagnosis-model/run.ipynb cell 6 output: test, normal-patients (array([0., 1.]), array([94, 48])) = 142 rows) gives 142. Our re-run gives 142, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "code/GC-prognosis-model/run.ipynb (code cells joined):175",
+   "evidence": "The paper reports \"95% confidence\" intervals, but the code computes the interval with 5%/95% bounds (`confidence_lower = sorted_scores[int(0.05 * len(sorted_scores))]`) (and 1 similar line(s)), which is a 90% interval; no 2.5%/97.5% bounds appear anywhere in the code. Check whether the reported intervals are 90% intervals.",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F2",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "location": "Results p.3 vs bp_work/data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx (our recount, TN=88,FP=6)",
+   "evidence": "Re-computed 'specificity 10-DM test set 1' = 0.9362 proportion does not match reported 0.926 proportion (Results p.3); relative difference 1.1%. Source: bp_work/data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx (our recount, TN=88,FP=6). Small gap: may be run-to-run variation (e.g. an unseeded random forest) or rounding; re-run with several seeds and pass the spread as `range`. No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "location": "Results p.3 vs bp_work/data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx (our recount, TP=56,FN=7)",
+   "evidence": "Re-computed 'sensitivity 10-DM external test set 2' = 0.8889 proportion does not match reported 0.905 proportion (Results p.3); relative difference 1.8%. Source: bp_work/data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx (our recount, TP=56,FN=7). Small gap: may be run-to-run variation (e.g. an unseeded random forest) or rounding; re-run with several seeds and pass the spread as `range`. No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "duplicate_output",
+   "severity": "yellow",
+   "location": "data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx",
+   "evidence": "3 files whose names describe different data (external+test / test) have identical content (142 rows x 150 columns): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx. One of them is the wrong file. Same pattern at 1 more place(s): run.ipynb code cell 14 line 9.",
+   "source": "script:data_checks.py",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-diagnosis-model/run.ipynb code cell 14 line 9"
+   ],
+   "id": "F5",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "paper p.5 vs code/GC-diagnosis-model/run.ipynb:94",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"We set the coefficient of the L1 constraint as 0.01 and selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation.\" (l1 = 0.01); the code sets `alpha=0.005` at code/GC-diagnosis-model/run.ipynb:94 (l1 = 0.005). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "split_overlap",
+   "severity": "yellow",
+   "location": "data/GC-diagnosis-model/discovery_set.xlsx contains data/GC-diagnosis-model/Xtest.xlsx",
+   "evidence": "data/GC-diagnosis-model/discovery_set.xlsx (426 rows) contains 142 of the 142 rows of data/GC-diagnosis-model/Xtest.xlsx (also in 3 other test-named file(s): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx); compared on 148 shared columns. If data/GC-diagnosis-model/discovery_set.xlsx was used for feature selection, tuning or preprocessing, the test samples took part in it. Check which file each step of the code reads.",
+   "source": "script:data_checks.py",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "location": "code/GC-prognosis-model/run.ipynb code cell 7 line 3",
+   "evidence": "perm.fit(Xtest, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 2 more place(s): run.ipynb code cell 13 line 2; run.ipynb code cell 9 line 5.",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+    "code/GC-prognosis-model/run.ipynb code cell 9 line 5"
+   ],
+   "id": "F8",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'The 10-DM model discriminates GC from NGC in the external test set (Cohort 2) with AUROC above 0.85' holds in 75% of 40 universes. Single changes that flip it: alpha=0.01.",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "evidence": "The paper names Benjamini-Hochberg / FDR (\"…. Differential metabolites were analyzed by a two-sided Wilcoxon rank-sum test (FDR < 0.05 and fold change > 1.25 or"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "evidence": "The paper names support vector machine (\"…-DM model with different machine learning algorithms in Metaboanalyst including Support Vector Machine (SVM), Logistic"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "evidence": "The paper names logistic regression (\"…ne learning algorithms in Metaboanalyst including Support Vector Machine (SVM), Logistic Regression (LR), Random Forest ("
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "evidence": "The paper names Cox regression (\"…nical parameters with significant prognostic relevance identified by univariate Cox regression analysis. Parameters with a P <"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py standardised-LASSO port (our re-run)",
+   "evidence": "Re-computed 'AUROC 10-DM external test set 2 (multiverse baseline re-run)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py standardised-LASSO port (our re-run)",
+   "evidence": "Re-computed 'AUROC 10-DM test set 1 (multiverse baseline re-run)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. The addition of clinical parameters bare, line 97",
+   "evidence": "'ulated based on data from n = 179 independent patient samples and Wald test.CI conf': 179 patient(s) appears once, while 181 patient(s) appears 3 times (and 18"
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "34 count mentions read; 1 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/GC-diagnosis-model/run.ipynb code cell 5 line 16",
+   "evidence": "Random split (StratifiedShuffleSplit) while the code mentions batch, patients; samples sharing a group may fall on both sides of the split (keyword match only: "
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods, Patient characteristics p.5",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. Exclusion of patients receiving anti-cancer treatment before sampling s"
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier definition or removal rule stated; n",
+   "severity_reasons": [
+    "checklist_nothing_done"
+   ]
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis or sample-size justification"
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods, Diagnostic prediction model p.5",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> partial. Stratified random split within batc"
+  },
+  {
+   "id": "F23",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/GC-diagnosis-model/run.ipynb cell 5",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> partial. LASSO selection repeated on the discovery "
+  },
+  {
+   "id": "F24",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods p.5 vs code",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> partial. LASSO alpha 0.01 in Methods vs 0.005"
+  },
+  {
+   "id": "F25",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No de-duplication rule for samples/metabolites beyond the 80% ",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ]
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results p.3; Supplementary Fig. 4c",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> partial. MetaboAnalyst baselines built in a web tool; settings not released"
+  },
+  {
+   "id": "F27",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results 'The addition of clinical parameters...' (p.3); Fig. 4d; Supplementary Fig. 5c",
+   "evidence": "Claim C5 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F28",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.3; Fig. 4e-g",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F29",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Table 1 (p.3)",
+   "evidence": "Claim C7 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F30",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results 'Reprogrammed plasma metabolic landscape...' (p.3); Fig. 2",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F31",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.3; Fig. 3f, g",
+   "evidence": "Claim C9 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F32",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.3",
+   "evidence": "Claim C10 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "1 multiply-reported quantities agree across locations; 12 re-computed values match the paper."
+  },
+  {
+   "id": "F34",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "6 of 6 estimate-CI reports are internally consistent."
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B02-v1119p",
+ "paper_id": "B02",
+ "variant": "injected",
+ "version": "v1.11.9",
+ "saved": "2026-11-18",
+ "source_file": "pages/B02-v1119p.c4.json",
+ "note": "stage 1 on Flash, rest on Pro",
+ "n_findings": 51,
+ "truncated": false,
+ "counts": {
+  "red": 3,
+  "yellow": 15,
+  "grey": 30,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 3,
+  "yellow": 15,
+  "grey": 30,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

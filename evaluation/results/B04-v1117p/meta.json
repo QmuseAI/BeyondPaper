@@ -1,0 +1,24 @@
+{
+ "run_id": "B04-v1117p",
+ "paper_id": "B04",
+ "variant": "injected",
+ "version": "v1.11.7",
+ "saved": "2026-11-18",
+ "source_file": "pages/B04-v1117p.c4.json",
+ "note": "v1.11.7 run; launched on DeepSeek V4 Pro; the last turn (image check and delivery, 13:39, no new findings) ran on V4 Flash per run details; c4 copy sha 930a0b8d verified",
+ "n_findings": 33,
+ "truncated": false,
+ "counts": {
+  "red": 5,
+  "yellow": 8,
+  "grey": 18,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 5,
+  "yellow": 8,
+  "grey": 18,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

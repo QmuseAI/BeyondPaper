@@ -1,0 +1,321 @@
+{
+ "paper": {
+  "title": "Measuring the effects of exercise in neuromuscular disorders: a systematic review and meta-analyses",
+  "doi": "10.12688/wellcomeopenres.15825.2",
+  "year": 2020
+ },
+ "counts": {
+  "red": 10,
+  "yellow": 8,
+  "grey": 24,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 9,
+   "archive_ok": 0,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 6
+  }
+ },
+ "multiverse": {
+  "robustness": 0.8333333333333334,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "outcome",
+    "value": "CK",
+    "holds": false,
+    "effect": -0.0643966170966581
+   }
+  ],
+  "n_ok": 36
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "problem",
+   "phantom_experiment": "problem",
+   "abstract_vs_body": "problem",
+   "claims_scan": "problem"
+  },
+  "param_mismatch": "Methods: REML random-effects, SMD, min 4 comparisons, I2>75%, R 3.4/metafor 2.0.0; code forest.R uses rma(measure='SMD') and rma(yi,vi,method='REML') for between-group; no contradicting parameter found",
+  "figure_data_mismatch": "Table 1/2 patient N vs data/Ex.vs.NonEx.csv and data/Pre.Post.csv: PeakW UC 55/53 vs 53/53; TUG UC 71/70 vs 71/71; CK ex 58/56 vs 58/58; Knee 149/149 vs 108/108 (Side filter); Elbow 89/89 vs 70/70; HandGrip 89/89 vs 63/63",
+  "phantom_experiment": "Methods name Egger's regression intercept and paired t-test power analysis; code (funnel.R) calls funnel()/trimfill() only, no regtest(); no power script in code/",
+  "abstract_vs_body": "Abstract 1805 participants vs Results 1850; Abstract I2 58.5% vs Table 2 58.05%; Abstract p=0.01 for Wpeak vs Results p=0.31",
+  "claims_scan": "claims_scan: 58.5 vs 58.05 (number_mismatch), 1850 vs tabulation csv (sample_size), IPD re-analysis of 312 patients has no data/code (phantom_experiment)"
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 1 vs Results, Exercise training versus usual care",
+   "evidence": "'p Wpeak exercise vs usual care' is reported with different values. Table 1: 0.01 p | Results, Exercise training versus usual care: 0.31 p. Agreeing reports: 1 location(s) [Table 1] vs 1 [Results, Exercise training versus usual care].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'p Wpeak exercise vs usual care' is correct (0.01 p or 0.31 p)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Table 2 vs Abstract",
+   "evidence": "'I2 STS seconds before-after' is reported with different values. Table 2: 58.05 % | Abstract: 58.5 %. Agreeing reports: 1 location(s) [Table 2] vs 1 [Abstract].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'I2 STS seconds before-after' is correct (58.05 % or 58.5 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract vs Table 2 / Heterogeneity",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Table 3 vs Discussion",
+   "evidence": "'95% CI % change 6MWT before-after' is reported with different values. Table 3: 7.11 % | Discussion: 6.86 %. Agreeing reports: 1 location(s) [Table 3] vs 1 [Discussion].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of '95% CI % change 6MWT before-after' is correct (7.11 % or 6.86 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, Sec. Exercise training versus usual care, line 71",
+   "evidence": "'analysis were primarily RCTs (83%; n=15/21) ( Underlying data, File 6) ^': 15/21 = 71.4%, but the text reports 83%.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the percentage, the numerator or the denominator mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 71",
+   "evidence": "'SMD 0.70 [95% CI 0.15, 1.24]; p=0.31) ( Figure 3) compared with usua': The 95% CI [0.15, 1.24] excludes the null value 0, but the reported p is = 0.31; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.012.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'-0.67 [95% CI -1.31, 0.03]; p=0.04) ( Figure 8), and rise from sup': The 95% CI [-1.31, 0.03] includes the null value 0, but the reported p is = 0.04; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': The 95% CI [-0.23, -0.11] excludes the null value 0, but the reported p is = 0.46; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': Estimate -0.06 lies outside its own 95% CI [-0.23, -0.11].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "Abstract vs Results (line 71) and Table 1",
+   "evidence": "Abstract: peak power p=0.01; Results: 'SMD 0.70 [95% CI 0.15, 1.24]; p=0.31'; Table 1: p=0.01. Same outcome, same analysis.",
+   "source": "llm",
+   "question_for_authors": "Which p-value for peak power is correct?",
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "Abstract vs Results (line 64)",
+   "evidence": "Abstract: 1,805 participants; Results: '130 articles with 1850 patients'. Same inclusion set.",
+   "source": "llm",
+   "question_for_authors": "Is the included population 1805 or 1850?",
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 15) vs body (paper.md line 151)",
+   "evidence": "The Abstract gives 58.5 ('...Substantial I ^2 statistic heterogeneity was revealed for STS (seconds) ( I²=58.5%; p=0.04) and citrate synthase ( I²=70.9...'); the body never states 58.5. The body sentence about the same quantity (shared words: citrate, heterogeneity, seconds, synthase) gives 58.05: '...We noted no evidence of heterogeneity with the exception of I ^2 statistically significant heterogeneity for STS (seconds) ( I²=58.05%; p=0.04) and citrate synthase ( I²=70.90%; p=0.002) ( Table 2)....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 58.5 (Abstract) or 58.05 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results (paper.md line 71)",
+   "evidence": "The text reports an additional study or analysis: 'An individual-participant-data re-analysis of 312 patients from eight of these trials confirmed the VO _2peak benefit (SMD 0.61 [95% CI 0.33, 0.89]).'. Its head count 312 appears nowhere else in the paper, the phrase 're-analysis' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 312 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods",
+   "evidence": "The paper names Egger's test (\"…tion bias was assessed via funnel plots with trim and fill, and estimated using Egger’s regression intercept ^[16]. The quality of evidence for outcomes was rated us…\"), but no matching call (/regtest|egger/) was found outside comments in 5 code file(s). Same pattern at 1 more place(s): Methods, Data analysis; MCID and power analysis.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Where in the released code is the Egger's test performed?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Methods, Data analysis; MCID and power analysis"
+   ],
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "Methods, Data analysis; MCID and power analysis",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F13"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Results (paper.md line 64) vs data/1. Overall clinical population tabulation.csv row 153",
+   "evidence": "The text gives 1850 patients ('...Of these, 130 articles with 1850 patients with NMD were deemed eligible for inclusion in the systematic review ( Extended data, Table 3, p 7, Underlying data, File 1) ^[8]....'); the authors' table data/1. Overall clinical population tabulation.csv has the row 'Total patients (N)' = 1805, which the paper itself gives elsewhere. The two numbers differ by transposed or changed digits.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Is the number of patients 1850 (text) or 1805 (data/1. Overall clinical population tabulation.csv)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F14",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 175",
+   "evidence": "'04 | 0.29 | 111.08 | S | 32.21 | 6.99 | (7.11 to 6.86)': interval (7.11 to 6.86) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F15"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 179",
+   "evidence": "'8 | -0.65 | 3.50 | M | -2.27 | -23.80 | (-15.19 to -32.4)': interval (-15.19 to -32.4) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "see note",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> not_reported. Risk of bias assessed by two investigators (Methods); randomisation/blinding of participants not described",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were blinding and randomisation of samples/animals/patients used and described?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "ghost",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/funnel.R:17",
+   "evidence": "The loop starting at line 15 reads datS, the per-iteration variable of the loop at line 4; this loop's own per-iteration variable is datR. It uses the value left over from the earlier loop.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Should line 17 use datR instead of datS?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F18"
+  }
+ ]
+}

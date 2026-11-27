@@ -1,0 +1,159 @@
+{
+ "counts": {
+  "red": 3,
+  "yellow": 6,
+  "grey": 19,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 2,
+   "port_gap": 6,
+   "archive_mismatch": 2,
+   "not_reproduced": 3,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Footnote 1 vs bp_work/results/main.html (table(newdata2$dCond))",
+   "evidence": "The paper reports 'n in experimental condition (footnote 1 parenthetical)' = 173 participants (Footnote 1); the authors' own stored output (bp_work/results/main.html (table(newdata2$dCond))) gives 100. Our re-run gives 100, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n in experimental condition (footnote 1 parenthetical)' (173), given that bp_work/results/main.html (table(newdata2$dCond)) gives 100?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the subgroup or the total mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C9"
+   ],
+   "location": "Methods, Participants vs bp_work/results/main.html (stat.desc Age, n=199)",
+   "evidence": "The paper reports 'mean age' = 21.0 years (Methods, Participants); the authors' own stored output (bp_work/results/main.html (stat.desc Age, n=199)) gives 21.7588. Our re-run gives 21.65, which matches neither. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'mean age' (21.0), given that bp_work/results/main.html (stat.desc Age, n=199) gives 21.7588?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results (paper.md line 101)",
+   "evidence": "The text reports an additional study or analysis: 'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all *p*s > .40).'. Its head count 412 appears nowhere else in the paper, the phrase 'repeated the study' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 412 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How was this number derived from the base and the multiplier?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "line 99",
+   "evidence": "'M = 4.83, SD = 1.25) than those in the control condition ( M = 4.24, SD = 1.42; Cohen’s d = .64': the reported d = .64, but the two means and SDs give a standardized difference of about 0.44 (|4.83 - 4.24| / sqrt((1.25^2 + 1.42^2) / 2)).",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Which inputs or formula produced the reported effect size?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C8",
+    "C9"
+   ],
+   "location": "Results, last paragraph",
+   "evidence": "An online MTurk repetition with 412 participants (all ps > .40) is reported in one sentence; the Methods do not describe it and the released capsule (data/EDC_clean2.csv 404 rows / 202 couples, code/main.Rmd, results/) contains no MTurk data, model or table, so the claim cannot be checked.",
+   "source": "llm",
+   "question_for_authors": null,
+   "judgement_key": "phantom_experiment",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Self-esteem does not moderate the effect of relationship threat on perceived acceptance, partner enhancement or closeness (no self-esteem x condition interaction)' holds in 27% of 30 universes. Single changes that flip it: seed=2; seed=4; outlier_z=3.0; outlier_z=2.5. [Yellow, not red (build_passport.py): the multiverse ran on our re-implementation of the authors' code (the reproduction gate recorded a port gap), so the fragility needs to be confirmed with the authors' own code.]",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under seed=2; seed=4; outlier_z=3.0; outlier_z=2.5?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "robustness_on_port"
+   ],
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  }
+ ]
+}

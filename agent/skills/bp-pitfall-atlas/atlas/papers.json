@@ -1,0 +1,66 @@
+{
+  "P01": {
+    "cite": "Chen et al. 2024, Nature Communications 15:1657",
+    "doi": "10.1038/s41467-024-46043-y",
+    "field": "clinical metabolomics, machine-learning diagnosis and prognosis",
+    "code": "Python (Jupyter)"
+  },
+  "P02": {
+    "cite": "Stefanetti et al. 2020, Wellcome Open Research 5:84 (v1)",
+    "doi": "10.12688/wellcomeopenres.15825.1",
+    "field": "systematic review and meta-analysis (exercise in neuromuscular disorders)",
+    "code": "R"
+  },
+  "P03": {
+    "cite": "Hardwicke et al. 2021, Royal Society Open Science 8:201494",
+    "doi": "10.1098/rsos.201494",
+    "field": "meta-research (analytic reproducibility)",
+    "code": "R"
+  },
+  "P04": {
+    "cite": "Thibault et al. 2024, AMPPS",
+    "doi": "10.1177/25152459231213808",
+    "field": "Delphi consensus study (psychology education)",
+    "code": "R (R Markdown)"
+  },
+  "P05": {
+    "cite": "Campbell et al. 2017, PsyArXiv preprint",
+    "doi": "10.31234/osf.io/5suda",
+    "field": "social psychology replication (regression models)",
+    "code": "R"
+  },
+  "B11": {
+    "cite": "Papalouka et al., MetaArXiv preprint",
+    "doi": "10.31222/osf.io/5sehd",
+    "field": "meta-research (ethics-committee forms, counts)",
+    "code": "R (R Markdown)",
+    "capsule": "9168639"
+  },
+  "V1": {
+    "cite": "BeyondPaper benchmark v1 (5 papers, 10 runs, 2026-10)",
+    "doi": null,
+    "field": "auditor self-evaluation",
+    "code": "R and Python"
+  },
+  "B12": {
+    "cite": "Zheng & Wang, EEG seizure SGRU (Code Ocean capsule 6746514)",
+    "doi": null,
+    "field": "EEG machine learning",
+    "code": "Python",
+    "capsule": "6746514"
+  },
+  "B13": {
+    "cite": "DAPPER leiomyosarcoma correlative analyses (Code Ocean capsule 3894632)",
+    "doi": "10.1158/1078-0432.CCR-23-1137",
+    "field": "oncology survival / radiomics",
+    "code": "R Markdown + Python",
+    "capsule": "3894632"
+  },
+  "B14": {
+    "cite": "Noone, stroke door-to-needle neural network (Code Ocean capsule 3269870)",
+    "doi": null,
+    "field": "clinical machine learning",
+    "code": "Python (TensorFlow 1.4)",
+    "capsule": "3269870"
+  }
+}

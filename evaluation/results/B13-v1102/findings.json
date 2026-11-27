@@ -1,0 +1,470 @@
+{
+ "paper": {
+  "title": "DAPPER Leiomyosarcoma: Correlation and Survival Analysis of Radiomic, Microbiome and Clinical Data (capsule 3894632; accompanying article Salawu et al., Clin Cancer Res 2023, DOI 10.1158/1078-0432.CCR-23-1137 — full text unavailable, capsule README + stored results used as paper text)",
+  "doi": "10.1158/1078-0432.CCR-23-1137"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 8,
+  "grey": 14,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "Correlations between radiomic, microbiome and clinical features were computed and saved as a spreadsheet that can be sorted by strength, significance or correlation type.",
+   "location": "README, General Description (p.1)",
+   "light": "yellow",
+   "findings": [
+    "F6",
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "A reduced feature set for survival analysis is generated and saved by the correlation script.",
+   "location": "README, General Description (p.1)",
+   "light": "grey",
+   "findings": [
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "Univariate Cox models of radiomic, microbiome and clinical features were fitted for overall survival (OS) and progression-free survival (PFS).",
+   "location": "README, General Description (p.1); code/dp_survival.Rmd",
+   "light": "yellow",
+   "findings": [
+    "F7",
+    "F21",
+    "F22"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "Results can be sorted by strength of association or significance, i.e. the analysis is exploratory and no feature is declared a validated prognostic marker.",
+   "location": "README, General Description (p.1)",
+   "light": "grey",
+   "findings": [
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "For PFS, best response, Gr3 toxicities and Gr1-2 toxicities are associated with progression risk after FDR adjustment (p.adjust < 0.05).",
+   "location": "results/dp_survival.nb.html (PFS table)",
+   "light": "yellow",
+   "findings": [
+    "F3",
+    "F4",
+    "F19",
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "No microbiome or radiomic (component) feature reaches FDR significance for PFS.",
+   "location": "results/dp_survival.nb.html (PFS table)",
+   "light": "yellow",
+   "findings": [
+    "F3",
+    "F20",
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "For OS, no feature reaches FDR significance; the smallest raw p-values are for microbiome taxa (Roseburia faecis, Bacteroides vulgatus/ovatus).",
+   "location": "code/dp_survival.Rmd (OS chunk); OS table not stored",
+   "light": "yellow",
+   "findings": [
+    "F5",
+    "F21"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py (saturation threshold)",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. Feature reduction by measurement saturation is applied; no outlier rule for the survival covariates.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5",
+    "C6"
+   ],
+   "location": "results/dp_survival.nb.html, rows Gr1.Gr2.Toxicities and Gr3.Toxicities",
+   "evidence": "Gr1-2 toxicities is quasi-completely separated for PFS: 2 patients without Gr1-2 toxicity, both censored; 2 of 28 with Gr1-2 toxicity censored. The archived table still reports beta -0.69, HR 0.50 (0.29-0.86), p=0.0029, p.adjust=0.0377 for it. Dropping that covariate in our re-run leaves 2 FDR-significant features (best response p.adjust 0.0259, Gr3 toxicities 0.0259) instead of 3, so the count of significant features depends on a covariate with 2 exposed patients.",
+   "source": "llm",
+   "question_for_authors": "How should the Gr1-2 toxicity HR be interpreted given only two patients in the reference group, and was a Firth or exact Cox model considered?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "results/dp_survival.nb.html, Best.Response.RECISTv1 row",
+   "evidence": "Best response is both a post-baseline outcome and a PFS predictor: all 19 patients coded 0 progressed, and the 2 censored patients are both responders (coded 1). The HR 0.18 (0.065-0.5) therefore partly encodes the response definition rather than an independent prognostic association.",
+   "source": "llm",
+   "question_for_authors": "Was best response treated as a baseline covariate or as a time-dependent variable in the PFS model?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "code/dp_survival.Rmd lines 60-97 vs results/dp_survival.nb.html",
+   "evidence": "The Rmd fits univariate Cox models for OS and for PFS, but the stored knitted notebook contains only the PFS table (39 rows, one pagedtable JSON block). No OS table is stored, so the OS results (13 events, 39 tests) cannot be checked against the authors' output; our Python re-run gives 4 raw p<0.05 and 0 FDR-significant features.",
+   "source": "llm",
+   "question_for_authors": "Can the OS univariate results table (os_results) be added to the capsule?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/correlation.py; results/correlation_results.csv (818 rows)",
+   "evidence": "818 pairwise correlations are reported with raw and adjusted p-values, but the capsule does not state which correction family was used (all 818 pairs, or within correlation type). The adjusted p-values in the stored file are consistent with a single BH family over 818 tests, which is not described in the README.",
+   "source": "llm",
+   "question_for_authors": "Over which family were the correlation p-values adjusted?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "code/dp_survival.Rmd lines 8-11 and 22",
+   "evidence": "`features <- features[-1]` drops the row-index column, `covariates <- covariates[-1]` drops Age, and `covariates[2:length(covariates)]` drops Gender, so 39 of the 41 features are tested and Age and Gender are never modelled, although the README says clinical data are included in the survival analysis. Our re-run reproduces 39 rows in the archived PFS table.",
+   "source": "llm",
+   "question_for_authors": "Were Age and Gender intentionally excluded from the univariate survival models?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'At least one feature is significantly associated with survival after multiple-testing correction' holds in 67% of 24 universes. Single changes that flip it: endpoint=OS.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under endpoint=OS?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_out/pfs_univariate_python.csv vs bp_work/results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'PFS adjusted p best response (RECISTv1)' gives 0.017692 (bp_out/pfs_univariate_python.csv), but the authors' stored output (bp_work/results/dp_survival.nb.html) gives 0.02145, which matches the paper (results/dp_survival.nb.html: 0.02145). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C5.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "port_gap",
+     "location": "bp_out/pfs_univariate_python.csv vs bp_work/results/dp_survival.nb.html",
+     "severity": "grey",
+     "file": "numbers.findings.json"
+    }
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_out/pfs_univariate_python.csv vs bp_work/results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'PFS p Lachnospira pectinoschiza' gives 0.077153 (bp_out/pfs_univariate_python.csv), but the authors' stored output (bp_work/results/dp_survival.nb.html) gives 0.078, which matches the paper (results/dp_survival.nb.html: 0.078). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C6.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_out/pfs_univariate_python_noGr1Gr2.csv (our re-run without the separated covariate) vs bp_work/results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'n features with p.adjust<0.05 for PFS' gives 2 (bp_out/pfs_univariate_python_noGr1Gr2.csv (our re-run without the separated covariate)), but the authors' stored output (bp_work/results/dp_survival.nb.html) gives 3, which matches the paper (results/dp_survival.nb.html: 3). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C5, C6.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py:100",
+   "evidence": "2 data-exclusion step(s): dropna@100, dropna@101. Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "metadata/metadata.yml; data/clinical/*.csv",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. Cohort data are supplied in the capsule but no accession/version for the radiomic or microbiome source tables is given.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the exact data source identified (version, DOI, accession, download date)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/scripts/functionals.py:100-101; code/dp_survival.Rmd:8-11",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. Microbiome features are dropped by a saturation threshold and dropna; Age and Gender are silently dropped by column indexing. No counts removed at each step.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F14"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "README; code/dp_survival.Rmd",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis; n=30 with 13 OS events and 39 tests.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the sample size justified (power analysis or other rationale)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F15"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/dp_survival.Rmd:14-16",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> partial. Mean/SD scaling fitted on the full cohort (no held-out data, so no leakage, but scaling uses all patients).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "results/dp_survival.nb.html",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> partial. Features credited from univariate models only; no multivariable model or internal validation.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "data/clinical/baseline.csv",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> partial. Trial randomisation is external to the capsule; the correlative analysis is observational.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were blinding and randomisation of samples/animals/patients used and described?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F18"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "results/dp_survival.nb.html (PFS table)",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F19"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "results/dp_survival.nb.html (PFS table)",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7"
+   ],
+   "location": "bp_work/paper.md (capsule README + stored results); article DOI 10.1158/1078-0432.CCR-23-1137",
+   "evidence": "The accompanying article is closed access (OpenAlex oa_status=closed, no PMCID, publisher page behind Cloudflare, no preprint). Per the task rule the capsule README and stored results serve as the paper text, so every paper-level claim (C1-C7) is unverifiable against the published article and is rated grey.",
+   "source": "llm",
+   "question_for_authors": "Could the accepted manuscript be deposited so that the reported correlative and survival results can be checked against the capsule?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F21"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "data/clinical/survival.csv (30 rows) vs DAPPER trial cohort",
+   "evidence": "The capsule analyses 30 patients (15 per cohort). The trial randomised 30 patients in total per the capsule's own cohort counts; whether any patient was excluded from the survival analysis is not documented in the capsule.",
+   "source": "llm",
+   "question_for_authors": "Were all randomised patients included in the survival analysis, and if not, which were excluded and why?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F22"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 10 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F23"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "0 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F24"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 8,
+   "archive_ok": 2,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.6666666666666666,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "endpoint",
+    "value": "OS",
+    "holds": false,
+    "effect": 0.0
+   }
+  ],
+  "n_ok": 24
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "near_duplicate": 1
+ }
+}

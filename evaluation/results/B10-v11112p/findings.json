@@ -1,0 +1,227 @@
+{
+ "paper": {
+  "title": "A Delphi Study to Strengthen Research-Methods Training in Undergraduate Psychology Programs",
+  "doi": "not reported"
+ },
+ "counts": {
+  "red": 1,
+  "yellow": 5,
+  "grey": 8,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 0,
+   "port_gap": 1,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 8
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "problem",
+   "abstract_vs_body": "problem",
+   "phantom_experiment": "ok",
+   "figure_data_mismatch": "ok",
+   "claims_scan": "problem"
+  },
+  "param_mismatch": "Paper Definition of consensus (p.3) states 70% essential in each nonstudent group; code manuscript.Rmd:157 sets consensus = if_else(perc_essential >= 0.75, TRUE, FALSE).",
+  "abstract_vs_body": "Abstract (line 12) reports 38 of 78 items reached consensus; Results (line 149-151) report 26 in Round 1 + 8 in Round 2 = 34, and the stored results/final/0.main_table.csv rebuilt with the manuscript.Rmd create_summary_table rule gives consensus_final 1=28, 2=6, no=45 (34 of 78).",
+  "phantom_experiment": "Discussion (line 423) describes a follow-up survey of 46 heads of department in 2023; it is a described external survey, not an analysis claimed to be in this study's data, and no code/data is claimed for it.",
+  "figure_data_mismatch": "Fig. 2 flowchart numbers are computed in manuscript.Rmd and manually inserted into a PowerPoint; the Rmd prints each count (count_unique(df1_all), count_unique(df1_completed), count_unique(df1_final)) so the figure values are traceable to code.",
+  "claims_scan": "claims_scan candidate #1 (abstract 38 vs body) is a real mismatch, recorded as a red number_mismatch under abstract_vs_body; candidate #0 (follow-up survey of 46 heads of department) is a described external survey, not a phantom experiment."
+ },
+ "findings": [
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract (paper.md line 12) vs Results, Delphi-item ratings (paper.md lines 149-151) vs results/final/0.main_table.csv",
+   "evidence": "Abstract: 'Of 78 items included in the consensus process, 38 reached consensus.' Results: 'Twenty-six items reached consensus in Round 1' + 'Eight items reached consensus in Round 2' = 34. Rebuilding Table 2 from the stored results/final/0.main_table.csv with the manuscript.Rmd create_summary_table rule gives consensus_final counts 1=28, 2=6, no=45, i.e. 34 of 78 items. 26+8=34, not 38. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "judgement_key": "abstract_vs_body",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 12) vs body (paper.md line 423)",
+   "evidence": "The Abstract gives 38 ('...Of 78 items included in the consensus process, 38 reached consensus....'); the body never states 38. The body sentence about the same quantity (shared words: consensus, items, reached) gives 34: '...Consensus was reached for 34 items....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "paper vs manuscript.Rmd:157",
+   "evidence": "The paper defines a threshold of at least 70% (\"### Definition of consensus Before launching the survey, the steering committee defined consensus as at least 70% of participants in each nonstudent stakeholder group rating an item as “essential” (i.e., between 7 and 9 \"), but no comparison in the code uses 0.7; the code compares at 0.75 (`consensus = if_else(perc_essential >= 0.75, TRUE, FALSE),`). Check which threshold produced the reported results. Same pattern at 1 more place(s): Definition of consensus (p. 3) vs code/manuscript.Rmd:157.",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Definition of consensus (p. 3) vs code/manuscript.Rmd:157"
+   ],
+   "id": "F3",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Discussion (paper.md line 423)",
+   "evidence": "The text reports an additional study or analysis: 'A follow-up survey of 46 heads of department in 2023 found that 31 of these 34 items were already taught at their institutions.'. Its head count 46 appears nowhere else in the paper, the phrase 'follow-up survey' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "p. 4, Sec. Participants, line 141",
+   "evidence": "'1. Our final sample comprised 113 participants who passed the attention chec': 113 participant(s) appears once, while 103 participant(s) appears 3 times (and 103 is used as a denominator elsewhere). A typo, or a different subgroup?",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "paper vs manuscript.Rmd:700",
+   "evidence": "The paper reports a median absolute change (\"Of the 47 items included in both Round 1 and Round 2, four went from not reaching consensus to reaching consensus, the median absolute change in the percentage of participants that rated an item as essential was 3.8%, an\"), but the code computes mean(abs(...)) (`mean(abs(compare_rounds$perc_essential_compare))*100,`) (and 5 similar line(s)) and never median(abs(...)). The reported statistic may be mislabelled.",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/results/final/0.main_table.csv + results/completed/0.main_table.csv (our rebuild of create_summary_table) vs paper.md Abstract line 12 (no stored table prints 38; stored tables give 26+8=34)",
+   "evidence": "Our re-computation of 'items reaching consensus (of 78)' gives 34 (bp_work/results/final/0.main_table.csv + results/completed/0.main_table.csv (our rebuild of c"
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Survey, line 85",
+   "evidence": "'e their level of agreement to 72 items on a scale from 1 to 9 in whi': 72 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a denominat"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 4, Sec. Thematic analysis of the open-ended ques, line 323",
+   "evidence": "'ic items, 30 participants for 82 suggested items, and 73 participants regardin': 82 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "41 count mentions read; 3 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F11",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/manuscript.Rmd:661",
+   "evidence": "2 data-exclusion step(s): filter@661, filter@797. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F13",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results, Sensitivity Analyses",
+   "evidence": "Claim C7 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F14",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Recommendations",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 2 re-computed values match the paper."
+  },
+  {
+   "id": "F16",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim '34 of 78 items reached consensus (26 in Round 1, 8 in Round 2)' holds in 100% of 8 universes. Single changes that flip it: none."
+  }
+ ]
+}

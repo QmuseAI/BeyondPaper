@@ -1,0 +1,24 @@
+{
+ "run_id": "B03-v11115p2",
+ "paper_id": "B03",
+ "variant": "clean",
+ "version": "v1.11.15",
+ "saved": "2026-11-19",
+ "source_file": "/tmp/b03/B03-v11115p2.c4.json",
+ "note": "Pro throughout (resumed after dispatch outage; one 继续 after repetitive-output stop); c4 sha256 ba20c9cb...; stage 4 port_gap (adapter _select)",
+ "n_findings": 25,
+ "truncated": false,
+ "counts": {
+  "red": 12,
+  "yellow": 13,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 12,
+  "yellow": 13,
+  "grey": 17,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B01-v1115",
+ "paper_id": "B01",
+ "variant": "clean",
+ "version": "v1.11.5",
+ "saved": "2026-11-17",
+ "source_file": "pages/B01-v1115.c4.json",
+ "note": "v1.11.5; DeepSeek V4 Flash at end; all stages done; c4 copy (grey keep location+evidence[:220]), sha256 570c607c verified; raw sha fbce5efb",
+ "n_findings": 31,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 1,
+  "grey": 27,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 1,
+  "grey": 27,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B07-v1114",
+ "paper_id": "B07",
+ "variant": "injected",
+ "version": "v1.11.4",
+ "saved": "2026-11-17",
+ "source_file": "pages/B07-v1114.c3.json",
+ "note": "v1.11.4; V4 Pro selected, platform switched to GLM-5.3; stopped twice, continued; c3 copy (claims dropped), sha256 verified; raw sha c9ce2236",
+ "n_findings": 26,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 6,
+  "grey": 17,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 6,
+  "grey": 17,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

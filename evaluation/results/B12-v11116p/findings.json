@@ -1,0 +1,246 @@
+{
+ "counts": {
+  "red": 0,
+  "yellow": 13,
+  "grey": 16,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 7,
+   "archive_ok": 8,
+   "port_gap": 2,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "figure_data_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "code/fig_6.py:8 vs code/fig_5.py:10",
+   "evidence": "Literal arrays (deep_checks.py): code/fig_6.py plots GRU scores[...][0] = 92.76 (Dataset 1); the per-fold values typed into code/fig_5.py (Acc4, labelled GRU) average 93.10 over 10 folds. The other GRU summary values match their arrays exactly, so this one does not come from the stored per-fold results.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which run produced the plotted value, and why does it differ from the mean of the per-fold values?",
+   "check": "mean of code/fig_5.py:Acc4",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/*.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No random_state / seed anywhere; XGBoost, RF, DT and Keras initialisation are stochastic. Also at: code/NewData_ML_Kfold.py:17; code/NewData_ML_Kfold.py:29; code/RawData_ML_Kfold.py:17; code/RawData_ML_Kfold.py:29; code/pca_test.py:23; code/pca_test.py:35; code/wave_test.py:23; code/wave_test.py:35; code/*.py (no seed), code/run.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/NewData_ML_Kfold.py:17",
+    "code/NewData_ML_Kfold.py:29",
+    "code/RawData_ML_Kfold.py:17",
+    "code/RawData_ML_Kfold.py:29",
+    "code/pca_test.py:23",
+    "code/pca_test.py:35",
+    "code/wave_test.py:23",
+    "code/wave_test.py:35",
+    "code/*.py (no seed), code/run"
+   ],
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "code/PCC_WFE.py:load_data",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. MinMaxScaler and the PCC-WFE weights are fitted on all 11500 samples before the CV split.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F4",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/*.py",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No duplicate check between folds; the UCI segments are not de-duplicated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were duplicates and near-duplicates between training and test sets removed?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. No negative control (shuffled labels / random feature) for the PCC-WFE expansion.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/NewData_ML_Kfold.py:12 vs code/perform.py",
+   "evidence": "Metric definitions (deep_checks.py): sensitivity/precision come from sklearn with recall_score average='macro' in one pipeline (code/NewData_ML_Kfold.py:12 recall_score average='macro'; code/NewData_ML_Kfold.py:13 precision_score average='macro'; code/RawData_ML_Kfold.py:12 recall_score average='macro') and from a binary TP/(TP+FN), TP/(TP+FP) count for one class in another (code/perform.py). Values with the same name are not the same quantity, so a table comparing them across methods is not like for like.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Were Se/PPV computed with the same definition for every method compared?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "code/SGRU_GRU_Kfold.py",
+   "evidence": "Pipeline coverage (deep_checks.py): code/SGRU_GRU_Kfold.py trains GRU, SGRU, which no script of the entry point (code/run) trains; the entry point never runs it and the stored output has no lines from it. The figure scripts plot numbers for GRU, SGRU as typed-in literals, so those numbers cannot be traced to a stored run. Also never run: code/pca_test.py, code/wave_test.py.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Can the log or results of SGRU_GRU_Kfold.py be added to the capsule?",
+   "check": "entry-point scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F8",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/PCC_WFE.py:load_data (MinMaxScaler fitted before the CV split)",
+   "evidence": "load_data() fits MinMaxScaler(feature_range=(-1,1)) on all 11500 samples and returns the scaled matrix; every *_Kfold.py then splits that matrix with KFold. The scaler therefore sees the test folds, and the PCC-WFE weights are computed from the full label vector. Reported accuracies are optimistic by an unquantified amount.",
+   "source": "llm",
+   "question_for_authors": "Was the scaler and the PCC-WFE weighting refitted inside each training fold? If not, how large is the optimism?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "code/run vs code/SGRU_GRU_Kfold.py",
+   "evidence": "code/run executes only NewData_ML_Kfold.py and the fig_*.py scripts; SGRU_GRU_Kfold.py (the only script that trains SGRU and GRU) is never called, and results/output contains no SGRU/GRU log. The SGRU/GRU numbers exist only as literals in fig_6.py and fig_8.py.",
+   "source": "llm",
+   "question_for_authors": "Can the SGRU/GRU training log (per-fold ACC/Se/PPV for both datasets) be added to the capsule?",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/RawData_ML_Kfold.py vs results/output",
+   "evidence": "results/output is the log of NewData_ML_Kfold.py only (Dataset 2). The Dataset-1 traditional-classifier results (RawData_ML_Kfold.py) are not in the stored output; the only Dataset-1 numbers are the per-fold arrays typed into fig_5.py.",
+   "source": "llm",
+   "question_for_authors": "Can the Dataset-1 log of RawData_ML_Kfold.py be added?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "code/fig_6.py scores[0][0] vs code/fig_5.py Acc4 (Dataset 1, GRU)",
+   "evidence": "fig_6.py plots GRU ACC on Dataset 1 as 92.76 %. The ten per-fold GRU accuracies typed into fig_5.py (Acc4) are 92.8695652173913, 93.82608695652174, 93.91304347826087, 94.95652173913044, 94.34782608695652, 89.82608695652174, 93.73913043478261, 93.56521739130435, 91.65217391304348, 92.2608695652174; their mean is 93.09565217391304 %. The plotted 92.76 is not the mean of the stored per-fold array (difference 0.34 pp). [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Which run produced the GRU Dataset-1 accuracy of 92.76 % plotted in Fig. 6, and where is its per-fold log?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'PCC-WFE feature expansion raises the mean 10-fold accuracy of the four traditional classifiers (Dataset 2 vs Dataset 1)' holds in 74% of 34 universes. Single changes that flip it: none. Time budget reached: 34 of 36 planned universes ran.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under none?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  }
+ ]
+}

@@ -1,0 +1,405 @@
+{
+ "paper": {
+  "title": "Safety, Immunologic, and Clinical Activity of Durvalumab in Combination with Olaparib or Cediranib in Advanced Leiomyosarcoma: Results of the DAPPER Clinical Trial",
+  "doi": "10.1158/1078-0432.CCR-23-1137",
+  "note": "Main text paywalled and not available. Paper text = publisher supplementary files (Methods S1, Tables S1-S3, Figure S1) + capsule README/metadata. Claims that only the main text would state are grey."
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 5,
+  "grey": 19,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "In the LMS cohort of DAPPER, radiomic (CT), microbiome and clinical features are correlated with each other; the capsule's correlation analysis quantifies these associations and corrects for multiple testing (FDR-BH).",
+   "location": "Capsule README; Supplementary Methods S1 §3-4",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "A reduced feature set (10 radiomic principal components + microbiome relative abundances + clinical variables) is used for univariate Cox survival analysis of OS and PFS.",
+   "location": "Capsule README; code/dp_survival.Rmd",
+   "light": "yellow",
+   "findings": [
+    "F1",
+    "F2",
+    "F4",
+    "F20"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "Univariate Cox models identify features associated with OS and PFS; p-values are FDR-adjusted across the tested features.",
+   "location": "code/dp_survival.Rmd (chunks '0verall-Survival', 'Progression-Free Survival')",
+   "light": "yellow",
+   "findings": [
+    "F1",
+    "F2",
+    "F4",
+    "F21"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "Immune/angiogenic transcriptomic signatures associated with OS in DAPPER LMS patients were evaluated in an independent TCGA LMS cohort (n = 104) by GSVA and log-rank test.",
+   "location": "Supplementary Methods S1 §2.3; Figure S1",
+   "light": "grey",
+   "findings": [
+    "F22"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "Best overall response (RECIST v1.1 and iRECIST) of LMS patients on DAPPER: 1 PR, 10 SD, 17 PD; clinical benefit 5/28 (18%).",
+   "location": "Supplementary Table S1; Supplementary Table S2",
+   "light": "grey",
+   "findings": [
+    "F23"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The DAPPER LMS cohort is representative of the leiomyosarcoma population in age (median 54.5 y, range 39-75), uterine primary share (60%) and sex, but enrolled primarily white individuals (80%).",
+   "location": "Supplementary Table S3",
+   "light": "grey",
+   "findings": [
+    "F24"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Microbiome taxa present in fewer than 40% of patients were excluded from correlation analyses to account for zero-inflation.",
+   "location": "Supplementary Methods S1 §3; code/scripts/functionals.py consolidateMB(thresh=40)",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C8",
+   "text": "Radiomic features were reduced by unsupervised PCA from 973 candidate features to 10 components ranked by explained variance.",
+   "location": "Supplementary Methods S1 §4; code/scripts/functionals.py radiomicsPCA",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "code/dp_survival.Rmd:40",
+   "evidence": "Post-baseline covariates (deep_checks.py): Best.Response.RECISTv1, Gr1.Gr2.Toxicities, Gr3.Toxicities are measured during or after treatment but enter the survival models (surv_object_OS, surv_object_PFS) as baseline predictors. A patient must survive long enough to have a best response or a toxicity grade (immortal-time / outcome-dependent covariate), so their hazard ratios are biased toward benefit.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Were these covariates handled with a landmark analysis or as time-dependent covariates?",
+   "check": "trace of code/dp_survival.Rmd",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "code/dp_survival.Rmd",
+   "evidence": "Rmd outputs (deep_checks.py): os_results computed in chunk(s) 0verall-Survival but never printed or written; the knitted output (dp_survival.nb.html, results/dp_survival.nb.html) can only hold what is printed: pfs_results. The stored result for os_results is therefore not in the materials.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Can the os_results table be added to the stored output?",
+   "check": "chunk scan of code/dp_survival.Rmd",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F2",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods S1",
+   "evidence": "[W4] Are cell line source, authentication, passage number and mycoplasma testing stated? -> not_reported. No blinding statement for the imaging or IHC scoring.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are cell line source, authentication, passage number and mycoplasma testing stated?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "code/dp_survival.Rmd:40",
+   "evidence": "Column trace (deep_checks.py): data/results/reduced-feature-set.csv has 41 columns after the code's own drops (line 20: features <- features[-1]); the model formulas use 39. Never modelled: Age, Gender. Steps: line 21: covariates <- colnames(features); line 22: covariates <- covariates[-1]; line 40: univ_formulas <- sapply(covariates[2:length(covariates)], function(x) as.formula(paste('surv_object_OS~', x))). Outcomes: surv_object_OS, surv_object_PFS.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Were Age, Gender meant to be tested? The index steps skip them without comment.",
+   "check": "trace of code/dp_survival.Rmd",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F4",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Gr1/Gr2 toxicity grade is strongly associated with radiomic Component 2 (r=-0.74, FDR p=0.0012)' holds in 19% of 108 universes. Single changes that flip it: corr_method=spearman; corr_method=kendall; outlier=z3; outlier=z2.5; subset=uterine. [Yellow, not red (build_passport.py): the multiverse ran on our re-implementation of the authors' code (the reproduction gate recorded a port gap), so the fragility needs to be confirmed with the authors' own code.]",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under corr_method=spearman; corr_method=kendall; outlier=z3; outlier=z2.5; subset=uterine?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "robustness_on_port"
+   ],
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F11",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 15,
+   "archive_ok": 0,
+   "port_gap": 3,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.18518518518518517,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "corr_method",
+    "value": "spearman",
+    "holds": false,
+    "effect": 0.43228960753537937
+   },
+   {
+    "fork": "corr_method",
+    "value": "kendall",
+    "holds": false,
+    "effect": 0.35879748073796175
+   },
+   {
+    "fork": "outlier",
+    "value": "z3",
+    "holds": false,
+    "effect": 0.5366022827869049
+   },
+   {
+    "fork": "outlier",
+    "value": "z2.5",
+    "holds": false,
+    "effect": null
+   },
+   {
+    "fork": "subset",
+    "value": "uterine",
+    "holds": false,
+    "effect": null
+   }
+  ],
+  "n_ok": 108
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "checklist_no_locus": 2,
+  "robustness_on_port": 1,
+  "stat_test_not_in_code": 2
+ }
+}

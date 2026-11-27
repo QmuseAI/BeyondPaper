@@ -1,0 +1,341 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray, Rose, Bellavia, Holmes, and Kusche (2002) Study 3",
+  "doi": "not reported"
+ },
+ "counts": {
+  "red": 3,
+  "yellow": 5,
+  "grey": 17,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 3,
+   "archive_ok": 0,
+   "port_gap": 7,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.9947916666666666,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "dv",
+    "value": "zCloseness",
+    "holds": false,
+    "effect": -0.33489834940183083
+   }
+  ],
+  "n_ok": 192
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "problem",
+   "abstract_vs_body": "ok",
+   "claims_scan": "problem"
+  },
+  "param_mismatch": "Methods parameters (missing codes -99/-88/-77, seed 16, psych::scoreItems impute=none, holm adjustment, mean-centred self-esteem, control=0/experimental=1) all appear in code/main.Rmd at the stated lines",
+  "figure_data_mismatch": "Figs 1-6 are ggplot interaction plots written by ggsave from the same lm() objects (main.Rmd lines 900-1030); no numeric values are printed on the figures, so no figure-vs-data number can disagree",
+  "phantom_experiment": "Results (paper.md line 101) reports an online MTurk replication with 412 participants; no data, code or output for it is in the materials (inventory.csv lists only data/EDC_clean2.csv, code/main.Rmd, results/)",
+  "abstract_vs_body": "Abstract, Results and Tables 2-3 agree on the direction and significance of every reported effect (no condition main effect, no self-esteem x condition interaction on the four primary outcomes); the only abstract-vs-body discrepancy found is the Table 3 state self-esteem CI, recorded separately as a red stat_inconsistency",
+  "claims_scan": "claims_scan flagged the online MTurk replication (412 participants) as a phantom experiment; recorded as a yellow phantom_experiment finding"
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "location": "Table 3, State Self-Esteem column, Self-Esteem row (paper.md line 326-327)",
+   "evidence": "Table 3 prints b = .571 with 95% CI (-.544, .032); the estimate lies outside its own interval. The authors' stored output (results/main.html, confint(m6)) gives cSelfEsteem 0.4120894 to 0.7305353, and the printed interval (-.544,.032) is exactly the Table 2 manipulation-check self-esteem interval (confint(m1): -0.5445029 to 0.03211769).",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results (paper.md line 101)",
+   "evidence": "The text reports an additional study or analysis: 'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all *p*s > .40).'. Its head count 412 appears nowhere else in the paper, the phrase 'repeated the study' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "line 99",
+   "evidence": "'M = 4.83, SD = 1.25) than those in the control condition ( M = 4.24, SD = 1.42; Cohen’s d = .64': the reported d = .64, but the two means and SDs give a standardized difference of about 0.44 (|4.83 - 4.24| / sqrt((1.25^2 + 1.42^2) / 2)).",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results para 2 (paper.md line 101)",
+   "evidence": "The paper reports an online MTurk replication with 412 participants and 'again found no interaction', but the materials contain no data, code or output for that study (inventory.csv: data/EDC_clean2.csv, code/main.Rmd, results/ only).",
+   "source": "llm",
+   "judgement_key": "phantom_experiment",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'No self-esteem x condition interaction on the four primary outcomes (p > .05)' holds in 99% of 192 universes. Single changes that flip it: dv=zCloseness.",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m1) dCond",
+   "evidence": "Our re-computation of 'Manipulation check b condition' gives 0.4598 (re-computed), but the authors' stored output (results/main.html lm(m1) dCond) gives 0.5627,"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m1) cSelfEsteem",
+   "evidence": "Our re-computation of 'Manipulation check b self-esteem' gives 0.3719 (re-computed), but the authors' stored output (results/main.html lm(m1) cSelfEsteem) gives"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m3) cSelfEsteem",
+   "evidence": "Our re-computation of 'Perceived acceptance b self-esteem' gives -0.1015 (re-computed), but the authors' stored output (results/main.html lm(m3) cSelfEsteem) gi"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m3) cSelfEsteem:dCond",
+   "evidence": "Our re-computation of 'Perceived acceptance b interaction' gives -0.0854 (re-computed), but the authors' stored output (results/main.html lm(m3) cSelfEsteem:dCo"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m6) cSelfEsteem",
+   "evidence": "Our re-computation of 'State self-esteem b self-esteem' gives 0.4957 (re-computed), but the authors' stored output (results/main.html lm(m6) cSelfEsteem) gives "
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m6) cSelfEsteem:dCond",
+   "evidence": "Our re-computation of 'State self-esteem b interaction' gives 0.0756 (re-computed), but the authors' stored output (results/main.html lm(m6) cSelfEsteem:dCond) "
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/main.html lm(m6) (Intercept)",
+   "evidence": "Our re-computation of 'State self-esteem intercept' gives 2.5488 (re-computed), but the authors' stored output (results/main.html lm(m6) (Intercept)) gives 5.48"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "25 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/main.Rmd:183",
+   "evidence": "2 data-exclusion step(s): na.omit@183, na.omit@201. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "port/port.py:50",
+   "evidence": "2 data-exclusion step(s): dropna@50, dropna@102. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Method, measures",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> partial. alphas reported for composites; the manipu"
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> not_reported. no exclusion of outliers or influential cases is described; na.omit only ",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ]
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results para 2",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity enco"
+  },
+  {
+   "id": "F23",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results para 2",
+   "evidence": "Claim C7 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F24",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Method, power analysis",
+   "evidence": "Claim C8 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F25",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Discussion",
+   "evidence": "Claim C9 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 3 re-computed values match the paper."
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "17 of 18 estimate-CI reports are internally consistent."
+  }
+ ]
+}

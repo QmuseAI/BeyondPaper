@@ -1,0 +1,24 @@
+{
+ "run_id": "B15-v11116pr",
+ "paper_id": "B15",
+ "variant": "blind",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B15-v11116pr.c4.json",
+ "note": "v1.11.16 blind B15: same thread as B15-v11116f, after a V4 Pro recheck of the Flash-written part (platform switched to GLM-5.3 during the last turn)",
+ "n_findings": 4,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 3,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 3,
+  "grey": 24,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

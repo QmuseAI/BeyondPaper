@@ -1,0 +1,13 @@
+{
+  "title": "BeyondPaper: an agent that audits published computational papers by executing them (v1.11.16)",
+  "upload_type": "software",
+  "description": "BeyondPaper is a custom agent for the SciencePal platform that re-runs the code and data of published computational papers, reconciles re-computed numbers with the authors' stored output, checks papers for internal inconsistencies and methods-code mismatches, stress-tests conclusions over defensible analysis choices, exports failure paths, and builds a tested paper agent for what-if questions. This record contains the system prompt, the nine skills, change logs, the evaluation scripts, per-run findings and manual adjudications.",
+  "creators": [
+    {"name": "Zhuang, Jiapei", "affiliation": "Independent"},
+    {"name": "Chen, Yaocheng", "affiliation": "Instituto de Astronomia, Geofísica e Ciências Atmosféricas, Universidade de São Paulo"}
+  ],
+  "license": "MIT",
+  "keywords": ["reproducibility", "research integrity", "LLM agents", "multiverse analysis", "data leakage", "AI for science"],
+  "version": "1.11.16",
+  "language": "eng"
+}

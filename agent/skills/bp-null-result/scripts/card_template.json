@@ -1,0 +1,73 @@
+{
+  "id": "NR-YYYY-short-name",
+  "title": "Panel X does not beat clinical markers for outcome Z",
+  "domain": "e.g. clinical metabolomics",
+  "keywords": [
+    "biomarker panel",
+    "external validation"
+  ],
+  "question": "Does the panel improve external-cohort AUROC over the clinical markers alone?",
+  "hypothesis": "What the authors expected and why.",
+  "method": {
+    "name": "panel X",
+    "version": "",
+    "settings": "",
+    "budget": "",
+    "implementation": "path/to/code"
+  },
+  "baselines": [
+    {
+      "name": "clinical markers",
+      "version": "",
+      "settings": "logistic regression",
+      "budget": "",
+      "why_this_baseline": "current standard of care"
+    }
+  ],
+  "data": {
+    "description": "",
+    "source": "",
+    "instances": "",
+    "generator_or_seed": ""
+  },
+  "metric": {
+    "name": "external-cohort AUROC",
+    "unit": "",
+    "direction": "higher"
+  },
+  "results": {
+    "table": "results.csv",
+    "source": "results file or user statement"
+  },
+  "verdict": {
+    "label": "no_difference",
+    "text": "Within the tested cohorts the panel did not improve AUROC beyond run-to-run variation."
+  },
+  "conditions_tested": "Summary in words; the exact grid is read from results.csv.",
+  "conditions_not_tested": [
+    "other sample types",
+    "prospective cohort",
+    "different assay platform"
+  ],
+  "why_stopped": "Why the work was not continued or published.",
+  "reproduce": {
+    "command": "",
+    "environment": "",
+    "runtime": ""
+  },
+  "artifacts": [
+    {
+      "path": "results.csv",
+      "kind": "table"
+    }
+  ],
+  "related_claims": [
+    {
+      "claim": "Published claim this result speaks to",
+      "url": "https://..."
+    }
+  ],
+  "contact": "",
+  "date": "YYYY-MM-DD",
+  "license": "CC BY 4.0"
+}

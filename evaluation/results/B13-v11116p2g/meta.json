@@ -1,0 +1,25 @@
+{
+ "run_id": "B13-v11116p2g",
+ "paper_id": "B13",
+ "variant": "blind",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B13-v11116p2g.c4.json",
+ "note": "v1.11.16 blind #1, B13-v11116p2 + guided continuation (generic rule: multiverse forks must not change the claim's endpoint or drop its variable); endpoint and post_baseline forks removed | EXCLUDED: B13 not used (paywalled paper, sandbox failures; see papers/B13_PAPER_ACCESS.md)",
+ "n_findings": 2,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 18,
+  "green": 3
+ },
+ "reproduction": "full",
+ "excluded": true
+}

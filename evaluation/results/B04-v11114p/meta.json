@@ -1,0 +1,24 @@
+{
+ "run_id": "B04-v11114p",
+ "paper_id": "B04",
+ "variant": "injected",
+ "version": "v1.11.14",
+ "saved": "2026-11-18",
+ "source_file": "pages/B04-v11114p.c4.json",
+ "note": "",
+ "n_findings": 35,
+ "truncated": false,
+ "counts": {
+  "red": 10,
+  "yellow": 7,
+  "grey": 16,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 10,
+  "yellow": 7,
+  "grey": 16,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

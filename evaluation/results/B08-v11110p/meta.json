@@ -1,0 +1,24 @@
+{
+ "run_id": "B08-v11110p",
+ "paper_id": "B08",
+ "variant": "injected",
+ "version": "v1.11.10",
+ "saved": "2026-11-18",
+ "source_file": "pages/B08-v11110p.c4.json",
+ "note": "Pro, one GLM turn then Pro",
+ "n_findings": 21,
+ "truncated": false,
+ "counts": {
+  "red": 4,
+  "yellow": 4,
+  "grey": 11,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 4,
+  "yellow": 4,
+  "grey": 11,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

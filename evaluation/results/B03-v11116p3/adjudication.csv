@@ -1,0 +1,4 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,red,stat_inconsistency,line 336,"'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",real:5.1,real,"5.1: .571 outside (-.544,.032)"
+1,F2,yellow,missing_info,code/main.Rmd,"[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. set.seed(16) used only for selecting control couples; no seed reported in paper",unlabeled,unclear,checklist M1 seeds: reporting point; seed only for selecting control couples
+2,F3,yellow,figure_data_mismatch,Table 2 (manipulation check rows) vs bp_work/data/EDC_clean2.csv,"Paper: experimental M=4.83 SD=1.25, control M=4.24 SD=1.42. Recomputed from the authors' data (202 participants, 3-item ManipCheck): experimental M=4.827 SD=1.423, control M=4.377 SD=1.305. The two SDs appear exchanged b",unlabeled,real,5.2: SDs of the two conditions swapped (author output 1.423 / 1.305)

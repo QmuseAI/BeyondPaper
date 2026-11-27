@@ -1,0 +1,24 @@
+{
+ "run_id": "B09-v11115p",
+ "paper_id": "B09",
+ "variant": "clean",
+ "version": "v1.11.15",
+ "saved": "2026-11-18",
+ "source_file": "/tmp/b09/B09-v11115p.c4.json",
+ "note": "Pro throughout; red/yellow only; sha bae6acd4",
+ "n_findings": 16,
+ "truncated": false,
+ "counts": {
+  "red": 7,
+  "yellow": 9,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 7,
+  "yellow": 9,
+  "grey": 24,
+  "green": 5
+ },
+ "reproduction": "partial"
+}

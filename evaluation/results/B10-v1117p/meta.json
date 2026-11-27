@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v1117p",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.7",
+ "saved": "2026-11-18",
+ "source_file": "pages/B10-v1117p.c4.json",
+ "note": "started v1.11.7, continued on v1.11.8 skills; GLM turns then Pro",
+ "n_findings": 16,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 1,
+  "grey": 12,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 1,
+  "grey": 12,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

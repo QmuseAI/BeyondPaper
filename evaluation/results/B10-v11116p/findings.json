@@ -1,0 +1,232 @@
+{
+ "counts": {
+  "red": 3,
+  "yellow": 7,
+  "grey": 18,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 1,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 4
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [
+    "C1",
+    "C10",
+    "C2"
+   ],
+   "location": "Abstract p.1 vs Results, Participants p.4",
+   "evidence": "'n participants (final sample)' is reported with different values. Abstract p.1: 103 participants | Results, Participants p.4: 113 participants. Agreeing reports: 1 location(s) [Abstract p.1] vs 1 [Results, Participants p.4].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'n participants (final sample)' is correct (103 participants or 113 participants)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "sample_size",
+     "location": "p. 4, Sec. Participants, line 141",
+     "severity": "yellow",
+     "file": "counts.findings.json"
+    }
+   ],
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [
+    "C2",
+    "C9"
+   ],
+   "location": "Abstract p.1 vs Discussion, Summary of results p.5",
+   "evidence": "'n items reaching consensus' is reported with different values. Abstract p.1: 38 items | Discussion, Summary of results p.5: 34 items. Agreeing reports: 1 location(s) [Abstract p.1] vs 1 [Discussion, Summary of results p.5].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'n items reaching consensus' is correct (38 items or 34 items)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "Results, Delphi-item ratings p.4 vs results/final/0.main_table.csv",
+   "evidence": "Text: 'the median percentage of participants that rated an item as essential was 74% (interquartile range = 60%-86%). The median of the average (mean) rating across the 78 items was 7.4 (interquartile range = 6.8-7.9)'. Stored main_table (72 non-NA items): median 70.0% (IQR 54.25-85.0), median mean 7.21 (IQR 6.66-7.92). My recount from data/1.item_ratings.csv: 70.1% (55.0-85.15) and 7.21 (6.68-7.90). [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Which sample and item set produced the reported 74% and 7.4 medians?",
+   "judgement_key": "claims_scan",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Results, Delphi-item ratings p.4 vs materials/results/final/0.main_table.csv (72 non-NA items, median of mean)",
+   "evidence": "The paper reports 'median of mean ratings' = 7.4 scale 1-9 (Results, Delphi-item ratings p.4); the authors' own stored output (materials/results/final/0.main_table.csv (72 non-NA items, median of mean)) gives 7.21. Our re-run gives 7.21, which matches the stored output. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run. Yellow, not red: 0.main_table.csv holds the columns mean, mean.1. The paper's table may be built from another version of the column; add `archive_code` (file:line of the authors' code that writes the paper's number) to recomputed.json once that column is confirmed.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'median of mean ratings' (7.4), given that materials/results/final/0.main_table.csv (72 non-NA items, median of mean) gives 7.21?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C10",
+    "C3",
+    "C6"
+   ],
+   "location": "paper vs manuscript.Rmd:157",
+   "evidence": "The paper defines a threshold of at least 70% (\"### Definition of consensus Before launching the survey, the steering committee defined consensus as at least 70% of participants in each nonstudent stakeholder group rating an item as “essential” (i.e., between 7 and 9 \"), but no comparison in the code uses 0.7; the code compares at 0.75 (`consensus = if_else(perc_essential >= 0.75, TRUE, FALSE),`). Check which threshold produced the reported results.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Was the threshold 70% or 0.75?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "param_mismatch",
+     "location": "Definition of consensus p.3 vs code/manuscript.Rmd:157,322-330",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F5",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C10",
+    "C3",
+    "C6"
+   ],
+   "location": "paper vs manuscript.Rmd:700",
+   "evidence": "The paper reports a median absolute change (\"Of the 47 items included in both Round 1 and Round 2, four went from not reaching consensus to reaching consensus, the median absolute change in the percentage of participants that rated an item as essential was 3.8%, an\"), but the code computes mean(abs(...)) (`mean(abs(compare_rounds$perc_essential_compare))*100,`) (and 5 similar line(s)) and never median(abs(...)). The reported statistic may be mislabelled.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported values medians or means of the absolute changes?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "Abstract p.1 vs Discussion, Summary of results p.5",
+   "evidence": "Abstract: 'Of 78 items included in the consensus process, 38 reached consensus'. Discussion: 'Consensus was reached for 34 items'. Table 2 (table2_verbatim.csv) counts 26 round-1 + 8 round-2 = 34 items with consensus; stored final/0.main_table.csv has 28 TRUE and 7 NA. 38 is not reproduced by any stored table. [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Do 38 or 34 items reach consensus, and what does the extra 4 in the abstract count?",
+   "judgement_key": "claims_scan",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Discussion, Summary of results p.5",
+   "evidence": "Text: 'A follow-up survey of 46 heads of department in 2023 found that 31 of these 34 items were already taught at their institutions.' No data file, code or stored output for this follow-up survey exists in the capsule (data/ holds only the Delphi files 1-8; results/ holds only Delphi outputs). [Yellow (build_passport.py, phantom_sample): the paper reports results for a named sample or experiment, and the released materials, which hold the data and code for the other analyses, contain nothing for it.]",
+   "source": "llm",
+   "question_for_authors": "Can the follow-up survey data (46 heads, 31/34 items) be shared?",
+   "judgement_key": "claims_scan",
+   "type_original": "missing_artifact",
+   "severity_original": "grey",
+   "severity_reasons": [
+    "phantom_sample"
+   ],
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8"
+  },
+  {
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C10",
+    "C3",
+    "C6"
+   ],
+   "location": "Abstract p.1 vs Results, Participants p.4",
+   "evidence": "Abstract: 103 participants. Results: '113 participants who passed the attention check and completed both Round 1 and Round 2'. Recount from data/1.item_ratings.csv applying manuscript.Rmd rules (pilot IDs and round 0 removed, remove_incomplete 7/32, attention check) gives 103 in the final sample and 112 completing Round 2 (bp_out/recount_participants.json). [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Is the final sample 103 or 113 participants?",
+   "judgement_key": "abstract_vs_body",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'A substantial set of Delphi items reaches consensus under the preregistered rule (>=28 of 78 items)' holds in 58% of 120 universes. Single changes that flip it: groups=all_four; incomplete_rule=lenient.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under groups=all_four; incomplete_rule=lenient?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  }
+ ]
+}

@@ -1,0 +1,374 @@
+{
+ "paper": {
+  "title": "Measuring the effects of exercise in neuromuscular disorders: a systematic review and meta-analyses",
+  "doi": "10.12688/wellcomeopenres.15825.2",
+  "authors": "Stefanetti et al. 2020, Wellcome Open Research"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 5,
+  "yellow": 5,
+  "grey": 21,
+  "green": 2
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, Sec. Exercise training versus usual care, line 71",
+   "evidence": "'analysis were primarily RCTs (83%; n=15/21) ( Underlying data, File 6) ^': 15/21 = 71.4%, but the text reports 83%.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the percentage, the numerator or the denominator mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 71",
+   "evidence": "'SMD 0.70 [95% CI 0.15, 1.24]; p=0.31) ( Figure 3) compared with usua': The 95% CI [0.15, 1.24] excludes the null value 0, but the reported p is = 0.31; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.012.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'-0.67 [95% CI -1.31, 0.03]; p=0.04) ( Figure 8), and rise from sup': The 95% CI [-1.31, 0.03] includes the null value 0, but the reported p is = 0.04; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': The 95% CI [-0.23, -0.11] excludes the null value 0, but the reported p is = 0.46; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': Estimate -0.06 lies outside its own 95% CI [-0.23, -0.11].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 175",
+   "evidence": "'04 | 0.29 | 111.08 | S | 32.21 | 6.99 | (7.11 to 6.86)': interval (7.11 to 6.86) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 179",
+   "evidence": "'8 | -0.65 | 3.50 | M | -2.27 | -23.80 | (-15.19 to -32.4)': interval (-15.19 to -32.4) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/funnel.R:17",
+   "evidence": "The loop starting at line 15 reads datS, the per-iteration variable of the loop at line 4; this loop's own per-iteration variable is datR. It uses the value left over from the earlier loop.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Should line 17 use datR instead of datS?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "part2/code/funnel.R:17"
+   ],
+   "merged": [
+    {
+     "type": "stale_loop_variable",
+     "location": "part2/code/funnel.R:17",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Before-after exercise training significantly improves VO2peak, Wpeak and 6MWT (SMD > 0, p < 0.05)' holds in 67% of 54 universes. Single changes that flip it: multiplicity=bonferroni.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under multiplicity=bonferroni?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F28",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F29",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F30",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F31",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F32",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 17,
+   "archive_ok": 6,
+   "port_gap": 12,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.6666666666666666,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "multiplicity",
+    "value": "bonferroni",
+    "holds": false,
+    "effect": 0.2921468614267148
+   }
+  ],
+  "n_ok": 54
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "checklist_nothing_done": 1,
+  "same_pattern": 1,
+  "stat_test_not_in_code": 2
+ },
+ "_c3_note": "claims dropped (10)"
+}

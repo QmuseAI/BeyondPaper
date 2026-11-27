@@ -1,0 +1,65 @@
+{
+ "counts": {
+  "red": 2,
+  "yellow": 1,
+  "grey": 5,
+  "green": 4
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 5,
+   "port_gap": 0,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2 vs bp_work/results/main.html",
+   "evidence": "The paper reports 'Table 2 condition b, inferred negative items' = 1.623 b (Table 2); the authors' own stored output (bp_work/results/main.html) gives 1.425.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 condition b, inferred negative items' (1.623), given that bp_work/results/main.html gives 1.425?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2 vs bp_work/results/main.html",
+   "evidence": "The paper reports 'Table 2 intercept, inferred negative items' = 3.442 b (Table 2); the authors' own stored output (bp_work/results/main.html) gives 3.548. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 intercept, inferred negative items' (3.442), given that bp_work/results/main.html gives 3.548?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  }
+ ]
+}

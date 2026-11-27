@@ -1,0 +1,24 @@
+{
+ "run_id": "B06-v1111",
+ "paper_id": "B06",
+ "variant": "clean",
+ "version": "v1.11.1",
+ "saved": "2026-11-17",
+ "source_file": "pages/B06-v1111.c3.json",
+ "note": "v1.11.1; c3 copy of bp_out/BP_FINDINGS_BLOCK.txt: red/yellow in full, grey/green without location/evidence; sha256 verified in browser",
+ "n_findings": 42,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 10,
+  "grey": 30,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 10,
+  "grey": 30,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

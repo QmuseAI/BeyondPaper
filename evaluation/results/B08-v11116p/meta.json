@@ -1,0 +1,24 @@
+{
+ "run_id": "B08-v11116p",
+ "paper_id": "B08",
+ "variant": "injected",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B08-v11116p.c5.json",
+ "note": "new account; GLM twice + ~15 s Flash (only bp_progress) -> flash by rule; red/yellow only c5 sha256 f79babca",
+ "n_findings": 10,
+ "truncated": false,
+ "counts": {
+  "red": 6,
+  "yellow": 4,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 6,
+  "yellow": 4,
+  "grey": 36,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

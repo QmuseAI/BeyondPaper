@@ -1,0 +1,437 @@
+{
+ "counts": {
+  "red": 4,
+  "yellow": 13,
+  "grey": 26,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 3,
+   "archive_ok": 1,
+   "port_gap": 1,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2 vs Discussion p.7 ('PCA, KPCA and autoencoder achieved higher sMAPE values of 6, 10 and 17')",
+   "evidence": "'sMAPE PCA-NN test' is reported with different values. Table 2: 10 % | Discussion p.7 ('PCA, KPCA and autoencoder achieved higher sMAPE values of 6, 10 and 17'): 6 %. Agreeing reports: 1 location(s) [Table 2] vs 1 [Discussion p.7 ('PCA, KPCA and autoencoder achieved higher sMAPE values of 6, 10 and 17')].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'sMAPE PCA-NN test' is correct (10 % or 6 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Table 2 vs Discussion p.7 ('BP-GFR ... achieving an sMAPE value of (8)')",
+   "evidence": "'sMAPE BP-GFR test' is reported with different values. Table 2: 0.7 % | Discussion p.7 ('BP-GFR ... achieving an sMAPE value of (8)'): 8 %. Agreeing reports: 1 location(s) [Table 2] vs 1 [Discussion p.7 ('BP-GFR ... achieving an sMAPE value of (8)')].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'sMAPE BP-GFR test' is correct (0.7 % or 8 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Table 2 vs Discussion p.7",
+   "evidence": "'sMAPE PCA-GFR test' is reported with different values. Table 2: 42 % | Discussion p.7: 74 %. Agreeing reports: 1 location(s) [Table 2] vs 1 [Discussion p.7].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'sMAPE PCA-GFR test' is correct (42 % or 74 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Table 1 vs Supplementary Results p.18",
+   "evidence": "'R2 Autoencoder-LR test' is reported with different values. Table 1: -0.6 R2 | Supplementary Results p.18: -0.21 R2. Agreeing reports: 1 location(s) [Table 1] vs 1 [Supplementary Results p.18].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'R2 Autoencoder-LR test' is correct (-0.6 R2 or -0.21 R2)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Table 1 vs Supplementary Results p.18",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "Methods p.7 vs code/R2_FeedBi_N.py:174-320",
+   "evidence": "The paper describes 5-fold cross-validation over the training data, but the script trains 5 folds per seed and then predicts the test set with the model left over from the last fold only (predictions = model.predict(X_test) after the fold loop), so the reported test metrics come from one fold's model, not from an ensemble or from all folds.",
+   "source": "llm",
+   "question_for_authors": "Which fold's model produced the reported test metrics, and were the test metrics averaged over folds?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Introduction p.2 and Methods p.7 vs SI Table S2",
+   "evidence": "The paper says the training data are laboratory-scale biofilters and the test data are a full-scale operational biofilter, but SI Table S2 describes the test set as five laboratory-scale biofilters at 10 and 20 C (the Shi et al. study), and the Methods themselves say the 62 test samples come from that laboratory temperature-gradient study. The cross-scale generalisation claim is not supported by the described split.",
+   "source": "llm",
+   "question_for_authors": "Is the 62-sample test set from a full-scale or a laboratory-scale biofilter?",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Results p.5 vs Supplementary Methods (SHAP Analysis Setup)",
+   "evidence": "Results say SHAP was performed 'using a Ridge regression model with Buckingham Pi features'; the Supplementary Methods say shap.Explainer was applied to a trained GradientBoostingRegressor (gb_model), and Figs. S4/S5 captions name the Gradient Boosting Regressor. The model behind the SHAP values is described two ways.",
+   "source": "llm",
+   "question_for_authors": "Was the SHAP analysis run on the Ridge or the Gradient Boosting model?",
+   "verified_by": "bp_work/checks/V10.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Methods p.9 and Table S4 vs code/R2_FeedBi_N.py:137-146",
+   "evidence": "Table S4 states early stopping with patience 10 epochs; the released create_model/fit calls use no EarlyStopping callback (model.fit(..., epochs=n_epochs, batch_size=batch, validation_data=...)), and the Dropout layer is commented out although Table S4 lists dropout 0.1.",
+   "source": "llm",
+   "question_for_authors": "Was early stopping and dropout used in the runs behind Tables 1-2?",
+   "verified_by": "bp_work/checks/V11.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "SI Table S2 vs capsule data/test_data.csv",
+   "evidence": "SI Table S2 gives the test-set ranges T [10,20], Pz 0.1, A [70,340], Bt 180, P 1.058, Cfit 2.6, t0 37, ICorg [7.725,21.7], ECorg [5.291,17.25]; the released data/test_data.csv (62 rows) reproduces every one of these ranges (T 10-20, Pv 0.1, A 70-340, Bt 180, P 1.058, Cfit 2.6, ICorg 7.724-21.7, ECorg 5.291-17.25). The test set is therefore a single-condition laboratory set (one pore size, one particle size, one filter diameter, one contact time), not a full-scale operational biofilter as the Introduction states.",
+   "source": "llm",
+   "question_for_authors": "Which biofilter produced the 62 test observations, and is it full-scale?",
+   "verified_by": "bp_work/checks/V13.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Table 1/Table 2 vs Supplementary Table S5",
+   "evidence": "Table 1 gives BP-NN training R2 0.95 (0.005) and Table 2 training sMAPE 2 (0.1); Supplementary Table S5 gives the same EnviroPiNet model train R2 0.94 and train sMAPE 2.1, and test sMAPE 5.6 where Table 2 gives 6 (2.1). The test R2 agrees (0.9). The ablation table and the main tables describe the same model on the same data, so the training values differ by more than rounding.",
+   "source": "llm",
+   "question_for_authors": "Were Table 1/2 and Table S5 produced by the same run? Which training R2 and sMAPE belong to the reported EnviroPiNet?",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Supplementary Table S4 vs code/R2_FeedBi_N.py:61,65",
+   "evidence": "Table S4 lists learning rate 0.05 and 200 epochs; the released training script sets learning_rate = 0.0001 (line 61) and n_epochs = 50 (line 65). Batch size 16, 64 units, 3 layers, ReLU, L2 0.01, dropout 0.1 and 7 seeds agree.",
+   "source": "llm",
+   "question_for_authors": "Which learning rate and epoch count produced the reported EnviroPiNet metrics?",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.8 (ridge alpha grid) vs code/BP_LR.py:66",
+   "evidence": "Methods: 'candidate values logarithmically spaced between 1e-3 and 1e10'. Code: param_grid = {'alpha': np.logspace(1,10,2)} = [10, 1e10], i.e. two candidate values starting at 10, not 1e-3.",
+   "source": "llm",
+   "question_for_authors": "Which alpha grid was used for the BP-LR fit behind Eq. 1?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "paper text",
+   "evidence": "The paper names random forest (\"…g. Additionally, ensemble methods such as Gradient Forest Regression (BP-GFR), Random Forest Regression (BP-RFR), and Support Vector Regression (BP-SVR) were evaluated, eac…\"), but no matching call (/RandomForest|randomForest|ranger/) was found outside comments in 4 code file(s). Same pattern at 1 more place(s): Methods p.8-9 (Ridge/GBR/RFR/SVR) vs capsule code.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Where in the released code is the random forest performed?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "paper text",
+    "paper text",
+    "Methods p.8-9 (Ridge/GBR/RFR/SVR) vs capsule code"
+   ],
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "paper text",
+     "severity": "yellow",
+     "file": "methods_code.findings.json",
+     "source": "script:methods_code_check.py"
+    },
+    {
+     "type": "phantom_experiment",
+     "location": "paper text",
+     "severity": "yellow",
+     "file": "methods_code.findings.json",
+     "source": "script:methods_code_check.py"
+    },
+    {
+     "type": "phantom_experiment",
+     "location": "Methods p.8-9 (Ridge/GBR/RFR/SVR) vs capsule code",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F13"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C7"
+   ],
+   "location": "capsule/code/R2_FeedBi_N.py:80",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training. Same pattern at 7 more place(s): R2_FeedBi_N.py:84; R2_FeedBi_N.py:95; R2_FeedBi_N.py:99; sMAPE_FeedBi_N.py:74; sMAPE_FeedBi_N.py:78; sMAPE_FeedBi_N.py:89; sMAPE_FeedBi_N.py:93.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "capsule/code/R2_FeedBi_N.py:84",
+    "capsule/code/R2_FeedBi_N.py:95",
+    "capsule/code/R2_FeedBi_N.py:99",
+    "capsule/code/sMAPE_FeedBi_N.py:74",
+    "capsule/code/sMAPE_FeedBi_N.py:78",
+    "capsule/code/sMAPE_FeedBi_N.py:89",
+    "capsule/code/sMAPE_FeedBi_N.py:93"
+   ],
+   "merged": [
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/R2_FeedBi_N.py:84",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/R2_FeedBi_N.py:95",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/R2_FeedBi_N.py:99",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:74",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:78",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:89",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:93",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F14",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "Methods p.8-9 vs code/R2_FeedBi_N.py:174-320",
+   "evidence": "The 5-fold KFold in the training loop splits the 255 training rows at random, but the rows are time series from three biofilters (Quinn 175 rows over 162 days, Ma 26 rows, Shi 54 rows). Rows from the same filter and adjacent sampling dates therefore sit on both sides of every fold, so the validation R2 used for model selection is not an out-of-filter estimate. The test set is a separate study, so the test metrics are not affected by this, but the training/validation numbers in Tables 1-2 are.",
+   "source": "llm",
+   "question_for_authors": "Were the cross-validation folds grouped by biofilter or by sampling date?",
+   "verified_by": "bp_work/checks/V15.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F15"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "capsule/code/BP.py:292",
+   "evidence": "np.random.uniform(...) used and no global seed is set in this file.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C4"
+   ],
+   "location": "capsule/code/R2_FeedBi_N.py:95",
+   "evidence": "scalerT.fit_transform(X_testl, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 5 more place(s): R2_FeedBi_N.py:99; sMAPE_FeedBi_N.py:89; sMAPE_FeedBi_N.py:93; Methods p.9 vs code/R2_FeedBi_N.py:98-99, 300-320; code/R2_FeedBi_N.py:95,99 (and sMAPE_FeedBi_N.py:89,93).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "capsule/code/R2_FeedBi_N.py:99",
+    "capsule/code/sMAPE_FeedBi_N.py:89",
+    "capsule/code/sMAPE_FeedBi_N.py:93",
+    "Methods p.9 vs code/R2_FeedBi_N.py:98-99, 300-320",
+    "code/R2_FeedBi_N.py:95,99 (and sMAPE_FeedBi_N.py:89,93)"
+   ],
+   "merged": [
+    {
+     "type": "test_set_reuse",
+     "location": "capsule/code/R2_FeedBi_N.py:99",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:89",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:93",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "missing_info",
+     "location": "Methods p.9 vs code/R2_FeedBi_N.py:98-99, 300-320",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "code/R2_FeedBi_N.py:95,99 (and sMAPE_FeedBi_N.py:89,93)",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F17"
+  }
+ ]
+}

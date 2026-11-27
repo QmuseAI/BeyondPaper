@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use BeyondPaper, please cite it as below."
+title: "BeyondPaper: an agent that audits published computational papers by executing them"
+version: "1.11.16"
+date-released: "2026-11-19"
+license: MIT
+authors:
+  - family-names: Zhuang
+    given-names: Jiapei
+    affiliation: "Independent"
+  - family-names: Chen
+    given-names: Yaocheng
+    affiliation: "Instituto de Astronomia, Geofísica e Ciências Atmosféricas, Universidade de São Paulo"
+keywords:
+  - reproducibility
+  - research integrity
+  - LLM agents
+  - multiverse analysis
+  - data leakage

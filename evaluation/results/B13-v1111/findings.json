@@ -1,0 +1,294 @@
+{
+ "paper": {
+  "title": "DAPPER Leiomyosarcoma: Correlation and Survival Analysis of Radiomic, Microbiome and Clinical Data (companion to Salawu et al., Clin Cancer Res 2023;29(20):4128-4138)",
+  "doi": "10.1158/1078-0432.CCR-23-1137"
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 6,
+  "grey": 19,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 17,
+   "archive_ok": 3,
+   "port_gap": 6,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5,
+  "baseline_holds": true,
+  "n_ok": 24
+ },
+ "severity_changes": {
+  "checklist_no_locus": 1,
+  "near_duplicate": 1
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "evidence": "The paper names Mann-Whitney / Wilcoxon (\"…for immune cell subsets in the TME were compared in patient subgroups using the Wilcoxon rank sum test with p<0.05 considered significant. 2.3. Gene set enrichment Ana…\"), but no matching call (/wilcox|mannwhitney|wilcoxon|ranksums/) was found outside comments in 4 code file(s)."
+  },
+  {
+   "id": "F2",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-3894632/code/dp_survival.Rmd:40",
+   "evidence": "Post-baseline covariates (deep_checks.py): Best.Response.RECISTv1, Gr1.Gr2.Toxicities, Gr3.Toxicities are measured during or after treatment but enter the survival models (surv_object_OS, surv_object_PFS) as baseline predictors. A patient must survive long enough to have a best response or a toxicity grade (immortal-time / outcome-dependent covariate), so their hazard ratios are biased toward benefit."
+  },
+  {
+   "id": "F3",
+   "module": "ghost",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-3894632/code/dp_survival.Rmd",
+   "evidence": "Rmd outputs (deep_checks.py): os_results computed in chunk(s) 0verall-Survival but never printed or written; the knitted output (capsule-3894632/dp_survival.nb.html, capsule-3894632/results/dp_survival.nb.html) can only hold what is printed: pfs_results. The stored result for os_results is therefore not in the materials."
+  },
+  {
+   "id": "F4",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "not reported (main text paywalled; capsule README/metadata)",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> not_reported. No random seed anywhere in correlation.py, functionals.py or dp_survival.Rmd; PCA and Cox are deterministic but the microbiome/radiomic preprocessing has no seed."
+  },
+  {
+   "id": "F5",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-3894632/code/dp_survival.Rmd:40",
+   "evidence": "Column trace (deep_checks.py): capsule-3894632/data/results/reduced-feature-set.csv has 41 columns after the code's own drops (line 20: features <- features[-1]); the model formulas use 39. Never modelled: Age, Gender. Steps: line 21: covariates <- colnames(features); line 22: covariates <- covariates[-1]; line 40: univ_formulas <- sapply(covariates[2:length(covariates)], function(x) as.formula(paste('surv_object_OS~', x))). Outcomes: surv_object_OS, surv_object_PFS."
+  },
+  {
+   "id": "F6",
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "source": "script:multiverse.py",
+   "hand_written": false,
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'In the DAPPER LMS cohort, best RECIST response and toxicity grades are the features significantly associated with PFS after FDR correction, while no radiomic or microbiome feature is.' holds in 50% of 24 universes. Single changes that flip it: post_baseline=exclude."
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json"
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "paper": "Thibault et al. 2024 AMPPS (Delphi)",
+ "items": [
+  {
+   "id": "4.1",
+   "mechanism": "statistic_mislabel",
+   "types": [
+    "param_mismatch",
+    "number_mismatch",
+    "stat_inconsistency",
+    "rerun_mismatch",
+    "archive_mismatch"
+   ],
+   "match_any": [
+    "mean",
+    "3.78",
+    "3.0%",
+    "0.13",
+    "abs("
+   ],
+   "description": "sensitivity statistics labelled median are means (mean(abs(...)))",
+   "status": "verified",
+   "match_all": [
+    "median"
+   ]
+  },
+  {
+   "id": "4.2",
+   "mechanism": "count_arithmetic",
+   "types": [
+    "sample_size",
+    "number_mismatch",
+    "archive_mismatch"
+   ],
+   "match_any": [
+    "47"
+   ],
+   "description": "'47 items in both rounds' should be 45 by the paper's own counts",
+   "status": "verified"
+  }
+ ],
+ "key": "P04"
+}

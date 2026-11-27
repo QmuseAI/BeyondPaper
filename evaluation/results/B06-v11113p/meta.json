@@ -1,0 +1,24 @@
+{
+ "run_id": "B06-v11113p",
+ "paper_id": "B06",
+ "variant": "clean",
+ "version": "v1.11.13",
+ "saved": "2026-11-18",
+ "source_file": "pages/B06-v11113p.c4.json",
+ "note": "",
+ "n_findings": 46,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 14,
+  "grey": 29,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 14,
+  "grey": 29,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

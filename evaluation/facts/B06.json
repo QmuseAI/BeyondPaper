@@ -1,0 +1,8 @@
+{
+ "_note": "B06 materials are not in the scoring workspace; seeds taken from the verified B06-v1104 F16 evidence (random_state 12306 in run.ipynb)",
+ "seeds": {
+  "code/GC-diagnosis-model/run.ipynb": [
+   "random_state=12306"
+  ]
+ }
+}

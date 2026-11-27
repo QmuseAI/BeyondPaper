@@ -1,0 +1,24 @@
+{
+ "run_id": "B07-v1116p2",
+ "paper_id": "B07",
+ "variant": "injected",
+ "version": "v1.11.6",
+ "saved": "2026-11-18",
+ "source_file": "../pages/B07-v1116p2.c4.json",
+ "note": "",
+ "n_findings": 23,
+ "truncated": false,
+ "counts": {
+  "red": 4,
+  "yellow": 2,
+  "grey": 14,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 4,
+  "yellow": 2,
+  "grey": 14,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

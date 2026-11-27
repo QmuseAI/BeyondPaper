@@ -1,0 +1,24 @@
+{
+ "run_id": "B07-v1118p",
+ "paper_id": "B07",
+ "variant": "injected",
+ "version": "v1.11.8",
+ "saved": "2026-11-18",
+ "source_file": "pages/B07-v1118p.c4.json",
+ "note": "v1.11.8; first turn switched to V4 Flash by the platform, stopped and continued on V4 Pro; c4 sha ca93f4e8 verified",
+ "n_findings": 21,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 17,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 17,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

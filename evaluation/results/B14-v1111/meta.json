@@ -1,0 +1,24 @@
+{
+ "run_id": "B14-v1111",
+ "paper_id": "B14",
+ "variant": "blind",
+ "version": "v1.11.1",
+ "saved": "2026-11-17",
+ "source_file": "pages/B14-v1111.compact.json",
+ "note": "v1.11.1; paper = user-supplied BJSTR 2021 published PDF; compact copy of bp_out/BP_FINDINGS_BLOCK.txt (grey evidence cut to 200 chars), sha256 verified in browser",
+ "n_findings": 45,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 15,
+  "grey": 27,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 15,
+  "grey": 27,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

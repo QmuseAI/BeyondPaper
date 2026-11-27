@@ -1,0 +1,257 @@
+{
+ "paper": {
+  "title": "A Delphi Study to Strengthen Research-Methods Training in Undergraduate Psychology Programs",
+  "doi": "not reported in paper.md",
+  "source": "paper.md (user-supplied)"
+ },
+ "counts": {
+  "red": 1,
+  "yellow": 6,
+  "grey": 11,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 7,
+   "archive_ok": 0,
+   "port_gap": 2,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": null,
+ "judgement_checks": {
+  "_verdicts": {
+   "abstract_vs_body": "problem",
+   "param_mismatch": "problem",
+   "phantom_experiment": "problem",
+   "figure_data_mismatch": "problem",
+   "claims_scan": "problem"
+  },
+  "abstract_vs_body": "Abstract (paper.md line 12) says 38 of 78 items reached consensus; Discussion Summary of results (line 423) says 'Consensus was reached for 34 items'; Results text (line 149-151) says 26 (Round 1) + 8 (Round 2) + 44 not = 78, i.e. 34 reaching consensus. Authors' stored results/final/0.main_table.csv: consensus==TRUE 28 rows, consensus.1==TRUE 8 rows, union 34 rows.",
+  "param_mismatch": "Sensitivity Analyses text (paper.md lines 240-245) reports 'median absolute change in the percentage ... 3.8%' and 'median absolute difference in participants rating ... 0.15'; code/manuscript.Rmd lines 700-706 compute mean(abs(compare_rounds$perc_essential_compare))*100 and mean(abs(compare_rounds$mean_compare)) for the Rounds column, and mean(abs(...)) for the Stakeholders and Sample columns. The stored results/sensitivity/*.csv hold the per-item differences, so the statistic can be recomputed.",
+  "phantom_experiment": "Discussion Summary of results (paper.md line 423): 'A follow-up survey of 46 heads of department in 2023 found that 31 of these 34 items were already taught at their institutions.' The Methods describe only the preparatory stage and two Delphi rounds; no follow-up survey is described, no citation is given, and no file in bp_work/data or bp_work/results contains such a survey (data/ holds 1.item_ratings, 2.feedback_on_questions, 3.rating_change_reasons, 4.participant_characteristics, 5.general_comments, 6.additional_outcomes_suggested, 7.thematic_analysis, 8.additional_qual_analyses).",
+  "figure_data_mismatch": "Table 2 (main table) and the sensitivity table are produced by code/manuscript.Rmd from results/final/0.main_table.csv and results/sensitivity/*.csv. Recount from the stored main table: consensus==TRUE 28 rows, consensus.1==TRUE 8 rows, union 34; items present in both rounds 45; consensus_dif changed 4, new_question 7, stable 41. The paper's Sensitivity Analyses text says 47 items were rated in both rounds, and the footnote arithmetic 72-26-1+7=52 uses 26 Round-1 consensus items, not the 28 in the stored table. Values go to recomputed.json in stage 4.",
+  "claims_scan": "claims_scan.findings.json#0 phantom_experiment (Discussion line 423, 46 heads of department): no data file or code found - kept as a yellow phantom_experiment finding. #1 number_mismatch (Abstract 38 vs body 34): confirmed as the same quantity (items reaching consensus out of 78); the stored main table gives 34, so kept as a red number_mismatch."
+ },
+ "findings": [
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract (paper.md line 12) vs Discussion Summary of results (line 423) vs Results Delphi-item ratings (lines 149-151)",
+   "evidence": "Abstract: 'Of 78 items included in the consensus process, 38 reached consensus'. Discussion: 'Consensus was reached for 34 items'. Results: 26 items reached consensus in Round 1, 8 in Round 2, 44 did not (26+8+44=78, so 34 reached consensus). Authors' stored results/final/0.main_table.csv: consensus==TRUE 28 rows, consensus.1==TRUE 8 rows, union 34 rows; no combination gives 38. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "judgement_key": "abstract_vs_body",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "location": "Abstract vs bp_work/results/final/0.main_table.csv (26 Round-1 + 8 Round-2)",
+   "evidence": "The paper reports 'n items reaching consensus' = 38 items (Abstract); the authors' own stored output (bp_work/results/final/0.main_table.csv (26 Round-1 + 8 Round-2)) gives 34. Our re-run gives 34, which matches the stored output. [Yellow, not red (build_passport.py): 0.main_table.csv holds several versions of the compared column (consensus, consensus.1); the paper's table may come from another version. Name the line of the authors' code that writes the paper's number before treating this as a conflict.]",
+   "source": "script:numbers_crosscheck.py",
+   "severity_original": "red",
+   "severity_reasons": [
+    "versioned_columns"
+   ],
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "location": "Results, Sensitivity Analyses vs bp_work/results/sensitivity/round1_round2.csv (45 rows)",
+   "evidence": "The paper reports 'n items in both rounds (sensitivity)' = 47 items (Results, Sensitivity Analyses); the authors' own stored output (bp_work/results/sensitivity/round1_round2.csv (45 rows)) gives 45. Our re-run gives 45, which matches the stored output. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 12) vs body (paper.md line 423)",
+   "evidence": "The Abstract gives 38 ('...Of 78 items included in the consensus process, 38 reached consensus....'); the body never states 38. The body sentence about the same quantity (shared words: consensus, items, reached) gives 34: '...Consensus was reached for 34 items....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Discussion (paper.md line 423)",
+   "evidence": "The text reports an additional study or analysis: 'A follow-up survey of 46 heads of department in 2023 found that 31 of these 34 items were already taught at their institutions.'. Its head count 46 appears nowhere else in the paper, the phrase 'follow-up survey' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "paper vs raw_1/code/manuscript.Rmd:700",
+   "evidence": "The paper reports a median absolute change (\"Of the 47 items included in both Round 1 and Round 2, four went from not reaching consensus to reaching consensus, the median absolute change in the percentage of participants that rated an item as essential was 3.8%, an\"), but the code computes mean(abs(...)) (`mean(abs(compare_rounds$perc_essential_compare))*100,`) (and 11 similar line(s)) and never median(abs(...)). The reported statistic may be mislabelled.",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "Results, Sensitivity Analyses (paper.md lines 240-245) vs code/manuscript.Rmd lines 700-706",
+   "evidence": "Text: 'the median absolute change in the percentage of participants that rated an item as essential was 3.8%, and the median absolute difference in participants rating of an item was 0.15'; also 5.3%/0.24 (stakeholders) and 1.3%/0.06 (samples). Code: sensitivity_out <- data.frame(Rounds = c(sum(...), mean(abs(compare_rounds$perc_essential_compare))*100, mean(abs(compare_rounds$mean_compare))), ...) - the code computes means of absolute differences, not medians, for all three columns.",
+   "source": "llm",
+   "judgement_key": "param_mismatch",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (our Python port) vs bp_work/results/sensitivity/round1_round2.csv mean(abs(perc_essential_1-perc_essential_2))*100 = 3.78",
+   "evidence": "Our re-computation of 'median absolute change percent essential (rounds)' gives 3.0 (bp_work/adapter.py (our Python port)), but the authors' stored output (bp_w"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/adapter.py (our Python port) vs bp_work/results/sensitivity/round1_round2.csv mean(abs(mean_1-mean_2)) = 0.15",
+   "evidence": "Our re-computation of 'median absolute rating difference (rounds)' gives 0.13 (bp_work/adapter.py (our Python port)), but the authors' stored output (bp_work/re"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Survey, line 85",
+   "evidence": "'e their level of agreement to 72 items on a scale from 1 to 9 in whi': 72 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a denominat"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 4, Sec. Thematic analysis of the open-ended ques, line 323",
+   "evidence": "'ic items, 30 participants for 82 suggested items, and 73 participants regardin': 82 item(s) appears once, while 78 item(s) appears 4 times (and 78 is used as a"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 4, Sec. Participants, line 141",
+   "evidence": "'1. Our final sample comprised 113 participants who passed the attention chec': 113 participant(s) appears once, while 103 participant(s) appears 3 times (and 1"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "41 count mentions read; 3 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/manuscript.Rmd:661",
+   "evidence": "2 data-exclusion step(s): filter@661, filter@797. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data availability",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. Methods describe the preparatory stage and two Delphi rounds; the code "
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data availability",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis or sample-size rationale for the Delphi panel; the pap"
+  },
+  {
+   "id": "F18",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Method, Definition of consensus",
+   "evidence": "Claim C7 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "1 multiply-reported quantities agree across locations; 7 re-computed values match the paper."
+  }
+ ]
+}

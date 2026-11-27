@@ -1,0 +1,82 @@
+{
+ "counts": {
+  "red": 1,
+  "yellow": 2,
+  "grey": 32,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 0,
+   "port_gap": 21,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C8"
+   ],
+   "location": "code/main.Rmd",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. set.seed(16) used only for selecting control couples; no seed reported in paper",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F2",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "figure_data_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8"
+   ],
+   "location": "Table 2 (manipulation check rows) vs bp_work/data/EDC_clean2.csv",
+   "evidence": "Paper: experimental M=4.83 SD=1.25, control M=4.24 SD=1.42. Recomputed from the authors' data (202 participants, 3-item ManipCheck): experimental M=4.827 SD=1.423, control M=4.377 SD=1.305. The two SDs appear exchanged between conditions; Cohen's d is essentially unchanged (.44 vs .44).",
+   "source": "llm",
+   "question_for_authors": null,
+   "judgement_key": "figure_data_mismatch",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3",
+   "claims_auto_linked": true
+  }
+ ]
+}

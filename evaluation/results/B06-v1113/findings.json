@@ -1,0 +1,506 @@
+{
+ "paper": {
+  "title": "Metabolomic machine learning predictor for diagnosis and prognosis of gastric cancer",
+  "doi": "10.1038/s41467-024-46072-1",
+  "journal": "Nature Communications 15:1657 (2024)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 2,
+  "yellow": 6,
+  "grey": 23,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "A 10-metabolite random-forest diagnostic model (10-DM) discriminates GC from non-GC controls in test set 1 with AUROC 0.967 (95% CI 0.944-0.987), sensitivity 0.854, specificity 0.926",
+   "location": "Results, Biomarker panel... (p.3); Abstract",
+   "light": "red",
+   "findings": [
+    "F1",
+    "F2",
+    "F5",
+    "F6"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "The 10-DM model validates in an external test set (Cohort 2, n=95) with AUROC 0.920, sensitivity 0.905, specificity 0.75",
+   "location": "Results p.3; Abstract",
+   "light": "yellow",
+   "findings": [
+    "F5"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "The 10-DM model detects early-stage GC (stage IA/IB in test set 1; stage IA and stage I+II in test set 2) with high accuracy",
+   "location": "Results p.3, Fig. 3f,g",
+   "light": "grey",
+   "findings": [
+    "F28"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "The 10-DM model outperforms the conventional 3-biomarker panel (CA19-9, CA72-4, CEA; sensitivity 0.428) and MetaboAnalyst SVM/LR/RF/PLS-DA models",
+   "location": "Results p.3, Supplementary Fig. 4",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "A 28-metabolite random survival forest prognostic model (28-PM) predicts OS in the test set with AUROC 0.832 (95% CI 0.697-0.951) and c-index 0.83",
+   "location": "Results p.3, Fig. 4b; Methods Prognostic model",
+   "light": "yellow",
+   "findings": [
+    "F3",
+    "F7"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The 28-PM model outperforms clinical parameters (TNM staging, macroscopic appearance, vascular tumor embolus) and adding clinical features improves performance by only ~1%",
+   "location": "Results p.3-4, Fig. 4c,d",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "The 28-PM risk score (cutoff 2.1) stratifies patients into high/low risk groups with different OS and DFS",
+   "location": "Fig. 4e-g",
+   "light": "yellow",
+   "findings": [
+    "F3",
+    "F7"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C8",
+   "text": "The 28-PM metabolic risk group is an independent prognostic factor in multivariate Cox regression (HR 7.53, 95% CI 2.83-20.04, P=5.276e-5)",
+   "location": "Table 1",
+   "light": "grey",
+   "findings": [
+    "F29"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C9",
+   "text": "Plasma metabolic reprogramming distinguishes GC from NGC, with 10 panel metabolites differing significantly (5 up, 5 down)",
+   "location": "Results p.2-3, Supplementary Fig. 3a",
+   "light": "grey",
+   "findings": [
+    "F30"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C10",
+   "text": "Only 11 of the 28 prognostic metabolites individually distinguish OS in the test set",
+   "location": "Results p.3, Supplementary Fig. 5b",
+   "light": "grey",
+   "findings": [
+    "F31"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 vs bp_work/data/GC-diagnosis-model/discovery_set.xlsx",
+   "evidence": "The paper reports 'n GC patients' = 389 patients (Results p.3); the authors' own stored output (bp_work/data/GC-diagnosis-model/discovery_set.xlsx) gives 145. Our re-run gives 145, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n GC patients' (389), given that bp_work/data/GC-diagnosis-model/discovery_set.xlsx gives 145?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 vs bp_work/data/GC-diagnosis-model/discovery_set.xlsx",
+   "evidence": "The paper reports 'n NGC' = 313 patients (Results p.3); the authors' own stored output (bp_work/data/GC-diagnosis-model/discovery_set.xlsx) gives 281. Our re-run gives 281, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n NGC' (313), given that bp_work/data/GC-diagnosis-model/discovery_set.xlsx gives 281?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5",
+    "C7"
+   ],
+   "location": "code/GC-prognosis-model/run.ipynb (code cells joined):175",
+   "evidence": "The paper reports \"95% confidence\" intervals, but the code computes the interval with 5%/95% bounds (`confidence_lower = sorted_scores[int(0.05 * len(sorted_scores))]`) (and 1 similar line(s)), which is a 90% interval; no 2.5%/97.5% bounds appear anywhere in the code. Check whether the reported intervals are 90% intervals.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported confidence intervals 95% or 90% intervals?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F3",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "duplicate_output",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx",
+   "evidence": "3 files whose names describe different data (external+test / test) have identical content (142 rows x 150 columns): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx. One of them is the wrong file. Same pattern at 1 more place(s): run.ipynb code cell 14 line 9.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Which of these files holds the intended content?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-diagnosis-model/run.ipynb code cell 14 line 9"
+   ],
+   "merged": [
+    {
+     "type": "duplicate_output",
+     "location": "code/GC-diagnosis-model/run.ipynb code cell 14 line 9",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "location": "paper p.5 vs code/GC-diagnosis-model/run.ipynb:94",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"We set the coefficient of the L1 constraint as 0.01 and selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation.\" (l1 = 0.01); the code sets `alpha=0.005` at code/GC-diagnosis-model/run.ipynb:94 (l1 = 0.005). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which l1 produced the reported results, 0.01 or 0.005?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F5",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "split_overlap",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "data/GC-diagnosis-model/discovery_set.xlsx contains data/GC-diagnosis-model/Xtest.xlsx",
+   "evidence": "data/GC-diagnosis-model/discovery_set.xlsx (426 rows) contains 142 of the 142 rows of data/GC-diagnosis-model/Xtest.xlsx (also in 3 other test-named file(s): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx); compared on 148 shared columns. If data/GC-diagnosis-model/discovery_set.xlsx was used for feature selection, tuning or preprocessing, the test samples took part in it. Check which file each step of the code reads.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Was discovery_set.xlsx (which contains the test samples) used for feature selection or tuning?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5",
+    "C7"
+   ],
+   "location": "code/GC-prognosis-model/run.ipynb code cell 7 line 3",
+   "evidence": "perm.fit(Xtest, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 2 more place(s): run.ipynb code cell 13 line 2; run.ipynb code cell 9 line 5.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+    "code/GC-prognosis-model/run.ipynb code cell 9 line 5"
+   ],
+   "merged": [
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 9 line 5",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'The 10-metabolite RF model discriminates GC from controls (test AUROC > 0.90 and external AUROC > 0.90)' holds in 65% of 40 universes. Single changes that flip it: seed=3.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under seed=3?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F28",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F29",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F30",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F31",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F32",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 19,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.65,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "seed",
+    "value": "3",
+    "holds": false,
+    "effect": 0.05877659574468086
+   }
+  ],
+  "n_ok": 40
+ },
+ "top_experiment": "X4",
+ "severity_changes": {
+  "checklist_no_locus": 3,
+  "near_duplicate": 1,
+  "same_pattern": 3
+ }
+}

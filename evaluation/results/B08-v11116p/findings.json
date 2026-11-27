@@ -1,0 +1,173 @@
+{
+ "counts": {
+  "red": 6,
+  "yellow": 4,
+  "grey": 36,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 4,
+   "archive_ok": 0,
+   "port_gap": 10,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html m2 interaction",
+   "evidence": "The paper reports 'Table 2 Inferred Negative Items interaction b' = 0.011 b (Table 2); the authors' own stored output (results/main.html m2 interaction) gives -0.01947. Our re-run gives 0.3102, which matches neither.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 Inferred Negative Items interaction b' (0.011), given that results/main.html m2 interaction gives -0.01947?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Footnote 1 vs results/main.html",
+   "evidence": "The paper reports 'wait time t statistic' = -5.93 t (Footnote 1); the authors' own stored output (results/main.html) gives 5.93. Our re-run gives 5.9, which matches neither.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'wait time t statistic' (-5.93), given that results/main.html gives 5.93?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the subgroup or the total mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Table 3, State Self-Esteem column, Self-Esteem row (95% CI) vs stored output results/main.html (m6 confint)",
+   "evidence": "Table 3 prints the State Self-Esteem self-esteem coefficient as .571 with 95% CI (-.544,.032); the stored output gives confint(m6) = (0.4120894, 0.7305353) for the same coefficient .57131236. The printed CI (-.544,.032) is the CI of the Manipulation Check self-esteem coefficient in Table 2 (stored confint(m1) = -0.5445029, 0.03211769), i.e. a copied interval. ci_check.py flags it independently. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Should the State Self-Esteem self-esteem CI read (.412,.731)?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 3, State Self-Esteem column, Intercept vs stored output results/main.html (m6)",
+   "evidence": "Table 3 prints the State Self-Esteem intercept as 5.468 (SE .071); the stored output prints (Intercept) 5.48639099 (SE 0.07139568). Same model, same DV, same sample. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Is the intercept 5.468 or 5.486?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results (paper.md line 101)",
+   "evidence": "The text reports an additional study or analysis: 'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all *p*s > .40).'. Its head count 412 appears nowhere else in the paper, the phrase 'repeated the study' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 412 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How was this number derived from the base and the multiplier?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "line 99",
+   "evidence": "'M = 4.83, SD = 1.25) than those in the control condition ( M = 4.24, SD = 1.42; Cohen’s d = .64': the reported d = .64, but the two means and SDs give a standardized difference of about 0.44 (|4.83 - 4.24| / sqrt((1.25^2 + 1.42^2) / 2)).",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Which inputs or formula produced the reported effect size?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Methods, Participants; code/main.Rmd setup2",
+   "evidence": "The paper says the control-condition partner was randomly selected after data collection with code at osf.io/yyrw6, but the capsule's main.Rmd contains its own selection chunk (set.seed(16), sample(1:2, n(), replace = TRUE)) that runs before any analysis. The two descriptions differ, and the capsule code's random pick does not reproduce the reported gender split (151/51 vs 104/98).",
+   "source": "llm",
+   "question_for_authors": "Which selection script was used for the published analyses?",
+   "verified_by": "bp_work/checks/V10.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BeyondPaper claim ledger",
+  "type": "object",
+  "required": ["paper", "claims", "evidence", "artifacts"],
+  "properties": {
+    "paper": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": {"type": "string"},
+        "doi": {"type": "string"},
+        "url": {"type": "string"},
+        "version": {"type": "string"}
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "text", "location", "evidence"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^C[0-9]+$"},
+          "text": {"type": "string"},
+          "type": {"enum": ["main", "secondary"]},
+          "location": {"type": "string"},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "conditions": {"type": "string"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "location", "artifacts"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^E[0-9]+$"},
+          "kind": {"enum": ["experiment", "figure", "table", "statistic", "citation", "text"]},
+          "location": {"type": "string"},
+          "description": {"type": "string"},
+          "artifacts": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "available"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^A[0-9]+$"},
+          "kind": {"enum": ["data", "code", "figure", "table", "supplement", "notebook", "other"]},
+          "path": {"type": "string"},
+          "url": {"type": "string"},
+          "available": {"type": "boolean"}
+        }
+      }
+    },
+    "reported_values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "value", "location"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "value": {"type": "number"},
+          "unit": {"type": ["string", "null"]},
+          "location": {"type": "string"},
+          "claim_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "methods": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "value", "location"],
+            "properties": {
+              "name": {"type": "string"},
+              "value": {"type": "string"},
+              "location": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,437 @@
+{
+ "paper": {
+  "title": "Diagnosis of epilepsy based on EEG — A New Feature Expansion Technique Combined with Shunt Gated Recurrent Unit Neural Network for Epileptic Seizure Diagnosis (Code Ocean capsule 6746514; no manuscript supplied)",
+  "doi": "not reported",
+  "source_note": "Capsule README/metadata/stored outputs used as the study description"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 9,
+  "grey": 23,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 6,
+   "archive_ok": 0,
+   "port_gap": 6,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 4
+  }
+ },
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "figure_data_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+   ],
+   "location": "code/fig_6.py:8 vs code/fig_5.py:10",
+   "evidence": "Literal arrays (deep_checks.py): code/fig_6.py plots GRU scores[...][0] = 92.76 (Dataset 1); the per-fold values typed into code/fig_5.py (Acc4, labelled GRU) average 93.10 over 10 folds. The other GRU summary values match their arrays exactly, so this one does not come from the stored per-fold results.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which run produced the plotted value, and why does it differ from the mean of the per-fold values?",
+   "check": "mean of code/fig_5.py:Acc4",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/PCC_WFE.py; code/NewData_ML_Kfold.py",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. No inclusion/exclusion rules; all 11,500 rows used, no filtering step in code.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F3",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:17,29; code/SGRU_GRU_Kfold.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No random_state / seed anywhere; XGBoost, RF and the Keras models are stochastic. leakage_scan.py flags 10 seed_missing sites. Also at: code/NewData_ML_Kfold.py:17; code/NewData_ML_Kfold.py:29; code/RawData_ML_Kfold.py:17; code/RawData_ML_Kfold.py:29; code/pca_test.py:23; code/pca_test.py:35; code/wave_test.py:23; code/wave_test.py:35; repro_ml.py:20; repro_ml.py:23.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/NewData_ML_Kfold.py:17",
+    "code/NewData_ML_Kfold.py:29",
+    "code/RawData_ML_Kfold.py:17",
+    "code/RawData_ML_Kfold.py:29",
+    "code/pca_test.py:23",
+    "code/pca_test.py:35",
+    "code/wave_test.py:23",
+    "code/wave_test.py:35",
+    "repro_ml.py:20",
+    "repro_ml.py:23"
+   ],
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/PCC_WFE.py:load_data",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. MinMaxScaler(feature_range=(-1,1)) is fitted on the full 11,500-row dataset before KFold; the PCC weights are also computed on all rows including the label. Transductive preprocessing; leakage_scan.py flags the same pattern in code/wave_test.py:84.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F5",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:16-30",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> not_reported. Hyper-parameters fixed by hand (max_depth=5, n_estimators=10, C=1.0); no search, no validation split.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. No negative control for the PCC-WFE feature (no y-randomisation, no shuffled-label feature).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:12 vs code/perform.py",
+   "evidence": "Metric definitions (deep_checks.py): sensitivity/precision come from sklearn with recall_score average='macro' in one pipeline (code/NewData_ML_Kfold.py:12 recall_score average='macro'; code/NewData_ML_Kfold.py:13 precision_score average='macro'; code/RawData_ML_Kfold.py:12 recall_score average='macro') and from a binary TP/(TP+FN), TP/(TP+FP) count for one class in another (code/perform.py). Values with the same name are not the same quantity, so a table comparing them across methods is not like for like.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Were Se/PPV computed with the same definition for every method compared?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/SGRU_GRU_Kfold.py",
+   "evidence": "Pipeline coverage (deep_checks.py): code/SGRU_GRU_Kfold.py trains GRU, SGRU, which no script of the entry point (code/run) trains; the entry point never runs it and the stored output has no lines from it. The figure scripts plot numbers for GRU, SGRU as typed-in literals, so those numbers cannot be traced to a stored run. Also never run: code/pca_test.py, code/wave_test.py.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Can the log or results of SGRU_GRU_Kfold.py be added to the capsule?",
+   "check": "entry-point scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run) vs results/output line 'XGboost: 0.951304347826 0.891302907383 0.954096015703'",
+   "evidence": "Our re-computation of 'mean ACC XGBoost Dataset 2' gives 0.9314782608695651 (bp_work/repro_ml.py (our re-run)), but the authors' stored output (results/output line 'XGboost: 0.951304347826 0.891302907383 0.954096015703')"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run) vs results/output line 'XGboost: ...'",
+   "evidence": "Our re-computation of 'mean Se XGBoost Dataset 2' gives 0.8334566744738214 (bp_work/repro_ml.py (our re-run)), but the authors' stored output (results/output line 'XGboost: ...') gives 0.891302907383, which matches the p"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run) vs results/output line 'SVM: 0.878 0.699233909757 0.92118231476'",
+   "evidence": "Our re-computation of 'mean ACC SVM Dataset 2' gives 0.9669565217391304 (bp_work/repro_ml.py (our re-run)), but the authors' stored output (results/output line 'SVM: 0.878 0.699233909757 0.92118231476') gives 0.878, whic"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run) vs results/output line 'SVM: ...'",
+   "evidence": "Our re-computation of 'mean Se SVM Dataset 2' gives 0.9321221496517484 (bp_work/repro_ml.py (our re-run)), but the authors' stored output (results/output line 'SVM: ...') gives 0.699233909757, which matches the paper (re"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run) vs results/output line 'SVM: ...'",
+   "evidence": "Our re-computation of 'mean PP SVM Dataset 2' gives 0.9630284643274176 (bp_work/repro_ml.py (our re-run)), but the authors' stored output (results/output line 'SVM: ...') gives 0.92118231476, which matches the paper (res"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run) vs results/output line 'RF: ...'",
+   "evidence": "Our re-computation of 'mean Se RF Dataset 2' gives 0.8769482858927965 (bp_work/repro_ml.py (our re-run)), but the authors' stored output (results/output line 'RF: ...') gives 0.868285162452, which matches the paper (resu"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run)",
+   "evidence": "Re-computed 'mean ACC XGBoost Dataset 1 (fig_5.py Acc array)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run)",
+   "evidence": "Re-computed 'mean ACC SVM Dataset 1 (fig_5.py Acc array)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run)",
+   "evidence": "Re-computed 'mean ACC DT Dataset 1 (fig_5.py Acc array)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run)",
+   "evidence": "Re-computed 'mean ACC RF Dataset 1 (fig_5.py Acc array)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/README.md; data/Epileptic Seizure Recognition.csv",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. UCI Epileptic Seizure Recognition named with URL; no version/DOI/download date. The csv shipped in the capsule is the analyse"
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/*.py",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule; no removal step. [Grey (build_passport.py, checklist_nothing_done): the code removes no ou",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_nothing_done"
+   ]
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "-",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis; n is the full public dataset."
+  },
+  {
+   "id": "F23",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "-",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. Six classifiers x 3 metrics compared without any multiplicity correction."
+  },
+  {
+   "id": "F24",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/NewData_ML_Kfold.py",
+   "evidence": "[G7] Is each statistical test named, with sidedness and assumptions checked? -> not_reported. No statistical test of any difference between classifiers; only means over 10 folds."
+  },
+  {
+   "id": "F25",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/NewData_ML_Kfold.py; code/SGRU_GRU_Kfold.py",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> partial. KFold(n_splits=10) without shuffle. The UCI table is ordered in blocks of 500 s per class (23 b"
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "-",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No duplicate check between folds. [Grey (build_passport.py): a reporting-checklist item with no place in the code or data ",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ]
+  },
+  {
+   "id": "F27",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/NewData_ML_Kfold.py vs code/SGRU_GRU_Kfold.py",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> partial. Traditional classifiers get 10 trees / depth 5; SGRU/GRU get 100 epochs, 4 GRU layers of 32 units and a 128-unit dense layer. Tuning effor"
+  },
+  {
+   "id": "F28",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "code/fig_6.py (results/zhu_1.png)",
+   "evidence": "Claim C3 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F29",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "code/fig_8.py (results/zhu_2.png)",
+   "evidence": "Claim C4 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F30",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "code/fig_5.py (results/Box.png, Box_1.png)",
+   "evidence": "Claim C5 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F31",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "results/output (fig_2.py output); code/fig_2.py",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F32",
+   "module": "multiverse",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "baseline universe",
+   "evidence": "With the paper's own choices the claim 'On Dataset 2 (PCC-WFE features) XGBoost reaches higher 10-fold accuracy than SVM, DT and RF' does not hold on re-run (effect = -0.03547826086956529). [Grey (build_passport.py): the",
+   "severity_original": "red",
+   "severity_reasons": [
+    "port_rerun"
+   ]
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 6 re-computed values match the paper."
+  },
+  {
+   "id": "F34",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "0 count mentions read; 0 flagged. Full list in counts_table.csv."
+  }
+ ]
+}

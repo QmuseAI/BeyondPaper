@@ -1,0 +1,2 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,yellow,number_mismatch,Abstract vs Results p.4 vs data/raw/data_values.csv,Paper: 37 major numerical discrepancies out of 789 (5%). data_values.csv comparisonOutcome counts: MAJOR_ERROR 29 + DECISION_ERROR 1 = 30; EYEBALL_ERROR 7; MINOR_ERROR 108; MATCH 644 (total 789). manuscript.Rmd:291 adds ,unlabeled,false_positive,"37 vs 30: the authors stored manuscript.tex prints the paper value (port_gap F2/F3); the 30 comes from the agents own recount, not the stored output"

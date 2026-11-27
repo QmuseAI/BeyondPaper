@@ -1,0 +1,71 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "not reported in paper.md"
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 1,
+  "grey": 16,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 8,
+   "archive_ok": 0,
+   "port_gap": 2,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 4
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 16
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "abstract_vs_body": "problem",
+   "param_mismatch": "ok",
+   "phantom_experiment": "ok",
+   "figure_data_mismatch": "ok",
+   "claims_scan": "ok"
+  },
+  "abstract_vs_body": "Abstract: 37 major discrepancies out of 789 (5% [3,6]); Results p.4 same 37/789. But data_values.csv has MAJOR_ERROR 29 + DECISION_ERROR 1 = 30, and Rmd line 291 adds decisionErrors to majorErrors; 37 is not 29+1+7(EYEBALL_ERROR)=37 only if eyeball errors are counted as major",
+  "param_mismatch": "Design p.3: major discrepancy PE>=10%, alpha 0.05; code/functions.R:4 propCI uses prop.test (Wilson) as stated; manuscript.Rmd:291 adds decision errors to major errors as Design states ('decision error' recorded separately). No parameter in the text contradicts the code.",
+  "phantom_experiment": "All analyses in the text have code: preprocessing.R, manuscript.Rmd, meta_analysis.R, plot_*.R; data_articles.csv (25 rows) and data_values.csv (789 rows) exist; SI sections C/E are in the supplementary Rmd, not in the capsule.",
+  "figure_data_mismatch": "Fig.1 forest plot is produced by meta_analysis.R from data_hardwicke2018 (35 rows) + articleLevelSummary; Fig.2/3 from data_values.csv; stored results/manuscript_files/figure-latex/*.png exist. No figure value contradicts the data files at the level checked here.",
+  "claims_scan": "claims_scan.py found 0 candidate claims (paper is a descriptive observational study with no hypothesis-test claims); the 10 ledger claims were checked by hand against Abstract/Results/Table 1."
+ },
+ "findings": [
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Abstract vs Results p.4 vs data/raw/data_values.csv",
+   "evidence": "Paper: 37 major numerical discrepancies out of 789 (5%). data_values.csv comparisonOutcome counts: MAJOR_ERROR 29 + DECISION_ERROR 1 = 30; EYEBALL_ERROR 7; MINOR_ERROR 108; MATCH 644 (total 789). manuscript.Rmd:291 adds decisionErrors to majorErrors, so the code yields 30, not 37; 37 = 29+1+7 only if the 7 EYEBALL_ERROR rows are also counted as major. 30/789 = 3.8%, 37/789 = 4.7%.",
+   "source": "llm",
+   "question_for_authors": "Which rows are counted as major discrepancies: 30 (MAJOR_ERROR+DECISION_ERROR) or 37 (also EYEBALL_ERROR)?",
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract vs Results p.4 vs data/raw/data_values.csv vs code/manuscript.Rmd:291",
+     "severity": "grey",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F1"
+  }
+ ]
+}

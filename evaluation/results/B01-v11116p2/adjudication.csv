@@ -1,0 +1,2 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,yellow,fragile_conclusion,multiverse_summary.json,Claim 'About 5% of the 789 checked values contained a major numerical discrepancy (37/789)' holds in 83% of 18 universes. Single changes that flip it: eyeball_rule=as_major.,unlabeled,unclear,multiverse: eyeball rule flips the 5% claim; robustness point

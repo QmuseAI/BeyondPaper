@@ -1,0 +1,72 @@
+{
+ "_doc": "benchmark id -> paper key, variant, and the clean twin used for pre-existing flags",
+ "B01": {
+  "paper": "P03",
+  "variant": "clean"
+ },
+ "B07": {
+  "paper": "P03",
+  "variant": "injected",
+  "clean_twin": "B01"
+ },
+ "B06": {
+  "paper": "P01",
+  "variant": "clean"
+ },
+ "B02": {
+  "paper": "P01",
+  "variant": "injected",
+  "clean_twin": "B06"
+ },
+ "B03": {
+  "paper": "P05",
+  "variant": "clean"
+ },
+ "B08": {
+  "paper": "P05",
+  "variant": "injected",
+  "clean_twin": "B03"
+ },
+ "B09": {
+  "paper": "P02",
+  "variant": "clean"
+ },
+ "B04": {
+  "paper": "P02",
+  "variant": "injected",
+  "clean_twin": "B09"
+ },
+ "B05": {
+  "paper": "P04",
+  "variant": "clean"
+ },
+ "B10": {
+  "paper": "P04",
+  "variant": "injected",
+  "clean_twin": "B05"
+ },
+ "B11": {
+  "paper": "B11",
+  "variant": "blind"
+ },
+ "B12": {
+  "paper": "B12",
+  "variant": "blind"
+ },
+ "B13": {
+  "paper": "B13",
+  "variant": "blind"
+ },
+ "B14": {
+  "paper": "B14",
+  "variant": "blind"
+ },
+ "B15": {
+  "paper": "B15",
+  "variant": "blind"
+ },
+ "B16": {
+  "paper": "B16",
+  "variant": "blind"
+ }
+}

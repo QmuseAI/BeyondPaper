@@ -1,0 +1,206 @@
+{
+ "counts": {
+  "red": 7,
+  "yellow": 5,
+  "grey": 14,
+  "green": 4
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 5,
+   "archive_ok": 0,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 2
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2 vs Results, Before versus after exercise training",
+   "evidence": "'SMD STS seconds within-group' is reported with different values. Table 2: -0.5 SMD | Results, Before versus after exercise training: -0.67 SMD. Agreeing reports: 1 location(s) [Table 2] vs 1 [Results, Before versus after exercise training].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'SMD STS seconds within-group' is correct (-0.5 SMD or -0.67 SMD)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Results, Before versus after exercise training vs Table 2",
+   "evidence": "'95% CI upper creatine kinase within-group' is reported with different values. Results, Before versus after exercise training: -0.11 SMD | Table 2: 0.11 SMD. Agreeing reports: 1 location(s) [Results, Before versus after exercise training] vs 1 [Table 2].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of '95% CI upper creatine kinase within-group' is correct (-0.11 SMD or 0.11 SMD)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Table 2 vs Abstract",
+   "evidence": "'I2 STS seconds' is reported with different values. Table 2: 58.05 % | Abstract: 58.5 %. Agreeing reports: 1 location(s) [Table 2] vs 1 [Abstract].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'I2 STS seconds' is correct (58.05 % or 58.5 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract (paper.md line 15) vs body (line 151)",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'-0.67 [95% CI -1.31, 0.03]; p=0.04) ( Figure 8), and rise from sup': The 95% CI [-1.31, 0.03] includes the null value 0, but the reported p is = 0.04; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': The 95% CI [-0.23, -0.11] excludes the null value 0, but the reported p is = 0.46; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the p-value, the estimate or a CI limit mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': Estimate -0.06 lies outside its own 95% CI [-0.23, -0.11].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "Abstract vs Table 2 (STS seconds)",
+   "evidence": "Abstract: I2=58.5% and SMD -0.67 [-1.31, 0.03]; Table 2: I2=58.05% and SMD -0.50",
+   "source": "llm",
+   "question_for_authors": null,
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 15) vs body (paper.md line 151)",
+   "evidence": "The Abstract gives 58.5 ('...Substantial I ^2 statistic heterogeneity was revealed for STS (seconds) ( I²=58.5%; p=0.04) and citrate synthase ( I²=70.9...'); the body never states 58.5. The body sentence about the same quantity (shared words: citrate, heterogeneity, seconds, synthase) gives 58.05: '...We noted no evidence of heterogeneity with the exception of I ^2 statistically significant heterogeneity for STS (seconds) ( I²=58.05%; p=0.04) and citrate synthase ( I²=70.90%; p=0.002) ( Table 2)....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 58.5 (Abstract) or 58.05 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods",
+   "evidence": "The paper names Egger's test (\"…tion bias was assessed via funnel plots with trim and fill, and estimated using Egger’s regression intercept ^[16]. The quality of evidence for outcomes was rated us…\"), but no matching call (/regtest|egger/) was found outside comments in 5 code file(s). Same pattern at 1 more place(s): Methods (data analysis) vs code/funnel.R.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Where in the released code is the Egger's test performed?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Methods (data analysis) vs code/funnel.R"
+   ],
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "Methods (data analysis) vs code/funnel.R",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 175",
+   "evidence": "'04 | 0.29 | 111.08 | S | 32.21 | 6.99 | (7.11 to 6.86)': interval (7.11 to 6.86) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 4, line 179",
+   "evidence": "'8 | -0.65 | 3.50 | M | -2.27 | -23.80 | (-15.19 to -32.4)': interval (-15.19 to -32.4) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Are the CI limits swapped or mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "ghost",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/funnel.R:17",
+   "evidence": "The loop starting at line 15 reads datS, the per-iteration variable of the loop at line 4; this loop's own per-iteration variable is datR. It uses the value left over from the earlier loop.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Should line 17 use datR instead of datS?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  }
+ ]
+}

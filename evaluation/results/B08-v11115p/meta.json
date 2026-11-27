@@ -1,0 +1,24 @@
+{
+ "run_id": "B08-v11115p",
+ "paper_id": "B08",
+ "variant": "injected",
+ "version": "v1.11.15",
+ "saved": "2026-11-18",
+ "source_file": "/tmp/b08/B08-v11115p.c4.json",
+ "note": "Pro throughout; c4 sha256 3ec10eb5...; stage 4 ManipCheck/P24NumNeg port_gap",
+ "n_findings": 40,
+ "truncated": false,
+ "counts": {
+  "red": 13,
+  "yellow": 10,
+  "grey": 13,
+  "green": 4
+ },
+ "counts_reported": {
+  "red": 13,
+  "yellow": 10,
+  "grey": 13,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

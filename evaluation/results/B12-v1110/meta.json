@@ -1,0 +1,24 @@
+{
+ "run_id": "B12-v1110",
+ "paper_id": "B12",
+ "variant": "blind",
+ "version": "v1.11.0",
+ "saved": "2026-11-17",
+ "source_file": "pages/B12-v1110.compact.json",
+ "note": "v1.11.0 independent check; compact copy of bp_out/BP_FINDINGS_BLOCK.txt (grey evidence cut to 200 chars), sha256 verified in browser",
+ "n_findings": 41,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 10,
+  "grey": 29,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 10,
+  "grey": 29,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B02-v11115p2",
+ "paper_id": "B02",
+ "variant": "injected",
+ "version": "v1.11.15",
+ "saved": "2026-11-18",
+ "source_file": "/tmp/b02/B02-v11115p2.c4.json",
+ "note": "Pro throughout; red/yellow findings only (F1-F22) transcribed; full block 55 findings in SciencePal bp_out",
+ "n_findings": 22,
+ "truncated": false,
+ "counts": {
+  "red": 4,
+  "yellow": 18,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 4,
+  "yellow": 18,
+  "grey": 31,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

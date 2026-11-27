@@ -1,0 +1,55 @@
+{
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 18,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "full",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "location": "capsule-3894632/code/dp_survival.Rmd:40",
+   "evidence": "Post-baseline covariates enter the survival models: Best.Response.RECISTv1 (HR 0.18, p=9e-04), Gr1.Gr2.Toxicities (HR 0.5, p=0.0029) and Gr3.Toxicities (HR 2.1, p=0.0011) are measured during/after treatment, so patients must survive long enough to have them (guaranteed-survival / immortal-time bias). The Rmd fits plain coxph with no landmark or time-dependent term.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Were best response and toxicity analysed with a landmark or time-dependent Cox model?",
+   "check": "trace of capsule-3894632/code/dp_survival.Rmd",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "not reported",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> not_reported. blinding/randomisation of the correlative analyses not described in the available text",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were blinding and randomisation of samples/animals/patients used and described?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  }
+ ]
+}

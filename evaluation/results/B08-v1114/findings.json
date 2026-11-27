@@ -1,0 +1,379 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray, Rose, Bellavia, Holmes, and Kusche (2002) Study 3",
+  "doi": "not reported (manuscript under review, Journal of Research in Personality)",
+  "file": "bp_work/paper.md"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 4,
+  "yellow": 10,
+  "grey": 14,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 47,
+   "port_gap": 0,
+   "archive_mismatch": 4,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs bp_work/results/main.html (summary(m2))",
+   "evidence": "The paper reports 'inferred negative items condition b' = 1.623 b (Table 2); the authors' own stored output (bp_work/results/main.html (summary(m2))) gives 1.42536029.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'inferred negative items condition b' (1.623), given that bp_work/results/main.html (summary(m2)) gives 1.42536029?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs bp_work/results/main.html (summary(m2))",
+   "evidence": "The paper reports 'inferred negative items interaction b' = 0.011 b (Table 2); the authors' own stored output (bp_work/results/main.html (summary(m2))) gives 0.03058533.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'inferred negative items interaction b' (0.011), given that bp_work/results/main.html (summary(m2)) gives 0.03058533?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the subgroup or the total mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs bp_work/results/main.html (summary(m2))",
+   "evidence": "The paper reports 'inferred negative items intercept' = 3.442 b (Table 2); the authors' own stored output (bp_work/results/main.html (summary(m2))) gives 3.54801601. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'inferred negative items intercept' (3.442), given that bp_work/results/main.html (summary(m2)) gives 3.54801601?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Methods, Participants vs bp_work/results/main.html (stat.desc Age)",
+   "evidence": "The paper reports 'mean age' = 21.0 years (Methods, Participants); the authors' own stored output (bp_work/results/main.html (stat.desc Age)) gives 21.758794. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'mean age' (21.0), given that bp_work/results/main.html (stat.desc Age) gives 21.758794?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How was this number derived from the base and the multiplier?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "sample_size",
+     "location": "Methods, Participants (bp_work/paper.md:37)",
+     "severity": "grey",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2, 'Inferred Number of Negative Items' columns vs bp_work/results/main.html (summary(m2))",
+   "evidence": "Paper Table 2: intercept 3.442, condition b 1.623, interaction b .011, df = 196. Authors' stored output summary(m2) on newdata3: intercept 3.54802, condition b 1.42536, interaction b .03059, residual df 198. The stored model is lm(P24NumNeg ~ cSelfEsteem * dCond, data = newdata3) with 200 complete cases (df = 196), so the df matches but the coefficients do not; the stored table cannot be regenerated from the released analysis as printed. Potential inconsistency, needs verification. [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the Table 2 coefficients for inferred negative items?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Methods, Participants (mean age) vs bp_work/results/main.html (stat.desc Age)",
+   "evidence": "Paper: average age M = 21.00 (SD = 4.44) years. Stored output stat.desc(Age): mean 21.7588, SD 4.4384, n = 199. The SD matches but the mean does not; the stored output's median is 21. Potential inconsistency, needs verification.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Is the reported mean age 21.00 or 21.76?",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "llm",
+   "type": "grouped_split_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "data/EDC_clean2.csv, CoupleID 55",
+   "evidence": "In the released data, the two members of CoupleID 55 have Condition 1 (PartID 109FA, QuestPack 1) and Condition 2 (PartID 110MB, QuestPack 2); all other 201 couples share one condition. The analysis keeps one partner per couple, so this does not duplicate a participant, but it means one couple was not assigned to a single condition as the Methods describe ('Couples were randomly assigned to condition').",
+   "source": "llm",
+   "question_for_authors": "Was couple 55 assigned to both conditions by design or by a data-entry error?",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C9"
+   ],
+   "location": "Procedure, para 3; code/main.Rmd (commented line)",
+   "evidence": "The paper says removing the two suspicious participants does not change the results, but the exclusion exists only as a commented-out line in main.Rmd (filter(PartID != '321FA', PartID != '335FA')); the stored output was produced without it, so the claim cannot be checked from the stored results.",
+   "source": "llm",
+   "question_for_authors": "Can the re-run with the two participants removed be provided?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results para 2 (bp_work/paper.md) vs bp_work/results/main.html (summarise sd_manipcheck)",
+   "evidence": "Paper: manipulation check experimental M = 4.83, SD = 1.25; control M = 4.24, SD = 1.42. Stored output: control SD 1.25, experimental SD 1.42 (means 4.25 and 4.83 agree). The two SDs appear swapped between conditions in the text; the stored output's mes() call also types 1.25 for experimental and 1.42 for control, so the swap is in the text and in the effect-size call, not in the summarise() table. Potential inconsistency, needs verification.",
+   "source": "llm",
+   "question_for_authors": "Are the manipulation-check SDs for the two conditions swapped in the Results text?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F13"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Results para 3, last sentence",
+   "evidence": "'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all ps > .40).' No data, code, table or figure for this online study is in the capsule (data/ contains only EDC_clean2.csv, code/ only main.Rmd).",
+   "source": "llm",
+   "question_for_authors": "Can the MTurk dataset and analysis script be shared?",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F14"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F28",
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "grey",
+   "source": "script:ci_check.py",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F29",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F30",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json"
+  }
+ ]
+}

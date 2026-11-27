@@ -1,0 +1,231 @@
+{
+ "paper": {
+  "title": "Research Ethics Committees as an intervention point to promote a priori sample size calculations",
+  "doi": "10.31222/osf.io/5sehd"
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 3,
+  "grey": 11,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 26,
+   "archive_ok": 1,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "n_ok": 24
+ },
+ "severity_changes": {
+  "different_quantity_declared": 1,
+  "gate_cap": 2
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "results/analysis.pdf Table 1; code/analysis.Rmd rec_outcomes()",
+   "evidence": "rec_outcomes() sums the coded outcomes with na.rm = TRUE, so institutions whose form was not obtained (NA codes) drop out of the denominator. Table 1 prints only numerators (US 9, UK 10 for sample size) and never prints the number of forms coded per country, so the reader cannot see that the US share is 9/19 and the UK share 10/14. The number of forms actually coded per country is not reported anywhere in the capsule."
+  },
+  {
+   "id": "F2",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "data/rec_data_raw.csv; code/analysis.Rmd:31-32",
+   "evidence": "The analysis keeps rows with a non-missing expenditure_rank. Three rows are national bodies rather than universities (National Institutes of Health phase 2, National Institutes of Health behavioural, NHS HRA) and are dropped by that filter; the capsule text does not state this exclusion rule, and the sampling frame ('10 RECs from research-intensive universities in each country') is not in the capsule. Whether the national bodies were part of the intended sample cannot be checked from the materials."
+  },
+  {
+   "id": "F3",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Abstract (metadata/metadata.yml description) vs results/analysis.pdf Table 1, row 'Institutions sampled'",
+   "evidence": "Abstract: 'template ethics submission forms from 10 RECs from research-intensive universities in each of the United States and the United Kingdom (for 20 forms in total)'. The authors' stored Table 1 (produced by code/analysis.Rmd) reports 'Institutions sampled': US 19, UK 14, i.e. 19 + 14 = 33 institutions, not 10 + 10 = 20. Our Python port of the same code on data/rec_data_raw.csv gives the same 19 and 14 (bp_out/port_results.json). The data file has 36 rows: 21 US and 15 UK, of which 2 US (National Institutes of Health, phase 2 and behavioural) and 1 UK (NHS HRA) have no expenditure_rank and are dropped by the filter in analysis.Rmd:31-32. [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (value for a count made from their data, archived for a number read from their stored output) and re-run numbers_crosscheck.py.]"
+  },
+  {
+   "id": "F4",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule-9168639/code/analysis.Rmd:31",
+   "evidence": "2 data-exclusion step(s): filter@31, filter@32. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F5",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "code/analysis.Rmd:31-32; results/analysis.pdf Table 1",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. The analysis keeps only rows with a non-missing expenditure_rank (US 19 of 21 rows, UK 14 of 15). The two exclu"
+  },
+  {
+   "id": "F6",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "-",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No sample-size justification for the 10 institutions per country; the capsule text gives none."
+  },
+  {
+   "id": "F7",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "data/rec_data_raw.csv",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> partial. Two NIH rows and one NHS HRA row are national bodies, not universities; whether they belong in a '10 univer"
+  },
+  {
+   "id": "F8",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "Abstract (metadata description)",
+   "evidence": "Claim C1 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F9",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "Abstract (metadata description), last sentence",
+   "evidence": "Claim C5 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F10",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "readme.txt; analysis.Rmd footnote",
+   "evidence": "Claim C6 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F11",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "readme.txt (pre-registration https://doi.org/10.17605/OSF.IO/RHW3M); capsule",
+   "evidence": "The study protocol is pre-registered on OSF, but the pre-registration document is not in the capsule, so the pre-specified sampling frame, coding rules and analysis plan cannot be compared with what w"
+  },
+  {
+   "id": "F12",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "data/rec_data_raw.csv (verbatim column); codebook",
+   "evidence": "The three outcomes were coded by hand from the archived form text (verbatim column). The capsule reports no second coder, no inter-rater agreement and no adjudication rule, so the reliability of the 1"
+  },
+  {
+   "id": "F13",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap",
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Abstract (metadata/metadata.yml description) vs results/analysis.pdf Table 1, rows 'Sample size', 'Justification', 'Calculation', 'Calculation (indirectly)'",
+   "evidence": "Abstract: '19 of them requested that researchers provide the planned sample size, 12 requested a justification of the sample size, and 6 requested a sample size calculation'. Stored Table 1: sample si"
+  },
+  {
+   "id": "F14",
+   "module": "llm",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Abstract (metadata description), last sentence",
+   "evidence": "'One potential avenue to promote the uptake of sample size calculation is through Research Ethics Committees (RECs)' and the call for future research are interpretive; the capsule contains no experime"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 27 re-computed values match the paper."
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "1 count mentions read; 0 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F17",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "hand_written": false,
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Most template REC forms request a planned sample size (19 of 20 in the abstract) and only a minority request a sample size calculation (6 of 20)' holds in 100% of 24 universes. Single changes that flip it: none."
+  }
+ ]
+}

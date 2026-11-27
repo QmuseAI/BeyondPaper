@@ -1,0 +1,24 @@
+{
+ "run_id": "B03-v11116f",
+ "paper_id": "B03",
+ "variant": "clean",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B03-v11116f.c4.json",
+ "note": "v1.11.16, ended on Flash (platform switch), before Pro continuation",
+ "n_findings": 3,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 1,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 1,
+  "grey": 5,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

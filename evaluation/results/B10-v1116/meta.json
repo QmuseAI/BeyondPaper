@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v1116",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.6",
+ "saved": "2026-11-17",
+ "source_file": "pages/B10-v1116.c4.json",
+ "note": "v1.11.6; DeepSeek V4 Flash; all stages done in one turn but no hand-written (llm) findings at all; I1 (38 vs 34) and I3 (113) found only as grey; c4 copy, sha256 cee51430 verified; raw sha 17fb884b",
+ "n_findings": 26,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 4,
+  "grey": 21,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 4,
+  "grey": 21,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

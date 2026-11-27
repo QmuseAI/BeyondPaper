@@ -1,0 +1,24 @@
+{
+ "run_id": "B02-v1117p",
+ "paper_id": "B02",
+ "variant": "injected",
+ "version": "v1.11.7",
+ "saved": "2026-11-18",
+ "source_file": "pages/B02-v1117p.c4.json",
+ "note": "started v1.11.7, continued on v1.11.8 skills; last turn used flash+pro (运行详情)",
+ "n_findings": 33,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 9,
+  "grey": 21,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 9,
+  "grey": 21,
+  "green": 2
+ },
+ "reproduction": "full"
+}

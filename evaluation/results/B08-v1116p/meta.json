@@ -1,0 +1,24 @@
+{
+ "run_id": "B08-v1116p",
+ "paper_id": "B08",
+ "variant": "injected",
+ "version": "v1.11.6",
+ "saved": "2026-11-18",
+ "source_file": "pages/B08-v1116p.c4.json",
+ "note": "v1.11.6 Pro rerun; DeepSeek V4 Pro in every turn; two continues (stage 4 port skipped by instruction); turn ended while pasting the block, files complete; c4 copy, sha256 623893f7 verified; raw sha d8789ba4",
+ "n_findings": 27,
+ "truncated": false,
+ "counts": {
+  "red": 9,
+  "yellow": 9,
+  "grey": 6,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 9,
+  "yellow": 9,
+  "grey": 6,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

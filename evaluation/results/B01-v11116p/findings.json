@@ -1,0 +1,99 @@
+{
+ "counts": {
+  "red": 1,
+  "yellow": 4,
+  "grey": 18,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 20,
+   "archive_ok": 0,
+   "port_gap": 3,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 3
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Abstract vs Results p.4",
+   "evidence": "'95% CI % articles fully reproducible before author contact (lower bound)' is reported with different values. Abstract: 20.0 % | Results p.4: 19.0 %. Agreeing reports: 1 location(s) [Abstract] vs 1 [Results p.4].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of '95% CI % articles fully reproducible before author contact (lower bound)' is correct (20.0 % or 19.0 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C6"
+   ],
+   "location": "Results p.4; multiverse_summary.json",
+   "evidence": "Multiverse over 4 analysis choices (eyeball-error rule, decision-error counting, CI method, denominator; 36 universes, all run): the claim 'after author involvement >=50% of articles fully reproducible and <50% before' holds in 18/36 universes. The only breaking fork is the denominator: with the 25 analysed articles 15/25 = 60% (holds); with all 35 articles that had reusable data (the 10 excluded articles counted as not reproducible) 15/35 = 42.9% (fails). Eyeball rule, decision-error counting and CI method do not change the point estimates.",
+   "source": "llm",
+   "question_for_authors": "How should the 10 articles excluded from the 35 reusable-data articles be counted in the reproducibility rate?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Results p.4, last paragraph vs data_articles.csv",
+   "evidence": "Text: 'between 1 and 30 (median = 7, interquartile range = 5) hours ... total time = 213 h'. Recomputed from data_articles.csv as (pilotTTC+copilotTTC)/60: min 1.33, max 30.08, median 7.0, IQR 5.92, total 212.7. The code (manuscript.Rmd timeSummary) rounds min/max/IQR/total but not the median, so the printed values are 1, 30, 7, 6 and 213 - the paper prints IQR = 5 where the code's rounded IQR is 6.",
+   "source": "llm",
+   "question_for_authors": "Is the interquartile range 5 or 6 hours?",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C10"
+   ],
+   "location": "Results p.4 vs Table 1 vs data_articles.csv",
+   "evidence": "Text: 'In three cases, the authors did not respond and in three cases there was insufficient information to proceed'. Table 1 cell 'not fully reproducible, no author involvement' = 3 (12%, [0,35]) and the code computes noResponse as articles with finalOutcome 'Failure without author assistance' (3) and insuffInfoErrors as articles with Insufficient_Information_Errors > 0 (3: 3-10-2014_PS, 7-3-2015_PS, 9-5-2014_PS). The two sets are not disjoint in the data: 3-10-2014_PS and 7-3-2015_PS are both 'Failure without author assistance' and have insufficient-information errors, so 'three and three' describes 3 articles, not 6.",
+   "source": "llm",
+   "question_for_authors": "Do the three non-responding and three insufficient-information cases overlap?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'After author involvement, most articles (>=50%) have fully reproducible target values, and the share reproducible before author contact is below 50%' holds in 50% of 36 universes. Single changes that flip it: denominator=reusable35.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under denominator=reusable35?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  }
+ ]
+}

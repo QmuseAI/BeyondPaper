@@ -1,0 +1,595 @@
+{
+ "counts": {
+  "red": 0,
+  "yellow": 13,
+  "grey": 31,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 20,
+   "archive_ok": 0,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 1
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 10) vs body (paper.md line 53)",
+   "evidence": "The Abstract gives 0.950 ('...ite GC diagnostic model, which is validated in an external test set with a sensitivity of 0.950, outperforming conventional methods lev...'); the body never states 0.950. The body sentence about the same quantity (shared words: sensitivity, validated) gives 0.944: '...Next, we trained a random forest model with the 10 essential features, and then validated the model in the test set 1, yielding an area under the receiver operating characteristic (AUROC) of 0.967 (95% confidence interval (CI): 0.944-0.987,...'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 0.950 (Abstract) or 0.944 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "GC-prognosis-model/run.ipynb (code cells joined):175",
+   "evidence": "The paper reports \"95% confidence\" intervals, but the code computes the interval with 5%/95% bounds (`confidence_lower = sorted_scores[int(0.05 * len(sorted_scores))]`) (and 1 similar line(s)), which is a 90% interval; no 2.5%/97.5% bounds appear anywhere in the code. Check whether the reported intervals are 90% intervals.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported confidence intervals 95% or 90% intervals?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results (paper.md line 57)",
+   "evidence": "The text reports an additional study or analysis: 'The 10-DM model was further validated in a prospective cohort of 214 participants recruited at a fourth centre, with an AUROC of 0.941 (sensitivity: 0.912, specificity: 0.833).'. Its head count 214 appears nowhere else in the paper, the phrase 'fourth centre' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 214 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "Results p.3 (paper.md line 57)",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 5, Sec. Diagnostic prediction model, line 163",
+   "evidence": "'The participants (Cohort 1, n = 426) were randomly stratified sampling into a discovery dataset (n = 284) and a test set (n = 152).': the parts 284 + 152 = 436, not the stated total n = 426.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Which of the counts is mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "duplicate_output",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx",
+   "evidence": "3 files whose names describe different data (external+test / test) have identical content (142 rows x 150 columns): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx. One of them is the wrong file. Same pattern at 1 more place(s): run.ipynb code cell 14 line 9.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Which of these files holds the intended content?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-diagnosis-model/run.ipynb code cell 14 line 9"
+   ],
+   "merged": [
+    {
+     "type": "duplicate_output",
+     "location": "code/GC-diagnosis-model/run.ipynb code cell 14 line 9",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F5",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> not_reported. no blinding/randomisation statement for sample handling",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were blinding and randomisation of samples/animals/patients used and described?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C9"
+   ],
+   "location": "paper p.5 vs code/GC-diagnosis-model/run.ipynb:94",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"We set the coefficient of the L1 constraint as 0.01 and selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation.\" (l1 = 0.01); the code sets `alpha=0.005` at code/GC-diagnosis-model/run.ipynb:94 (l1 = 0.005). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which l1 produced the reported results, 0.01 or 0.005?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C9"
+   ],
+   "location": "paper p.? vs code/GC-diagnosis-model/run.ipynb:73",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"The final model included five hundred classifier trees which were built using the split criterion of Gini impurity .\" (n_estimators = 500); the code sets `n_estimators=100` at code/GC-diagnosis-model/run.ipynb:73 (n_estimators = 100). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which n_estimators produced the reported results, 500 or 100?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F8",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "split_overlap",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C8"
+   ],
+   "location": "data/GC-diagnosis-model/discovery_set.xlsx contains data/GC-diagnosis-model/Xtest.xlsx",
+   "evidence": "data/GC-diagnosis-model/discovery_set.xlsx (426 rows) contains 142 of the 142 rows of data/GC-diagnosis-model/Xtest.xlsx (also in 3 other test-named file(s): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx); compared on 148 shared columns. If data/GC-diagnosis-model/discovery_set.xlsx was used for feature selection, tuning or preprocessing, the test samples took part in it. Check which file each step of the code reads.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Was discovery_set.xlsx (which contains the test samples) used for feature selection or tuning?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "id": "F9",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5",
+    "C7"
+   ],
+   "location": "code/GC-prognosis-model/run.ipynb code cell 7 line 3",
+   "evidence": "perm.fit(Xtest, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 2 more place(s): run.ipynb code cell 13 line 2; run.ipynb code cell 9 line 5.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+    "code/GC-prognosis-model/run.ipynb code cell 9 line 5"
+   ],
+   "merged": [
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 9 line 5",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F10",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 10) vs Results p.3 (line 53)",
+   "evidence": "Abstract: external test set sensitivity 0.950. Body: external test set 2 sensitivity 0.905 (AUROC 0.920) and fourth-centre cohort sensitivity 0.912. 0.950 appears nowhere in the body; the closest body values are 0.905 and 0.912. Potential inconsistency, needs verification.",
+   "source": "llm",
+   "question_for_authors": null,
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C9"
+   ],
+   "location": "Methods p.5 vs code/GC-diagnosis-model/run.ipynb:73,94",
+   "evidence": "Methods: 'five hundred trees' for the random forest; code: RF(n_estimators=100, random_state=seed) (run.ipynb:73). Methods: LASSO L1 penalty 0.01; code: Lasso(alpha=0.005, max_iter=10000) (run.ipynb:94). Both are potential inconsistencies, needs verification.",
+   "source": "llm",
+   "question_for_authors": null,
+   "judgement_key": "param_mismatch",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 (10-DM AUROC 0.967) vs bp_out/multiverse_results_ok.csv",
+   "evidence": "60 of 120 planned universes ran (the 'outlier=none' branch failed in the adapter with a TypeError, so only |z|>3 universes completed). In the 60 completed universes the claim 'AUROC > 0.90 in test set 1' holds in 49/60 (81.7%); AUROC ranges 0.849-0.956. The weakest fork is the LASSO penalty: alpha=0.02 holds in 11/20 (55%) while alpha=0.01 holds in 20/20; seed 4 holds in 8/12 (67%). Baseline re-run (seed 12306, alpha 0.005, 100 trees, random split) gives AUROC 0.958 vs the paper's 0.967. The paper's own number is reproduced only when the 10 features are taken from the stored feature-importance file; re-running LASSO selection inside the pipeline gives 0.958.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "How sensitive is the reported AUROC to the LASSO penalty and the random seed, and which seed produced the reported 0.967?",
+   "file": "multiverse_llm.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "our re-run, Biomarker_clinical.xlsx vs paper.md (comparison section)",
+   "hand_written": false
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "our re-run, Biomarker_clinical.xlsx vs paper.md (comparison section)",
+   "hand_written": false
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "our re-run, Biomarker_clinical.xlsx vs paper.md (comparison section)",
+   "hand_written": false
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Xtest.xlsx rows vs paper.md line 163 (Methods: test n = 152)",
+   "hand_written": false
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "stored feature-importances file rows",
+   "hand_written": false
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. The addition of clinical parameters bare, line 97",
+   "hand_written": false
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "hand_written": false
+  },
+  {
+   "id": "F25",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/GC-diagnosis-model/run.ipynb code cell 5 line 16",
+   "hand_written": false
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods p.5",
+   "hand_written": false
+  },
+  {
+   "id": "F27",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F28",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F29",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F30",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/GC-diagnosis-model/run.ipynb",
+   "hand_written": false
+  },
+  {
+   "id": "F31",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods p.5",
+   "hand_written": false
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "code/GC-diagnosis-model/run.ipynb",
+   "hand_written": false
+  },
+  {
+   "id": "F33",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods p.5 vs run.ipynb:73,94",
+   "hand_written": false
+  },
+  {
+   "id": "F34",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F35",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results comparison section",
+   "hand_written": false
+  },
+  {
+   "id": "F36",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results",
+   "hand_written": false
+  },
+  {
+   "id": "F37",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "hand_written": false
+  },
+  {
+   "id": "F38",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results, 'Comparison of the diagnostic performance...', p.3; Supplementary Fig. 4b",
+   "hand_written": false
+  },
+  {
+   "id": "F39",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.3; Supplementary Fig. 4c",
+   "hand_written": false
+  },
+  {
+   "id": "F40",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results, 'The addition of clinical parameters...', p.3; Fig. 4d; Supplementary Fig. 5c",
+   "hand_written": false
+  },
+  {
+   "id": "F41",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.3; Fig. 4e-g; Table 1",
+   "hand_written": false
+  },
+  {
+   "id": "F42",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results, 'Reprogrammed plasma metabolic landscape...', p.3; Fig. 2",
+   "hand_written": false
+  },
+  {
+   "id": "F43",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Methods 'Patients, data collection, and study design'",
+   "hand_written": false
+  },
+  {
+   "id": "F44",
+   "module": "multiverse",
+   "type": "rerun_failed",
+   "severity": "grey",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "baseline universe",
+   "hand_written": false
+  },
+  {
+   "id": "F45",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "hand_written": false
+  },
+  {
+   "id": "F46",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "hand_written": false
+  }
+ ]
+}

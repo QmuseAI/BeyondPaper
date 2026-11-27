@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v1116p",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.6",
+ "saved": "2026-11-17",
+ "source_file": "pages/B10-v1116p.c4.json",
+ "note": "v1.11.6 Pro rerun; first turn switched to GLM-5.3 by the platform, stopped and continued on DeepSeek V4 Pro (rest of run on Pro); c4 copy, sha256 00272942 verified; raw sha db612a7b",
+ "n_findings": 29,
+ "truncated": false,
+ "counts": {
+  "red": 8,
+  "yellow": 3,
+  "grey": 17,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 8,
+  "yellow": 3,
+  "grey": 17,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

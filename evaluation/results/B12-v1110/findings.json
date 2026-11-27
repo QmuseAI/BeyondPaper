@@ -1,0 +1,486 @@
+{
+ "paper": {
+  "title": "A New Feature Expansion Technique Combined with Shunt Gated Recurrent Unit Neural Network for Epileptic Seizure Diagnosis",
+  "doi": "not reported (no open full text located; capsule metadata/metadata.yml used as the paper)"
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 10,
+  "grey": 29,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 3,
+   "archive_ok": 0,
+   "port_gap": 3,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 18
+  }
+ },
+ "multiverse": null,
+ "severity_changes": {
+  "checklist_no_locus": 1,
+  "low_value_repeat": 8
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule-6746514/code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F2",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "PCC_WFE.py:29-45; NewData_ML_Kfold.py:51-52",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. No inclusion/exclusion rules are documented. The code silently drops 124 of 178 channels (negative PCC) and collapses classes 2-5 into 'non-seizure'; neither step is described in any text."
+  },
+  {
+   "id": "F3",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "NewData_ML_Kfold.py:17,29; SGRU_GRU_Kfold.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No random seed is set anywhere; XGBoost/RF/DT and the Keras models are unseeded, so a single run is not reproducible bit-for-bit. Also at: capsule-6746514/code/NewData_ML_Kfold.py:17; capsule-6746514/code/NewData_ML_Kfold.py:29; capsule-6746514/code/RawData_ML_Kfold.py:17; capsule-6746514/code/RawData_ML_Kfold.py:29; capsule-6746514/code/pca_test.py:23; capsule-6746514/code/pca_test.py:35; capsule-6746514/code/wave_test.py:23; capsule-6746514/code/wave_test.py:35."
+  },
+  {
+   "id": "F4",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "NewData_ML_Kfold.py:39; SGRU_GRU_Kfold.py:50",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> not_reported. Plain sklearn KFold(n_splits=10) with no shuffle and no grouping. The UCI file has no patient/segment identifier, so whether the 23 five-second segments of one 23.6-s recording can fall in different folds cannot be checked from the materials."
+  },
+  {
+   "id": "F5",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "PCC_WFE.py:24-67; NewData_ML_Kfold.py:36",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. PCC-WFE weights and the MinMaxScaler are fitted once on all 11500 samples before KFold, so every test fold contributes to the feature construction and to the scaling range."
+  },
+  {
+   "id": "F6",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "NewData_ML_Kfold.py:16-30",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> not_reported. Hyper-parameters are fixed constants with no search space, budget or selection criterion; no tuning is described."
+  },
+  {
+   "id": "F7",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "data/Epileptic Seizure Recognition.csv",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No de-duplication step; the UCI file has no identifier column, so duplicate segments cannot be detected."
+  },
+  {
+   "id": "F8",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "PCC_WFE.py:29-45",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. No negative control for the PCC-WFE feature (no shuffled-label or random-weight feature). The added feature is a fixed linear combination of the same 178 channels, so its contribution is not isolated from the raw channels."
+  },
+  {
+   "id": "F9",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-6746514/code/NewData_ML_Kfold.py:12 vs capsule-6746514/code/perform.py",
+   "evidence": "Metric definitions (deep_checks.py): sensitivity/precision come from sklearn with recall_score average='macro' in one pipeline (capsule-6746514/code/NewData_ML_Kfold.py:12 recall_score average='macro'; capsule-6746514/code/NewData_ML_Kfold.py:13 precision_score average='macro'; capsule-6746514/code/RawData_ML_Kfold.py:12 recall_score average='macro') and from a binary TP/(TP+FN), TP/(TP+FP) count for one class in another (capsule-6746514/code/perform.py, code/perform.py). Values with the same name are not the same quantity, so a table comparing them across methods is not like for like."
+  },
+  {
+   "id": "F10",
+   "module": "ghost",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-6746514/code/SGRU_GRU_Kfold.py",
+   "evidence": "Pipeline coverage (deep_checks.py): capsule-6746514/code/SGRU_GRU_Kfold.py trains GRU, SGRU, which no script of the entry point (capsule-6746514/code/run, code/run) trains; the entry point never runs it and the stored output has no lines from it. The figure scripts plot numbers for GRU, SGRU as typed-in literals, so those numbers cannot be traced to a stored run. Also never run: code/SGRU_GRU_Kfold.py, capsule-6746514/code/pca_test.py, code/pca_test.py, capsule-6746514/code/wave_test.py, code/wave_test.py."
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds) vs results/output",
+   "evidence": "Our re-computation of 'ACC XGBoost Dataset 2' gives 0.931652 (bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)), but the authors' stored output (results/output) gi"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds) vs results/output",
+   "evidence": "Our re-computation of 'Se XGBoost Dataset 2' gives 0.83354 (bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)), but the authors' stored output (results/output) give"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds) vs results/output",
+   "evidence": "Our re-computation of 'ACC SVM Dataset 2' gives 0.966551 (bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)), but the authors' stored output (results/output) gives "
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'ACC XGBoost Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se XGBoost Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV XGBoost Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'ACC SVM Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se SVM Dataset 2' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se SVM Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV SVM Dataset 2' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV SVM Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'ACC DT Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se DT Dataset 2' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se DT Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV DT Dataset 2' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV DT Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'ACC RF Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F28",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se RF Dataset 2' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F29",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'Se RF Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F30",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml.py (our re-run, authors' PCC_WFE.load_data, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV RF Dataset 2' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F31",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_work/repro_ml2.py (our re-run, leakage-free variant, mean of 3 shuffle seeds)",
+   "evidence": "Re-computed 'PPV RF Dataset 2 (PCC-WFE fitted inside each training fold)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "code/README.md; data/Epileptic Seizure Recognition.csv",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. UCI Epileptic Seizure Recognition dataset named with the UCI URL, but no version, download date or DOI; t"
+  },
+  {
+   "id": "F33",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "all scripts",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule anywhere; no sample is removed. [Grey (build_passport.py): a reporting-"
+  },
+  {
+   "id": "F34",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "NewData_ML_Kfold.py; SGRU_GRU_Kfold.py",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. Six classifiers x three metrics are compared with no multiplicity correction and no uncerta"
+  },
+  {
+   "id": "F35",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "NewData_ML_Kfold.py:16-30; SGRU_GRU_Kfold.py:14-42",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> partial. All classifiers get the same data and the same 10 folds, but the traditional models use 10-30 trees/depth 5 while the "
+  },
+  {
+   "id": "F36",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "fig_6.py scores; results/zhu_1.png",
+   "evidence": "Claim C3 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F37",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "fig_8.py scores; results/zhu_2.png",
+   "evidence": "Claim C4 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F38",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "fig_5.py Acc55 vs Acc00-Acc33; fig_8.py",
+   "evidence": "Claim C5 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F39",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "results/output (fig_2.py print); fig_2.py:31-33",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F40",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 3 re-computed values match the paper."
+  },
+  {
+   "id": "F41",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "2 count mentions read; 0 flagged. Full list in counts_table.csv."
+  }
+ ]
+}

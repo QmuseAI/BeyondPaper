@@ -1,0 +1,55 @@
+weights:
+  novelty: 0.5          # w_novelty in EIG x (1 + w*novelty) x feasibility / cost
+  cost_exponent: 1.0
+
+hypotheses:
+  H1: {prior: 0.4, text: "Model A's advantage is real and transfers to unseen chemical families"}
+  H2: {prior: 0.5, text: "The advantage comes from leakage between related compositions under random splitting"}
+  H3: {prior: 0.1, text: "The advantage is specific to one database release"}
+
+literature:
+  - {ref: "doi:10.xxxx/placeholder", supports: H2, note: "replace with real sources found in the search"}
+
+experiments:
+  - id: X1
+    title: "Leave-cluster-out re-evaluation of A vs B on the released data"
+    tests: [H1, H2]
+    variable: "split strategy (random -> leave-one-cluster-out)"
+    controls: "same features, same hyperparameter budget for both models"
+    min_sample: "all released samples; >= 10 clusters"
+    cost: 1
+    feasibility: 1.0
+    novelty: 0.3
+    rationale: "Under H2 the advantage should vanish without shared families in train and test."
+    outcomes:
+      A_better: {H1: 0.75, H2: 0.10, H3: 0.40}
+      no_difference: {H1: 0.20, H2: 0.55, H3: 0.40}
+      B_better: {H1: 0.05, H2: 0.35, H3: 0.20}
+
+  - id: X2
+    title: "Evaluate both models on the next database release"
+    tests: [H1, H3]
+    variable: "dataset version"
+    controls: "frozen models, identical preprocessing"
+    min_sample: "new entries only (no overlap with training data)"
+    cost: 2
+    feasibility: 0.8
+    novelty: 0.5
+    rationale: "H3 predicts the gap closes on the new release; H1 predicts it persists."
+    outcomes:
+      gap_persists: {H1: 0.70, H2: 0.40, H3: 0.15}
+      gap_closes: {H1: 0.30, H2: 0.60, H3: 0.85}
+
+  - id: X3
+    title: "Repeat the original evaluation with 10 seeds"
+    tests: [H1]
+    variable: "random seed"
+    controls: "everything else as in the paper"
+    min_sample: "10 seeds"
+    cost: 0.5
+    feasibility: 1.0
+    novelty: 0.1
+    rationale: "Checks run-to-run noise but barely separates H1 from H2, since leakage is seed-independent."
+    outcomes:
+      A_better_most_seeds: {H1: 0.90, H2: 0.85, H3: 0.85}
+      mixed: {H1: 0.10, H2: 0.15, H3: 0.15}

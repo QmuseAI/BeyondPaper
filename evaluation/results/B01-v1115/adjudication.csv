@@ -1,0 +1,2 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,yellow,param_mismatch,Design p.3 vs data_values.csv,"Design says discrepancies are classified by percentage error (major = PE >= 10%). In data_values.csv, percentageError > 10 holds for 29 rows and comparisonOutcome == MAJOR_ERROR for 29 rows, but one MAJOR_ERROR row (16-2",unlabeled,false_positive,PE = inf satisfies PE >= 10%; eyeball relabelling is described in the SI (the run itself notes this in grey F22). At most a main-text omission

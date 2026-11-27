@@ -1,0 +1,24 @@
+{
+ "run_id": "B03-v1116p",
+ "paper_id": "B03",
+ "variant": "clean",
+ "version": "v1.11.6",
+ "saved": "2026-11-17",
+ "source_file": "pages/B03-v1116p.c4.json",
+ "note": "v1.11.6 Pro rerun; one turn switched to GLM-5.3 (it asked a question), answered and continued on DeepSeek V4 Pro; c4 copy, sha256 43365342 verified; raw sha 4aec852d",
+ "n_findings": 33,
+ "truncated": false,
+ "counts": {
+  "red": 9,
+  "yellow": 4,
+  "grey": 16,
+  "green": 4
+ },
+ "counts_reported": {
+  "red": 9,
+  "yellow": 4,
+  "grey": 16,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

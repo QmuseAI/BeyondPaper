@@ -1,0 +1,509 @@
+{
+ "paper": {
+  "title": "Research Ethics Committees as an intervention point to promote a priori sample size calculations",
+  "doi": "10.31222/osf.io/5sehd",
+  "source": "OSF preprint PDF (osf.io/download/natz7/, 11 pages) -> bp_work/paper.md"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 8,
+  "grey": 13,
+  "green": 3
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "19 of 20 sampled REC template forms requested the planned sample size",
+   "location": "Abstract, p.1",
+   "light": "yellow",
+   "findings": [
+    "F4",
+    "F8",
+    "F19",
+    "F20"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "12 of 20 forms requested a justification of the sample size",
+   "location": "Abstract p.1; Discussion p.5",
+   "light": "yellow",
+   "findings": [
+    "F4",
+    "F8",
+    "F19",
+    "F20"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "6 of 20 forms requested a sample size calculation",
+   "location": "Abstract p.1; Discussion p.5",
+   "light": "yellow",
+   "findings": [
+    "F2",
+    "F4",
+    "F5",
+    "F8",
+    "F19",
+    "F20"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "Results were generally similar between US and UK universities; 60% requested a justification and 20% (UK) to 40% (US) requested a sample size calculation",
+   "location": "Results, p.4",
+   "light": "yellow",
+   "findings": [
+    "F2",
+    "F5",
+    "F8"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "The NIH drug/device and behavioural forms requested sample size, justification and a calculation; the NHS HRA form requested all three with the calculation 'if applicable'",
+   "location": "Results, p.5",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "Six of the 7 RECs that declined to share their form said they could not because they use an online submission system, so the sample is biased toward forms available as text documents",
+   "location": "Figure 1 caption p.4 and footnote 4 p.5",
+   "light": "yellow",
+   "findings": [
+    "F7"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Inter-coder agreement was near perfect: all coding matched except 1 instance regarding sample size calculation",
+   "location": "footnote 3, p.4",
+   "light": "yellow",
+   "findings": [
+    "F3"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C8",
+   "text": "The 'indirectly requested a sample size calculation' category comprises forms prefaced with 'if applicable' (n=2) or asking for 'statistical planning including sample size justification' (n=1)",
+   "location": "Figure 1 caption, p.5",
+   "light": "yellow",
+   "findings": [
+    "F6"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C9",
+   "text": "The study is descriptive with no hypotheses and no inferential statistics; sample size was set by MSc programme requirements",
+   "location": "Study Objective p.3; Methods p.3",
+   "light": "grey",
+   "findings": [
+    "F17",
+    "F18"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C10",
+   "text": "Promoting sample size calculations through RECs could focus on the HRA in the UK and on the university level in the US",
+   "location": "Discussion, p.5",
+   "light": "grey",
+   "findings": [
+    "F21"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4"
+   ],
+   "location": "Results p.4 vs Abstract p.1 / Discussion p.5; bp_out/multiverse_results.csv",
+   "evidence": "The headline 'only 6 of 20 request sample size calculations' depends on counting the 3 forms coded 99 ('indirectly requested') as requests: with only explicit requests the count is 3 of 20 (15%), and over all 23 included forms it is 5 of 23 (21.7%) explicit or 9 of 23 (39.1%) including indirect. The qualitative claim (a minority of forms request a calculation) holds in 16/16 multiverse universes, but the reported number ranges from 15% to 39% depending on two defensible coding choices.",
+   "source": "llm",
+   "question_for_authors": "Please report the explicit and indirect counts separately in the Abstract (e.g. '3 of 20 explicitly, 6 of 20 including indirect requests').",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "footnote 3, p.4 vs Supplementary Material A item 3 (p.9)",
+   "evidence": "Footnote 3: 'The ethics forms were independently coded by two team members. All coding matched except for 1 instance regarding sample size calculation.' Supplementary A: 'The second coder (RTT) entered this information manually into a spreadsheet, rather than using the coding form which we preregistered and that the first coder used', and the same footnote says the 'indirectly requested' option 'was not available to the first coder'. The two coders therefore did not use the same instrument, and the 4 recoded cases were resolved by the second coder's category rather than by agreement; no kappa or agreement statistic is reported.",
+   "source": "llm",
+   "question_for_authors": "How were the 4 disagreements on 'indirectly requested' resolved, and what is the agreement rate on the three outcome variables with the final coding scheme?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "Methods p.3-4; data/rec_data_raw.csv 'verbatim' column",
+   "evidence": "The coding rules are not stated: e.g. Johns Hopkins is coded sample_size=0 although its verbatim text asks for a 'Statistical plan including sample size justification'; Edinburgh ('If applicable and known, please specify ... sample size') is coded sample_size=1; Washington is coded sample_size=1 although the form only asks for a maximum number of subjects and a rationale if prediction is impossible. The codebook gives only 'explicitly asked'. A reader cannot reproduce the 19/12/6 counts from the verbatim text without the authors' judgement rules.",
+   "source": "llm",
+   "question_for_authors": "Please publish the decision rules used to code sample_size, justification and calculation (e.g. how 'if applicable', 'if known' and 'statistical plan including sample size justification' were treated).",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4"
+   ],
+   "location": "Abstract p.1 and Discussion p.5 vs Results p.4 (and capsule results/analysis.pdf Table 1)",
+   "evidence": "Two places in the paper disagree, no authors' file needed: Abstract '6 requested a sample size calculation' and Discussion 'only 6 of 20 request sample size calculations' vs Results '20% (UK) to 40% (US) requested a sample size calculations'. 20% of 10 UK forms = 2 and 40% of 10 US forms = 4, so 2 + 4 = 6 of 20 = 30%, not 60%; the Results percentages describe a different quantity from the Abstract total. The authors' stored Table 1 (results/analysis.pdf) shows why: Calculation US 2 + UK 1 = 3 explicit, Calculation (indirectly) US 2 + UK 1 = 3, and 3 + 3 = 6. The Abstract/Discussion count includes the 'indirectly requested' code; the Results percentages count only explicit requests. [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (value for a count made from their data, archived for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Does '6 of 20 requested a sample size calculation' include the 3 forms coded 99 ('indirectly requested')? If yes, the Results percentages should be 30% overall (40% US, 20% UK only for explicit requests); if no, the Abstract/Discussion should say 3 of 20.",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Figure 1 caption, p.5 vs capsule data/rec_data_raw.csv (calculation==99 rows)",
+   "evidence": "Two places in the paper disagree, no authors' file needed: the Figure 1 caption (p.5) says the 'indirectly requested' category means a form prefaced its request with 'if applicable' (n=2) or asked for 'statistical planning including sample size justification' (n=1), i.e. 2 + 1 = 3 forms. The paper's own totals require 3 indirect forms to reach 6 of 20 (3 explicit + 3 indirect), so the caption's two sub-categories account for all 3 and no fourth form is described; the released data additionally code a fourth form (Leeds, 'If you have a formal power calculation please replicate it here') as 99. [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (value for a count made from their data, archived for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Which four forms were coded 99, and how should the caption describe the fourth one (Leeds, 'if you have a formal power calculation')?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Figure 1 caption p.4 vs capsule results/analysis.pdf Table 1",
+   "evidence": "Caption: 'Six of the 7 RECs that declined to share their ethics form, stated they could not share it because they use an online submission system'. Stored Table 1: 'Forms indicated as not available to share' US 4 + UK 3 = 7 (matches 7 declining). The data split those 7 into declined_online = 6 (US 3 + UK 3) and declined = 1 (Harvard), so 6 of 7 is consistent with the data; the paper never states the 7 explicitly, and the code's grepl('declined') counts both categories.",
+   "source": "llm",
+   "question_for_authors": "Please state the number of declining RECs (7) explicitly in the text so the 6-of-7 statement can be checked against the flowchart.",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7"
+  },
+  {
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "location": "Abstract p.1 / Discussion p.5 ('of 20') vs Results p.4 and capsule Table 1 (23 included forms)",
+   "evidence": "The paper's headline denominators are 20 university forms ('10 RECs ... in each ... for 20 forms in total'; '12 of 20'; '6 of 20'). The data contain 23 included forms: 10 US universities + 10 UK universities + 2 NIH forms + the NHS HRA form. The authors' stored Table 1 reports the national bodies separately (US 9/6/2/2, UK 10/6/1/1) and the paper's 19/12/6 are the university-only sums (9+10, 6+6, 2+1 explicit). Over all 23 included forms the same counts are 22 (sample size), 15 (justification) and 5 explicit / 9 including indirect (calculation). The paper does not say that the national bodies are excluded from the 20.",
+   "source": "llm",
+   "question_for_authors": "Are the NIH and NHS HRA forms excluded from the 'of 20' denominators? If so, please say so in the Abstract and Discussion; if not, the totals over all 23 included forms are 22, 15 and 5 (9 including indirect).",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/capsule-9168639/data/rec_data_raw.csv (our Python re-run of code/analysis.Rmd)",
+   "evidence": "Re-computed 'n forms requesting calculation, all 23 included forms (incl. NIH x2, NHS HRA)' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/capsule-9168639/data/rec_data_raw.csv (our Python re-run of code/analysis.Rmd)",
+   "evidence": "Re-computed 'n forms requesting calculation incl. indirect, all 23 included forms' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/capsule-9168639/data/rec_data_raw.csv (our Python re-run of code/analysis.Rmd)",
+   "evidence": "Re-computed 'n forms requesting justification, all 23 included forms' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/capsule-9168639/data/rec_data_raw.csv (our Python re-run of code/analysis.Rmd)",
+   "evidence": "Re-computed 'n forms requesting sample size, all 23 included forms' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "capsule-9168639/code/analysis.Rmd:31",
+   "evidence": "2 data-exclusion step(s): filter@31, filter@32. Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Methods p.3; data/rec_data_raw.csv archived_link",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. Sampling frame named by source and column (NCSES Table 20 '2020'; HESA 'Total expenditure') but the ranked list and download date are not given; archived links per form are provided.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the exact data source identified (version, DOI, accession, download date)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F14"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Results p.4; Figure 1; Supplementary A item 5",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. Flowchart counts are given (19/14 sampled, 16/10 contacted, 10/10 included) but the reasons for the missing ranks (US 3,4,8,9,12,13,14,17,18; UK 9,16-20) are only partly explained (LSHTM, Georgia Tech).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F15"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "data/rec_data_raw.csv",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> partial. One row per institution; no duplicate institutions, but the two NIH forms and the NHS HRA form are extra rows outside the 20-university denominator (see findings).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were duplicates and near-duplicates between training and test sets removed?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C9"
+   ],
+   "location": "Study Objective p.3; Methods p.3",
+   "evidence": "Claim C9 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C9"
+   ],
+   "location": "Methods p.3; Supplementary A p.9",
+   "evidence": "The sampling frame is described only by source and column (NCSES p.84 Table 20 '2020' column; HESA 'Total expenditure'), not by the ranked list of institutions. The data file has expenditure_rank values 1-20 with gaps (US 19, 3, 4, 8, 9, 12, 13, 14, 17, 18 missing; UK 9, 16-20 missing) and the supplement says two institutions were not contacted (LSHTM rank 9, Georgia Tech rank 19), but the other gaps are not explained.",
+   "source": "llm",
+   "question_for_authors": "Please provide the ranked sampling frame and explain each missing rank (e.g. ranks 3, 4, 8, 9, 12-14, 17, 18 in the US).",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F18"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "Methods p.3-4; data/rec_data_raw.csv 'archived_link'",
+   "evidence": "The paper reports one template form per university, but the data show that for several institutions the coded form is not the medical/interventional form the Methods prioritise (Stanford: non-medical form because the medical form was not public; Cambridge: no medical committee; Imperial: ICREC non-NHS form; Birmingham: form updated to an online system in 2023). The Methods state the priority order but not how often it could not be followed.",
+   "source": "llm",
+   "question_for_authors": "For how many of the 20 universities was the prioritised (medical, interventional, non-minimal-risk) form unavailable, and which form was coded instead?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "Methods p.3-4; capsule has no preregistration file",
+   "evidence": "The preregistration (https://doi.org/10.17605/OSF.IO/RHW3M) and the coding form are cited but not included in the capsule; Supplementary A lists 5 deviations but the preregistered coding scheme itself is not reproduced, so the deviation 'we dropped all coding variables except the three main questions' cannot be checked against the registered plan.",
+   "source": "llm",
+   "question_for_authors": "Please include the preregistered protocol and coding form in the capsule so the deviations can be checked.",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C10"
+   ],
+   "location": "Discussion p.5",
+   "evidence": "The recommendation that UK efforts 'could focus on the HRA' and US efforts 'may do better to focus at the university level' rests on the observation that the NIH does not provide ethical review for extramural researchers. That premise is not supported by any data, citation or document in the paper or capsule; it is an interpretation.",
+   "source": "llm",
+   "question_for_authors": "Please cite a source for the statement that the NIH does not provide ethical review of studies for extramural researchers.",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F21"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 34 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "12 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F23"
+  },
+  {
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Most sampled REC forms request a sample size justification (>=50%) and a minority request a sample size calculation (<50%)' holds in 100% of 16 universes. Single changes that flip it: none.",
+   "source": "script:multiverse.py",
+   "question_for_authors": null,
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F24"
+  }
+ ],
+ "reproduction": {
+  "level": "full",
+  "counts": {
+   "reproduced": 34,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 4
+  }
+ },
+ "multiverse": {
+  "robustness": 1.0,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 16
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "gate_cap": 2
+ }
+}

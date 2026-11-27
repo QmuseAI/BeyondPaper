@@ -1,0 +1,27 @@
+{
+ "paper": "Hardwicke et al. 2021 R Soc Open Sci 8:201494",
+ "items": [],
+ "known_false": [
+  {
+   "id": "A-P03-ci",
+   "mechanism": "disclosed_method_difference",
+   "types": [
+    "number_mismatch",
+    "stat_inconsistency",
+    "stat_decision_error"
+   ],
+   "match_any": [
+    "[20, 59]",
+    "[19, 57]",
+    "20–59",
+    "19–57",
+    "20-59",
+    "19-57",
+    "sison"
+   ],
+   "description": "two CI methods (Sison-Glaz, Wilson) both named in the supplement; should be grey",
+   "status": "verified"
+  }
+ ],
+ "key": "P03"
+}

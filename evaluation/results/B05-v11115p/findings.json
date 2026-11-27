@@ -1,0 +1,149 @@
+{
+ "paper": {
+  "title": "A Delphi Study to Strengthen Research-Methods Training in Undergraduate Psychology Programs",
+  "doi": "not reported in paper.md"
+ },
+ "counts": {
+  "red": 1,
+  "yellow": 4,
+  "grey": 11,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 19,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.25,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "include_students",
+    "value": "True",
+    "holds": false,
+    "effect": -1
+   },
+   {
+    "fork": "drop_attention",
+    "value": "False",
+    "holds": false,
+    "effect": 0
+   }
+  ],
+  "n_ok": 24
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "ok",
+   "abstract_vs_body": "problem",
+   "claims_scan": "problem"
+  },
+  "param_mismatch": "Consensus threshold 75% essential in each nonstudent group with >=12 participants (paper, Definition of consensus) matches manuscript.Rmd:330-345 (noStudents & academic & instructor consensus all TRUE); rating scale 1-9 with 7-9 essential matches the code's perc_essential definition. No parameter mismatch found.",
+  "figure_data_mismatch": "Fig. 2 flowchart counts (170 began R1, 139 completed R1, 103 final) match count_unique(df1_all/df1_completed/df1_final) in manuscript.Rmd:820-860 and the stored results/final/0.main_table.csv (79 rows, 78 items after removing the attention check). Table 1 N=125 matches filter(current_round==2) in manuscript.Rmd:760-790.",
+  "phantom_experiment": "Every analysis described in the text has code and stored output: item ratings (results/final, completed, all), sensitivity analyses (results/sensitivity/*.csv), Table 1 (data/4.participant_characteristics.csv), open-ended counts (data/2,3,6). The thematic analysis (data/7.thematic_analysis.xlsx) is qualitative and not scripted, as stated. No phantom experiment.",
+  "abstract_vs_body": "Abstract: 'Of 78 items included in the consensus process, 34 reached consensus' and '707 open-ended text responses'. Body: 26 (R1) + 8 (R2) = 34 and 44 not reached (26+8+44=78) - consistent. Open-ended counts in the body are 222 + 82 + 337 = 641 item-level responses plus 45 + 21 general comments = 707 - consistent. No abstract/body conflict found; the 47-vs-45 item count is recorded separately under claims_scan.",
+  "claims_scan": "claims_scan.py found 0 candidates. Manual check of the same claims: (a) Sensitivity Analyses says '47 items included in both Round 1 and Round 2' but results/final/0.main_table.csv has 45 rows with non-missing consensus in both rounds and results/sensitivity/round1_round2.csv has 45 data rows; (b) the sensitivity text says 'median absolute change' while manuscript.Rmd:697-712 computes mean(abs(...)) - recomputed mean 3.8%/0.15 vs median 3.0%/0.13."
+ },
+ "findings": [
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim '34 of 78 Delphi items reach consensus (26 in Round 1, 8 in Round 2)' holds in 25% of 24 universes. Single changes that flip it: include_students=True; drop_attention=False.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under include_students=True; drop_attention=False?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Sensitivity Analyses vs results/sensitivity/round1_round2.csv (45 data rows)",
+   "evidence": "The paper reports 'n items in both rounds' = 47 items (Sensitivity Analyses); the authors' own stored output (results/sensitivity/round1_round2.csv (45 data rows)) gives 45. Our re-run gives 45, which matches the stored output. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n items in both rounds' (47), given that results/sensitivity/round1_round2.csv (45 data rows) gives 45?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C6",
+    "C8",
+    "C9"
+   ],
+   "location": "paper vs manuscript.Rmd:700",
+   "evidence": "The paper reports a median absolute change (\"Of the 47 items included in both Round 1 and Round 2, four went from not reaching consensus to reaching consensus, the median absolute change in the percentage of participants that rated an item as essential was 3.8%, an\"), but the code computes mean(abs(...)) (`mean(abs(compare_rounds$perc_essential_compare))*100,`) (and 5 similar line(s)) and never median(abs(...)). The reported statistic may be mislabelled.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported values medians or means of the absolute changes?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F3",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Sensitivity Analyses (p. 4) vs code/manuscript.Rmd:697-712 and results/sensitivity/round1_round2.csv",
+   "evidence": "Paper: 'the median absolute change in the percentage of participants that rated an item as essential was 3.8%, and the median absolute difference in participants' rating of an item was 0.15'. The code that writes the sensitivity table computes mean(abs(perc_essential_compare))*100 and mean(abs(mean_compare)) (manuscript.Rmd:697-712). Recomputing from results/sensitivity/round1_round2.csv: mean absolute change = 3.8% and mean absolute rating difference = 0.15 (match the paper), while the median absolute change = 3.0% and median absolute rating difference = 0.13. The same pattern holds for the other two comparisons (instructors vs academics: mean 5.3% / 0.24 vs median 4.0% / 0.22; all vs final: mean 1.3% / 0.06 vs median 1.0% / 0.06).",
+   "source": "llm",
+   "question_for_authors": "The reported 3.8% and 0.15 are means of absolute differences, not medians; should the text say 'mean absolute change' or should the table report medians?",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Sensitivity Analyses (p. 4) vs results/final/0.main_table.csv",
+   "evidence": "Paper: 'Of the 47 items included in both Round 1 and Round 2'. In results/final/0.main_table.csv, 45 rows have a non-missing consensus in both rounds (79 rows total; 26 items reached consensus in Round 1 and were dropped, 7 items were added in Round 2, and the attention-check item is in Round 1 only: 78 - 26 - 1 = 51, 51 - 7 = 44... the stored file gives 45). The authors' own footnote 2 arithmetic (72 - 26 - 1 + 7 = 52) implies 45 items rated in both rounds, and results/sensitivity/round1_round2.csv has 45 data rows.",
+   "source": "llm",
+   "question_for_authors": "How many items were rated in both rounds: 45 (as in the stored data) or 47 (as in the text)?",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Sensitivity Analyses (p. 4) vs results/final/0.main_table.csv",
+     "severity": "grey",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F5"
+  }
+ ]
+}

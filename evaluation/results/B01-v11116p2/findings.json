@@ -1,0 +1,35 @@
+{
+ "counts": {
+  "red": 0,
+  "yellow": 1,
+  "grey": 19,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "full",
+  "counts": {
+   "reproduced": 29,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 11
+  }
+ },
+ "findings": [
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'About 5% of the 789 checked values contained a major numerical discrepancy (37/789)' holds in 83% of 18 universes. Single changes that flip it: eyeball_rule=as_major.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under eyeball_rule=as_major?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  }
+ ]
+}

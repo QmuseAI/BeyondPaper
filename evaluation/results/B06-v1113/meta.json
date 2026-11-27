@@ -1,0 +1,24 @@
+{
+ "run_id": "B06-v1113",
+ "paper_id": "B06",
+ "variant": "clean",
+ "version": "v1.11.3",
+ "saved": "2026-11-17",
+ "source_file": "pages/B06-v1113.c3.json",
+ "note": "v1.11.3; DeepSeek V4 Pro selected, platform switched to V4 Flash partway; c3 copy of BP_FINDINGS_BLOCK.txt (grey/green trimmed), sha256 verified; raw block sha 9346f893",
+ "n_findings": 33,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 6,
+  "grey": 23,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 6,
+  "grey": 23,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

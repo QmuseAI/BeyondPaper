@@ -1,0 +1,24 @@
+{
+ "run_id": "B12-v1116",
+ "paper_id": "B12",
+ "variant": "blind",
+ "version": "v1.11.6",
+ "saved": "2026-11-17",
+ "source_file": "pages/B12-v1116.c4.json",
+ "note": "v1.11.6; GLM-5.3 then DeepSeek V4 Pro; one accidental resume click after it had finished; all 9 yellows are script findings, no hand-written findings; c4 copy, sha256 a60a9458 verified; raw sha 98ad7e07",
+ "n_findings": 34,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 9,
+  "grey": 23,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 9,
+  "grey": 23,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

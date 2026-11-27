@@ -1,0 +1,24 @@
+{
+ "run_id": "B08-v1114",
+ "paper_id": "B08",
+ "variant": "injected",
+ "version": "v1.11.4",
+ "saved": "2026-11-17",
+ "source_file": "pages/B08-v1114.c3.json",
+ "note": "v1.11.4; DeepSeek V4 Flash at end; stage 4 multiverse skipped by instruction; c3 copy, sha256 5b97f7bc verified; raw sha 912b8711",
+ "n_findings": 30,
+ "truncated": false,
+ "counts": {
+  "red": 4,
+  "yellow": 10,
+  "grey": 14,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 4,
+  "yellow": 10,
+  "grey": 14,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

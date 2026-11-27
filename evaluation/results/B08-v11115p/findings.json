@@ -1,0 +1,647 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray, Rose, Bellavia, Holmes, and Kusche (2002) Study 3",
+  "doi": "not reported",
+  "file": "bp_work/paper.md"
+ },
+ "counts": {
+  "red": 13,
+  "yellow": 10,
+  "grey": 13,
+  "green": 4
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 77,
+   "port_gap": 0,
+   "archive_mismatch": 19,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 40
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "problem",
+   "abstract_vs_body": "ok",
+   "claims_scan": "problem"
+  },
+  "param_mismatch": "Methods parameters (mean-centred self-esteem, condition 0/1, OLS outcome ~ SE*cond, seed 16, NA codes -99/-88/-77) all appear in code/main.Rmd; methods_code_check.py found 0 mismatches",
+  "figure_data_mismatch": "fig1-fig6 are ggplot scatter+prediction lines from the same models m1-m6; no numeric values are printed on the figures, so no figure-vs-table number to compare",
+  "phantom_experiment": "Results p.4 reports an online MTurk replication with 412 participants (all ps > .40) but the capsule contains no MTurk data, code or table; claims_scan.py flagged the same sentence",
+  "abstract_vs_body": "Abstract says manipulation-check effects replicated and no SE x condition interaction for any primary outcome; Table 2/3 and stored output agree (condition b .563/.1.623 significant, all four interaction CIs span 0)",
+  "claims_scan": "claims_scan.py flagged the MTurk sentence (Results p.4) as an analysis with no data or code in the capsule; the same sentence is the only support for claim C8"
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:641 (summary(m2) dCond)",
+   "evidence": "The paper reports 'Table 2 NumNeg condition b' = 1.623 b (Table 2); the authors' own stored output (results/main.html:641 (summary(m2) dCond)) gives 1.42536.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg condition b' (1.623), given that results/main.html:641 (summary(m2) dCond) gives 1.42536?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:641 (summary(m2) cSelfEsteem:dCond)",
+   "evidence": "The paper reports 'Table 2 NumNeg interaction b' = 0.011 b (Table 2); the authors' own stored output (results/main.html:641 (summary(m2) cSelfEsteem:dCond)) gives 0.03059.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg interaction b' (0.011), given that results/main.html:641 (summary(m2) cSelfEsteem:dCond) gives 0.03059?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 note vs results/main.html:641 region (summary(m2) residual df)",
+   "evidence": "The paper reports 'Table 2 df Inferred Number of Negative Items' = 196 df (Table 2 note); the authors' own stored output (results/main.html:641 region (summary(m2) residual df)) gives 151.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 df Inferred Number of Negative Items' (196), given that results/main.html:641 region (summary(m2) residual df) gives 151?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Table 3 vs results/main.html:915 (confint(m6) cSelfEsteem 2.5%)",
+   "evidence": "The paper reports 'Table 3 State Self-Esteem self-esteem CI lower' = -0.544 b (Table 3); the authors' own stored output (results/main.html:915 (confint(m6) cSelfEsteem 2.5%)) gives 0.4120894.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 3 State Self-Esteem self-esteem CI lower' (-0.544), given that results/main.html:915 (confint(m6) cSelfEsteem 2.5%) gives 0.4120894?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Table 3 vs results/main.html:915 (confint(m6) cSelfEsteem 97.5%)",
+   "evidence": "The paper reports 'Table 3 State Self-Esteem self-esteem CI upper' = 0.032 b (Table 3); the authors' own stored output (results/main.html:915 (confint(m6) cSelfEsteem 97.5%)) gives 0.7305353.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 3 State Self-Esteem self-esteem CI upper' (0.032), given that results/main.html:915 (confint(m6) cSelfEsteem 97.5%) gives 0.7305353?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:682 (confint(m2) dCond 2.5%)",
+   "evidence": "The paper reports 'Table 2 NumNeg condition CI lower' = 0.888 b (Table 2); the authors' own stored output (results/main.html:682 (confint(m2) dCond 2.5%)) gives 0.6587871.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg condition CI lower' (0.888), given that results/main.html:682 (confint(m2) dCond 2.5%) gives 0.6587871?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:682 (confint(m2) dCond 97.5%)",
+   "evidence": "The paper reports 'Table 2 NumNeg condition CI upper' = 2.35 b (Table 2); the authors' own stored output (results/main.html:682 (confint(m2) dCond 97.5%)) gives 2.1919334.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg condition CI upper' (2.35), given that results/main.html:682 (confint(m2) dCond 97.5%) gives 2.1919334?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:641 (summary(m2) cSelfEsteem)",
+   "evidence": "The paper reports 'Table 2 NumNeg self-esteem b' = -0.448 b (Table 2); the authors' own stored output (results/main.html:641 (summary(m2) cSelfEsteem)) gives -0.42338.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg self-esteem b' (-0.448), given that results/main.html:641 (summary(m2) cSelfEsteem) gives -0.42338?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:682 (confint(m2) cSelfEsteem 97.5%)",
+   "evidence": "The paper reports 'Table 2 NumNeg self-esteem CI upper' = 0.134 b (Table 2); the authors' own stored output (results/main.html:682 (confint(m2) cSelfEsteem 97.5%)) gives 0.1484686.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg self-esteem CI upper' (0.134), given that results/main.html:682 (confint(m2) cSelfEsteem 97.5%) gives 0.1484686?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 vs results/main.html:384 (summarise sd_manipcheck, Experimental)",
+   "evidence": "Values swapped between two quantities: the paper reports 'manipulation check SD experimental' = 1.25 and 'manipulation check SD control' = 1.42; the authors' stored output gives 1.42 and 1.25, i.e. the two values are exchanged. [Red (build_passport.py, swapped_pair).]",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "severity_original": "grey",
+   "severity_reasons": [
+    "swapped_pair"
+   ],
+   "merged": [
+    {
+     "type": "archive_mismatch",
+     "location": "Results p.3 vs results/main.html:384 (summarise sd_manipcheck, Control)",
+     "severity": "grey",
+     "source": "script:numbers_crosscheck.py"
+    }
+   ],
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 vs results/main.html:423 (mes(4.83,4.24,1.25,1.42,100,102) d)",
+   "evidence": "The paper reports 'manipulation check Cohen d' = 0.64 d (Results p.3); the authors' own stored output (results/main.html:423 (mes(4.83,4.24,1.25,1.42,100,102) d)) gives 0.44.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'manipulation check Cohen d' (0.64), given that results/main.html:423 (mes(4.83,4.24,1.25,1.42,100,102) d) gives 0.44?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the subgroup or the total mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:641 (summary(m2) Estimate (Intercept))",
+   "evidence": "The paper reports 'Table 2 NumNeg intercept b' = 3.442 b (Table 2); the authors' own stored output (results/main.html:641 (summary(m2) Estimate (Intercept))) gives 3.54802. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg intercept b' (3.442), given that results/main.html:641 (summary(m2) Estimate (Intercept)) gives 3.54802?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F14"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 3 vs results/main.html:869 (summary(m6) Estimate (Intercept))",
+   "evidence": "The paper reports 'Table 3 State Self-Esteem intercept b' = 5.468 b (Table 3); the authors' own stored output (results/main.html:869 (summary(m6) Estimate (Intercept))) gives 5.48639099. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 3 State Self-Esteem intercept b' (5.468), given that results/main.html:869 (summary(m6) Estimate (Intercept)) gives 5.48639099?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F15"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:682 (confint(m2) interaction 2.5%)",
+   "evidence": "The paper reports 'Table 2 NumNeg interaction CI lower' = -0.777 b (Table 2); the authors' own stored output (results/main.html:682 (confint(m2) interaction 2.5%)) gives -0.7661138. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg interaction CI lower' (-0.777), given that results/main.html:682 (confint(m2) interaction 2.5%) gives -0.7661138?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:682 (confint(m2) interaction 97.5%)",
+   "evidence": "The paper reports 'Table 2 NumNeg interaction CI upper' = 0.799 b (Table 2); the authors' own stored output (results/main.html:682 (confint(m2) interaction 97.5%)) gives 0.8272844. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg interaction CI upper' (0.799), given that results/main.html:682 (confint(m2) interaction 97.5%) gives 0.8272844?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 vs results/main.html:682 (confint(m2) cSelfEsteem 2.5%)",
+   "evidence": "The paper reports 'Table 2 NumNeg self-esteem CI lower' = -1.03 b (Table 2); the authors' own stored output (results/main.html:682 (confint(m2) cSelfEsteem 2.5%)) gives -0.9952285. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 NumNeg self-esteem CI lower' (-1.03), given that results/main.html:682 (confint(m2) cSelfEsteem 2.5%) gives -0.9952285?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F18"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Methods Participants vs results/main.html:230 (stat.desc Age mean)",
+   "evidence": "The paper reports 'age mean' = 21.0 years (Methods Participants); the authors' own stored output (results/main.html:230 (stat.desc Age mean)) gives 21.758794. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'age mean' (21.0), given that results/main.html:230 (stat.desc Age mean) gives 21.758794?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F19"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results (paper.md line 101)",
+   "evidence": "The text reports an additional study or analysis: 'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all *p*s > .40).'. Its head count 412 appears nowhere else in the paper, the phrase 'repeated the study' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 412 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F20"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How was this number derived from the base and the multiplier?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F21"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "line 99",
+   "evidence": "'M = 4.83, SD = 1.25) than those in the control condition ( M = 4.24, SD = 1.42; Cohen’s d = .64': the reported d = .64, but the two means and SDs give a standardized difference of about 0.44 (|4.83 - 4.24| / sqrt((1.25^2 + 1.42^2) / 2)).",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Which inputs or formula produced the reported effect size?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results p.4",
+   "evidence": "The paper reports an online MTurk replication with 412 participants (all ps > .40) but the capsule contains no MTurk data, code, table or figure; the claim cannot be checked from the materials.",
+   "source": "llm",
+   "question_for_authors": null,
+   "judgement_key": "phantom_experiment",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F23"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Table 3 vs results/main.html:797 (confint(m4) cSelfEsteem 2.5%)",
+   "evidence": "The paper reports 'Table 3 Partner Enhancement self-esteem CI lower' = 0.083 b (Table 3); the authors' own stored output (results/main.html:797 (confint(m4) cSelfEsteem 2.5%)) gives 0.08383113. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run. [Grey (build_passport.py): 0.083 and 0.08383113 differ by one unit in the last printed decimal, which is what rounding the same value two ways gives.]",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 3 Partner Enhancement self-esteem CI lower' (0.083), given that results/main.html:797 (confint(m4) cSelfEsteem 2.5%) gives 0.08383113?",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "last_digit_rounding"
+   ],
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F24"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Table 3 vs results/main.html:797 (confint(m4) interaction 97.5%)",
+   "evidence": "The paper reports 'Table 3 Partner Enhancement interaction CI upper' = 0.224 b (Table 3); the authors' own stored output (results/main.html:797 (confint(m4) interaction 97.5%)) gives 0.2245287. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run. [Grey (build_passport.py): 0.224 and 0.2245287 differ by one unit in the last printed decimal, which is what rounding the same value two ways gives.]",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 3 Partner Enhancement interaction CI upper' (0.224), given that results/main.html:797 (confint(m4) interaction 97.5%) gives 0.2245287?",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "last_digit_rounding"
+   ],
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F25"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Table 3 vs results/main.html:852 (confint(m5) dCond 97.5%)",
+   "evidence": "The paper reports 'Table 3 Closeness condition CI upper' = 0.299 b (Table 3); the authors' own stored output (results/main.html:852 (confint(m5) dCond 97.5%)) gives 0.2997128. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run. [Grey (build_passport.py): 0.299 and 0.2997128 differ by one unit in the last printed decimal, which is what rounding the same value two ways gives.]",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 3 Closeness condition CI upper' (0.299), given that results/main.html:852 (confint(m5) dCond 97.5%) gives 0.2997128?",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "last_digit_rounding"
+   ],
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F26"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 vs results/main.html:384 (summarise sdNum, Control)",
+   "evidence": "The paper reports 'inferred negative items SD control' = 1.65; the cell recorded as stored output gives 1.64, but 1.65 appears 1 time(s) in bp_work/results/main.html (first on line 460: '<pre class=\"r\"><code>mes(5.07, 3.43, 3.4, 1.65, 100, 102) #effect size calculator for P24NumNeg</code></pre>'). Find the line of the authors' code that produces the paper's number and compare with that cell.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F27"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "25 count mentions read; 2 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F28"
+  },
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment (Dockerfile / environment file).]",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "env_pinned"
+   ],
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F29"
+  },
+  {
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/main.Rmd:183",
+   "evidence": "2 data-exclusion step(s): na.omit@183, na.omit@201. Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F30"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Methods",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule stated; no outlier removal in code [Grey (build_passport.py, checklist_nothing_done): the code removes no outliers, so there is no removal rule to report.]",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_nothing_done"
+   ],
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F31"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Results",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. Four primary outcomes tested without multiplicity correction; no statement",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is correction for multiple comparisons stated when many tests or metrics are reported?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F32"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/main.Rmd setup2",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> partial. set.seed(16) for partner selection only; no seed for any other step; single run reported",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F33"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/README.md",
+   "evidence": "[M2] Are software and library versions (and hardware, for GPU non-determinism) stated? -> not_reported. No sessionInfo/renv.lock; package versions not pinned (leakage_scan dependency_unpinned)",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are software and library versions (and hardware, for GPU non-determinism) stated?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F34"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Methods Participants; Discussion p.5",
+   "evidence": "Claim C7 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F35"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Results p.4",
+   "evidence": "Claim C8 cannot be re-computed: no available data or code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F36"
+  },
+  {
+   "module": "consistency",
+   "type": "grim_inconsistency",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported means",
+   "evidence": "2 testable mean(s) passed GRIM; 6 not testable.",
+   "source": "script:grim.py",
+   "question_for_authors": null,
+   "file": "grim.findings.json",
+   "hand_written": false,
+   "id": "F37"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 77 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F38"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "17 of 18 estimate-CI reports are internally consistent.",
+   "source": "script:ci_check.py",
+   "question_for_authors": null,
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F39"
+  },
+  {
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Self-esteem x relationship threat interaction on perceived acceptance is null (replication of Murray et al. 2002 Study 3)' holds in 100% of 40 universes. Single changes that flip it: none.",
+   "source": "script:multiverse.py",
+   "question_for_authors": null,
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F40"
+  }
+ ]
+}

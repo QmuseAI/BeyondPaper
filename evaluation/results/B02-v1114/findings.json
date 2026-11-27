@@ -1,0 +1,518 @@
+{
+ "paper": {
+  "title": "Metabolomic machine learning predictor for diagnosis and prognosis of gastric cancer",
+  "doi": "10.1038/s41467-024-46004-5",
+  "journal": "Nature Communications 15:1657 (2024)",
+  "file": "bp_work/paper.md"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 4,
+  "yellow": 18,
+  "grey": 32,
+  "green": 2
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Methods, Diagnostic prediction model vs code/GC-diagnosis-model/run.ipynb cell 6 output (test, normal-patients 94+48)",
+   "evidence": "The paper reports 'n test set 1' = 152 participants (Methods, Diagnostic prediction model); the authors' own stored output (code/GC-diagnosis-model/run.ipynb cell 6 output (test, normal-patients 94+48)) gives 142. Our re-run gives 142, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n test set 1' (152), given that code/GC-diagnosis-model/run.ipynb cell 6 output (test, normal-patients 94+48) gives 142?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract vs Results, Fig. 3e paragraph",
+   "evidence": "'external test sensitivity (10-DM)' is reported with different values. Abstract: 0.95 proportion | Results, Fig. 3e paragraph: 0.905 proportion. Agreeing reports: 1 location(s) [Abstract] vs 1 [Results, Fig. 3e paragraph].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'external test sensitivity (10-DM)' is correct (0.95 proportion or 0.905 proportion)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "red",
+   "location": "Methods, Diagnostic prediction model vs code/GC-diagnosis-model/run.ipynb cell 5 and cell 7",
+   "evidence": "Methods: 'We set the coefficient of the L1 constraint as 0.01' and 'The final model included five hundred classifier trees'. Code: ArgsClass(k=10, alpha=0.005) -> Lasso(alpha=0.005) (cell 5), and RF(n_estimators=100, random_state=12306) (cell 7). The released code uses alpha 0.005 (not 0.01) and 100 trees (not 500).",
+   "source": "llm",
+   "question_for_authors": "Which LASSO alpha (0.01 or 0.005) and how many trees (500 or 100) produced the reported model?",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "code/GC-prognosis-model/run.ipynb (code cells joined):175",
+   "evidence": "The paper reports \"95% confidence\" intervals, but the code computes the interval with 5%/95% bounds (`confidence_lower = sorted_scores[int(0.05 * len(sorted_scores))]`) (and 1 similar line(s)), which is a 90% interval; no 2.5%/97.5% bounds appear anywhere in the code. Check whether the reported intervals are 90% intervals.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported confidence intervals 95% or 90% intervals?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "location": "Results, 'Comparison of the diagnostic performance...' vs bp_out/tables/biomarker_panel.csv",
+   "evidence": "Re-computed 'CA19-9 sensitivity' = 0.20320855614973263 proportion does not match reported 0.217 proportion (Results, 'Comparison of the diagnostic performance...'); relative difference 6.4%. Source: bp_out/tables/biomarker_panel.csv. No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which code version, data version, seed or settings produced the reported value?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "location": "Results, 'Comparison of the diagnostic performance...' vs bp_out/tables/biomarker_panel.csv",
+   "evidence": "Re-computed 'CA72-4 sensitivity' = 0.2702702702702703 proportion does not match reported 0.317 proportion (Results, 'Comparison of the diagnostic performance...'); relative difference 14.7%. Source: bp_out/tables/biomarker_panel.csv. No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which code version, data version, seed or settings produced the reported value?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "duplicate_output",
+   "severity": "yellow",
+   "location": "data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx",
+   "evidence": "3 files whose names describe different data (external+test / test) have identical content (142 rows x 150 columns): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx. One of them is the wrong file. Same pattern at 2 more place(s): run.ipynb code cell 14 line 9; results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx vs code/GC-diagnosis-model/run.ipynb cell 14.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Which of these files holds the intended content?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-diagnosis-model/run.ipynb code cell 14 line 9",
+    "results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx vs code/GC-diagnosis-model/run.ipynb cell 14"
+   ],
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Methods, Diagnostic prediction model; code/GC-prognosis-model/run.ipynb cells 7-10",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> not_reported. The diagnostic model has no hyperparameter search. For the prognostic model the number of features (28) and the feature ranking come from test-set permutation importance and a test-set c-index sweep (cell 9), i.e. selection used the test set.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "paper p.5 vs code/GC-diagnosis-model/run.ipynb:94",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"We set the coefficient of the L1 constraint as 0.01 and selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation.\" (l1 = 0.01); the code sets `alpha=0.005` at code/GC-diagnosis-model/run.ipynb:94 (l1 = 0.005). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which l1 produced the reported results, 0.01 or 0.005?",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "ghost",
+   "type": "split_overlap",
+   "severity": "yellow",
+   "location": "data/GC-diagnosis-model/discovery_set.xlsx contains data/GC-diagnosis-model/Xtest.xlsx",
+   "evidence": "data/GC-diagnosis-model/discovery_set.xlsx (426 rows) contains 142 of the 142 rows of data/GC-diagnosis-model/Xtest.xlsx (also in 3 other test-named file(s): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx); compared on 148 shared columns. If data/GC-diagnosis-model/discovery_set.xlsx was used for feature selection, tuning or preprocessing, the test samples took part in it. Check which file each step of the code reads.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Was discovery_set.xlsx (which contains the test samples) used for feature selection or tuning?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "red",
+   "location": "code/GC-prognosis-model/run.ipynb code cell 7 line 3",
+   "evidence": "perm.fit(Xtest, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 3 more place(s): run.ipynb code cell 13 line 2; run.ipynb code cell 9 line 5; code/GC-prognosis-model/run.ipynb cells 7-10 vs Results, 'The metabolic prognostic model...'.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+    "code/GC-prognosis-model/run.ipynb code cell 9 line 5",
+    "code/GC-prognosis-model/run.ipynb cells 7-10 vs Results, 'The metabolic prognostic model...'"
+   ],
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "grouped_split_risk",
+   "severity": "yellow",
+   "location": "code/GC-diagnosis-model/run.ipynb cell 5 vs data/GC-diagnosis-model/discovery_set.xlsx",
+   "evidence": "The discovery/test split is stratified by batch (batch1/2/3) and by class, so batches are shared between the two sets: the test set contains 39 batch1, 57 batch2 and 46 batch3 samples (bp_out/tables/split_composition.csv). Batch is therefore not a held-out factor, and the batch-normalisation step (QC-based normalisation, Methods) is applied within each batch; the reported test performance does not test transfer to a new analytical batch. Cohort 2 (external test) does provide a batch-independent check.",
+   "source": "llm",
+   "question_for_authors": "Was any batch held out entirely, and how much of the test-set performance depends on shared batch structure?",
+   "verified_by": "bp_work/checks/V16.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "location": "Results, Fig. 3e paragraph ('prospective cohort of 214 participants recruited at a fourth centre')",
+   "evidence": "The paper reports AUROC 0.941, sensitivity 0.912, specificity 0.833 for a prospective cohort of 214 participants at a fourth centre. No data file, code path or stored output for this cohort exists in the materials: data/GC-diagnosis-model contains only Cohort 1 (discovery_set 426, Xtrain 284, Xtest 142) and Cohort 2 (Xexternal_test 95); Biomarker_clinical.xlsx lists cohorts 2, 3 and 4 (n=61, 84, 63) but no metabolomics matrix for cohort 4.",
+   "source": "llm",
+   "question_for_authors": "Please provide the metabolomics data and prediction scores for the 214-participant prospective cohort.",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F13"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "location": "Results, 'Comparison of the diagnostic performance...' (Supplementary Fig. 4c)",
+   "evidence": "The comparison with SVM, logistic regression, random forest and PLS-DA is attributed to the MetaboAnalyst web module (Methods: 'we input the training and testing dataset into the Metaboanalyst biomarker analysis module'). No MetaboAnalyst project file, exported settings or result table is provided, and no code in the capsule reproduces it.",
+   "source": "llm",
+   "question_for_authors": "Please provide the MetaboAnalyst project/exported results behind Supplementary Fig. 4c.",
+   "verified_by": "bp_work/checks/V10.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F14"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "location": "Results, Fig. 4c,d and Table 1",
+   "evidence": "The univariate Cox screening (Fig. 4c), the c-index comparison of clinical models (Fig. 4d) and the multivariate Cox model (Table 1) are reported, but the capsule contains no Cox regression code: code/GC-diagnosis-model/Rscript/Clinical_Model_comparison.R and code/GC-prognosis-model/Rscript/model_prediction_performance.R only draw plots from stored xlsx files, and the two notebooks contain no Cox fit. The clinical variables (TNM stage, Borrmann type, vascular embolus) are not in any provided data file.",
+   "source": "llm",
+   "question_for_authors": "Please provide the clinical data and the Cox regression code behind Fig. 4c,d and Table 1.",
+   "verified_by": "bp_work/checks/V11.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F15"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Results, 'The addition of clinical parameters...' (Fig. 4d)",
+   "evidence": "The paper states the clinical-integrated model gives 'only a 1% benefit compared to the 28-PM model' and reports C-index 0.868 (early stage) vs 0.778 (late stage), but no C-index value for the 28-PM model alone, for the clinical-only models, or for the integrated model is printed in the text or in a table; Fig. 4d is the only source and its numbers are not in any provided file.",
+   "source": "llm",
+   "question_for_authors": "Please give the numeric C-index values behind Fig. 4d (28-PM, each clinical factor, combination, integrated model).",
+   "verified_by": "bp_work/checks/V12.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F16"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Results, Fig. 4f,g",
+   "evidence": "The log-rank P-values for OS and DFS (Fig. 4f) and the Fisher exact P-value for the risk-group composition (Fig. 4g) are not printed in the text, and no survival or group-composition table is provided; the risk-score file (results/GC-prognosis-model/GC-prognosis-model-risk-score.xlsx, n=60) contains risk_score, OS and Sample but no event indicator, so the KM curves cannot be re-derived from it.",
+   "source": "llm",
+   "question_for_authors": "Please provide the event indicators and the P-values behind Fig. 4f,g.",
+   "verified_by": "bp_work/checks/V13.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F17"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Results, 'The metabolic prognostic model...' (Supplementary Fig. 5b)",
+   "evidence": "The paper reports that 'only 11 of the 28 metabolites' relative abundance could significantly distinguish the overall survival of test set patients' and lists 11 metabolites, but the test set has 10 deaths (ytest OS_State: 50 censored, 10 events; run.ipynb cell 4 output), so each univariate survival test rests on 10 events. No test statistics or P-values for these 11 tests are reported.",
+   "source": "llm",
+   "question_for_authors": "What were the P-values and the multiple-testing correction for the 11 metabolite-OS associations in a test set with 10 events?",
+   "verified_by": "bp_work/checks/V14.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F18"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "Methods, Diagnostic prediction model vs code/GC-diagnosis-model/run.ipynb cell 5",
+   "evidence": "Methods: 'selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation'. Code: the 10,000 loop (cell 5) re-splits the discovery set with StratifiedShuffleSplit(test_size=0.33) and calls sel.fit(Xtrain, ytrain) on the whole training part; Selection.fit uses a single Lasso fit with SelectFromModel(max_features=10) and no cross-validation, and the misclassification error is never computed. The 10,000 rounds are used to count how often each metabolite is selected, not to average a CV error.",
+   "source": "llm",
+   "question_for_authors": "How was the misclassification error over 10,000 random cross-validations computed, and was it used to choose the 10 features?",
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "Methods, Diagnostic prediction model / Prognostic model vs code (both notebooks)",
+   "evidence": "Methods: 'A 95% confidence interval was calculated based on the mean and covariance of one thousand random sampling tests' (Fig. 3b, Fig. 4b legends). Code: the CI() function in both notebooks bootstraps 1000 resamples but takes sorted_scores[int(0.05*n)] and sorted_scores[int(0.95*n)], i.e. the 5th and 95th percentiles of a 90% interval; no 2.5/97.5 percentile appears anywhere in the code. The stored output prints 'Confidence interval for the score: [0.941 - 0.986]' for test set 1, which is narrower than a 95% bootstrap interval would be.",
+   "source": "llm",
+   "question_for_authors": "Are the reported 95% CIs actually 90% bootstrap intervals, and was the 'mean and covariance' method used instead of the percentile code?",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "Results, 'The metabolic prognostic model...' vs code/GC-prognosis-model/run.ipynb cell 9",
+   "evidence": "Results: '28 metabolites were selected as key features for re-training an optimal model (28-PM model)'. Code: cell 9 refits the RSF for every k = 1..147 and records train and test c-index for each k, but the loop's output is only the printed counter (1..147); the c-index arrays are never printed or saved, so the choice of 28 cannot be checked against the stored output. The comment in cell 10 ('the best model prediction performance is achieved when the top 28 features are selected') states the selection was made on the test-set c-index curve.",
+   "source": "llm",
+   "question_for_authors": "Was the number of features (28) chosen by maximising the test-set c-index? Please provide the train/test c-index curve over k.",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F21"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'The 10-DM model separates GC from NGC in test set 1 (AUROC > 0.90) and the 28-PM model predicts OS in the test set (c-index > 0.70)' holds in 34% of 44 universes. Single changes that flip it: split=batch_holdout; prog_selection=train. Time budget reached: 44 of 60 planned universes ran. [Yellow, not red (build_passport.py): the multiverse ran on our re-implementation of the authors' code (the reproduction gate recorded a port gap), so the fragility needs to be confirmed with the authors' own code.]",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under split=batch_holdout; prog_selection=train?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "robustness_on_port"
+   ],
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  },
+  {
+   "id": "F23",
+   "type": "missing_artifact",
+   "severity": "grey"
+  },
+  {
+   "id": "F24",
+   "type": "missing_artifact",
+   "severity": "grey"
+  },
+  {
+   "id": "F25",
+   "type": "missing_artifact",
+   "severity": "grey"
+  },
+  {
+   "id": "F26",
+   "type": "missing_artifact",
+   "severity": "grey"
+  },
+  {
+   "id": "F27",
+   "type": "sample_size",
+   "severity": "grey"
+  },
+  {
+   "id": "F28",
+   "type": "sample_size",
+   "severity": "grey"
+  },
+  {
+   "id": "F29",
+   "type": "grouped_split_risk",
+   "severity": "grey"
+  },
+  {
+   "id": "F30",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F31",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F32",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F33",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F34",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F35",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F36",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F37",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F38",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F39",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F40",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F41",
+   "type": "unverifiable_claim",
+   "severity": "grey"
+  },
+  {
+   "id": "F42",
+   "type": "unverifiable_claim",
+   "severity": "grey"
+  },
+  {
+   "id": "F43",
+   "type": "unverifiable_claim",
+   "severity": "grey"
+  },
+  {
+   "id": "F44",
+   "type": "unverifiable_claim",
+   "severity": "grey"
+  },
+  {
+   "id": "F45",
+   "type": "unverifiable_claim",
+   "severity": "grey"
+  },
+  {
+   "id": "F46",
+   "type": "unverifiable_claim",
+   "severity": "grey"
+  },
+  {
+   "id": "F47",
+   "type": "fragile_conclusion",
+   "severity": "grey"
+  },
+  {
+   "id": "F48",
+   "type": "fragile_conclusion",
+   "severity": "grey"
+  },
+  {
+   "id": "F49",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F50",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F51",
+   "type": "missing_info",
+   "severity": "grey"
+  },
+  {
+   "id": "F52",
+   "type": "number_mismatch",
+   "severity": "grey"
+  },
+  {
+   "id": "F53",
+   "type": "param_mismatch",
+   "severity": "grey"
+  },
+  {
+   "id": "F54",
+   "type": "sample_size",
+   "severity": "grey"
+  },
+  {
+   "id": "F55",
+   "type": "number_mismatch",
+   "severity": "green"
+  },
+  {
+   "id": "F56",
+   "type": "stat_inconsistency",
+   "severity": "green"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 28,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 2,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.3409090909090909,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "split",
+    "value": "batch_holdout",
+    "holds": false,
+    "effect": null
+   },
+   {
+    "fork": "prog_selection",
+    "value": "train",
+    "holds": false,
+    "effect": 0.05678191489361706
+   }
+  ],
+  "n_ok": 44
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "checklist_no_locus": 2,
+  "different_metric": 2,
+  "different_quantity_declared": 3,
+  "gate_cap": 2,
+  "near_duplicate": 1,
+  "restates_script": 2,
+  "robustness_on_port": 2,
+  "same_pattern": 3
+ },
+ "_c3_note": "claims dropped (9); c4: merged/check/claim_ids dropped"
+}

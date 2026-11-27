@@ -1,0 +1,24 @@
+{
+ "run_id": "B15-v1113",
+ "paper_id": "B15",
+ "variant": "blind",
+ "version": "v1.11.3",
+ "saved": "2026-11-17",
+ "source_file": "pages/B15-v1113.c3.json",
+ "note": "v1.11.3; V4 Pro selected, switched to V4 Flash partway; paper + Source Data only (capsule not public); c3 copy with claims dropped, sha256 verified; raw sha 81e32560",
+ "n_findings": 28,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 3,
+  "grey": 21,
+  "green": 4
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 3,
+  "grey": 21,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

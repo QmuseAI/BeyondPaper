@@ -1,0 +1,454 @@
+{
+ "paper": {
+  "title": "Metabolomic machine learning predictor for diagnosis and prognosis of gastric cancer",
+  "doi": "10.1038/s41467-024-48700-8",
+  "venue": "Nature Communications 2024"
+ },
+ "counts": {
+  "red": 4,
+  "yellow": 18,
+  "grey": 31,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 14,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 6
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "split",
+    "value": "batch_holdout",
+    "holds": false,
+    "effect": -0.0432935916542474
+   }
+  ],
+  "n_ok": 120
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "problem",
+   "abstract_vs_body": "problem",
+   "phantom_experiment": "problem",
+   "claims_scan": "problem",
+   "figure_data_mismatch": "problem"
+  },
+  "param_mismatch": "Methods p.5 and Fig.3b/4b legends say 95% CI; code/GC-diagnosis-model/run.ipynb cell 8 and code/GC-prognosis-model/run.ipynb cell 16 compute the 5th/95th percentiles (int(0.05*n), int(0.95*n)) of 1000 bootstrap AUROCs, i.e. a 90% interval; stored outputs print [0.941-0.986] (test set 1) and [0.697-0.951] (prognosis), and the paper prints 0.944-0.987 and 0.697-0.951 as 95% CI",
+  "abstract_vs_body": "Abstract (line 11) 'validated in an external test set with a sensitivity of 0.950'; Results p.3 (line 57) for the same external test set 2 (Cohort 2): 'AUROC of 0.920 (sensitivity:0.905, specificity:0.75)'. Same cohort, same metric, same model; 0.950 appears nowhere else in the paper.",
+  "phantom_experiment": "Results p.3 (line 57): 'The 10-DM model was further validated in a prospective cohort of 214 participants recruited at a fourth centre, with an AUROC of 0.941 (sensitivity: 0.912, specificity: 0.833)'. No Methods subsection, no data file, no code and no supplementary item for this cohort; the released data cover Cohort 1 (426), Cohort 2 (95) and Cohort 3 (181) only.",
+  "claims_scan": "claims_scan flagged 2 items: (a) phantom 214-cohort (recorded under phantom_experiment); (b) '0.950 vs 0.944' pairing is a false pairing - 0.944 is the lower CI bound of the test-set-1 AUROC, not a sensitivity; the real abstract-vs-body conflict is 0.950 vs 0.905 (recorded under abstract_vs_body).",
+  "figure_data_mismatch": "Fig. 3d/e and Fig. 4e are scatter plots of stored prediction scores; the stored score files (results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, ...-for-external-test.xlsx, results/GC-prognosis-model/GC-prognosis-model-risk-score.xlsx) are checked in stage 3/4 against the reported sensitivity/specificity; the figure PDFs themselves carry no numbers."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Methods, Diagnostic prediction model p.5 vs data/GC-diagnosis-model/Xtest.xlsx (142 rows); run.ipynb cell 6 output 'test, normal-patients (array([0., 1.]), array([94, 48]))'",
+   "evidence": "The paper reports 'n test set 1' = 152 participants (Methods, Diagnostic prediction model p.5); the authors' own stored output (data/GC-diagnosis-model/Xtest.xlsx (142 rows); run.ipynb cell 6 output 'test, normal-patients (array([0., 1.]), array([94, 48]))') gives 142. Our re-run gives 142, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n test set 1' (152), given that data/GC-diagnosis-model/Xtest.xlsx (142 rows); run.ipynb cell 6 output 'test, normal-patients (array([0., 1.]), array([94, 48]))' gives 142?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Methods 'Diagnostic prediction model' p.5 vs data/GC-diagnosis-model/Xtest.xlsx and run.ipynb cell 6 output",
+   "evidence": "Methods: Cohort 1 n=426 split into discovery n=284 and test n=152 (284+152=436). The authors' stored output prints 'test, normal-patients (array([0., 1.]), array([94, 48]))' = 142 test samples, and Xtest.xlsx holds 142 rows (284+142=426). [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Is the test set 1 size 152 or 142?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V12.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 vs results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx (TN 88, FP 6)",
+   "evidence": "The paper reports 'specificity 10-DM test set 1' = 0.926 proportion (Results p.3); the authors' own stored output (results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx (TN 88, FP 6)) gives 0.936. Our re-run gives 0.936, which matches the stored output. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'specificity 10-DM test set 1' (0.926), given that results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx (TN 88, FP 6) gives 0.936?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 10) vs body (paper.md line 53)",
+   "evidence": "The Abstract gives 0.950 ('...ite GC diagnostic model, which is validated in an external test set with a sensitivity of 0.950, outperforming conventional methods lev...'); the body never states 0.950. The body sentence about the same quantity (shared words: sensitivity, validated) gives 0.944: '...Next, we trained a random forest model with the 10 essential features, and then validated the model in the test set 1, yielding an area under the receiver operating characteristic (AUROC) of 0.967 (95% confidence interval (CI): 0.944-0.987,...'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 0.950 (Abstract) or 0.944 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "GC-prognosis-model/run.ipynb (code cells joined):175",
+   "evidence": "The paper reports \"95% confidence\" intervals, but the code computes the interval with 5%/95% bounds (`confidence_lower = sorted_scores[int(0.05 * len(sorted_scores))]`) (and 1 similar line(s)), which is a 90% interval; no 2.5%/97.5% bounds appear anywhere in the code. Check whether the reported intervals are 90% intervals.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported confidence intervals 95% or 90% intervals?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Results (paper.md line 57)",
+   "evidence": "The text reports an additional study or analysis: 'The 10-DM model was further validated in a prospective cohort of 214 participants recruited at a fourth centre, with an AUROC of 0.941 (sensitivity: 0.912, specificity: 0.833).'. Its head count 214 appears nowhere else in the paper, the phrase 'fourth centre' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 214 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Results p.3 (paper.md line 57)"
+   ],
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "Results p.3 (paper.md line 57)",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 5, Sec. Diagnostic prediction model, line 163",
+   "evidence": "'The participants (Cohort 1, n = 426) were randomly stratified sampling into a discovery dataset (n = 284) and a test set (n = 152).': the parts 284 + 152 = 436, not the stated total n = 426.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Which of the counts is mistyped?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "duplicate_output",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx",
+   "evidence": "3 files whose names describe different data (external+test / test) have identical content (142 rows x 150 columns): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx. One of them is the wrong file. Same pattern at 2 more place(s): run.ipynb code cell 14 line 9; code/GC-diagnosis-model/run.ipynb code cell 14; results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Which of these files holds the intended content?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-diagnosis-model/run.ipynb code cell 14 line 9",
+    "code/GC-diagnosis-model/run.ipynb code cell 14; results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx"
+   ],
+   "merged": [
+    {
+     "type": "duplicate_output",
+     "location": "code/GC-diagnosis-model/run.ipynb code cell 14 line 9",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "duplicate_output",
+     "location": "code/GC-diagnosis-model/run.ipynb code cell 14; results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx",
+     "severity": "red",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code run.ipynb cell 5",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. LASSO feature selection is fitted on the discovery set only (correct), but the 10 features are then fixed and reused for the external set; the paper does not state that selection used the discovery set only.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "location": "paper p.5 vs code/GC-diagnosis-model/run.ipynb:94",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"We set the coefficient of the L1 constraint as 0.01 and selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation.\" (l1 = 0.01); the code sets `alpha=0.005` at code/GC-diagnosis-model/run.ipynb:94 (l1 = 0.005). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which l1 produced the reported results, 0.01 or 0.005?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F10",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "location": "paper p.? vs code/GC-diagnosis-model/run.ipynb:73",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"The final model included five hundred classifier trees which were built using the split criterion of Gini impurity .\" (n_estimators = 500); the code sets `n_estimators=100` at code/GC-diagnosis-model/run.ipynb:73 (n_estimators = 100). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which n_estimators produced the reported results, 500 or 100?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F11",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "split_overlap",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C8"
+   ],
+   "location": "data/GC-diagnosis-model/discovery_set.xlsx contains data/GC-diagnosis-model/Xtest.xlsx",
+   "evidence": "data/GC-diagnosis-model/discovery_set.xlsx (426 rows) contains 142 of the 142 rows of data/GC-diagnosis-model/Xtest.xlsx (also in 3 other test-named file(s): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx); compared on 148 shared columns. If data/GC-diagnosis-model/discovery_set.xlsx was used for feature selection, tuning or preprocessing, the test samples took part in it. Check which file each step of the code reads.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Was discovery_set.xlsx (which contains the test samples) used for feature selection or tuning?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "id": "F12",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "red",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "code/GC-prognosis-model/run.ipynb code cell 7 line 3",
+   "evidence": "perm.fit(Xtest, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 3 more place(s): run.ipynb code cell 13 line 2; run.ipynb code cell 9 line 5; code/GC-prognosis-model/run.ipynb code cells 7, 9, 10, 12 (paper Methods 'Prognostic model', p.5).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+    "code/GC-prognosis-model/run.ipynb code cell 9 line 5",
+    "code/GC-prognosis-model/run.ipynb code cells 7, 9, 10, 12 (paper Methods 'Prognostic model', p.5)"
+   ],
+   "merged": [
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 9 line 5",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cells 7, 9, 10, 12 (paper Methods 'Prognostic model', p.5)",
+     "severity": "red",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F13"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Results p.3; Methods 'Prognostic model' p.5",
+   "evidence": "The paper reports a c-index of 0.90 for the 28-PM model without saying whether it is the training or the test set; the stored notebook prints training c-index 0.904 and test c-index 0.826, and the paper's test c-index 0.83 matches the test value.",
+   "source": "llm",
+   "question_for_authors": "Is the c-index 0.90 the training-set value?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F14"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Results 'The addition of clinical parameters...' p.3; Fig. 4d",
+   "evidence": "The '1% benefit' of adding clinical parameters and the C-index values 0.868 (early stage) / 0.778 (late stage) have no code, table or stored output in the materials; the clinical covariates are not in the released data files.",
+   "source": "llm",
+   "question_for_authors": "Can you provide the C-index table behind Fig. 4d and the 1% claim?",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F15"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Table 1; Fig. 4f,g",
+   "evidence": "Table 1 (multivariate Cox, n=179) and the KM/DFS and Fisher-test panels of Fig. 4f,g have no code or stored output in the materials; the released prognosis data contain no clinical covariates, so the Cox model cannot be re-run.",
+   "source": "llm",
+   "question_for_authors": "Can you share the clinical covariate table and the Cox/KM scripts for Table 1 and Fig. 4f,g?",
+   "verified_by": "bp_work/checks/V10.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F16"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Results p.3 (external test set 2) vs recomputation from the released model",
+   "evidence": "Paper: external test set 2 sensitivity 0.905, specificity 0.75. Rebuilding the 10-DM random forest from Xtrain/ytrain with the stored 10 features and the code's settings (n_estimators=100, random_state=12306) gives sensitivity 0.889 (TP 56, FN 7) and specificity 0.75 (TN 24, FP 8); AUROC 0.9201 matches the paper's 0.920. The sensitivity differs by 1 patient.",
+   "source": "llm",
+   "question_for_authors": "Which model/seed produced sensitivity 0.905 on Cohort 2?",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F17"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.3 (test set 1) vs stored prediction scores",
+   "evidence": "Paper: test set 1 specificity 0.926. The stored scores (results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx) give TN 88, FP 6 -> specificity 0.936; sensitivity 0.854 (TP 41, FN 7) and AUROC 0.9672 match the paper.",
+   "source": "llm",
+   "question_for_authors": "Is the test-set-1 specificity 0.926 or 0.936?",
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F18"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Results p.3 (stage IA/IB, test set 1) vs recomputation from model_prediction_results_for_test.xlsx",
+   "evidence": "Paper: stage IA accuracy 90.9% and specificity 0.926; stage IB accuracy 0.927 and specificity 0.926. Recomputed on the same file: stage IA n=110 (16 GC) accuracy 0.918, specificity 0.936; stage IB n=96 (2 GC) accuracy 0.938, specificity 0.936. AUROC (0.957 / 0.984) and sensitivity (0.813 / 1.0) match.",
+   "source": "llm",
+   "question_for_authors": "Which subset and cutoff give the reported stage IA/IB accuracies of 90.9% and 0.927?",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Results 'Comparison of the diagnostic performance...' p.3 vs Results p.3 (test set 1)",
+   "evidence": "The same 10-DM model on the same test set 1 is reported with sensitivity 0.854 in the model section and 0.925 in the comparison section (and 0.925 again for the 3-biomarker comparison). No second cutoff or subset is named.",
+   "source": "llm",
+   "question_for_authors": "Which sensitivity of the 10-DM model on test set 1 is correct: 0.854 or 0.925?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Methods 'Diagnostic prediction model' p.5 vs code/GC-diagnosis-model/run.ipynb",
+   "evidence": "Methods: LASSO L1 coefficient 0.01 and a random forest of 500 trees. Code: ArgsClass(k=10, alpha=0.005) (cell 5) and RF(n_estimators=100, random_state=12306) (cell 7). Rebuilding with 500 trees gives test AUROC 0.967 and external AUROC 0.910 (vs 0.920 with 100 trees), so the stored results come from the 100-tree model.",
+   "source": "llm",
+   "question_for_authors": "Which LASSO alpha and forest size produced the reported results?",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F21"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'The 10-DM model discriminates GC from NGC with AUROC > 0.90 in the held-out test set' holds in 50% of 120 universes. Single changes that flip it: split=batch_holdout.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under split=batch_holdout?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  }
+ ]
+}

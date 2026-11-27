@@ -1,0 +1,275 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray, Rose, Bellavia, Holmes, and Kusche (2002) Study 3",
+  "doi": "10.1016/j.jrp.2017.04.001",
+  "url": "https://doi.org/10.1016/j.jrp.2017.04.001",
+  "version": "Code Ocean capsule v2 (materials.zip)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 3,
+  "grey": 7,
+  "green": 3
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "The relationship-threat manipulation replicated the original study: participants in the experimental condition scored higher on the manipulation check and inferred that their partner listed more negative things about them than control participants.",
+   "location": "Abstract; Results p. 6 (Table 2); Discussion para. 2",
+   "light": "yellow",
+   "findings": [
+    "F3"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "No interaction between self-esteem and experimental condition was observed for any primary study outcome (perceived acceptance, partner enhancement, closeness, state self-esteem).",
+   "location": "Abstract; Results p. 6 (Table 3); Discussion para. 3",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "The interaction coefficients across the four regression models were all near zero, with 95% confidence intervals that allow both positive and negative values.",
+   "location": "Discussion para. 3",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "The replication results are inconsistent with those of the original research (Murray et al. 2002 Study 3).",
+   "location": "Discussion para. 3",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "Target participants in the experimental condition waited longer for their partners to complete the writing task than target participants in the control condition.",
+   "location": "Discussion para. 2; footnote 1",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "There were no interactions between self-esteem and condition for the two manipulation-check measures.",
+   "location": "Results p. 6 (Table 2)",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Individual differences in self-esteem were associated with three of the four primary outcome variables in the expected direction.",
+   "location": "Results p. 6 (Table 3)",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C8",
+   "text": "The sample was recruited at more than two and a half times the size of the original study (202 analysed vs 65 in the original).",
+   "location": "Methods Participants p. 3; Discussion para. 1",
+   "light": "grey",
+   "findings": [
+    "F10"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods p.3-4; code/main.Rmd",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule is stated or implemented; the only exclusion is the patterned-response couple.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.6 (section 03_front_part3.md:36) vs authors' stored output results/main.html (group_by(Cond) summarise) and code/main.Rmd:217",
+   "evidence": "Text: experimental M = 4.83, SD = 1.25; control M = 4.24, SD = 1.42. Stored output of the same summarise() call gives control SD 1.25 and experimental SD 1.42 (means 4.24 / 4.83 agree). main.Rmd:217 calls mes(4.83, 4.24, 1.25, 1.42, 100, 102) with the same swapped SDs, so Cohen's d = .44 is barely affected; the two SDs in the text appear interchanged relative to the stored output. Potential inconsistency, needs verification.",
+   "source": "llm",
+   "question_for_authors": "Were the two standard deviations in the manipulation-check sentence (experimental 1.25, control 1.42) interchanged? The stored output of the summarise() call reports control SD 1.25 and experimental SD 1.42.",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/port4.py (our Python port of code/main.Rmd; R not installed) vs bp_work/results/main.html (summary(m1), cSelfEsteem:dCond)",
+   "evidence": "Our re-computation of 'manipulation check interaction p (stored output)' gives 0.5543 (bp_work/port4.py (our Python port of code/main.Rmd; R not installed)), but the authors' stored output (bp_work/results/main.html (summary(m1), cSelfEsteem:dCond)) gives 0.4916, which matches the paper (results/main.html (tidy(m1)): 0.491583484511188). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C6.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/port4.py (our Python port of code/main.Rmd; R not installed) vs bp_work/results/main.html (summary(m5), cSelfEsteem:dCond)",
+   "evidence": "Our re-computation of 'closeness interaction p (stored output)' gives 0.4281 (bp_work/port4.py (our Python port of code/main.Rmd; R not installed)), but the authors' stored output (bp_work/results/main.html (summary(m5), cSelfEsteem:dCond)) gives 0.8709, which matches the paper (results/main.html (tidy(m5)): 0.8708876). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C2.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/port4.py (our Python port of code/main.Rmd; R not installed) vs bp_work/results/main.html (summary(m6), cSelfEsteem:dCond)",
+   "evidence": "Our re-computation of 'state self-esteem interaction p (stored output)' gives 0.1656 (bp_work/port4.py (our Python port of code/main.Rmd; R not installed)), but the authors' stored output (bp_work/results/main.html (summary(m6), cSelfEsteem:dCond)) gives 0.9998, which matches the paper (results/main.html (tidy(m6)): 0.9998322). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C2.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/main.Rmd:183",
+   "evidence": "2 data-exclusion step(s): na.omit@183, na.omit@201. Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Methods, Participants p.3; code/main.Rmd:60-62, 183, 201",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. One couple removed for a repeating response pattern is stated with a count; the two participants who expressed suspicion are only mentioned in a commented-out line (main.Rmd:96) and are kept in the reported analysis.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/main.Rmd:47",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> partial. set.seed(16) is set for the control-group partner selection; no seed is needed elsewhere (deterministic OLS).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Methods Participants p. 3; Discussion para. 1",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "grim_inconsistency",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported means",
+   "evidence": "2 testable mean(s) passed GRIM; 4 not testable.",
+   "source": "script:grim.py",
+   "question_for_authors": null,
+   "file": "grim.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "111 multiply-reported quantities agree across locations; 0 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "24 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 0,
+   "port_gap": 3,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": null,
+ "top_experiment": "X3",
+ "severity_changes": {}
+}

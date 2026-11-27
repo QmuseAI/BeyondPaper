@@ -1,0 +1,51 @@
+{
+ "counts": {
+  "red": 2,
+  "yellow": 0,
+  "grey": 11,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 16,
+   "archive_ok": 0,
+   "port_gap": 3,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Table 3, state self-esteem row (paper.md lines 326-327) vs results/main.html confint(m6)",
+   "evidence": "Paper Table 3 prints '.571 (-.544,.032)' for the self-esteem coefficient of the state self-esteem model: the estimate .571 lies outside the printed interval [-.544, .032]. The authors' stored output (results/main.html, confint(m6)) gives cSelfEsteem 0.4121 to 0.7305, which contains .571; the printed interval matches the cSelfEsteem interval of the manipulation-check model (confint(m1): -0.5445 to 0.0321).",
+   "source": "llm",
+   "question_for_authors": "Was the confidence interval in the state self-esteem row of Table 3 copied from the manipulation-check model? Which interval belongs to the .571 estimate?",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F2"
+  }
+ ]
+}

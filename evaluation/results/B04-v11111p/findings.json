@@ -1,0 +1,728 @@
+{
+ "paper": {
+  "title": "Measuring the effects of exercise in neuromuscular disorders: a systematic review and meta-analysis",
+  "doi": "not reported in paper.md"
+ },
+ "counts": {
+  "red": 11,
+  "yellow": 13,
+  "grey": 36,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 6,
+   "archive_ok": 0,
+   "port_gap": 5,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 14
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 4
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "abstract_vs_body": "problem",
+   "claims_scan": "problem",
+   "param_mismatch": "problem",
+   "phantom_experiment": "problem",
+   "figure_data_mismatch": "problem"
+  },
+  "abstract_vs_body": "Abstract: 1,805 participants; Results first paragraph: 1850 patients (paper.md line 15 vs line 64). Same quantity, same population (included articles), two values.",
+  "claims_scan": "claims_scan candidates reviewed: I2 58.5 (abstract) vs 58.05 (Table 2) upheld; 1850 vs 1805 upheld; IPD re-analysis of 312 patients has no code/data (phantom) upheld.",
+  "param_mismatch": "Methods: 'publication bias ... estimated using Egger's regression intercept'; code funnel.R calls funnel()/trimfill() only, no regtest() (grep).",
+  "phantom_experiment": "Results: IPD re-analysis of 312 patients from eight trials (SMD 0.61) - no data file or code in the capsule; power statistics for paired t-tests also absent from code.",
+  "figure_data_mismatch": "Table 1/2 study counts vs data files: 6MWT between-group 6 studies in Table 1 but Ex.vs.NonEx.csv has 4 6MWT rows; checked with a python cross-table."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Table 2 vs Results text",
+   "evidence": "'STS seconds SMD within group' is reported with different values. Table 2: -0.5 SMD | Results text: -0.67 SMD. Agreeing reports: 1 location(s) [Table 2] vs 1 [Results text].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Table 2 vs Abstract",
+   "evidence": "'STS seconds I2' is reported with different values. Table 2: 58.05 percent | Abstract: 58.5 percent. Agreeing reports: 1 location(s) [Table 2] vs 1 [Abstract].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Results text vs Table 2",
+   "evidence": "'CK within-group 95% CI upper' is reported with different values. Results text: -0.11 SMD | Table 2: 0.11 SMD. Agreeing reports: 1 location(s) [Results text] vs 1 [Table 2].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "p. 4, Sec. Exercise training versus usual care, line 71",
+   "evidence": "'analysis were primarily RCTs (83%; n=15/21) ( Underlying data, File 6) ^': 15/21 = 71.4%, but the text reports 83%.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "Results text vs Results, Exercise training versus usual care",
+   "evidence": "'n articles exercise vs usual care' is reported with different values. Results text: 18 articles | Results, Exercise training versus usual care: 21 articles. Agreeing reports: 1 location(s) [Results text] vs 1 [Results, Exercise training versus usual care].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "location": "p. 4, line 71",
+   "evidence": "'SMD 0.70 [95% CI 0.15, 1.24]; p=0.31) ( Figure 3) compared with usua': The 95% CI [0.15, 1.24] excludes the null value 0, but the reported p is = 0.31; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.012.",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "location": "p. 4, line 91",
+   "evidence": "'-0.67 [95% CI -1.31, 0.03]; p=0.04) ( Figure 8), and rise from sup': The 95% CI [-1.31, 0.03] includes the null value 0, but the reported p is = 0.04; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_decision_error",
+   "severity": "red",
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': The 95% CI [-0.23, -0.11] excludes the null value 0, but the reported p is = 0.46; significance at alpha = 0.05 disagrees. p implied by the CI (Altman-Bland) is about 0.05.",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "location": "p. 4, line 91",
+   "evidence": "'SMD -0.06 [95% CI -0.23, -0.11]; p=0.46) ( Table 2; Extended data, Figu': Estimate -0.06 lies outside its own 95% CI [-0.23, -0.11].",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Results text (line 91) vs Table 2, STS (seconds) row",
+   "evidence": "Results text: 'STS (seconds) (SMD -0.67 [95% CI -1.31, 0.03]; p=0.04)'; Table 2 same row: SMD -0.50, 95% CI -1.31, 0.03, p=0.04. Same outcome, same analysis, same table row; the text value -0.67 is not in Table 2.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "Abstract vs Results first paragraph",
+   "evidence": "Abstract: 1,805 participants; Results: 1850 patients with NMD included (paper.md line 15 vs line 64). Same quantity, same population.",
+   "source": "llm",
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 15) vs body (paper.md line 151)",
+   "evidence": "The Abstract gives 58.5 ('...Substantial I ^2 statistic heterogeneity was revealed for STS (seconds) ( I²=58.5%; p=0.04) and citrate synthase ( I²=70.9...'); the body never states 58.5. The body sentence about the same quantity (shared words: citrate, heterogeneity, seconds, synthase) gives 58.05: '...We noted no evidence of heterogeneity with the exception of I ^2 statistically significant heterogeneity for STS (seconds) ( I²=58.05%; p=0.04) and citrate synthase ( I²=70.90%; p=0.002) ( Table 2)....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results (paper.md line 71)",
+   "evidence": "The text reports an additional study or analysis: 'An individual-participant-data re-analysis of 312 patients from eight of these trials confirmed the VO _2peak benefit (SMD 0.61 [95% CI 0.33, 0.89]).'. Its head count 312 appears nowhere else in the paper, the phrase 're-analysis' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Methods",
+   "evidence": "The paper names Egger's test (\"…tion bias was assessed via funnel plots with trim and fill, and estimated using Egger’s regression intercept ^[16]. The quality of evidence for outcomes was rated us…\"), but no matching call (/regtest|egger/) was found outside comments in 5 code file(s).",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F14"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "Results (paper.md line 64) vs data/1. Overall clinical population tabulation.csv row 153",
+   "evidence": "The text gives 1850 patients ('...Of these, 130 articles with 1850 patients with NMD were deemed eligible for inclusion in the systematic review ( Extended data, Table 3, p 7, Underlying data, File 1) ^[8]....'); the authors' table data/1. Overall clinical population tabulation.csv has the row 'Total patients (N)' = 1805, which the paper itself gives elsewhere. The two numbers differ by transposed or changed digits.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F15",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "p. 4, line 175",
+   "evidence": "'04 | 0.29 | 111.08 | S | 32.21 | 6.99 | (7.11 to 6.86)': interval (7.11 to 6.86) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "p. 4, line 179",
+   "evidence": "'8 | -0.65 | 3.50 | M | -2.27 | -23.80 | (-15.19 to -32.4)': interval (-15.19 to -32.4) has its lower limit above the upper limit.",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Methods / Data analysis",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> not_reported. not stated in paper.md or code",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F18"
+  },
+  {
+   "module": "ghost",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "location": "code/funnel.R:17",
+   "evidence": "The loop starting at line 15 reads datS, the per-iteration variable of the loop at line 4; this loop's own per-iteration variable is datR. It uses the value left over from the earlier loop.",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "location": "Table 2, STS (seconds) and citrate synthase rows vs our re-run",
+   "evidence": "Our Python REML port reproduces 20 of 25 checked pooled estimates to the printed precision (VO2peak 0.58, 6MWT 0.29, FSS -0.65, SF-36 0.70, type I 0.50, type II 0.63, rise from supine -0.50, TUG -0.23, all between-group rows). Two rows do not: STS (seconds) SMD -0.66 (CI -1.22,-0.10) vs Table 2 -0.50 (CI -1.31,0.03) and I2 29.2% vs 58.05%; citrate synthase SMD 1.50 (1.06,1.94) vs 1.81 (0.87,2.76) and I2 74.4% vs 70.9%. The authors' stored output for these rows is only the printed table, so this is a port gap, not a paper error; but the two rows are exactly the two the paper calls heterogeneous, and the STS (seconds) significance (p=0.04) depends on which value is right.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V13.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Methods, Data analysis vs code/forest.R",
+   "evidence": "Methods state a REML random-effects model for all pooled estimates. In forest.R the before-after loop calls rma(measure=\"SMD\", m1i=..., data=datS) without method=, so metafor's default (REML) applies; the usual-care loop calls rma(yi, vi, data=dat.both, method=\"REML\"). The two loops therefore use the same estimator, but the before-after loop relies on a package default that is not pinned (no renv.lock / sessionInfo in the capsule).",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F21"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "Methods, Data analysis vs code/funnel.R",
+   "evidence": "Methods: publication bias 'estimated using Egger's regression intercept'; funnel.R calls funnel() and trimfill() only, no regtest() call.",
+   "source": "llm",
+   "judgement_key": "param_mismatch",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F22"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "code/funnel.R:1-2 vs Methods, Data analysis",
+   "evidence": "The header comment of funnel.R says trim and fill is used 'according to Egger's regression test', and the Methods say publication bias was 'estimated using Egger's regression intercept', but no regtest() call exists in any of the five R files (grep regtest -> 0 hits).",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F23"
+  },
+  {
+   "module": "llm",
+   "type": "stale_loop_variable",
+   "severity": "yellow",
+   "location": "code/funnel.R:17 (Exercise vs Usual-Care loop)",
+   "evidence": "In the usual-care funnel loop, datR <- funneldata.R[[i]] is followed by escalc(..., data=datS), where datS is the per-iteration variable left over from the before-after loop at line 4. The funnel plot for each usual-care outcome is therefore drawn from the last before-after data frame, not from the usual-care data. The paper's claim that funnel plots show no publication bias (C8) rests on these plots.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F24"
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json",
+   "location": "Methods",
+   "evidence": "The paper names t-test (\"…ormed where appropriate ( Extended data, p 5) ^[8]. Power statistics for paired t-tests determined the number of patients with NMDs th",
+   "severity_reasons": [
+    "stat_test_not_in_code"
+   ]
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs Table 2",
+   "evidence": "Our re-computation of 'STS seconds SMD within group' gives -0.66 (re-computed), but the authors' stored output (Table 2) gives -0.5, which matches the paper (Ta"
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs Table 2",
+   "evidence": "Our re-computation of 'STS seconds I2' gives 29.15 (re-computed), but the authors' stored output (Table 2) gives 58.05, which matches the paper (Table 2: 58.05)"
+  },
+  {
+   "id": "F28",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs Table 2",
+   "evidence": "Our re-computation of 'Citrate synthase I2' gives 74.38 (re-computed), but the authors' stored output (Table 2) gives 70.9, which matches the paper (Table 2: 70"
+  },
+  {
+   "id": "F29",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs Table 2",
+   "evidence": "Our re-computation of 'n studies CK within group' gives 31 (re-computed), but the authors' stored output (Table 2) gives 29, which matches the paper (Table 2: 2"
+  },
+  {
+   "id": "F30",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs Table 2",
+   "evidence": "Our re-computation of 'n studies VO2peak within group' gives 27 (re-computed), but the authors' stored output (Table 2) gives 23, which matches the paper (Table"
+  },
+  {
+   "id": "F31",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'TUG SMD between groups' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F32",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'SF-36 vitality SMD between groups' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'CK SMD between groups' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F34",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'VO2peak SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F35",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'Peak power SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F36",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'STS repetitions SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F37",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'Citrate synthase SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F38",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'FSS SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F39",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'SF-36 overall SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F40",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'Central nuclei SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F41",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'Type I fibre area SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F42",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'Type II fibre area SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F43",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'Rise from supine SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F44",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'TUG SMD within group' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F45",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "20 count mentions read; 1 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F46",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F47",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> not_reported. not stated in paper.md or code [Grey (build_passport.py): a ",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ]
+  },
+  {
+   "id": "F48",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. not stated in paper.md or code [Grey (build_passport.py): a report",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ]
+  },
+  {
+   "id": "F49",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G3] Is the handling of missing values stated? -> not_reported. not stated in paper.md or code"
+  },
+  {
+   "id": "F50",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. not stated in paper.md or code [Grey (build_pas",
+   "severity_reasons": [
+    "checklist_off_topic"
+   ]
+  },
+  {
+   "id": "F51",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. not stated in paper.md or code"
+  },
+  {
+   "id": "F52",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. not stated in paper.md or code"
+  },
+  {
+   "id": "F53",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods / Data analysis",
+   "evidence": "[G7] Is each statistical test named, with sidedness and assumptions checked? -> not_reported. not stated in paper.md or code"
+  },
+  {
+   "id": "F54",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results, Safety; Table 1; Table 2",
+   "evidence": "Claim C4 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F55",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Heterogeneity; Table 2",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F56",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F57",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results, subgroup and sensitivity analyses",
+   "evidence": "Claim C7 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F58",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results, Exercise training versus usual care",
+   "evidence": "Claim C9 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F59",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; MCID section",
+   "evidence": "Claim C10 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F60",
+   "module": "llm",
+   "type": "figure_data_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Table 1 vs data/Ex.vs.NonEx.csv",
+   "evidence": "Table 1 lists 6 studies for 6MWT between groups; Ex.vs.NonEx.csv has 4 6MWT rows (2 exercise + 2 control). [Grey (build_passport.py): the executed check did not",
+   "severity_reasons": [
+    "refuted_on_check"
+   ]
+  },
+  {
+   "id": "F61",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "2 multiply-reported quantities agree across locations; 6 re-computed values match the paper."
+  },
+  {
+   "id": "F62",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "15 of 20 estimate-CI reports are internally consistent."
+  },
+  {
+   "id": "F63",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Exercise training improves 6MWT within individuals (before vs after), SMD > 0 and p < 0.05' holds in 100% of 4 universes. Single changes that flip it: no"
+  }
+ ]
+}

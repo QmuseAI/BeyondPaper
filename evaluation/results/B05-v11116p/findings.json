@@ -1,0 +1,56 @@
+{
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 15,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 14,
+   "archive_ok": 0,
+   "port_gap": 6,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 1
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C7",
+    "C8"
+   ],
+   "location": "paper vs manuscript.Rmd:700",
+   "evidence": "The paper reports a median absolute change (\"Of the 47 items included in both Round 1 and Round 2, four went from not reaching consensus to reaching consensus, the median absolute change in the percentage of participants that rated an item as essential was 3.8%, an\"), but the code computes mean(abs(...)) (`mean(abs(compare_rounds$perc_essential_compare))*100,`) (and 5 similar line(s)) and never median(abs(...)). The reported statistic may be mislabelled.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported values medians or means of the absolute changes?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim '34 of 78 items reach consensus (>=75% essential) in the final sample of 103' holds in 67% of 24 universes. Single changes that flip it: consensus_threshold=0.7.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under consensus_threshold=0.7?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  }
+ ]
+}

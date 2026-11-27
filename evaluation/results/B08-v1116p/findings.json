@@ -1,0 +1,332 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray, Rose, Bellavia, Holmes, and Kusche (2002) Study 3",
+  "doi": "10.1016/j.jrp.2017.04.001",
+  "source": "paper.md (uploaded)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 9,
+  "yellow": 9,
+  "grey": 6,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 103,
+   "port_gap": 0,
+   "archive_mismatch": 7,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Table 2 vs results/main.html",
+   "evidence": "The paper reports 'Table 2 NumNeg condition b' = 1.623 items (Table 2); the authors' own stored output (results/main.html) gives 1.42536029.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Table 2 vs results/main.html",
+   "evidence": "The paper reports 'Table 2 NumNeg interaction b' = 0.011 items (Table 2); the authors' own stored output (results/main.html) gives 0.03058533.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Table 2 note vs results/main.html",
+   "evidence": "The paper reports 'Table 2 df inferred negative items' = 196 df (Table 2 note); the authors' own stored output (results/main.html) gives 151.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Results p.3 vs results/main.html",
+   "evidence": "The paper reports 'manipulation check Cohen's d' = 0.64 d (Results p.3); the authors' own stored output (results/main.html) gives 0.44.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Table 2, Inferred Number of Negative Items column vs results/main.html (m2)",
+   "evidence": "Reproduction gate (numbers_crosscheck.py, archive_mismatch): the authors' stored output gives intercept 3.54802, condition b 1.42536, condition beta 0.28286, interaction b 0.03059 and 151 residual df; Table 2 prints 3.442, 1.623, 0.293, 0.011 and df = 196. The table cannot be regenerated from the released model. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "script:numbers_crosscheck.py",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "red",
+   "location": "Table 2 note (df = 196) vs code/main.Rmd m2 and results/main.html",
+   "evidence": "Table 2 note states 'df = 198 (Manipulation Check), and 196 (Inferred Number of Negative Items)'. The released model m2 <- lm(P24NumNeg~cSelfEsteem * dCond, data = newdata3) has 151 residual df in the stored output ('Residual standard error: 2.409 on 151 degrees of freedom'), i.e. n = 155 complete cases, not 200. The stored coefficients also differ from the table: intercept 3.54802 vs 3.442, condition b 1.42536 vs 1.623, self-esteem b -0.42338 vs -0.448.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8"
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "location": "Table 3, State Self-Esteem column, Self-Esteem row (paper.md line 336)",
+   "evidence": "Table 3 prints the State Self-Esteem self-esteem coefficient as '.571 (-.544,.032)': the point estimate .571 lies outside its own 95% CI [-.544, .032]. The same CI (-.544, .032) is the one printed for the Manipulation Check self-esteem coefficient in Table 2, so the interval appears to have been copied from Table 2. The authors' stored output (results/main.html, confint(m6)) gives 0.4120894 to 0.7305353 for this coefficient.",
+   "source": "script:ci_check.py",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "location": "Table 2 vs results/main.html",
+   "evidence": "The paper reports 'Table 2 NumNeg intercept b' = 3.442 items (Table 2); the authors' own stored output (results/main.html) gives 3.54801601. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "location": "Table 2 vs results/main.html",
+   "evidence": "The paper reports 'Table 2 NumNeg condition beta' = 0.293 beta (Table 2); the authors' own stored output (results/main.html) gives 0.282864521. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "location": "Methods Participants p.2 vs results/main.html",
+   "evidence": "The paper reports 'age mean' = 21.0 years (Methods Participants p.2); the authors' own stored output (results/main.html) gives 21.758794. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "line 99",
+   "evidence": "'M = 4.83, SD = 1.25) than those in the control condition ( M = 4.24, SD = 1.42; Cohen’s d = .64': the reported d = .64, but the two means and SDs give a standardized difference of about 0.44 (|4.83 - 4.24| / sqrt((1.25^2 + 1.42^2) / 2)).",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F14"
+  },
+  {
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "location": "Methods Participants p.2 vs results/main.html (stat.desc)",
+   "evidence": "Paper: average age M = 21.00 (SD = 4.44) years. Stored output stat.desc(newdata) gives Age mean 21.7587940, std.dev 4.4383670 (n = 199). The SD agrees, the mean does not (21.00 vs 21.76).",
+   "source": "script:numbers_crosscheck.py",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F15"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Results p.4; Table 3",
+   "evidence": "The paper reports no effect size or equivalence test for the null interaction (only b, SE, beta and 95% CI). The Discussion says the interaction 'may be much smaller than currently estimated' but gives no smallest effect size of interest, so the null cannot be distinguished from an underpowered test.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F16"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results p.4, last sentence",
+   "evidence": "'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all ps > .40).' The materials contain only the lab study: data/EDC_clean2.csv (404 rows = 202 couples), code/main.Rmd (lab models m1-m7) and results/main.html. No MTurk data, code, table or figure is provided, and the online study is not described in the Methods.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F17"
+  },
+  {
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "Footnote 1 (paper.md line 374)",
+   "evidence": "Footnote 1: 'times were only recorded for 156 participants [173 in the experimental condition]'. The subgroup count 173 exceeds the total 156. The stored output (results/main.html, mes(73.97, 15.05, 77.57, 36.67, 73, 83)) uses n = 73 experimental + 83 control = 156, so 173 is inconsistent with the authors' own analysis. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.] [Yellow, not red (build_passport.py red lint): the evidence relies on a total but does not write the cells and the sum (e.g. 2 + 1 + 2 + 1 = 6).]",
+   "source": "script:counts_check.py",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified",
+    "red_lint_sum_without_cells"
+   ],
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F18"
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Results p.3 vs results/main.html",
+   "evidence": "The paper reports 'manipulation check SD experimental' = 1.25; the cell recorded as stored output gives 1.42, but 1.25 a"
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Results p.3 vs results/main.html",
+   "evidence": "The paper reports 'manipulation check SD control' = 1.42; the cell recorded as stored output gives 1.25, but 1.42 appear"
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Results p.3 vs results/main.html",
+   "evidence": "The paper reports 'inferred negative items SD control' = 1.65; the cell recorded as stored output gives 1.64, but 1.65 a"
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "25 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F23",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C6 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F24",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Methods Participants p.2; Discussion p.4",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "grim_inconsistency",
+   "severity": "green",
+   "source": "script:grim.py",
+   "file": "grim.findings.json",
+   "location": "reported means",
+   "evidence": "2 testable mean(s) passed GRIM; 4 not testable."
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "1 multiply-reported quantities agree across locations; 103 re-computed values match the paper."
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "17 of 18 estimate-CI reports are internally consistent."
+  }
+ ]
+}

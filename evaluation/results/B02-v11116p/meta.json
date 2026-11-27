@@ -1,0 +1,24 @@
+{
+ "run_id": "B02-v11116p",
+ "paper_id": "B02",
+ "variant": "injected",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B02-v11116p.c4.json",
+ "note": "new account; GLM-5.3 mid-run (platform switch), stopped and finished on Pro -> pro; c4 sha256 c283a45b",
+ "n_findings": 46,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 13,
+  "grey": 31,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 13,
+  "grey": 31,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

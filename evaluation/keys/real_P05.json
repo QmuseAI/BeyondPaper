@@ -1,0 +1,73 @@
+{
+ "paper": "Campbell et al. 2017 PsyArXiv (replication)",
+ "items": [
+  {
+   "id": "5.1",
+   "mechanism": "impossible_interval",
+   "types": [
+    "stat_inconsistency",
+    "stat_decision_error",
+    "number_mismatch"
+   ],
+   "match_any": [
+    ".571",
+    "-.544",
+    "−.544",
+    ".032"
+   ],
+   "description": "Table 3 self-esteem CI (-.544,.032) impossible for b=.571, copied from Table 2",
+   "status": "verified"
+  },
+  {
+   "id": "5.2",
+   "mechanism": "transcription_error",
+   "types": [
+    "number_mismatch",
+    "archive_mismatch",
+    "stat_inconsistency"
+   ],
+   "match_any": [
+    "1.25",
+    "1.42",
+    "swap"
+   ],
+   "description": "condition SDs swapped vs results/main.html",
+   "status": "verified"
+  },
+  {
+   "id": "5.3",
+   "mechanism": "transcription_error",
+   "types": [
+    "number_mismatch",
+    "archive_mismatch"
+   ],
+   "match_any": [
+    "5.468",
+    "5.486"
+   ],
+   "description": "Table 3 intercept 5.468 vs 5.48639",
+   "status": "verified"
+  },
+  {
+   "id": "5.4",
+   "mechanism": "unregenerable_result",
+   "types": [
+    "archive_mismatch",
+    "rerun_mismatch",
+    "number_mismatch",
+    "sample_size",
+    "not_reproduced"
+   ],
+   "match_any": [
+    "1.623",
+    "3.442",
+    "1.425",
+    "3.548",
+    "151"
+   ],
+   "description": "Table 2 negative-items model not regenerable (151 df, b=1.425)",
+   "status": "verified"
+  }
+ ],
+ "key": "P05"
+}

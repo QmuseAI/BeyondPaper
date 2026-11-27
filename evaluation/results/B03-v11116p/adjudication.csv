@@ -1,0 +1,2 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,red,stat_inconsistency,line 336,"'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",real:5.1,real,"5.1: .571 outside (-.544,.032)"

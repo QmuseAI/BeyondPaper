@@ -1,0 +1,801 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray, Rose, Bellavia, Holmes, and Kusche (2002) Study 3",
+  "doi": "not reported in manuscript text",
+  "url": "https://osf.io/w5q4g/ (pre-registration); https://osf.io/wb6vc/ (data and code)",
+  "version": "manuscript text supplied by user (paper.md)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 5,
+  "yellow": 13,
+  "grey": 24,
+  "green": 3
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "The relationship-threat manipulation was effective: participants in the experimental condition reported more negative perceptions of what their partner wrote (manipulation check) than control participants, replicating Murray et al. (2002).",
+   "location": "Abstract; Results (Table 2); Discussion para 2",
+   "light": "red",
+   "findings": [
+    "F4",
+    "F10",
+    "F12",
+    "F16"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "Participants in the experimental condition inferred that their partners listed more negative things about them than control participants (second manipulation-check outcome).",
+   "location": "Results (Table 2); Discussion para 2",
+   "light": "red",
+   "findings": [
+    "F1",
+    "F2",
+    "F3",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10",
+    "F12",
+    "F15"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "No self-esteem x condition interaction was observed for any of the four primary outcomes (perceived acceptance, partner enhancement, closeness, state self-esteem); the interaction coefficients were all near zero.",
+   "location": "Abstract; Results (Table 3); Discussion para 3",
+   "light": "yellow",
+   "findings": [
+    "F10",
+    "F13",
+    "F14",
+    "F42"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "There was no significant main effect of experimental condition on any of the four primary outcomes.",
+   "location": "Results (Table 3)",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "Self-esteem was positively associated with perceived acceptance, partner enhancement and state self-esteem (main effects in the expected direction).",
+   "location": "Results (Table 3)",
+   "light": "yellow",
+   "findings": [
+    "F17"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The replication results are inconsistent with the original Murray et al. (2002) Study 3 finding of a self-esteem x threat interaction.",
+   "location": "Discussion para 3",
+   "light": "yellow",
+   "findings": [
+    "F14"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Target participants in the experimental condition waited longer for their partners to finish the writing task than control participants (behavioural manipulation check).",
+   "location": "Discussion para 2; footnote 1",
+   "light": "yellow",
+   "findings": [
+    "F18"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C8",
+   "text": "The sample was more than 2.5 times larger than the original study (202 analysed vs 65 in the original).",
+   "location": "Methods (Participants); Discussion para 1",
+   "light": "grey",
+   "findings": [
+    "F40",
+    "F41"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, row Condition, Inferred Number of Negative Items vs bp_work/results/main.html (summary(m2) Estimate)",
+   "evidence": "The paper reports 'Table 2 inferred items condition b' = 1.623 items (Table 2, row Condition, Inferred Number of Negative Items); the authors' own stored output (bp_work/results/main.html (summary(m2) Estimate)) gives 1.42536.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 inferred items condition b' (1.623), given that bp_work/results/main.html (summary(m2) Estimate) gives 1.42536?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, row Interaction, Inferred Number of Negative Items vs bp_work/results/main.html (summary(m2) Estimate)",
+   "evidence": "The paper reports 'Table 2 inferred items interaction b' = 0.011 items (Table 2, row Interaction, Inferred Number of Negative Items); the authors' own stored output (bp_work/results/main.html (summary(m2) Estimate)) gives 0.03059.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 inferred items interaction b' (0.011), given that bp_work/results/main.html (summary(m2) Estimate) gives 0.03059?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2 note vs bp_work/results/main.html (summary(m2) residual df)",
+   "evidence": "The paper reports 'Table 2 df inferred items' = 196 df (Table 2 note); the authors' own stored output (bp_work/results/main.html (summary(m2) residual df)) gives 151.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 df inferred items' (196), given that bp_work/results/main.html (summary(m2) residual df) gives 151?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results para 3 vs bp_work/results/main.html (group_by(Cond) summarise sd_manipcheck)",
+   "evidence": "The paper reports 'manipulation check SD experimental' = 1.25 scale points (Results para 3); the authors' own stored output (bp_work/results/main.html (group_by(Cond) summarise sd_manipcheck)) gives 1.42.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'manipulation check SD experimental' (1.25), given that bp_work/results/main.html (group_by(Cond) summarise sd_manipcheck) gives 1.42?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "archive_mismatch",
+     "location": "Results para 3 vs bp_work/results/main.html (group_by(Cond) summarise sd_manipcheck)",
+     "severity": "red",
+     "file": "numbers.findings.json"
+    }
+   ],
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "question_for_authors": "Is the estimate or one of the CI limits mistyped?",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, row Intercept, Inferred Number of Negative Items vs bp_work/results/main.html (summary(m2) Estimate)",
+   "evidence": "The paper reports 'Table 2 inferred items intercept b' = 3.442 items (Table 2, row Intercept, Inferred Number of Negative Items); the authors' own stored output (bp_work/results/main.html (summary(m2) Estimate)) gives 3.54802. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 inferred items intercept b' (3.442), given that bp_work/results/main.html (summary(m2) Estimate) gives 3.54802?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, row Condition, Inferred Number of Negative Items vs bp_work/results/main.html (summary(m2) Std. Error)",
+   "evidence": "The paper reports 'Table 2 inferred items condition SE' = 0.373 items (Table 2, row Condition, Inferred Number of Negative Items); the authors' own stored output (bp_work/results/main.html (summary(m2) Std. Error)) gives 0.38798. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 inferred items condition SE' (0.373), given that bp_work/results/main.html (summary(m2) Std. Error) gives 0.38798?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, row Condition, Inferred Number of Negative Items vs bp_work/results/main.html (lm.beta(m2))",
+   "evidence": "The paper reports 'Table 2 inferred items condition beta' = 0.293 beta (Table 2, row Condition, Inferred Number of Negative Items); the authors' own stored output (bp_work/results/main.html (lm.beta(m2))) gives 0.282864521. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'Table 2 inferred items condition beta' (0.293), given that bp_work/results/main.html (lm.beta(m2)) gives 0.282864521?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Results para 3 vs bp_work/results/main.html (summarise sdNum)",
+   "evidence": "The paper reports 'inferred negative items SD control' = 1.65 items (Results para 3); the authors' own stored output (bp_work/results/main.html (summarise sdNum)) gives 1.64. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'inferred negative items SD control' (1.65), given that bp_work/results/main.html (summarise sdNum) gives 1.64?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Results para 3 (inferred negative items SD control = 1.65) vs bp_work/results/main.html (summarise sdNum)",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). Also at: code/main.Rmd (library calls); code/run.sh.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/main.Rmd (library calls); code/run.sh"
+   ],
+   "id": "F10"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods; code/main.Rmd",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule is stated or implemented; the only removal is the one couple with a repeating response pattern. Multiverse fork: no removal vs |z|>3 vs IQR.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "location": "Methods (Measures), Manipulation check (alpha = .41)",
+   "evidence": "The three-item manipulation check has alpha = .41, far below the level at which a composite is usually treated as a single scale, and the paper reports no item-level results. The two significant condition effects (Table 2) are therefore driven by a composite whose items are only weakly related; the paper does not report whether each item separately shows the condition effect.",
+   "source": "llm",
+   "question_for_authors": "What are the condition effects for the three manipulation-check items analysed separately, given alpha = .41?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Methods (Participants) para 2; code/main.Rmd chunk setup2",
+   "evidence": "In control couples one partner was selected at random with set.seed(16) and sample(1:2, n(), replace = TRUE). The paper says the selection was random but does not report the seed, the number of couples in each condition, or how many control couples contributed a man vs a woman; the stored output prints only the pooled gender table. The seed is in the released code, so the selection is reproducible, but the paper itself does not document it.",
+   "source": "llm",
+   "question_for_authors": "How many control couples were there, and what was the gender split of the selected control partners?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F13"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C6"
+   ],
+   "location": "Discussion para 3; Methods (Participants) para 1",
+   "evidence": "The paper interprets the null interaction as possibly reflecting a much smaller true effect ('requiring a sample size well beyond the 202 participants'), but reports no smallest effect size of interest, no equivalence test and no power calculation for detecting the original f2 = .076 at N = 202. The 95% CIs in Table 3 (e.g. interaction -.217 to .178 for perceived acceptance) are consistent both with a null effect and with effects smaller than the original, and the paper does not quantify which.",
+   "source": "llm",
+   "question_for_authors": "What interaction effect sizes can be excluded at 80% power with N = 202, and what is the smallest effect size of interest for this replication?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F14"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, Inferred Number of Negative Items column vs bp_work/results/main.html (summary(m2), confint(m2))",
+   "evidence": "Table 2 reports intercept 3.442, condition b = 1.623 (SE .373, beta .293), interaction b = .011 and df = 196. The authors' stored output for the same model (m2 <- lm(P24NumNeg ~ cSelfEsteem * dCond, data = newdata3)) gives intercept 3.54802, condition b = 1.42536 (SE .38798, beta .28286), interaction b = .03059 and residual df = 151. The stored output's own descriptive means (3.43 vs 5.07) and the paper's text match, so the discrepancy is in the regression column, not in the data. The paper's df = 196 implies 200 analysed cases, while the stored model uses 155 (151 + 3). [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Which model produced the Inferred Number of Negative Items column of Table 2? The released code and stored output give b = 1.425, intercept 3.548, df = 151.",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F15"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results para 3 (manipulation check SDs) vs bp_work/results/main.html (group_by(Cond) summarise)",
+   "evidence": "The text reports the manipulation check as experimental M = 4.83, SD = 1.25 and control M = 4.24, SD = 1.42. The stored output gives Control SD = 1.25 and Experimental SD = 1.42, i.e. the two SDs are swapped in the text. The same swapped values (1.25, 1.42) are typed into the effect-size call mes(4.83, 4.24, 1.25, 1.42, 100, 102) in code/main.Rmd, so the reported d = .44 is computed from the swapped SDs; with the stored SDs d is about .43, so the conclusion does not change. [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "question_for_authors": "Are the two manipulation-check SDs in the Results swapped relative to the stored output (control 1.25, experimental 1.42)?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F16"
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Table 3, row Self-Esteem, column State Self-Esteem (b = .571, SE = .081, 95% CI (-.544, .032))",
+   "evidence": "The 95% CI printed for the self-esteem coefficient in the state self-esteem model, (-.544, .032), does not contain its own estimate .571 and is far too narrow for SE = .081 (a 95% CI from b = .571, SE = .081 is about .41 to .73). The same interval (-.544, .032) is the self-esteem interval of the Manipulation Check model in Table 2, where b = -.256, SE = .146. The authors' stored output (bp_work/results/main.html, confint(m6)) gives (.4120894, .7305353) for this coefficient, so the interval in Table 3 appears to have been copied from Table 2. ci_check.py flags the same cell (bp_out/ci.findings.json). [Yellow, not red (build_passport.py red lint): a red finding names two sources that conflict, and the evidence must show both values.]",
+   "source": "llm",
+   "question_for_authors": "Is the state self-esteem self-esteem interval in Table 3 a copy of the Table 2 manipulation-check interval? The stored output gives (.412, .731).",
+   "severity_original": "red",
+   "severity_reasons": [
+    "red_lint_one_value"
+   ],
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F17"
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Footnote 1 (t(99) = -5.93, p < .0001, d = .99)",
+   "evidence": "The footnote reports a t test with df = 99 for wait times recorded for 156 participants (73 experimental). A Welch test on 73 and 83 participants has about 100-150 df, and a pooled-variance test has 154 df; df = 99 is not what either test on these group sizes gives. The sign is also printed as 't(99) -5.93' without an equals sign. The stored output prints only the group means/SDs (74.0/77.6 vs 15.0/36.7) and does not print this t test, so the statistic cannot be checked against the authors' output.",
+   "source": "llm",
+   "question_for_authors": "Which test and group sizes produced t(99) = -5.93 for the wait-time comparison (156 participants, 73 experimental)?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F18"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 perceived acceptance intercept SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F19"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 perceived acceptance self-esteem SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F20"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 perceived acceptance condition SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F21"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 perceived acceptance interaction SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 partner enhancement intercept SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F23"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 partner enhancement self-esteem SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F24"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 partner enhancement condition SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F25"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 partner enhancement interaction SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F26"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 closeness intercept SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F27"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 closeness self-esteem SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F28"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 closeness condition SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F29"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 closeness interaction SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F30"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 state self-esteem intercept SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F31"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 state self-esteem self-esteem SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F32"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 state self-esteem condition SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F33"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "re-computed",
+   "evidence": "Re-computed 'Table 3 state self-esteem interaction SE' has no reported counterpart in the ledger.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F34"
+  },
+  {
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/main.Rmd:183",
+   "evidence": "2 data-exclusion step(s): na.omit@183, na.omit@201. Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "exclusion_rule",
+     "location": "materials_unz/code/main.Rmd:183",
+     "severity": "grey",
+     "file": "leakage.findings.json"
+    }
+   ],
+   "id": "F35"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Methods (Participants) para 2; Methods (Procedure) para 1",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. 203 couples recruited, 1 couple removed (repeating diagonal response pattern), 202 analysed; inclusion criteria (dating >= 4 months, age >= 18) stated. The number of couples per condition is not reported in the paper (stored output: 102 control, 100 experimental).",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F36"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Results (Tables 2-3)",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. Seven regression models (m1-m7) are reported without any multiplicity correction; the four primary outcomes are the pre-registered family, but the paper does not say so explicitly.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is correction for multiple comparisons stated when many tests or metrics are reported?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F37"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/main.Rmd; code/run.sh",
+   "evidence": "[M2] Are software and library versions (and hardware, for GPU non-determinism) stated? -> not_reported. No sessionInfo() or renv.lock; package versions unknown.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are software and library versions (and hardware, for GPU non-determinism) stated?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F38"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "Methods (Procedure) para 2",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> partial. Couples were randomly assigned to condition and, in the experimental condition, the target partner was pre-selected before data collection; the paper does not state whether the experimenter running the session was blind to condition.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were blinding and randomisation of samples/animals/patients used and described?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F39"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Methods (Participants); Discussion para 1",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F40"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Methods (Participants) para 2 (OSF links https://osf.io/yyrw6/, https://osf.io/wb6vc/)",
+   "evidence": "The paper points to OSF for the partner-selection code, the measures and the data. The supplied capsule contains the analysis code and data but not the OSF materials, so the pre-registration, the measures and the suspicion-removal re-analysis could not be checked here.",
+   "source": "llm",
+   "question_for_authors": "Can the OSF materials (pre-registration, measures, suspicion-removal script) be supplied with the capsule?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F41"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Methods (Composite Variables); code/main.Rmd chunk estimate alpha",
+   "evidence": "The composite scores are means of z-scored component scales computed with psych::scoreItems(missing = TRUE, impute = 'none'), i.e. person-mean imputation within each scale. The paper does not state how many item-level responses were missing or how imputation affected the composites, and the stored output does not print item-level missingness.",
+   "source": "llm",
+   "question_for_authors": "How many item responses were missing in each scale, and how were composites computed for participants with missing items?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F42"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "2 multiply-reported quantities agree across locations; 37 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F43"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "24 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F44"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "17 of 18 estimate-CI reports are internally consistent.",
+   "source": "script:ci_check.py",
+   "question_for_authors": null,
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F45"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 37,
+   "port_gap": 0,
+   "archive_mismatch": 9,
+   "not_reproduced": 0,
+   "not_run": 1,
+   "unmatched": 16
+  }
+ },
+ "multiverse": null,
+ "top_experiment": "X4",
+ "severity_changes": {
+  "gate_cap": 2,
+  "low_value_repeat": 1,
+  "near_duplicate": 3,
+  "red_lint_one_value": 1
+ }
+}

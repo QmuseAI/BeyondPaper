@@ -1,0 +1,857 @@
+{
+ "paper": {
+  "title": "A machine learning model guided by physical principles for biofilter performance prediction",
+  "doi": "10.1038/s41598-025-18585-8"
+ },
+ "counts": {
+  "red": 3,
+  "yellow": 37,
+  "grey": 35,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "full",
+  "counts": {
+   "reproduced": 2,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 1,
+   "unmatched": 1
+  }
+ },
+ "multiverse": {
+  "robustness": 0,
+  "baseline_holds": false,
+  "n_ok": 60
+ },
+ "severity_changes": {
+  "checklist_no_locus": 1,
+  "different_quantity_declared": 10,
+  "gate_cap": 1,
+  "low_value_repeat": 3,
+  "near_duplicate": 1,
+  "refuted_on_check": 1
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "Table 2, BP-LR testing, Results p.5 vs Discussion p.7",
+   "evidence": "'BP-LR test sMAPE' is reported with different values. Table 2, BP-LR testing: 10 percent | Discussion p.7: 8 percent. Agreeing reports: 2 location(s) [Table 2, BP-LR testing, Results p.5] vs 1 [Discussion p.7]."
+  },
+  {
+   "id": "F2",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "Table 1, Autoencoder-LR testing vs SI p.18 (Supplementary Results)",
+   "evidence": "'Autoencoder-LR test R2' is reported with different values. Table 1, Autoencoder-LR testing: -0.6 R2 | SI p.18 (Supplementary Results): -0.21 R2. Agreeing reports: 1 location(s) [Table 1, Autoencoder-LR testing] vs 1 [SI p.18 (Supplementary Results)]."
+  },
+  {
+   "id": "F3",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "Table 2, PCA-NN testing vs Discussion p.7",
+   "evidence": "'PCA-NN test sMAPE' is reported with different values. Table 2, PCA-NN testing: 10 percent | Discussion p.7: 6 percent. Agreeing reports: 1 location(s) [Table 2, PCA-NN testing] vs 1 [Discussion p.7]."
+  },
+  {
+   "id": "F4",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "paper text",
+   "evidence": "The paper names bootstrap (\"…to enhance generalization and mitigate overfitting. Each tree is trained on a bootstrap sample of the data, and at each node, a random subset of features is considered…\"), but no matching call (/boot|bootstrap|resample/) was found outside comments in 15 code file(s)."
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "paper text",
+   "evidence": "The paper names random forest (\"…g. Additionally, ensemble methods such as Gradient Forest Regression (BP-GFR), Random Forest Regression (BP-RFR), and Support Vector Regression (BP-SVR) were evaluated, eac…\"), but no matching call (/RandomForest|randomForest|ranger/) was found outside comments in 15 code file(s)."
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "paper text",
+   "evidence": "The paper names support vector machine (\"…as Gradient Forest Regression (BP-GFR), Random Forest Regression (BP-RFR), and Support Vector Regression (BP-SVR) were evaluated, each yielding a Pearson r r-value of appro…\"), but no matching call (/SVC|SVR|svm\\(/) was found outside comments in 15 code file(s)."
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "paper text",
+   "evidence": "The paper names gradient boosting / XGBoost (\"…ented with ensemble-based regressors including Random Forest Regression (RFR), Gradient Boosted Regression (GRF), and Support Vector Regression (SVR). A full account of the…\"), but no matching call (/xgb|XGB|GradientBoosting|lgb|lightgbm|catboost/) was found outside comments in 15 code file(s)."
+  },
+  {
+   "id": "F8",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/R2_FeedBi_N.py:80",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F9",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/R2_FeedBi_N.py:84",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F10",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/R2_FeedBi_N.py:95",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F11",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/R2_FeedBi_N.py:99",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/sMAPE_FeedBi_N.py:74",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/sMAPE_FeedBi_N.py:78",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/sMAPE_FeedBi_N.py:89",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/sMAPE_FeedBi_N.py:93",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/R2_FeedBi_N.py:80",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/R2_FeedBi_N.py:84",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/R2_FeedBi_N.py:95",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/R2_FeedBi_N.py:99",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/sMAPE_FeedBi_N.py:74",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/sMAPE_FeedBi_N.py:78",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/sMAPE_FeedBi_N.py:89",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F23",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/sMAPE_FeedBi_N.py:93",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 173); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F24",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "data/training_data.csv",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No de-duplication described; the training file contains repeated identical predictor rows with different ECorg (e.g. T=21.671875, ICorg=12.51, A=168, Bt=450, P=1.058, Cfit=2.6, to=37, Pv=0.1 appears with ECorg 6.37 and 7.17)."
+  },
+  {
+   "id": "F25",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "paper p.25 vs capsule/code/.vscode/User/History/-69b9d5b6/6VLF.py:55",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"The model \nwas compiled using the Adam optimizer with a learning rate of 0.001 and trained to minimize \nthe mean squared error (MSE) loss between the input and its reconstruction.\" (learning_rate = 0.001); the code sets `learning_rate = 0.01` at capsule/code/.vscode/User/History/-69b9d5b6/6VLF.py:55 (learning_rate = 0.01). Same parameter, different value."
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "paper p.22 vs capsule/code/.vscode/User/History/-69b9d5b6/6VLF.py:62",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"0.45210789 \n-0.0911345 \n-0.0222453 \n0.05938292 \n\n<!-- page 12 -->\n \n \nFig.S1: Learning curves and performance metrics (MSE and MAE) for EnviroPiNet, \nAutoencoder-NN, PCA-NN, and KPCA-NN, illustrating \" (epochs = 13); the code sets `n_epochs =50` at capsule/code/.vscode/User/History/-69b9d5b6/6VLF.py:62 (epochs = 50). Same parameter, different value."
+  },
+  {
+   "id": "F27",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "paper p.8 vs deep_checks_py311.py:775",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"In this study, the Random Forest \nRegressor was implemented using the scikit-learn library with 100 estimators and a fixed random seed (42) to \nensure reproducibility.\" (n_estimators = 42); the code sets `n_estimators = 79` at deep_checks_py311.py:775 (n_estimators = 79). Same parameter, different value."
+  },
+  {
+   "id": "F28",
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/BP.py:292",
+   "evidence": "np.random.uniform(...) used and no global seed is set in this file. Also at: code/paper_code/BP.py:292; Methods p.9 ('number of random seeds was set to 7') vs code R2_FeedBi_N.py:176; Methods p.9; code R2_FeedBi_N.py:176."
+  },
+  {
+   "id": "F29",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/R2_FeedBi_N.py:95",
+   "evidence": "scalerT.fit_transform(X_testl, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F30",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/R2_FeedBi_N.py:99",
+   "evidence": "scalery.fit_transform(y_test, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F31",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/sMAPE_FeedBi_N.py:89",
+   "evidence": "scalerT.fit_transform(X_testl, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule/code/sMAPE_FeedBi_N.py:93",
+   "evidence": "scalery.fit_transform(y_test, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F33",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/R2_FeedBi_N.py:95",
+   "evidence": "scalerT.fit_transform(X_testl, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F34",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/R2_FeedBi_N.py:99",
+   "evidence": "scalery.fit_transform(y_test, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F35",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/sMAPE_FeedBi_N.py:89",
+   "evidence": "scalerT.fit_transform(X_testl, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F36",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "code/paper_code/sMAPE_FeedBi_N.py:93",
+   "evidence": "scalery.fit_transform(y_test, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent."
+  },
+  {
+   "id": "F37",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Methods p.7 ('20% (62 samples) ... reserved for model testing') vs data/training_data.csv",
+   "evidence": "The paper says the test set is 20% of the combined data taken from study 16 (Shi et al.), i.e. 62 of 116 samples, and that the other 54 are used for training. The released training_data.csv contains rows with the test-set conditions (T=21.671875, ICorg=12.51, A=168, Bt=450, P=1.058, Cfit=2.6, to=37, Pv=0.1), which are outside the test ranges given in Table S2 (T 10-20, ICorg 7.725-21.7, A 70-340, Bt 180)."
+  },
+  {
+   "id": "F38",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Methods p.9 ('5-fold cross-validation') vs code R2_FeedBi_N.py:176-300",
+   "evidence": "The 5-fold CV is used only to compute train/validation R2 inside the training data; the test-set R2 is computed from the model fitted on the last fold only (model.predict(X_test) after the fold loop, R2_FeedBi_N.py:296-300), so the reported test R2 comes from a model trained on 4/5 of the training data, not on all of it."
+  },
+  {
+   "id": "F39",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Methods p.9; code R2_FeedBi_N.py:88-98",
+   "evidence": "The target and the features are standardised with scalerT/scalery fitted separately on the training and on the test set (scalerT.fit_transform(X_testl), scalery.fit_transform(y_test)), i.e. test-set statistics enter the preprocessing; the paper does not describe this."
+  },
+  {
+   "id": "F40",
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "Methods p.8-9; Table 1 rows PCA/KPCA/Autoencoder; Figs. S4-S6",
+   "evidence": "The released capsule (code/BP.py, BP_LR.py, R2_FeedBi_N.py, sMAPE_FeedBi_N.py, Algo_comp_plot.py) contains no PCA, KernelPCA, Autoencoder, RandomForest, GradientBoosting, SVR or SHAP call (grep over 5 .py files: only the string 'PCA-NN' inside the hard-coded dict of Algo_comp_plot.py:7). Table 1/2 report 15 PCA/KPCA/Autoencoder/ensemble rows and Figs. S4-S6 report SHAP values, but no code that produces them is in the capsule."
+  },
+  {
+   "id": "F41",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F42",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F43",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F44",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F45",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F46",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F47",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F48",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F49",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F50",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F51",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F52",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F53",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F54",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F55",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F56",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F57",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F58",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F59",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F60",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F61",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F62",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F63",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F64",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F65",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap",
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F66",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F67",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F68",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F69",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F70",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "severity_original": "red",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F71",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F72",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F73",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F74",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "refuted_on_check"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F75",
+   "module": "multiverse",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:multiverse.py",
+   "hand_written": false,
+   "file": "multiverse.findings.json"
+  },
+  {
+   "id": "F76",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F77",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json"
+  }
+ ]
+}

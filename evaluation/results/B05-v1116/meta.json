@@ -1,0 +1,24 @@
+{
+ "run_id": "B05-v1116",
+ "paper_id": "B05",
+ "variant": "clean",
+ "version": "v1.11.6",
+ "saved": "2026-11-17",
+ "source_file": "pages/B05-v1116.c4.json",
+ "note": "v1.11.6; GLM-5.3 / DeepSeek V4 Pro; one resume click and one continue (agent asked a question); no hand-written findings; c4 copy, sha256 199400f1 verified; raw sha 6b590294",
+ "n_findings": 14,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 11,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 11,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

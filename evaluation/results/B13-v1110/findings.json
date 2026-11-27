@@ -1,0 +1,345 @@
+{
+ "paper": {
+  "title": "DAPPER Leiomyosarcoma: Correlation and Survival Analysis of Radiomic, Microbiome and Clinical Data (Code Ocean capsule 3894632)",
+  "doi": ""
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 8,
+  "grey": 17,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 12,
+   "archive_ok": 0,
+   "port_gap": 4,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5,
+  "baseline_holds": true,
+  "n_ok": 24
+ },
+ "severity_changes": {
+  "checklist_no_locus": 1,
+  "different_quantity_declared": 1,
+  "port_value": 1
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-3894632/code/dp_survival.Rmd:40",
+   "evidence": "Post-baseline covariates (deep_checks.py): Best.Response.RECISTv1, Gr1.Gr2.Toxicities, Gr3.Toxicities are measured during or after treatment but enter the survival models (surv_object_OS, surv_object_PFS) as baseline predictors. A patient must survive long enough to have a best response or a toxicity grade (immortal-time / outcome-dependent covariate), so their hazard ratios are biased toward benefit."
+  },
+  {
+   "id": "F2",
+   "module": "ghost",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-3894632/code/dp_survival.Rmd",
+   "evidence": "Rmd outputs (deep_checks.py): os_results computed in chunk(s) 0verall-Survival but never printed or written; the knitted output (capsule-3894632/dp_survival.nb.html, capsule-3894632/results/dp_survival.nb.html) can only hold what is printed: pfs_results. The stored result for os_results is therefore not in the materials."
+  },
+  {
+   "id": "F3",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-3894632/code/dp_survival.Rmd:40",
+   "evidence": "Column trace (deep_checks.py): capsule-3894632/data/results/reduced-feature-set.csv has 41 columns after the code's own drops (line 20: features <- features[-1]); the model formulas use 39. Never modelled: Age, Gender. Steps: line 21: covariates <- colnames(features); line 22: covariates <- covariates[-1]; line 40: univ_formulas <- sapply(covariates[2:length(covariates)], function(x) as.formula(paste('surv_object_OS~', x))). Outcomes: surv_object_OS, surv_object_PFS."
+  },
+  {
+   "id": "F4",
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "bp_out/multiverse_summary.json (24 universes); results/dp_survival.nb.html",
+   "evidence": "Multiverse over four analysis choices (covariate set, PFS definition RECIST v1 vs iRECIST, multiplicity correction FDR/Bonferroni/none, post-baseline covariates included/excluded): the claim 'at least one feature is associated with PFS after multiplicity correction' holds in 12/24 universes (50%). The only breaking change is post_baseline=exclude: with baseline covariates only, no feature reaches adjusted p<0.05 in any of the 12 universes (mean number of significant features 0.0 vs 2.0). Covariate set, PFS definition and multiplicity method do not change the verdict."
+  },
+  {
+   "id": "F5",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "code/dp_survival.Rmd chunk '0verall-Survival' vs results/dp_survival.nb.html",
+   "evidence": "The notebook computes os_results (univariate Cox for Overall Survival) but never prints it; the knitted notebook results/dp_survival.nb.html contains only the printed pfs_results table (39 rows). The README states that two dataframes, for OS and PFS, are generated, but the stored output contains no OS table, so the OS claim (C3) cannot be checked against any stored result."
+  },
+  {
+   "id": "F6",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "code/dp_survival.Rmd: covariates[2:length(covariates)] vs results/dp_survival.nb.html",
+   "evidence": "The loop tests covariates[2:length(covariates)] after features[-1] and covariates[-1], i.e. 40 covariates (Gender ... Microbiome_RELA_s__Proteobacteria_bacterium_CAG_139; Age is dropped). The printed pfs_results has 39 rows and no Gender row, so the stored table does not contain every model the code fits. Our Python port (bp_out/port_PFS_results.csv) returns 40 rows including Gender (beta -0.25, p 0.20)."
+  },
+  {
+   "id": "F7",
+   "module": "llm",
+   "type": "post_baseline_predictor",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "results/dp_survival.nb.html pfs_results rows 'Best.Response.RECISTv1', 'Gr1.Gr2.Toxicities', 'Gr3.Toxicities'",
+   "evidence": "Best response (RECIST v1) and treatment-emergent toxicities are measured after treatment start, yet they enter the same univariate Cox models as baseline covariates (Age, Gender, Race, ECOG, Diagnosis, Treatment Arm) with no landmark or time-dependent formulation. The three post-baseline variables are the only ones with FDR-adjusted p<0.05 in the stored PFS table (Best Response p.adjust 0.021, Gr3 p.adjust 0.021, Gr1Gr2 p.adjust 0.038); all 36 baseline/radiomic/microbiome covariates have p.adjust>=0.68. Immortal-time bias can inflate these associations."
+  },
+  {
+   "id": "F8",
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "source": "script:multiverse.py",
+   "hand_written": false,
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'At least one clinical, radiomic or microbiome feature is associated with progression-free survival after multiplicity correction (FDR-adjusted p<0.05)' holds in 50% of 24 universes. Single changes that flip it: post_baseline=exclude."
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_out/port_PFS_results.csv vs capsule-3894632/results/dp_survival.nb.html",
+   "evidence": "Our re-computation of 'n rows in printed pfs_results' gives 40 (bp_out/port_PFS_results.csv), but the authors' stored output (capsule-3894632/results/dp_survival.nb.html) gives 39, which matches the p"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_out/port_PFS_results.csv (lifelines, 2 patients with Gr1Gr2=0) vs capsule-3894632/results/dp_survival.nb.html pfs_results row 7",
+   "evidence": "Our re-computation of 'HR Gr1 Gr2 Toxicities (PFS)' gives 1.3 (bp_out/port_PFS_results.csv (lifelines, 2 patients with Gr1Gr2=0)), but the authors' stored output (capsule-3894632/results/dp_survival.n"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_out/port_PFS_results.csv vs capsule-3894632/results/dp_survival.nb.html pfs_results row 7",
+   "evidence": "Our re-computation of 'p Gr1 Gr2 Toxicities (PFS)' gives 0.78 (bp_out/port_PFS_results.csv), but the authors' stored output (capsule-3894632/results/dp_survival.nb.html pfs_results row 7) gives 0.0029"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "bp_out/port_PFS_results.csv vs capsule-3894632/results/dp_survival.nb.html pfs_results row 7",
+   "evidence": "Our re-computation of 'FDR-adjusted p Gr1 Gr2 Toxicities (PFS)' gives 0.999 (bp_out/port_PFS_results.csv), but the authors' stored output (capsule-3894632/results/dp_survival.nb.html pfs_results row 7"
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule-3894632/code/scripts/functionals.py:100",
+   "evidence": "2 data-exclusion step(s): dropna@100, dropna@101. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "data/clinical/*.csv, data/radiomics/rad-features.csv, data/mu-biome/*.xlsx",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. Raw data are shipped in the capsule, but no accession, version or collection date for the DAPPER trial da"
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "code/scripts/functionals.py consolidateMB/consolidateRF",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. Microbiome features kept if measured in >=40% of patients; radiomics reduced to 10 PCs; insim_r dropped (r=0.93"
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "code/",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule is defined or applied anywhere in the code. [Grey (build_passport.py): "
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "capsule text",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis or sample-size justification; n=30 patients, 13 OS events, 28 PFS events."
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "code/scripts/functionals.py radiomicsPCA",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> partial. PCA and standardisation are fitted on all 30 patients (no held-out set exists), so"
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "code/dp_survival.Rmd",
+   "evidence": "[W5] Were blinding and randomisation of samples/animals/patients used and described? -> partial. Clinical trial cohort (DAPPER Phase II, LMS); the capsule does not state the trial's registration or th"
+  },
+  {
+   "id": "F20",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "README.md, General description",
+   "evidence": "Claim C1 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F21",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "REPRODUCING.md; results/output",
+   "evidence": "Claim C6 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F22",
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "results/dp_survival.nb.html pfs_results; data/clinical/survival.csv",
+   "evidence": "The PFS analysis has 30 patients and 28 events, and the Gr1 Gr2 Toxicities indicator is 1 for 28/30 patients (2 in the reference group), so its HR is estimated from 2 patients. The only FDR-significan"
+  },
+  {
+   "id": "F23",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "code/scripts/functionals.py: consolidateMB / consolidateRF",
+   "evidence": "The microbiome feature set depends on a 40% measurement-saturation threshold and the radiomic feature set on 10 principal components of volume-weighted per-lesion features; neither the number of featu"
+  },
+  {
+   "id": "F24",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "REPRODUCING.md; results/output",
+   "evidence": "The capsule pins its environment only through the Code Ocean Docker image tag (registry.codeocean.com/published/fcd67c32-...:v1); no sessionInfo(), package versions or lockfile is stored in the capsul"
+  },
+  {
+   "id": "F25",
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "port_value"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "results/dp_survival.nb.html pfs_results, row 'Gr1.Gr2.Toxicities'",
+   "evidence": "Stored output reports Gr1 Gr2 Toxicities beta -0.69, HR 0.5 (0.32-0.79), Wald 8.8, p 0.0029, C-index 0.56. In the data (data/results/reduced-feature-set.csv) Gr1 Gr2 Toxicities is 1 for 28/30 patients"
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 12 re-computed values match the paper."
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "0 count mentions read; 0 flagged. Full list in counts_table.csv."
+  }
+ ]
+}

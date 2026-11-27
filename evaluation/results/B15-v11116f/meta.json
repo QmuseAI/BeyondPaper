@@ -1,0 +1,24 @@
+{
+ "run_id": "B15-v11116f",
+ "paper_id": "B15",
+ "variant": "blind",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B15-v11116f.c4.json",
+ "note": "v1.11.16 blind #1; Pro start, GLM partial, Pro continuation, ended on Flash",
+ "n_findings": 3,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 2,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 2,
+  "grey": 25,
+  "green": 4
+ },
+ "reproduction": "partial"
+}

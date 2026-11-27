@@ -1,0 +1,168 @@
+{
+ "counts": {
+  "red": 0,
+  "yellow": 7,
+  "grey": 27,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 28,
+   "archive_ok": 0,
+   "port_gap": 3,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 9
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "GC-prognosis-model/run.ipynb (code cells joined):175",
+   "evidence": "The paper reports \"95% confidence\" intervals, but the code computes the interval with 5%/95% bounds (`confidence_lower = sorted_scores[int(0.05 * len(sorted_scores))]`) (and 1 similar line(s)), which is a 90% interval; no 2.5%/97.5% bounds appear anywhere in the code. Check whether the reported intervals are 90% intervals.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Are the reported confidence intervals 95% or 90% intervals?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "duplicate_output",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx = results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx",
+   "evidence": "3 files whose names describe different data (external+test / test) have identical content (142 rows x 150 columns): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx. One of them is the wrong file. Same pattern at 1 more place(s): run.ipynb code cell 14 line 9.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Which of these files holds the intended content?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-diagnosis-model/run.ipynb code cell 14 line 9"
+   ],
+   "merged": [
+    {
+     "type": "duplicate_output",
+     "location": "code/GC-diagnosis-model/run.ipynb code cell 14 line 9",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Methods 'Diagnostic prediction model'",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> not_reported. samples come in 19 acquisition batches (Batch01-Batch19 in discovery_set.xlsx); no batch adjustment and no batch-aware split is described",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "paper p.5 vs code/GC-diagnosis-model/run.ipynb:94",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"We set the coefficient of the L1 constraint as 0.01 and selected ten features with nonzero coefficients based on the misclassification error averaged from 10,000 times of random cross-validation.\" (l1 = 0.01); the code sets `alpha=0.005` at code/GC-diagnosis-model/run.ipynb:94 (l1 = 0.005). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which l1 produced the reported results, 0.01 or 0.005?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "param_mismatch",
+     "location": "Methods 'Diagnostic prediction model' vs code/GC-diagnosis-model/run.ipynb cell 5",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F4",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "split_overlap",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "data/GC-diagnosis-model/discovery_set.xlsx contains data/GC-diagnosis-model/Xtest.xlsx",
+   "evidence": "data/GC-diagnosis-model/discovery_set.xlsx (426 rows) contains 142 of the 142 rows of data/GC-diagnosis-model/Xtest.xlsx (also in 3 other test-named file(s): data/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-test.xlsx, results/GC-diagnosis-model/GC-diagnosis-model-pred-score-for-external-test.xlsx); compared on 148 shared columns. If data/GC-diagnosis-model/discovery_set.xlsx was used for feature selection, tuning or preprocessing, the test samples took part in it. Check which file each step of the code reads.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Was discovery_set.xlsx (which contains the test samples) used for feature selection or tuning?",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "id": "F5",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "code/GC-prognosis-model/run.ipynb code cell 7 line 3",
+   "evidence": "perm.fit(Xtest, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 2 more place(s): run.ipynb code cell 13 line 2; run.ipynb code cell 9 line 5.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+    "code/GC-prognosis-model/run.ipynb code cell 9 line 5"
+   ],
+   "merged": [
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 13 line 2",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "code/GC-prognosis-model/run.ipynb code cell 9 line 5",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Abstract vs Results 'Comparison of the diagnostic performance of the 10-DM model and traditional biomarkers'",
+   "evidence": "Abstract: 'the 3-biomarker panel achieved a sensitivity of 0.925'. Results: on the 208 GC samples with biomarker records, any-of-3 positivity (CA19-9 >27, CA72-4 >6.9, CEA >5) is 89/208 = 0.428; the 0.925 value is the 10-DM sensitivity on the same 208 samples (195/208 = 0.938 in our recount of Biomarker_clinical.xlsx Sheet2 pred_score). The abstract sentence therefore attaches the model's sensitivity to the biomarker panel.",
+   "source": "llm",
+   "question_for_authors": "Does the abstract's 0.925 refer to the 3-biomarker panel or to the 10-DM model on the biomarker subset?",
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7",
+   "claims_auto_linked": true
+  }
+ ]
+}

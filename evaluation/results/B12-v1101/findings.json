@@ -1,0 +1,584 @@
+{
+ "paper": {
+  "title": "A New Feature Expansion Technique Combined with Shunt Gated Recurrent Unit Neural Network for Epileptic Seizure Diagnosis",
+  "doi": "not found (no published full text located; see bp_out/assumptions.md)",
+  "source": "reconstructed from Code Ocean capsule 6746514 (metadata, README, code, stored outputs)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 1,
+  "yellow": 13,
+  "grey": 19,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "The proposed PCC-WFE feature expansion technique improves the performance of traditional classifiers on the UCI Epileptic Seizure Recognition dataset (Dataset 2 with the added feature vs Dataset 1 without it).",
+   "location": "code/README.md; code/NewData_ML_Kfold.py vs code/RawData_ML_Kfold.py",
+   "light": "grey",
+   "findings": [
+    "F28"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "The SGRU classifier (stacked GRU with residual additions and mish activation) achieves high accuracy on the epilepsy diagnosis task on both Dataset 1 and Dataset 2.",
+   "location": "code/README.md; code/SGRU_GRU_Kfold.py",
+   "light": "grey",
+   "findings": [
+    "F29"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "XGBoost is the best of the four traditional classifiers on the PCC-WFE expanded data (accuracy 0.9513, recall 0.8913, precision 0.9541).",
+   "location": "results/output, lines 41-44",
+   "light": "grey",
+   "findings": [
+    "F30"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "The PCC-WFE new feature is a weighted sum of the features positively correlated with the label, with weights proportional to the Pearson correlation coefficient.",
+   "location": "code/PCC_WFE.py lines 10-45",
+   "light": "grey",
+   "findings": [
+    "F31"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "The dataset has 11,500 samples, 178 features and 5 classes of 2,300 samples each.",
+   "location": "results/output lines 1, 48-49; code/PCC_WFE.py",
+   "light": "grey",
+   "findings": [
+    "F32"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The SGRU/GRU comparison is evaluated by 10-fold cross-validation on both Dataset 1 (178 features) and Dataset 2 (179 features).",
+   "location": "code/SGRU_GRU_Kfold.py lines 60-190",
+   "light": "grey",
+   "findings": [
+    "F33"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "multiverse",
+   "type": "rerun_mismatch",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "baseline universe",
+   "evidence": "With the paper's own choices the claim 'XGBoost on the PCC-WFE expanded data reaches accuracy >= 0.95 (the stored-log value 0.9513)' does not hold on re-run (effect = -0.018521739130434867).",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Which settings or data version produced the reported result?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "capsule/capsule-6746514/code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/repro_ml.py:34",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 49); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/repro_ml.py:36",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 49); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py; code/NewData_ML_Kfold.py",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. No inclusion/exclusion rules; all 11,500 rows used, labels binarised y>1 -> 0 without stating why.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier definition or removal; the new feature spans about -547 to 401 before scaling.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:17,29; code/SGRU_GRU_Kfold.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No random_state for XGBoost/RandomForest and no seed for Keras; single run only.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py:44-45",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. MinMaxScaler and the PCC-WFE feature (Pearson correlation with the label) are fitted on the full dataset before the 10-fold split, so test-fold labels influence the scaling and the new feature.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F10"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> not_reported. Hyperparameters fixed by hand (max_depth=5, n_estimators=10, C=1.0); no search space, budget or selection criterion stated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. No duplicate/near-duplicate check between training and test folds.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were duplicates and near-duplicates between training and test sets removed?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. No negative control (shuffled labels, random feature) for the PCC-WFE feature; the added feature is a weighted sum of label-correlated features, so a y-randomisation control is the natural check.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "capsule/capsule-6746514/code/NewData_ML_Kfold.py:17",
+   "evidence": "XGBClassifier(...) called without random_state. Also at: capsule/capsule-6746514/code/NewData_ML_Kfold.py:29; capsule/capsule-6746514/code/RawData_ML_Kfold.py:17; capsule/capsule-6746514/code/RawData_ML_Kfold.py:29; capsule/capsule-6746514/code/pca_test.py:23; capsule/capsule-6746514/code/pca_test.py:35; capsule/capsule-6746514/code/wave_test.py:23; capsule/capsule-6746514/code/wave_test.py:35; code/NewData_ML_Kfold.py:17; code/NewData_ML_Kfold.py:29; code/RawData_ML_Kfold.py:17; code/RawData_ML_Kfold.py:29; code/pca_test.py:23.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "capsule/capsule-6746514/code/NewData_ML_Kfold.py:29",
+    "capsule/capsule-6746514/code/RawData_ML_Kfold.py:17",
+    "capsule/capsule-6746514/code/RawData_ML_Kfold.py:29",
+    "capsule/capsule-6746514/code/pca_test.py:23",
+    "capsule/capsule-6746514/code/pca_test.py:35",
+    "capsule/capsule-6746514/code/wave_test.py:23",
+    "capsule/capsule-6746514/code/wave_test.py:35",
+    "code/NewData_ML_Kfold.py:17",
+    "code/NewData_ML_Kfold.py:29",
+    "code/RawData_ML_Kfold.py:17",
+    "code/RawData_ML_Kfold.py:29",
+    "code/pca_test.py:23",
+    "code/pca_test.py:35",
+    "code/wave_test.py:23",
+    "code/wave_test.py:35"
+   ],
+   "id": "F14"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/code/repro_ml.py (our Python re-run, seed 0) vs stored/output line 41",
+   "evidence": "Our re-computation of 'accuracy XGBoost Dataset 2' gives 0.93147826087 (bp_work/code/repro_ml.py (our Python re-run, seed 0)), but the authors' stored output (stored/output line 41) gives 0.951304347826, which matches the paper (results/output line 41: 0.951304347826). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C1, C3.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F15"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/code/repro_ml.py (our Python re-run, seed 0) vs stored/output line 41",
+   "evidence": "Our re-computation of 'recall XGBoost Dataset 2' gives 0.833456674474 (bp_work/code/repro_ml.py (our Python re-run, seed 0)), but the authors' stored output (stored/output line 41) gives 0.891302907383, which matches the paper (results/output line 41: 0.891302907383). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C3.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/code/repro_ml.py (our Python re-run, seed 0) vs stored/output line 42",
+   "evidence": "Our re-computation of 'accuracy SVM Dataset 2' gives 0.966956521739 (bp_work/code/repro_ml.py (our Python re-run, seed 0)), but the authors' stored output (stored/output line 42) gives 0.878, which matches the paper (results/output line 42: 0.878). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C1.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/code/repro_ml.py (our Python re-run, seed 0) vs stored/output line 42",
+   "evidence": "Our re-computation of 'recall SVM Dataset 2' gives 0.932122149652 (bp_work/code/repro_ml.py (our Python re-run, seed 0)), but the authors' stored output (stored/output line 42) gives 0.699233909757, which matches the paper (results/output line 42: 0.699233909757). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C1.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F18"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/code/repro_ml.py (our Python re-run, seed 0) vs stored/output line 42",
+   "evidence": "Our re-computation of 'precision SVM Dataset 2' gives 0.963028464327 (bp_work/code/repro_ml.py (our Python re-run, seed 0)), but the authors' stored output (stored/output line 42) gives 0.92118231476, which matches the paper (results/output line 42: 0.92118231476). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C1.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F19"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/code/repro_ml.py (our Python re-run, seed 0) vs stored/output line 44",
+   "evidence": "Our re-computation of 'recall RF Dataset 2' gives 0.873395919436 (bp_work/code/repro_ml.py (our Python re-run, seed 0)), but the authors' stored output (stored/output line 44) gives 0.868285162452, which matches the paper (results/output line 44: 0.868285162452). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C1.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F20"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/README.md; data/Epileptic Seizure Recognition.csv",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. UCI Epileptic Seizure Recognition dataset named with repository URL, but no version/download date; the csv is shipped in the capsule.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the exact data source identified (version, DOI, accession, download date)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F21"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[G3] Is the handling of missing values stated? -> not_reported. No missing-value handling; the UCI file has no missing values, but this is not stated.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the handling of missing values stated?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "-",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. No power analysis or sample-size justification.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the sample size justified (power analysis or other rationale)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F23"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. Four classifiers x three metrics reported without any multiple-comparison correction.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is correction for multiple comparisons stated when many tests or metrics are reported?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F24"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py; code/perform.py",
+   "evidence": "[G7] Is each statistical test named, with sidedness and assumptions checked? -> not_reported. No statistical test at all; only 10-fold means of accuracy/recall/precision, no CI or sd.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is each statistical test named, with sidedness and assumptions checked?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F25"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py:33",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> partial. KFold(n_splits=10) without shuffle; samples are 1-s windows from the same 500-s EEG recording, so windows from the same recording/patient appear in both training and test folds. No grouping by recording is used.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F26"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> partial. All four baselines use the same data and the same fixed hyperparameters, but no tuning effort is described for any of them.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were baselines given comparable tuning effort and the same data?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F27"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/README.md; code/NewData_ML_Kfold.py vs code/RawData_ML_Kfold.py",
+   "evidence": "Claim C1 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F28"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "code/README.md; code/SGRU_GRU_Kfold.py",
+   "evidence": "Claim C2 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F29"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "results/output, lines 41-44",
+   "evidence": "Claim C3 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F30"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "code/PCC_WFE.py lines 10-45",
+   "evidence": "Claim C4 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F31"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "results/output lines 1, 48-49; code/PCC_WFE.py",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F32"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "code/SGRU_GRU_Kfold.py lines 60-190",
+   "evidence": "Claim C6 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F33"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 12 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F34"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "2 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F35"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 12,
+   "archive_ok": 0,
+   "port_gap": 6,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.0,
+  "baseline_holds": false,
+  "breaking_changes": [],
+  "n_ok": 12
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "low_value_repeat": 15
+ }
+}

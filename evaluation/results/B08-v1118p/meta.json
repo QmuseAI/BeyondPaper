@@ -1,0 +1,24 @@
+{
+ "run_id": "B08-v1118p",
+ "paper_id": "B08",
+ "variant": "injected",
+ "version": "v1.11.8",
+ "saved": "2026-11-18",
+ "source_file": "pages/B08-v1118p.c4.json",
+ "note": "started on Flash, continued on Pro",
+ "n_findings": 31,
+ "truncated": false,
+ "counts": {
+  "red": 3,
+  "yellow": 8,
+  "grey": 18,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 3,
+  "yellow": 8,
+  "grey": 18,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

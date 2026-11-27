@@ -1,0 +1,24 @@
+{
+ "run_id": "B14-v1102",
+ "paper_id": "B14",
+ "variant": "blind",
+ "version": "v1.10.2",
+ "saved": "2026-11-16",
+ "source_file": "pages/B14-v1102.txt",
+ "note": "",
+ "n_findings": 42,
+ "truncated": false,
+ "counts": {
+  "red": 4,
+  "yellow": 21,
+  "grey": 15,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 4,
+  "yellow": 21,
+  "grey": 15,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

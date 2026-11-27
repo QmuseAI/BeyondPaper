@@ -1,0 +1,764 @@
+{
+ "paper": {
+  "title": "A machine learning model guided by physical principles for biofilter performance prediction",
+  "doi": "10.1038/s41598-025-18585-8",
+  "journal": "Scientific Reports (2025) 15:34664",
+  "capsule_doi": "10.24433/CO.7617036.v1"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 5,
+  "yellow": 18,
+  "grey": 26,
+  "green": 2
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Table 1, BP-NN training vs Table S5, Buckingham Pi row, Train R2",
+   "evidence": "'R2 BP-NN (EnviroPiNet) training' is reported with different values. Table 1, BP-NN training: 0.95 R2 | Table S5, Buckingham Pi row, Train R2: 0.94 R2. Agreeing reports: 1 location(s) [Table 1, BP-NN training] vs 1 [Table S5, Buckingham Pi row, Train R2].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'R2 BP-NN (EnviroPiNet) training' is correct (0.95 R2 or 0.94 R2)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Table 2, PCA-NN testing vs Discussion p.7 ('PCA, KPCA and autoencoder achieved higher sMAPE values of 6, 10 and 17')",
+   "evidence": "'sMAPE PCA-NN test' is reported with different values. Table 2, PCA-NN testing: 10 % | Discussion p.7 ('PCA, KPCA and autoencoder achieved higher sMAPE values of 6, 10 and 17'): 6 %. Agreeing reports: 1 location(s) [Table 2, PCA-NN testing] vs 1 [Discussion p.7 ('PCA, KPCA and autoencoder achieved higher sMAPE values of 6, 10 and 17')].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'sMAPE PCA-NN test' is correct (10 % or 6 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Table 2, BP-GFR testing vs Discussion p.7 ('BP-GFR ... achieving an sMAPE value of (8)')",
+   "evidence": "'sMAPE BP-GFR test' is reported with different values. Table 2, BP-GFR testing: 0.7 % | Discussion p.7 ('BP-GFR ... achieving an sMAPE value of (8)'): 8 %. Agreeing reports: 1 location(s) [Table 2, BP-GFR testing] vs 1 [Discussion p.7 ('BP-GFR ... achieving an sMAPE value of (8)')].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'sMAPE BP-GFR test' is correct (0.7 % or 8 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Table 2, PCA-GFR testing vs Discussion p.7",
+   "evidence": "'sMAPE PCA-GFR test' is reported with different values. Table 2, PCA-GFR testing: 42 % | Discussion p.7: 74 %. Agreeing reports: 1 location(s) [Table 2, PCA-GFR testing] vs 1 [Discussion p.7].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'sMAPE PCA-GFR test' is correct (42 % or 74 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table S4 (SI p.15) vs capsule/code/R2_FeedBi_N.py:53,57",
+   "evidence": "Table S4 states 'Learning rate for optimization 0.05' and 'Number of training epochs 200'. The released training script sets learning_rate = 0.0001 (R2_FeedBi_N.py:53) and n_epochs = 50 (R2_FeedBi_N.py:57). The same two values are used in sMAPE_FeedBi_N.py. The reported EnviroPiNet numbers therefore come from a run with a learning rate 500x smaller and 4x fewer epochs than the paper states.",
+   "source": "llm",
+   "question_for_authors": "Which learning rate and epoch count produced the reported EnviroPiNet results: the Table S4 values (0.05, 200) or the released code values (0.0001, 50)?",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "paper text",
+   "evidence": "The paper names random forest (\"…g. Additionally, ensemble methods such as Gradient Forest Regression (BP-GFR), Random Forest Regression (BP-RFR), and Support Vector Regression (BP-SVR) were evaluated, eac…\"), but no matching call (/RandomForest|randomForest|ranger/) was found outside comments in 10 code file(s). Same pattern at 1 more place(s): Methods p.8-9; Table 1; Table 2 vs capsule/code/.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Where in the released code is the random forest performed?",
+   "file": "methods_code.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "paper text",
+    "paper text",
+    "Methods p.8-9; Table 1; Table 2 vs capsule/code/"
+   ],
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "paper text",
+     "severity": "yellow",
+     "file": "methods_code.findings.json",
+     "source": "script:methods_code_check.py"
+    },
+    {
+     "type": "phantom_experiment",
+     "location": "paper text",
+     "severity": "yellow",
+     "file": "methods_code.findings.json",
+     "source": "script:methods_code_check.py"
+    },
+    {
+     "type": "phantom_experiment",
+     "location": "Methods p.8-9; Table 1; Table 2 vs capsule/code/",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "SI p.10; Fig. S2 caption vs our PCA (min-max scaled 8 raw inputs, training_data.csv)",
+   "evidence": "Re-computed 'PCA variance explained PC1' = 73.64 % does not match reported 67.62 % (SI p.10; Fig. S2 caption); relative difference 8.2%. Source: our PCA (min-max scaled 8 raw inputs, training_data.csv). No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which code version, data version, seed or settings produced the reported value?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "SI p.10; Fig. S2 caption vs our PCA (min-max scaled 8 raw inputs, training_data.csv)",
+   "evidence": "Re-computed 'PCA variance explained PC1-PC4 total' = 98.19 % does not match reported 97.32 % (SI p.10; Fig. S2 caption); relative difference 0.9%. Source: our PCA (min-max scaled 8 raw inputs, training_data.csv). Small gap: may be run-to-run variation (e.g. an unseeded random forest) or rounding; re-run with several seeds and pass the spread as `range`. No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which code version, data version, seed or settings produced the reported value?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "capsule/code/R2_FeedBi_N.py:80",
+   "evidence": "StandardScaler.fit_transform is called before the first split (line 179); if it sees test data, information leaks into training. Same pattern at 7 more place(s): R2_FeedBi_N.py:84; R2_FeedBi_N.py:95; R2_FeedBi_N.py:99; sMAPE_FeedBi_N.py:74; sMAPE_FeedBi_N.py:78; sMAPE_FeedBi_N.py:89; sMAPE_FeedBi_N.py:93.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "capsule/code/R2_FeedBi_N.py:84",
+    "capsule/code/R2_FeedBi_N.py:95",
+    "capsule/code/R2_FeedBi_N.py:99",
+    "capsule/code/sMAPE_FeedBi_N.py:74",
+    "capsule/code/sMAPE_FeedBi_N.py:78",
+    "capsule/code/sMAPE_FeedBi_N.py:89",
+    "capsule/code/sMAPE_FeedBi_N.py:93"
+   ],
+   "merged": [
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/R2_FeedBi_N.py:84",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/R2_FeedBi_N.py:95",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/R2_FeedBi_N.py:99",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:74",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:78",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:89",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "leakage_risk",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:93",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    }
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C5",
+    "C7",
+    "C8",
+    "C9"
+   ],
+   "location": "Methods p.7-9",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier definition or removal rule; the released csv contains 31 duplicated rows in training_data.csv and no filtering step in the code.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F10",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "R2_FeedBi_N.py:80-99",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. Feature and target scalers are re-fitted on the test set (scalerT.fit_transform(X_testl), scalery.fit_transform(y_test)) instead of reusing training statistics.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F11"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "paper p.25 vs capsule/code/R2_FeedBi_N.py:56",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"The model \nwas compiled using the Adam optimizer with a learning rate of 0.001 and trained to minimize \nthe mean squared error (MSE) loss between the input and its reconstruction.\" (learning_rate = 0.001); the code sets `learning_rate = 0.01` at capsule/code/R2_FeedBi_N.py:56 (learning_rate = 0.01). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which learning_rate produced the reported results, 0.001 or 0.01?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F12"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "paper p.24 vs capsule/code/R2_FeedBi_N.py:63",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"a, Mean Squared Error (MSE) learning curve for EnviroPiNet, \nshowing both training and validation losses decreasing and converging, with early stopping at \nepoch 21 indicating effective learning and s\" (epochs = 21); the code sets `n_epochs =50` at capsule/code/R2_FeedBi_N.py:63 (epochs = 50). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which epochs produced the reported results, 21 or 50?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F13"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C5"
+   ],
+   "location": "capsule/code/BP.py:292",
+   "evidence": "np.random.uniform(...) used and no global seed is set in this file. Also at: Methods p.9; Table S4; capsule/code/R2_FeedBi_N.py:47,174-186; Results p.5; Table S5 vs SI p.17-18; Methods p.9; Table S4; capsule/code/R2_FeedBi_N.py:47; Methods p.9; Table S4; R2_FeedBi_N.py:47. Same pattern at 4 more place(s): Methods p.9; Table S4; capsule/code/R2_FeedBi_N.py:47,174-186; Results p.5; Table S5 vs SI p.17-18; Methods p.9; Table S4; capsule/code/R2_FeedBi_N.py:47; Methods p.9; Table S4; R2_FeedBi_N.py:47.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null,
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "Methods p.9; Table S4; capsule/code/R2_FeedBi_N.py:47,174-186",
+    "Results p.5; Table S5 vs SI p.17-18",
+    "Methods p.9; Table S4; capsule/code/R2_FeedBi_N.py:47",
+    "Methods p.9; Table S4; R2_FeedBi_N.py:47"
+   ],
+   "id": "F14"
+  },
+  {
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "location": "capsule/code/R2_FeedBi_N.py:95",
+   "evidence": "scalerT.fit_transform(X_testl, ...) fits on test-named data. If the result feeds feature selection, tuning or the final model, the test set is no longer independent. Same pattern at 4 more place(s): R2_FeedBi_N.py:99; sMAPE_FeedBi_N.py:89; sMAPE_FeedBi_N.py:93; Methods p.9; capsule/code/R2_FeedBi_N.py:88-98.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Was any model, selector or importance estimate fitted on the test set?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "capsule/code/R2_FeedBi_N.py:99",
+    "capsule/code/sMAPE_FeedBi_N.py:89",
+    "capsule/code/sMAPE_FeedBi_N.py:93",
+    "Methods p.9; capsule/code/R2_FeedBi_N.py:88-98"
+   ],
+   "merged": [
+    {
+     "type": "test_set_reuse",
+     "location": "capsule/code/R2_FeedBi_N.py:99",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:89",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "test_set_reuse",
+     "location": "capsule/code/sMAPE_FeedBi_N.py:93",
+     "severity": "yellow",
+     "file": "leakage.findings.json",
+     "source": "script:leakage_scan.py"
+    },
+    {
+     "type": "missing_info",
+     "location": "Methods p.9; capsule/code/R2_FeedBi_N.py:88-98",
+     "severity": "yellow",
+     "file": "llm.findings.json",
+     "source": "llm"
+    }
+   ],
+   "id": "F15"
+  },
+  {
+   "module": "ledger",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "capsule/results",
+   "evidence": "Artifact A9 (other) is referred to by the paper but not provided.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Can the other 'capsule/results' be shared?",
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Results p.5 (ablation, Table S5) vs our negative control on capsule/data",
+   "evidence": "Negative control run in the sandbox with the released data and the same MLP (64-64, lr 1e-4, 200 epochs, 10 seeds): with the training target randomly permuted the test R2 is 0.253 on average (range -0.085 to 0.649), and with random Gaussian features replacing the Pi groups it is 0.321 (0.228-0.462). The real Pi model reaches 0.898. The control is therefore not near zero, so a single test R2 of 0.9 is not by itself evidence that the Pi features carry the signal; the paper reports no such control.",
+   "source": "llm",
+   "question_for_authors": "Can the authors report the shuffled-target and random-feature control R2 for EnviroPiNet on the same test set?",
+   "verified_by": "bp_work/checks/V17.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F17"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "Methods p.7-9; capsule/code/run",
+   "evidence": "The capsule entry point runs BP.py, R2_FeedBi_N.py, Algo_comp_plot.py and BP_LR.py only. sMAPE_FeedBi_N.py (the script that computes the sMAPE values of Table 2) is never called by run, and no script in the capsule computes PCA, kernel PCA, autoencoder or ensemble models. The stored results folder referenced by the scripts (/results/...) is absent from the export.",
+   "source": "llm",
+   "question_for_authors": "Which scripts produced Table 2 and the PCA/KPCA/autoencoder rows, and can the results folder be included?",
+   "verified_by": "bp_work/checks/V10.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F18"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C9"
+   ],
+   "location": "Methods p.7; Table S2; capsule/data/test_data.csv",
+   "evidence": "In the test set five of the eight predictors are constant (Bt = 180 s, P = 1.058 mm, Cfit = 2.6 mm, Pv = 0.1 nm, to = 37 K), so only T, ICorg and A vary. The Pi groups Up_1 = Pv/Cfit and Up_3 = P/Cfit are therefore single constants in the test set, and the 'cross-scale' test exercises 3 varying inputs, not 8.",
+   "source": "llm",
+   "question_for_authors": "How should the test-set performance be interpreted when two of the four Pi groups are constant in the test data?",
+   "verified_by": "bp_work/checks/V13.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F19"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Table 1 / Table 2 vs Table S5",
+   "evidence": "The same EnviroPiNet run is reported with different precision in the main text and the supplement: train R2 0.95 (Table 1) vs 0.94 (Table S5); test sMAPE 6 (Table 2, Results p.5, Discussion p.7) vs 5.6 (Table S5); train sMAPE 2 (Table 2) vs 2.1 (Table S5). Test R2 agrees (0.9 in both).",
+   "source": "llm",
+   "question_for_authors": "Do Tables 1-2 and Table S5 report the same run? If so, which rounding is correct?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F20"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table S4 note (SI p.15) vs capsule/code/R2_FeedBi_N.py:136-152",
+   "evidence": "Table S4 note says 'Early stopping with a patience of 10 epochs was employed' and lists 'Dropout rate 0.1'. In the released code the Dropout layer is commented out (R2_FeedBi_N.py:143-146) and model.fit() is called without any EarlyStopping callback (R2_FeedBi_N.py:186-188), so neither dropout nor early stopping is applied in the run that produces the reported numbers.",
+   "source": "llm",
+   "question_for_authors": "Were dropout and early stopping active in the run behind Table 1/Table 2, and if so in which script?",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F21"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4"
+   ],
+   "location": "Methods p.8 ('candidate values logarithmically spaced between 10^-3 and 10^10') vs capsule/code/BP_LR.py:66",
+   "evidence": "Methods describe the ridge alpha grid as 10^-3 to 10^10; the code uses np.logspace(1,10,2), i.e. only two candidate values, 10 and 1e10. The grid search therefore selects between two alphas, and the fitted BP-LR exponents in Eq. (1) come from that two-point grid.",
+   "source": "llm",
+   "question_for_authors": "Which alpha grid was used for the BP-LR model reported in Eq. (1) and Table 1?",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F22"
+  },
+  {
+   "module": "llm",
+   "type": "unit_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C8"
+   ],
+   "location": "Table S1 (SI p.3)",
+   "evidence": "Table S1 lists the filter diameter Cfit range as '[3.75, 2.6]' mm (lower bound above upper bound) and gives temperature in 'k' with dimension L^0 M^0 T^0 K^1 while the pore size is given dimension L^1 M^0 T^0 K^1; the training data file has Cfit in {2.6, 3.75} mm and T in [4, 28] K. The range is printed in reverse order.",
+   "source": "llm",
+   "question_for_authors": "Should the Cfit range in Table S1 read [2.6, 3.75] mm?",
+   "verified_by": "bp_work/checks/V15.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F23"
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "script:methods_code_check.py",
+   "file": "methods_code.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F28",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F29",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F30",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F31",
+   "module": "ghost",
+   "type": "grouped_split_risk",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F33",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F34",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F35",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F36",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F37",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F38",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F39",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F40",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F41",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F42",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F43",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F44",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F45",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F46",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F47",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F48",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F49",
+   "module": "multiverse",
+   "type": "rerun_failed",
+   "severity": "grey",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json"
+  },
+  {
+   "id": "F50",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F51",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 8,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 5,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5957446808510638,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 94
+ },
+ "top_experiment": "X2",
+ "severity_changes": {
+  "bootstrap_in_forest": 1,
+  "checklist_no_locus": 2,
+  "different_quantity_declared": 3,
+  "low_value_repeat": 4,
+  "percent_rounding": 2,
+  "port_rerun": 3,
+  "refuted_on_check": 1,
+  "restates_script": 2,
+  "same_pattern": 12
+ },
+ "_c3_note": "claims dropped (9)"
+}

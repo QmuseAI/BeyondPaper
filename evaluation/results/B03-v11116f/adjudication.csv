@@ -1,0 +1,4 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,red,archive_mismatch,Table 2 vs bp_work/results/main.html,"The paper reports 'Table 2 condition b, inferred negative items' = 1.623 b (Table 2); the authors' own stored output (bp_work/results/main.html) gives 1.425.",real:5.4,real,5.4: Table 2 NumNeg b 1.623 vs stored 1.425
+1,F2,red,stat_inconsistency,line 336,"'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",real:5.1,real,"5.1: .571 outside (-.544,.032)"
+2,F3,yellow,archive_mismatch,Table 2 vs bp_work/results/main.html,"The paper reports 'Table 2 intercept, inferred negative items' = 3.442 b (Table 2); the authors' own stored output (bp_work/results/main.html) gives 3.548. The gap is small (<5%): it may be run-to-run variation if the st",real:5.4(dup),duplicate,"5.4 again (same Table 2 model, intercept)"

@@ -1,0 +1,650 @@
+{
+ "paper": {
+  "title": "Design of a Neural Network to Predict Team Performance in Acute Ischemic Stroke",
+  "doi": "not reported",
+  "url": "http://mcareapps.com/docs/design_neural_network_stroke_pathway.pdf",
+  "version": "author-hosted PDF, 5 pages, no journal/DOI printed"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 2,
+  "yellow": 16,
+  "grey": 20,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "The optimized network achieved precision 63%, recall 67%, F1 0.64 and accuracy 60% on the validation set.",
+   "location": "Abstract Results, p.1; Results, p.4; Table 2, p.5",
+   "light": "red",
+   "findings": [
+    "F1",
+    "F10",
+    "F11",
+    "F12",
+    "F16",
+    "F17",
+    "F18"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "With four weakly associated parameters (duration, NIHSS severity, age, hour of day) the neural network constructed a reasonable prediction model for stroke team performance.",
+   "location": "Abstract Conclusion, p.1; Discussion, p.5",
+   "light": "green",
+   "findings": [],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "The four features individually show only weak association with door-to-needle time.",
+   "location": "Methods p.2; Table 1 p.3",
+   "light": "grey",
+   "findings": [
+    "F34"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "A 45-minute door-to-needle cut-off showed the best predictive performance and was used as the classification threshold.",
+   "location": "Methods p.2; Figure 1 p.2",
+   "light": "yellow",
+   "findings": [
+    "F15",
+    "F33"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "Hyperparameters (learning rate 0.15, layer sizes 4-6-1, L2 lambda 0.02) were selected by systematic tuning.",
+   "location": "Hyperparameter tuning p.4",
+   "light": "yellow",
+   "findings": [
+    "F13",
+    "F14",
+    "F16",
+    "F18",
+    "F32"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The network was trained on 221 cases (2003-201x) and validated on 61 cases (last two years).",
+   "location": "Methods p.2",
+   "light": "yellow",
+   "findings": [
+    "F12",
+    "F28",
+    "F29",
+    "F30",
+    "F31"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Application of a neural network to optimize acute stroke care with a predictive model is feasible and may improve team performance.",
+   "location": "Discussion p.5",
+   "light": "grey",
+   "findings": [
+    "F36",
+    "F38"
+   ],
+   "note": ""
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 8,
+   "archive_ok": 0,
+   "port_gap": 9,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results, p.4, Table 2, p.5 vs Abstract Results, p.1",
+   "evidence": "'F1 (validation)' differs and units differ (fraction vs %); could not convert automatically. Results, p.4: 0.64 fraction | Abstract Results, p.1: 64 % Ratio is 10^2: possible unit-mismatch, needs verification.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Is F1 reported as a fraction (0.64) or as a percentage (64%)? Please use one unit consistently."
+  },
+  {
+   "id": "F2",
+   "module": "multiverse",
+   "type": "rerun_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "baseline universe",
+   "evidence": "With the paper's own choices the claim 'The network reaches precision >= 63% and recall >= 67% on the validation set (the paper's reported performance)' does not hold on re-run (effect -0.986). Note: our re-run is a numpy port (substitute=true); the authors' stored output does match the paper, so this is reported as a port_gap in the reproduction gate and the multiverse robustness is measured around our re-run, not around the paper's number.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Please report the random seed and the exact TensorFlow version used, so the reported run can be reproduced."
+  },
+  {
+   "id": "F3",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). The capsule Dockerfile pins tensorflow:1.4.0-python2.7.12-cuda8.0.61-cudnn6.0.21-ubuntu16.04, but no Python-level requirements file is present.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which exact numpy/TensorFlow versions were used, and can a requirements file be added?"
+  },
+  {
+   "id": "F4",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.2",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. No inclusion/exclusion criteria and no counts removed before the 221/61 split.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "What were the inclusion/exclusion criteria, and how many records were removed at each step before the 221/61 split?"
+  },
+  {
+   "id": "F5",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.2; code/nn.py",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule; nn.py uses all rows as given.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were any outlier records removed, and if so by which rule and before or after the split?"
+  },
+  {
+   "id": "F6",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Training p.3; code/nn.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. No seed in paper or code; single run reported.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "What random seed was used, and what is the spread of the reported metrics over several seeds?"
+  },
+  {
+   "id": "F7",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.4",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> not_reported. No baseline model (logistic regression, clinical score) reported.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How does the network compare with a logistic regression or a simple clinical rule on the same 61 validation cases?"
+  },
+  {
+   "id": "F8",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.4",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Was a negative control (shuffled labels or random features) run to show the network learns signal rather than noise?"
+  },
+  {
+   "id": "F9",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Methods p.2",
+   "evidence": "[M2] Is the validation set used for model selection, and is a separate test set held out? -> partial. The paper calls the 61 cases a validation set and also reports its metrics as final performance; hyperparameters were tuned on the same set.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were the reported metrics obtained on data that was also used for hyperparameter selection?"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Abstract Results p.1 / Results p.4 / Table 2 p.5 vs results/predict-output.txt",
+   "evidence": "Paper reports precision 63, recall 67, F1 0.64, accuracy 60; the authors' stored output results/predict-output.txt prints PRECISION 62%, RECALL 66%, F1 62%, ACCURACY 60%. Recounting the stored prediction vector against data/test_data.csv rows 1-60 gives TP 22 / FP 13 / FN 11 / TN 14 = precision 62.86, recall 66.67, F1 64.71, accuracy 60.00, which matches the paper. The stored file's own printed F1 (62) does not match its own counts (64.71).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which F1 value is correct for the validation set: 62 (printed in predict-output.txt) or 64.71 (recomputed from the same predictions)?"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.4 and Table 2 p.5 vs results/predict-output.txt (EQUAL / TOTAL)",
+   "evidence": "predict-output.txt prints EQUAL 36 of TOTAL 60 (accuracy 60%). Recounting the same 60 predictions against data/test_data.csv rows 1-60 gives 30 equal (accuracy 50.00%). The 60% accuracy in the paper therefore cannot be reproduced from the stored prediction vector and the released labels.",
+   "source": "script:recount_archived.py",
+   "question_for_authors": "Which 60 rows were scored, and can the scoring script that produced EQUAL=36 be released?"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C6"
+   ],
+   "location": "Methods p.2 (61 validation cases) vs results/predict-output.txt (TOTAL 60)",
+   "evidence": "Methods state 61 validation cases; data/test_data.csv has 61 rows; the stored output scores TOTAL 60. One case is unaccounted for.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Why does the stored output score 60 cases when the validation set has 61?"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Hyperparameter tuning p.4 vs results/Output (220-row block)",
+   "evidence": "results/Output contains a 220-row prediction block whose printed metrics (precision 68, recall 69, F1 68, accuracy 65, EQUAL 145) do not match the paper's reported validation metrics (63/67/0.64/60). Recounting that block gives precision 68.03, recall 69.75, F1 68.88, accuracy 65.91 (TP 83 / FP 39 / FN 36 / TN 62). The paper does not report this 220-case result.",
+   "source": "script:recount_archived.py",
+   "question_for_authors": "What is the 220-row block in results/Output, and why are its metrics not reported in the paper?"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Training p.3 / Hyperparameter tuning p.4 vs code/nn.py",
+   "evidence": "The paper describes systematic hyperparameter tuning; code/nn.py contains a single fixed configuration (learning rate 0.15, layers 4-6-1, lambda 0.02, 1500 iterations) with no tuning loop, and validation_sz = int(M_app*0.5) = 30 inside the training file.",
+   "source": "script:methods_code_check.py",
+   "question_for_authors": "Where is the hyperparameter search implemented, and on which data was it run?"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Methods p.2; Table 1 p.3",
+   "evidence": "The paper states that a 45-minute cut-off showed the best predictive performance, but no code, table or figure compares alternative cut-offs, and the released CSV contains only the binary label (no raw door-to-needle minutes).",
+   "source": "llm",
+   "question_for_authors": "Which cut-offs were compared, and can the raw door-to-needle times be released so the comparison can be repeated?"
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Training p.3; code/nn.py",
+   "evidence": "Neither the paper nor code/nn.py sets a random seed (no tf.set_random_seed / np.random.seed); a single run is reported. Our 5-seed re-run of the same pipeline gives validation accuracy 44.26-57.38% and precision 50.0-60.53%.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "What seed produced the reported run, and what is the metric distribution over 50 seeds?"
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results p.4 / Table 2 p.5 (F1 0.64) and Hyperparameter tuning p.4 (F1 68)",
+   "evidence": "F1 is reported as 0.64 for the validation set and as 68 for the tuned configuration; with precision 63 and recall 67 the harmonic mean is 64.9, so 0.64 and 68 cannot both describe the same run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run does F1 = 68 belong to?"
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Hyperparameter tuning p.4 vs Results p.4",
+   "evidence": "Hyperparameters were selected using the same 61 cases whose metrics are reported as final performance; no separate held-out test set is described. The reported validation metrics are therefore optimistic.",
+   "source": "llm",
+   "question_for_authors": "Was any data held out from hyperparameter selection?"
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_work/adapter.py (numpy port of code/nn.py, 5 seeds 0-4) vs results/predict-output.txt",
+   "evidence": "Our numpy port gives validation precision 55.02% (range 50.0-60.53) against the paper's 63%; the authors' stored output matches the paper, so this is our port's problem, not a paper finding.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_work/adapter.py (numpy port of code/nn.py, 5 seeds 0-4) vs results/predict-output.txt",
+   "evidence": "Our numpy port gives validation F1 57.59 (range 51.52-63.89) against the paper's 0.64; stored output matches the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_work/adapter.py (numpy port of code/nn.py, 5 seeds 0-4) vs results/predict-output.txt",
+   "evidence": "Our numpy port gives validation accuracy 50.49% (range 44.26-57.38) against the paper's 60%; stored output matches the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_out/scripts/recount_archived.py vs results/predict-output.txt",
+   "evidence": "Recount of the stored 60-row block gives precision 62.86 against the printed 62 (rounding of the same counts).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_out/scripts/recount_archived.py vs results/predict-output.txt",
+   "evidence": "Recount of the stored 60-row block gives recall 66.67 against the printed 66 (rounding of the same counts).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "bp_out/scripts/recount_archived.py vs results/predict-output.txt",
+   "evidence": "Recount of the stored 60-row block gives F1 64.71 against the printed 62 (the printed value is not the harmonic mean of its own counts).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "bp_out/scripts/recount_archived.py vs results/Output",
+   "evidence": "Recount of the 220-row block gives recall 69.75 against the printed 69 (rounding).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "bp_out/scripts/recount_archived.py vs results/Output",
+   "evidence": "Recount of the 220-row block gives F1 68.88 against the printed 68 (rounding).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "bp_out/scripts/recount_archived.py vs results/Output",
+   "evidence": "Recount of the 220-row block gives accuracy 65.91 against the printed 65 (rounding).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F28",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.2",
+   "evidence": "[G1] Is the data source and collection period stated with counts per centre? -> partial. Ten stroke centres are mentioned but no per-centre counts are given.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How many cases came from each of the ten stroke centres?"
+  },
+  {
+   "id": "F29",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.2; code/nn.py",
+   "evidence": "[G3] Is missing data handled and reported? -> not_reported. No missing-value statement; the released CSV has no missing cells, so the handling of missing values in the full cohort is unknown.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How were missing values in the source records handled before the 221/61 split?"
+  },
+  {
+   "id": "F30",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.2",
+   "evidence": "[G5] Is the split temporal or random, and is it stated? -> partial. The paper says the last two years were used for validation, but the released files carry no dates, so the split cannot be verified.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Can the case dates be released so the temporal split can be verified?"
+  },
+  {
+   "id": "F31",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods p.2",
+   "evidence": "[G6] Is the sample size justified (events per variable)? -> not_reported. 221 cases with 4 predictors and a 4-6-1 network; no power or EPV discussion.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How was the sample size of 221 cases justified for a network with 4-6-1 weights?"
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Hyperparameter tuning p.4",
+   "evidence": "[M3] Is the hyperparameter search space and selection criterion stated? -> partial. Values are listed but the search space and criterion are not.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "What search space and selection criterion were used for the hyperparameters?"
+  },
+  {
+   "id": "F33",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Methods, p.2; Figure 1, p.2",
+   "evidence": "The 45-minute cut-off comparison is shown only in a figure; no underlying data or code is released, so the claim cannot be checked.",
+   "source": "llm",
+   "question_for_authors": "Can the data behind Figure 1 be released?"
+  },
+  {
+   "id": "F34",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Methods, p.2; Table 1, p.3",
+   "evidence": "Table 1 reports univariate associations of the four features; no test statistics or CIs are given and the raw data behind the table are not released in a form that reproduces it.",
+   "source": "llm",
+   "question_for_authors": "Which test produced the associations in Table 1, and what are the effect sizes and CIs?"
+  },
+  {
+   "id": "F35",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Methods, p.2",
+   "evidence": "The collection period is written as '2003-201x' in the paper; the exact end year is not reported.",
+   "source": "llm",
+   "question_for_authors": "What is the exact end year of the data collection period?"
+  },
+  {
+   "id": "F36",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Discussion, p.5",
+   "evidence": "The claim that the model may improve team performance is a projection; no prospective or interventional evaluation is reported.",
+   "source": "llm",
+   "question_for_authors": "Has the model been evaluated prospectively in the stroke pathway?"
+  },
+  {
+   "id": "F37",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Methods p.2; Figure 1 p.2",
+   "evidence": "The statement that 45 minutes is the guideline target is supported only by citation; the guideline text is not part of the materials.",
+   "source": "llm",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F38",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Discussion p.5",
+   "evidence": "Generalisation to other centres is asserted without external validation data.",
+   "source": "llm",
+   "question_for_authors": "Is there any external validation cohort?"
+  },
+  {
+   "id": "F39",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "reported values",
+   "evidence": "3 quantities agree across the paper's own locations (abstract, results text, Table 2) after unit normalisation.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": ""
+  },
+  {
+   "id": "F40",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "whole text",
+   "evidence": "Sample sizes are consistent across locations: 221 training cases and 61 validation cases appear in Methods and match the released CSV row counts (221 and 61).",
+   "source": "script:counts_check.py",
+   "question_for_authors": ""
+  }
+ ],
+ "top_experiment": {
+  "id": "X1",
+  "title": "Re-run the released pipeline with 50 seeds and report the distribution of validation metrics",
+  "eig_bits": 0.22,
+  "score": 0.485
+ },
+ "multiverse": {
+  "robustness": 0.015,
+  "universes": 200,
+  "baseline_holds": false
+ }
+}

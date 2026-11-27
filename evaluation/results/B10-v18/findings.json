@@ -1,0 +1,738 @@
+{
+ "paper": {
+  "title": "A Delphi Study to Strengthen Research-Methods Training in Undergraduate Psychology Programs",
+  "doi": "not reported in supplied materials"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 8,
+  "yellow": 10,
+  "grey": 23,
+  "green": 1
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "A two-round modified Delphi with 103 participants (final sample) identified the research-methods skills the UK psychology community deems essential for undergraduates.",
+   "location": "Abstract, p.1",
+   "light": "red",
+   "findings": [
+    "F3",
+    "F16",
+    "F17",
+    "F34",
+    "F40"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "Of 78 items included in the consensus process, 38 reached consensus.",
+   "location": "Abstract, p.1",
+   "light": "red",
+   "findings": [
+    "F1",
+    "F2",
+    "F4",
+    "F5",
+    "F9",
+    "F15",
+    "F18"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "Consensus was reached for 34 items; a follow-up survey of 46 heads of department in 2023 furthered the recommendations.",
+   "location": "Discussion, Summary of results, p.5",
+   "light": "red",
+   "findings": [
+    "F1",
+    "F5",
+    "F6",
+    "F7",
+    "F10",
+    "F11"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "Consensus was not reached for 44 items, spanning advanced analysis techniques, statistics teaching and staff resources.",
+   "location": "Results, Consensus largely reached, p.4",
+   "light": "red",
+   "findings": [
+    "F4",
+    "F10",
+    "F11"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "A qualitative thematic analysis of 707 open-ended text responses yielded two main themes.",
+   "location": "Abstract, p.1; Thematic analysis, p.4",
+   "light": "grey",
+   "findings": [
+    "F36",
+    "F41"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "A sensitivity analysis requiring 75% essential ratings from all four stakeholder groups changed little.",
+   "location": "Sensitivity Analyses, p.4",
+   "light": "grey",
+   "findings": [
+    "F38"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "Ratings were stable across rounds and samples: of 47 items in both rounds, 4 moved to consensus.",
+   "location": "Sensitivity Analyses, p.4",
+   "light": "grey",
+   "findings": [
+    "F21",
+    "F22",
+    "F23",
+    "F24",
+    "F25",
+    "F35"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C8",
+   "text": "Almost 90% of participants rated it essential that students learn to use descriptive statistics before inferential statistics.",
+   "location": "Results, p.4; Table 2",
+   "light": "yellow",
+   "findings": [
+    "F9"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C9",
+   "text": "The consensus results partially overlap with publicly available curricula: effect sizes and confidence intervals are under-represented.",
+   "location": "Relation to the literature, p.5",
+   "light": "grey",
+   "findings": [
+    "F39"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C10",
+   "text": "The study provides open data, summary data sheets and analysis code that allow others to reproduce the analyses.",
+   "location": "Data availability, p.6",
+   "light": "green",
+   "findings": [
+    "F42"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "id": "F1",
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "Discussion, Summary of results, p.5 vs bp_work/materials_extract/results/final/0.main_table.csv",
+   "evidence": "The paper reports 'n items reaching consensus' = 34 items (Discussion, Summary of results, p.5); the authors' own stored output (bp_work/materials_extract/results/final/0.main_table.csv) gives 28. results/table2_verbatim.csv splits them as 26 (Round 1) + 8 (Round 2) = 34, i.e. the Round-1 items appear to be counted twice. Our Python port of manuscript.Rmd also returns 28.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Is the number of items reaching consensus 28 or 34, and how is the Round-1/Round-2 split counted?"
+  },
+  {
+   "id": "F2",
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Results, Delphi-item ratings, p.4 vs bp_work/materials_extract/results/final/0.main_table.csv",
+   "evidence": "Paper: median percentage rating items as essential = 74% (IQR 60-86). Stored output over the same 78 items gives median 70.0% (our port: 70.1%, IQR 55.9-85.1).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which item set and aggregation produce the reported 74% (IQR 60-86)?"
+  },
+  {
+   "id": "F3",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results, Participants, p.4 vs code/readme.txt results/ description",
+   "evidence": "'n participants (completed both rounds)' is reported with different values. Results, Participants, p.4: 113 participants | code/readme.txt: 112 participants. Our port reproduces 112 and 103 (final sample).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Is the number of participants completing both rounds 112 or 113?"
+  },
+  {
+   "id": "F4",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [
+    "C2",
+    "C4"
+   ],
+   "location": "Discussion, Summary of results, p.5, Recommendations, p.5 vs Abstract, p.1",
+   "evidence": "'n items reaching consensus' is reported with different values. Discussion, Summary of results, p.5: 34 items | Abstract, p.1: 38 items. Agreeing reports: 2 location(s).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which of 34 and 38 is the number of items reaching consensus?"
+  },
+  {
+   "id": "F5",
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Discussion, Summary of results, p.5 vs results/final/0.main_table.csv and results/table2_verbatim.csv",
+   "evidence": "The paper states that 34 of 78 items reached consensus. The authors' stored output gives 28 items with consensus == TRUE (results/final/0.main_table.csv); results/table2_verbatim.csv splits them as 26 + 8 = 34.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which stored table should be used to verify the 34-item figure?"
+  },
+  {
+   "id": "F6",
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Results, Delphi-item ratings, p.4 vs results/final/0.main_table.csv",
+   "evidence": "Paper: median percentage rating items as essential = 74% (IQR 60-86). Stored output results/final/0.main_table.csv over the same 78 items gives median 70.0% (our port: 70.1%).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which item set and which aggregation produce the reported 74% (IQR 60-86)?"
+  },
+  {
+   "id": "F7",
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Results, Delphi-item ratings, p.4 vs results/final/0.main_table.csv",
+   "evidence": "Paper: median mean rating = 7.4 (IQR 6.8-7.9). Stored output results/final/0.main_table.csv gives median 7.21 (our port: 7.21, IQR 6.68-7.91).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which item set produces the reported median mean rating of 7.4?"
+  },
+  {
+   "id": "F8",
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "red",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'At least 28 of 78 items reach the preregistered consensus threshold' holds in 28% of 72 universes. Single changes that flip it: sample=all; sample=round2; threshold=0.8; unable=zero.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under sample=all; sample=round2; threshold=0.8; unable=zero?"
+  },
+  {
+   "id": "F9",
+   "module": "llm",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C8"
+   ],
+   "location": "Results, Delphi-item ratings, p.4 vs bp_work/materials_extract/results/final/0.main_table.csv",
+   "evidence": "Median mean rating: paper 7.4 vs stored output 7.21 (difference 0.19, 2.6%).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which item set produces the reported median mean rating of 7.4?"
+  },
+  {
+   "id": "F10",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4"
+   ],
+   "location": "Table 2, p.4, Results, Consensus largely reached, p.4 vs Recommendations, p.5",
+   "evidence": "Table 2 lists 26 items with consensus '1' and 8 with '2' (26 + 8 = 34), while the stored main table flags 28 items as consensus; the text uses 34 in one place and 38 in another.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Which count is the headline: 28, 34 or 38?"
+  },
+  {
+   "id": "F11",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3",
+    "C4"
+   ],
+   "location": "Table 2, p.4, Results, Consensus largely reached, p.4",
+   "evidence": "44 items are reported as not reaching consensus; 34 + 44 = 78, but the stored table gives 28 + 44 = 72, leaving 6 items unaccounted for.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How do the 34 consensus and 44 non-consensus items sum to the 78 analysed items?"
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [
+    "C10"
+   ],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?"
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "materials_extract/code/manuscript.Rmd:912",
+   "evidence": "Random functions used and set.seed() never called.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F14",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Results, p.4 vs code/manuscript.Rmd:141,184",
+   "evidence": "Rating value 10 encodes 'unable to rate'. In sum_stats() it is set to NA and excluded from the denominator, but in the plotting chunk it is recoded to 0. The paper reports 3% unable to rate without saying which treatment underlies the reported percentages.",
+   "source": "llm",
+   "question_for_authors": "Are 'unable to rate' responses excluded from the denominator or counted as a rating of 0?"
+  },
+  {
+   "id": "F15",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Methods, Consensus definition, p.3 vs code/manuscript.Rmd:157,322-330",
+   "evidence": "The paper defines consensus as more than 75% rating an item essential; the code uses perc_essential >= 0.75 (at least 75%). Items sitting exactly at 75.0% would be classified differently.",
+   "source": "llm",
+   "question_for_authors": "Was the preregistered threshold >75% or >=75%?"
+  },
+  {
+   "id": "F16",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results, Participants, p.4 vs Table 1, p.3",
+   "evidence": "The text says 113 participants completed both rounds; Table 1 and code/readme.txt:51 report 112 completing Round 2 and 103 in the final sample. Our port reproduces 112 and 103.",
+   "source": "llm",
+   "question_for_authors": "Is the number of participants completing both rounds 112 or 113?"
+  },
+  {
+   "id": "F17",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Survey description, p.3 (line 85) vs Results, p.4",
+   "evidence": "The Survey section refers to 72 items while the consensus process and all result tables use 78 items (78 = 71 rated in Round 1 + 7 added for Round 2). The relation between 72 and 78 is not explained.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How do the 72 items mentioned in the Survey section relate to the 78 items analysed?"
+  },
+  {
+   "id": "F18",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Results, p.4 (line 323) vs Results, p.4",
+   "evidence": "The text says 82 items were suggested by participants, but only 7 items were added to Round 2 and the analysed set is 78 items; the 82 figure is not traceable to any stored count.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How many suggested items were received, and why were only 7 added?"
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "our Python port (bp_out/flow_counts.json) vs bp_work/materials_extract/code/readme.txt",
+   "evidence": "n participants (completed both rounds): paper 113, stored output 112, our port 103. Stored output agrees with the paper; the gap is in our port.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "our Python port (bp_out/flow_counts.json) vs bp_work/materials_extract/code/readme.txt",
+   "evidence": "n participants (began Round 2): paper 125, stored output 125, our port 170. Stored output agrees with the paper; the gap is in our port.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "our Python port (bp_out/repro_sensitivity.json) vs results/sensitivity/round1_round2.csv",
+   "evidence": "items moving to consensus (R1 vs R2): paper 4, stored output 4, our port 6.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "our Python port (bp_out/repro_sensitivity.json) vs results/sensitivity/round1_round2.csv",
+   "evidence": "median absolute change in % essential (R1 vs R2): paper 3.8, stored output 3.8, our port 3.97.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "our Python port (bp_out/repro_sensitivity.json) vs results/sensitivity/round1_round2.csv",
+   "evidence": "median absolute rating difference (R1 vs R2): paper 0.15, stored output 0.15, our port 0.162.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "our Python port (bp_out/repro_sensitivity.json) vs results/sensitivity/final_all.csv",
+   "evidence": "median absolute change in % essential (all vs final): paper 1.3, stored output 1.3, our port 1.52.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "our Python port (bp_out/repro_sensitivity.json) vs results/sensitivity/final_all.csv",
+   "evidence": "median absolute rating difference (all vs final): paper 0.06, stored output 0.06, our port 0.07.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "p. 3, Sec. Survey, line 85",
+   "evidence": "Count mention '72 items' flagged by counts_check.py as a near-singleton count.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How do the 72 items relate to the 78 analysed items?"
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "p. 4, Sec. Thematic analysis of the open-ended ques, line 323",
+   "evidence": "Count mention '82 items' flagged by counts_check.py as a near-singleton count.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "How many suggested items were received?"
+  },
+  {
+   "id": "F28",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "p. 4, Sec. Participants, line 141",
+   "evidence": "Count mention of participants flagged by counts_check.py as a near-singleton count.",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Which participant count is the final sample?"
+  },
+  {
+   "id": "F29",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "counts_check.py flagged a count mention that could not be tied to a single noun.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null
+  },
+  {
+   "id": "F30",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "materials_extract/code/manuscript.Rmd:661",
+   "evidence": "2 data-exclusion steps (filter@661, filter@797). Candidate forks for the multiverse stage.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which exclusion rules were preregistered?"
+  },
+  {
+   "id": "F31",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Results, Participants, p.4; code/manuscript.Rmd:39-94",
+   "evidence": "[G2] Inclusion/exclusion rules are only partial: pilot users, round 0, incomplete responders and attention-check failures are removed in code; the paper reports the flow but not the -9/10 rating codes or the 7/32 missing-item thresholds.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?"
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Methods, p.3",
+   "evidence": "[G5] Sample size is not justified: no power analysis or sample-size rationale for the Delphi panel.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the sample size justified (power analysis or other rationale)?"
+  },
+  {
+   "id": "F33",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C10"
+   ],
+   "location": "code/run; REPRODUCING.md",
+   "evidence": "[M2] Software and library versions are not reported; no renv.lock/requirements, only a Code Ocean capsule and a Docker link.",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are software and library versions stated?"
+  },
+  {
+   "id": "F34",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Abstract, p.1",
+   "evidence": "No code or data artifact in the materials reproduces this claim directly.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Which artifact supports this claim?"
+  },
+  {
+   "id": "F35",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Discussion, Summary of results, p.5",
+   "evidence": "No code or data artifact in the materials reproduces this claim directly.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Which artifact supports this claim?"
+  },
+  {
+   "id": "F36",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Abstract, p.1; Thematic analysis, p.4",
+   "evidence": "The thematic analysis is provided only as data/7.thematic_analysis.xlsx; no code reproduces the reported themes or counts.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Which script produces the reported theme counts?"
+  },
+  {
+   "id": "F37",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Definition of consensus, p.3",
+   "evidence": "The preregistration document is not in the materials; the >75% vs >=75% wording cannot be checked against it.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Where is the preregistration?"
+  },
+  {
+   "id": "F38",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "Sensitivity Analyses, p.4",
+   "evidence": "The four-group sensitivity analysis is described but no stored output for it was located in results/sensitivity/.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Which file holds the four-group sensitivity results?"
+  },
+  {
+   "id": "F39",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C9"
+   ],
+   "location": "Relation to the literature, p.5",
+   "evidence": "The curriculum comparison is not backed by a data file in the materials.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": "Which data underlie the curriculum comparison?"
+  },
+  {
+   "id": "F40",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "data/1.item_ratings.csv (StudyRound == 0)",
+   "evidence": "76 users have StudyRound == 0 with every rating coded -9 (1912 rows). The code removes them with filter(study_round != 0); the paper does not describe this pilot/void round or the -9 code.",
+   "source": "llm",
+   "question_for_authors": "What does StudyRound 0 with rating -9 represent, and how many participants does it contain?"
+  },
+  {
+   "id": "F41",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Results, qualitative analyses, p.5",
+   "evidence": "The paper reports 707 open-ended responses and a thematic analysis, but the coding is only available as data/7.thematic_analysis.xlsx with no code that reproduces the reported themes or counts.",
+   "source": "llm",
+   "question_for_authors": "Which script produces the reported theme counts from the qualitative data?"
+  },
+  {
+   "id": "F42",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [
+    "C10"
+   ],
+   "location": "reported values",
+   "evidence": "14 of 24 re-computed quantities match the paper and the authors' stored output (participant flow 170/139/112/103, 78 items, 26 + 8 consensus items, 44 non-consensus items, item-level percentages).",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 14,
+   "archive_ok": 0,
+   "port_gap": 7,
+   "archive_mismatch": 3,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "claim": {
+   "text": "At least 28 of 78 items reach the preregistered consensus threshold",
+   "holds": "n_consensus >= 28",
+   "effect": "n_consensus - 28"
+  },
+  "n_grid": 72,
+  "n_ok": 72,
+  "robustness": 0.2778,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "sample",
+    "value": "all",
+    "holds": false,
+    "effect": -2.0
+   },
+   {
+    "fork": "sample",
+    "value": "round2",
+    "holds": false,
+    "effect": -20.0
+   },
+   {
+    "fork": "threshold",
+    "value": "0.8",
+    "holds": false,
+    "effect": -6.0
+   },
+   {
+    "fork": "unable",
+    "value": "zero",
+    "holds": false,
+    "effect": -3.0
+   }
+  ]
+ },
+ "top_experiment": "X2"
+}

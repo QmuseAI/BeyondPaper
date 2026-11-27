@@ -1,0 +1,182 @@
+{
+ "counts": {
+  "red": 4,
+  "yellow": 4,
+  "grey": 13,
+  "green": 1
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 1,
+   "archive_ok": 1,
+   "port_gap": 2,
+   "archive_mismatch": 2,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Definition of consensus vs Definition of consensus",
+   "evidence": "'consensus threshold (essential %)' is reported with different values. Definition of consensus: 70 % | Definition of consensus: 75 %. Agreeing reports: 1 location(s) [Definition of consensus] vs 1 [Definition of consensus].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'consensus threshold (essential %)' is correct (70 % or 75 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [
+    "C1",
+    "C7"
+   ],
+   "location": "Abstract, Results, Delphi-item ratings, Sensitivity Analyses vs Results, Participants",
+   "evidence": "'n participants (final sample)' is reported with different values. Abstract: 103 participants | Results, Participants: 113 participants. Agreeing reports: 3 location(s) [Abstract, Results, Delphi-item ratings, Sensitivity Analyses] vs 1 [Results, Participants].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'n participants (final sample)' is correct (103 participants or 113 participants)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "sample_size",
+     "location": "p. 4, Sec. Participants, line 141",
+     "severity": "yellow",
+     "file": "counts.findings.json"
+    }
+   ],
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "Abstract vs Discussion, Summary of results",
+   "evidence": "'n items reaching consensus' is reported with different values. Abstract: 38 items | Discussion, Summary of results: 34 items. Agreeing reports: 1 location(s) [Abstract] vs 1 [Discussion, Summary of results].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'n items reaching consensus' is correct (38 items or 34 items)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract (paper.md line 12) vs body (paper.md line 423)",
+     "severity": "yellow",
+     "file": "claims_scan.findings.json"
+    }
+   ],
+   "id": "F3"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+   ],
+   "location": "Abstract (paper.md line 13) vs Discussion, Summary of results (line 421)",
+   "evidence": "Abstract: 'Of 78 items included in the consensus process, 38 reached consensus.' Discussion Summary of results: 'Consensus was reached for 34 items.' Table 2 marks 26 items consensus=1 and 8 items consensus=2 (26 + 8 = 34). Stored results/final/0.main_table.csv: 28 TRUE in the Round 1 consensus column and 8 TRUE in the Round 2 column, union 34. The 38 in the Abstract is not reproduced by any stored table. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Is the number of items reaching consensus 38 (Abstract) or 34 (Results, Table 2, stored main_table)?",
+   "judgement_key": "abstract_vs_body",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "Abstract vs bp_work/materials/results/final/0.main_table.csv (79 rows)",
+   "evidence": "The paper reports 'n items in consensus process' = 78 items (Abstract); the authors' own stored output (bp_work/materials/results/final/0.main_table.csv (79 rows)) gives 79. Our re-run gives 79, which matches the stored output. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n items in consensus process' (78), given that bp_work/materials/results/final/0.main_table.csv (79 rows) gives 79?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Discussion (paper.md line 423)",
+   "evidence": "The text reports an additional study or analysis: 'A follow-up survey of 46 heads of department in 2023 found that 31 of these 34 items were already taught at their institutions.'. Its head count 46 appears nowhere else in the paper, the phrase 'follow-up survey' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 46 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "Discussion, Summary of results (paper.md line 423)",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+   ],
+   "location": "Definition of consensus (paper.md line 81) vs code manuscript.Rmd:157,327-329",
+   "evidence": "Methods state consensus as at least 70% essential in each nonstudent stakeholder group; the analysis code thresholds perc_essential >= 0.75 and the stored results/final/0.main_table.csv consensus column reproduces exactly under 0.75 (0 mismatches over 79 items x 2 rounds) and not under 0.70 (10 mismatches). The paper's own text also calls 75% the common threshold. Potential inconsistency, needs verification: which threshold was preregistered and applied?",
+   "source": "llm",
+   "question_for_authors": "Was the preregistered consensus threshold 70% or 75% essential, and which one produced the 34/38 consensus items?",
+   "judgement_key": "param_mismatch",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'A substantial minority of the 78 Delphi items reaches consensus (34 of 78 in the paper)' holds in 67% of 24 universes. Single changes that flip it: rating10=keep.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under rating10=keep?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  }
+ ]
+}

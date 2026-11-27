@@ -1,0 +1,24 @@
+{
+ "run_id": "B06-v1101",
+ "paper_id": "B06",
+ "variant": "clean",
+ "version": "v1.10.1",
+ "saved": "2026-11-17",
+ "source_file": "pages/B06-v1101.txt",
+ "note": "",
+ "n_findings": 59,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 24,
+  "grey": 31,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 24,
+  "grey": 31,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

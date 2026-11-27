@@ -1,0 +1,218 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "10.1177/1745691620928462",
+  "file": "bp_work/paper.md"
+ },
+ "counts": {
+  "red": 3,
+  "yellow": 6,
+  "grey": 12,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 10,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 3
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "denominator",
+    "value": "articles",
+    "holds": false,
+    "effect": -138
+   }
+  ],
+  "n_ok": 8
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "problem",
+   "abstract_vs_body": "problem",
+   "claims_scan": "problem"
+  },
+  "param_mismatch": "Methods: PE>=10% major, alpha 0.05, random-effects inverse-variance meta-analysis; code preprocessing.R/manuscript.Rmd implement PE classification and propCI; methods_code_check.py: methods named=0 not found in code=0",
+  "figure_data_mismatch": "Fig 2 caption says 41 values below 0.001 not shown; data_values.csv has 41 rows with reportedValue<0.001 (checked by script)",
+  "phantom_experiment": "Results paper.md:72 reports a 30-article no-badge comparison sample (21/30=70%, 3 decision errors); no data file or code chunk for it in materials",
+  "abstract_vs_body": "Abstract 789 checked values vs Results 879; Abstract 34% vs Table 1 24% for 6/25; CI [20,59] vs [19,57] for 9/25",
+  "claims_scan": "claims_scan.py 4 candidates reviewed: phantom_experiment (kept), 34 vs 24 (kept), 789 vs 879 (kept), 27 articles (kept as sample_size)"
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Results p.4 vs results/manuscript.tex:411",
+   "evidence": "The paper reports 'n target values examined after author involvement (Results)' = 879 values (Results p.4); the authors' own stored output (results/manuscript.tex:411) gives 789. Our re-run gives 789, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'n target values examined after author involvement (Results)' (879), given that results/manuscript.tex:411 gives 789?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Abstract (paper.md:11) vs Results (paper.md:72)",
+   "evidence": "Abstract: '37 major numerical discrepancies remained out of 789 checked values (5% [3,6])'. Results: '37 major numerical discrepancies remained among the 879 target values examined across all articles (5%, CI [3,6])'. Same numerator (37), same percentage (5%), same CI, but the denominator differs (789 vs 879). The authors' stored output (results/manuscript.tex:411) prints 789, and data/raw/data_values.csv has 789 rows, so 879 is a digit transposition in the Results sentence. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Should the Results sentence read 789 target values (as in the Abstract and the knitted output) rather than 879?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract (paper.md line 10) vs Results (paper.md line 72)",
+     "severity": "yellow",
+     "file": "claims_scan.findings.json"
+    }
+   ],
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Abstract (paper.md:11) vs Table 1 (paper.md:61-70)",
+   "evidence": "Reproducible with author involvement: Abstract gives 6 (34% [8,47]); Table 1 gives 6 (24%, [8,47]). Same n=6 and same CI, but 6/25 = 24%, not 34%. The stored output (results/manuscript.tex) prints 24% in Table 1; 34% appears only in the Abstract sentence. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Is the Abstract percentage for 'reproducible with author involvement' 24% (6/25, as in Table 1) rather than 34%?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 10) vs body (paper.md line 58)",
+   "evidence": "The Abstract gives 34 ('...hor involvement for 9 (36% [20,59]) articles; reproducible with author involvement for 6 (34% [8,47]) articles; not fully reproducibl...'); the body never states 34. The body sentence about the same quantity (shared words: articles, author, involvement, reproducible) gives 25: '...Prior to seeking original author involvement, all target values in 9 out of the 25 articles (36%, CI [19,57]) were reproducible, with the remaining 16 articles (64%, CI [43,81]) containing at least one major numerical discrepancy....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 34 (Abstract) or 25 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "Results (paper.md line 72)",
+   "evidence": "The text reports an additional study or analysis: 'A comparison sample of 30 articles from the same journal without open data badges, checked with the same protocol, contained at least one major numerical discrepancy in 21 (70%) articles.'. Its head count 30 appears nowhere else in the paper, the phrase 'comparison sample' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Where are the data, code and methods for the analysis of 30 described here?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "phantom_experiment",
+     "location": "Results (paper.md:72)",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Methods (paper.md line 41) vs data/raw/bibliography.csv column 'Article ID'",
+   "evidence": "The text gives 27 articles once ('...In total, 789 discrete numerical values reported in 27 articles published between January 2014 and May 2015 were designated as target values....'); the authors' table data/raw/bibliography.csv has 25 distinct values of 'Article ID', and the paper says '25 articles' 2 time(s) elsewhere.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Is the number of articles 27 or 25?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "sample_size",
+     "location": "Sample (paper.md:41) vs data/raw/data_articles.csv",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "p. 3, Sec. Sample, line 41",
+   "evidence": "'numerical values reported in 27 articles published between January 201': 27 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a denominator elsewhere). A typo, or a different subgroup?",
+   "source": "script:counts_check.py",
+   "question_for_authors": "Is the count 27 correct here, or should it be 25?",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "Results (paper.md:72); SI section E",
+   "evidence": "The claim that no discrepancy was consequential for the original conclusions rests on subjective per-article judgements; the vignettes (SI section E) are not in the materials, so the judgement cannot be checked.",
+   "source": "llm",
+   "question_for_authors": "Can the vignettes with the conclusion-impact judgements be provided in machine-readable form?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Most target values are reproducible: fewer than 10% of checked values carry a major numerical discrepancy after author contact' holds in 50% of 8 universes. Single changes that flip it: denominator=articles.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under denominator=articles?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F9"
+  }
+ ]
+}

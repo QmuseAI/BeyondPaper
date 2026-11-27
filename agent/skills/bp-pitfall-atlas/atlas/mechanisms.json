@@ -1,0 +1,499 @@
+{
+  "version": "2026-11-17",
+  "mechanisms": [
+    {
+      "id": "selection_on_test",
+      "kind": "paper",
+      "name_zh": "用测试集做选择",
+      "summary": "Test data are used to fit, select features, tune or choose the model that is then evaluated on the same test data; the reported test performance is optimistic.",
+      "finding_types": [
+        "test_set_reuse",
+        "leakage_risk"
+      ],
+      "triggers": [
+        "test set",
+        "held[- ]out",
+        "validation set",
+        "feature selection",
+        "permutation importance",
+        "hyperparameter",
+        "model selection",
+        "top \\d+ features",
+        "AUROC|AUC|c-index|accuracy",
+        "测试集",
+        "验证集",
+        "特征选择"
+      ],
+      "detector": "bp-ghost-variables/scripts/leakage_scan.py (test_set_reuse)",
+      "question": "Which samples were used to select features, tune and choose the final model, and were any of them in the test set?",
+      "summary_zh": "用测试集拟合、挑特征、调参或选模型，再在同一个测试集上报告性能，报告的性能偏乐观。"
+    },
+    {
+      "id": "train_test_overlap",
+      "kind": "paper",
+      "name_zh": "训练/发现集包含测试样本",
+      "summary": "Rows of the test set also sit in the file used for training or discovery, so the split described in the paper is not the split in the data.",
+      "finding_types": [
+        "split_overlap"
+      ],
+      "triggers": [
+        "discovery (set|cohort)",
+        "training set",
+        "test set",
+        "split",
+        "cohort",
+        "LASSO",
+        "发现集",
+        "训练集"
+      ],
+      "detector": "bp-ghost-variables/scripts/data_checks.py (split_overlap)",
+      "question": "Does the released discovery/training file contain the test samples, and which file was used for selection?",
+      "summary_zh": "测试集的样本也出现在训练/发现集文件里，数据里的划分与论文描述的不同。"
+    },
+    {
+      "id": "group_leakage",
+      "kind": "paper",
+      "name_zh": "同一受试者/批次跨训练与测试",
+      "summary": "Samples are split at random although several samples come from the same subject, batch, site or recording; the model can learn the group instead of the signal.",
+      "finding_types": [
+        "grouped_split_risk"
+      ],
+      "triggers": [
+        "patients?",
+        "subjects?",
+        "participants?",
+        "batch(es)?",
+        "segments?",
+        "epochs?",
+        "recordings?",
+        "sites?",
+        "repeated measures",
+        "k-fold",
+        "random(ly)? split",
+        "cross-validation",
+        "受试者",
+        "批次"
+      ],
+      "detector": "bp-ghost-variables checklist (grouped split) + multiverse fork split=group",
+      "question": "Can samples from the same subject, batch or site appear in both training and test data?",
+      "summary_zh": "同一受试者、批次、站点或记录的多个样本被随机分到训练和测试两边，模型可能学到的是“组”而不是信号。"
+    },
+    {
+      "id": "stale_variable",
+      "kind": "paper",
+      "name_zh": "沿用了上一个循环/步骤留下的变量",
+      "summary": "Code inside a loop or a later step uses a variable left over from an earlier loop, so a figure or table is computed from the wrong data.",
+      "finding_types": [
+        "stale_loop_variable"
+      ],
+      "triggers": [
+        "for \\(|for .* in ",
+        "loop",
+        "funnel",
+        "each (comparison|outcome|subgroup)",
+        "subgroup"
+      ],
+      "detector": "bp-ghost-variables/scripts/leakage_scan.py (stale_loop_variable)",
+      "question": "Which data frame does each iteration actually use?",
+      "summary_zh": "循环或后续步骤里用到了上一个循环留下的变量，图表其实是用错的数据算出来的。"
+    },
+    {
+      "id": "wrong_output_file",
+      "kind": "paper",
+      "name_zh": "结果文件存错了对象",
+      "summary": "A released result file holds a different object than its name says (e.g. test-set predictions saved as external-test predictions).",
+      "finding_types": [
+        "duplicate_output"
+      ],
+      "triggers": [
+        "external (test|validation)",
+        "prediction",
+        "results?/",
+        "output",
+        "外部"
+      ],
+      "detector": "bp-ghost-variables/scripts/leakage_scan.py + data_checks.py (duplicate_output)",
+      "question": "Which object was written to each released result file?",
+      "summary_zh": "公开的结果文件里存的对象与文件名不符（例如把测试集预测存成外部测试集预测）。"
+    },
+    {
+      "id": "methods_code_mismatch",
+      "kind": "paper",
+      "name_zh": "Methods 写的与代码做的不一致",
+      "summary": "A parameter, test or method stated in the Methods differs from, or is absent in, the released code.",
+      "finding_types": [
+        "param_mismatch",
+        "phantom_experiment"
+      ],
+      "triggers": [
+        "we set",
+        "coefficient",
+        "\\balpha\\b|\\blambda\\b|penalty",
+        "Egger",
+        "regression test",
+        "n_estimators|\\btrees\\b",
+        "\\bfolds?\\b",
+        "parameter",
+        "参数"
+      ],
+      "detector": "bp-consistency-check/scripts/methods_code_check.py",
+      "question": "Which value or method did the run behind the reported numbers actually use?",
+      "summary_zh": "Methods 里写的参数、检验或方法，与公开代码不一致或在代码里根本没有。"
+    },
+    {
+      "id": "interval_mislabel",
+      "kind": "paper",
+      "name_zh": "区间水平或方法标错",
+      "summary": "An interval is reported at a different confidence level than the code computes (e.g. 5th-95th percentiles reported as 95% CI).",
+      "finding_types": [
+        "param_mismatch",
+        "stat_inconsistency"
+      ],
+      "triggers": [
+        "95 ?% ?(?-i:CI)\\b",
+        "confidence interval",
+        "bootstrap",
+        "percentile",
+        "置信区间"
+      ],
+      "detector": "bp-consistency-check/scripts/methods_code_check.py (CI90/CI95)",
+      "question": "Which percentiles or which interval method produced the reported intervals?",
+      "summary_zh": "区间的置信水平或方法与代码不符（例如 5–95 分位写成 95% CI）。"
+    },
+    {
+      "id": "statistic_mislabel",
+      "kind": "paper",
+      "name_zh": "统计量名不副实",
+      "summary": "The text names one statistic (median) while the code computes another (mean).",
+      "finding_types": [
+        "param_mismatch",
+        "number_mismatch"
+      ],
+      "triggers": [
+        "median",
+        "mean",
+        "average",
+        "中位数",
+        "均值"
+      ],
+      "detector": "Methods vs code (grep for mean/median in the code that writes the table)",
+      "question": "Is the reported value a mean or a median?",
+      "summary_zh": "正文写的是一种统计量（中位数），代码算的是另一种（均值）。"
+    },
+    {
+      "id": "impossible_interval",
+      "kind": "paper",
+      "name_zh": "自相矛盾的区间",
+      "summary": "An interval that excludes its own estimate, has its bounds reversed, contradicts its p-value, or is copied from another row/table.",
+      "finding_types": [
+        "stat_inconsistency",
+        "stat_decision_error"
+      ],
+      "triggers": [
+        "(?-i:\\bCI\\b)|confidence interval|置信区间",
+        "(?-i:\\b(SMD|OR|RR|HR)\\b)|\\bb ?= ?-?\\.?\\d",
+        "\\bp ?[=<] ?0?\\.\\d"
+      ],
+      "detector": "bp-consistency-check/scripts/ci_check.py, statcheck_lite.py",
+      "question": "Which interval belongs to this estimate?",
+      "summary_zh": "区间不含自己的点估计、上下限颠倒、与 p 值矛盾，或是从别的行/表抄来的。"
+    },
+    {
+      "id": "transcription_error",
+      "kind": "paper",
+      "name_zh": "正文、表格、输出之间抄写不一致",
+      "summary": "The same quantity is reported with different values in text, tables or the authors' own output (typos, swapped values, rounding to the wrong digit).",
+      "finding_types": [
+        "number_mismatch",
+        "magnitude_error",
+        "unit_mismatch",
+        "archive_mismatch"
+      ],
+      "triggers": [
+        "Table \\d",
+        "(?-i:\\bSDs?\\b)",
+        "(?-i:\\bI2\\b)|I²",
+        "intercept",
+        "表 ?\\d"
+      ],
+      "detector": "bp-consistency-check/scripts/numbers_crosscheck.py",
+      "question": "Which of the two values is correct?",
+      "summary_zh": "同一个量在正文、表格或作者自己的输出里数值不同（笔误、两个值互换、舍入位数错）。"
+    },
+    {
+      "id": "count_arithmetic",
+      "kind": "paper",
+      "name_zh": "计数加减对不上",
+      "summary": "Counts reported in the paper do not add up (items, participants, articles across rounds or flow-chart boxes).",
+      "finding_types": [
+        "sample_size",
+        "number_mismatch"
+      ],
+      "triggers": [
+        "items?",
+        "participants?",
+        "articles?",
+        "rounds?",
+        "excluded",
+        "flow ?chart",
+        "n ?=",
+        "条目",
+        "例"
+      ],
+      "detector": "bp-consistency-check/scripts/counts_check.py",
+      "question": "How many units entered each step?",
+      "summary_zh": "论文里的计数加减对不上（条目、参与者、文章在各轮或流程图各框之间）。"
+    },
+    {
+      "id": "unregenerable_result",
+      "kind": "paper",
+      "name_zh": "表格无法由公开的分析重新生成",
+      "summary": "A reported table or model cannot be regenerated from the released analysis: different df, coefficients or subset.",
+      "finding_types": [
+        "archive_mismatch",
+        "rerun_mismatch",
+        "not_reproduced"
+      ],
+      "triggers": [
+        "Table \\d",
+        "df ?=",
+        "model",
+        "lm\\(|glm\\(|lmer\\("
+      ],
+      "detector": "reproduction gate (numbers_crosscheck.py with recomputed.json)",
+      "question": "Which data subset and model produced this table?",
+      "summary_zh": "表格或模型无法由公开的分析重新生成：自由度、系数或子集不同。"
+    },
+    {
+      "id": "port_semantics",
+      "kind": "auditor",
+      "name_zh": "[审计方] 移植代码时改变了语义",
+      "summary": "Our Python port of the authors' R code treats values differently (R reads the string NA as missing; factor order; 1-based indexing; default quantile type), producing counts the authors never computed.",
+      "finding_types": [
+        "port_gap",
+        "rerun_mismatch",
+        "number_mismatch",
+        "sample_size"
+      ],
+      "triggers": [
+        "read\\.csv|read_csv|tidyverse|dplyr|filter\\(",
+        "is\\.na\\(|\\bNA\\b"
+      ],
+      "detector": "reproduction gate: compare with the authors' stored output before any finding",
+      "question": null,
+      "require_files": "\\.(R|Rmd|r|rmd)$",
+      "summary_zh": "我们把作者的 R 代码移植成 Python 时改变了语义（R 把字符串 NA 读成缺失；因子顺序；下标从 1 开始；默认分位数算法），算出了作者从未算过的数。"
+    },
+    {
+      "id": "aggregation_slip",
+      "kind": "auditor",
+      "name_zh": "[审计方] 把表格各格相加时出错",
+      "summary": "A paper total is the sum of several table cells (explicit + indirect, US + UK); adding them up by hand in the reasoning gives a wrong total and a false mismatch.",
+      "finding_types": [
+        "number_mismatch",
+        "sample_size"
+      ],
+      "triggers": [
+        "Table \\d",
+        "\\b\\d+ ?/ ?\\d+\\b",
+        "(?-i:\\b(US|UK)\\b)|\\b(groups?|arms?)\\b"
+      ],
+      "detector": "write every cell and the sum in the evidence; put the value through the reproduction gate",
+      "question": null,
+      "summary_zh": "论文里的总数是几个表格单元之和（明确 + 间接、美国 + 英国），推理时手工相加出错，得出假的不一致。"
+    },
+    {
+      "id": "denominator_choice",
+      "kind": "auditor",
+      "name_zh": "[审计方] 用错了百分比的分母",
+      "summary": "A percentage is recomputed over a different set of units than the paper's (institutions sampled instead of forms obtained, all rows instead of the analysed subset), producing a false mismatch.",
+      "summary_zh": "重算百分比时用了与论文不同的分母（用抽样机构数代替实际拿到的表格数，用全部行代替分析子集），得出假的不一致。",
+      "finding_types": [
+        "rerun_mismatch",
+        "number_mismatch",
+        "sample_size"
+      ],
+      "triggers": [
+        "\\d+ ?%",
+        "percent|proportion|比例|百分"
+      ],
+      "detector": "before a percentage mismatch, compute it over every denominator the paper names (sampled, contacted, obtained, included, analysed) and show which one reproduces it",
+      "question": null
+    },
+    {
+      "id": "disclosed_method_difference",
+      "kind": "auditor",
+      "name_zh": "[审计方] 把已披露的方法差异当成错误",
+      "summary": "Two reported values differ because two different, disclosed methods were used (e.g. two CI methods named in the supplement); this is grey, not red.",
+      "finding_types": [
+        "number_mismatch",
+        "stat_inconsistency"
+      ],
+      "triggers": [
+        "Wilson|Sison|Clopper|exact (binomial|test)",
+        "supplement",
+        "(?-i:\\bCI\\b)"
+      ],
+      "detector": "search the paper and supplement for both method names before rating",
+      "question": null,
+      "summary_zh": "两个数值不同是因为用了两种都已披露的方法（例如补充材料里写明的两种 CI 算法），应为灰灯而不是红灯。"
+    },
+    {
+      "id": "port_gap",
+      "kind": "auditor",
+      "name_zh": "[审计方] 换语言/环境重算的偏差被当成论文错误",
+      "summary": "A value re-computed in another language or package version differs from the paper while the authors' stored output agrees with the paper.",
+      "finding_types": [
+        "port_gap",
+        "rerun_mismatch"
+      ],
+      "triggers": [
+        "library\\(|require\\(|\\.Rmd|knitr|Stata|MATLAB|SPSS"
+      ],
+      "detector": "reproduction gate (numbers_crosscheck.py)",
+      "question": null,
+      "require_files": "\\.(R|Rmd|r|rmd|do|m|sps)$",
+      "summary_zh": "换语言或包版本重算的值与论文不同，而作者存档输出与论文一致。"
+    },
+    {
+      "id": "unclassified_false_alarm",
+      "kind": "auditor",
+      "name_zh": "[审计方] 其他误报",
+      "summary": "A flag that a human checked and rejected, not yet assigned to a specific auditor mechanism.",
+      "finding_types": [],
+      "triggers": [],
+      "detector": "human adjudication",
+      "question": null,
+      "summary_zh": "人工核对后否决、尚未归入具体审计方机制的报警。"
+    },
+    {
+      "id": "post_baseline_predictor",
+      "kind": "paper",
+      "name_zh": "把治疗后才知道的变量当基线预测因子",
+      "summary": "Variables observed during or after treatment (best response, toxicity grade, adverse events) enter a survival model as baseline covariates; patients must survive long enough to have them (immortal time), so hazard ratios favour them.",
+      "finding_types": [
+        "leakage_risk",
+        "fragile_conclusion"
+      ],
+      "triggers": [
+        "coxph|Surv\\(|CoxPH|lifelines|survival",
+        "best response|RECIST|toxicit|adverse event",
+        "univariate"
+      ],
+      "detector": "bp-ghost-variables/scripts/deep_checks.py (post_baseline)",
+      "question": "Were post-baseline covariates analysed with a landmark or time-dependent model?",
+      "summary_zh": "把最佳疗效、毒性分级等治疗中/后才观察到的变量当作基线协变量放进生存模型；病人得活得足够久才会有这些值（不朽时间偏倚），风险比偏向有利。"
+    },
+    {
+      "id": "unstored_result",
+      "kind": "paper",
+      "name_zh": "代码算了、但存档里没有的结果",
+      "summary": "The analysis computes a result (an OS table, a model, a figure) that is never printed or written, so the stored output cannot back the corresponding claim.",
+      "finding_types": [
+        "missing_artifact",
+        "unverifiable_claim"
+      ],
+      "triggers": [
+        "Rmd|knit|nb\\.html|notebook",
+        "results?|table",
+        "OS|PFS|overall survival|progression"
+      ],
+      "detector": "bp-ghost-variables/scripts/deep_checks.py (rmd_outputs, archive_objects)",
+      "question": "Can the result table that the code computes but never prints be added to the stored output?",
+      "summary_zh": "代码算出了某个结果（OS 表、模型、图），但从未打印或写出，存档无法支撑对应结论。"
+    },
+    {
+      "id": "literal_result_values",
+      "kind": "paper",
+      "name_zh": "图里的数字是手敲的，与逐折结果对不上",
+      "summary": "Figure scripts plot numbers typed in as literals; the per-fold arrays typed elsewhere average to a different value, or the script that would produce them is never run.",
+      "finding_types": [
+        "figure_data_mismatch",
+        "phantom_experiment"
+      ],
+      "triggers": [
+        "fig_|plot|bar\\(",
+        "scores\\s*=|np\\.array\\(\\[0\\.9",
+        "fold|KFold"
+      ],
+      "detector": "bp-ghost-variables/scripts/deep_checks.py (literal_arrays, pipeline)",
+      "question": "Which run produced the plotted values, and where is its log?",
+      "summary_zh": "画图脚本里的数字是手敲的字面量；别处手敲的逐折数组平均值与之不符，或者产生这些数的脚本从未运行。"
+    },
+    {
+      "id": "architecture_mismatch",
+      "kind": "paper",
+      "name_zh": "论文写的网络结构与存档权重不符",
+      "summary": "The architecture written in the paper (layer sizes, number of hidden units) differs from the shapes of the weight matrices the authors stored.",
+      "finding_types": [
+        "archive_mismatch",
+        "param_mismatch"
+      ],
+      "triggers": [
+        "hidden layer|neurons|nodes|architecture",
+        "\\d+-\\d+-\\d+",
+        "checkpoint|\\.h5|\\.pt|chkp"
+      ],
+      "detector": "bp-ghost-variables/scripts/deep_checks.py (weights)",
+      "question": "Which architecture produced the reported results?",
+      "summary_zh": "论文写的网络结构（层数、隐藏单元数）与作者存档的权重矩阵形状不符。"
+    },
+    {
+      "id": "metric_definition_mix",
+      "kind": "paper",
+      "name_zh": "同名指标用不同定义算",
+      "summary": "Sensitivity, precision or recall are computed with sklearn macro averaging for some methods and as a one-class binary count for others, then compared in one table.",
+      "finding_types": [
+        "param_mismatch"
+      ],
+      "triggers": [
+        "average=.macro|macro",
+        "TP\\s*/\\s*\\(TP",
+        "sensitivity|PPV|Se\\b"
+      ],
+      "detector": "bp-ghost-variables/scripts/deep_checks.py (metric_defs)",
+      "question": "Were the compared metrics computed with the same definition?",
+      "summary_zh": "灵敏度、精确率等指标对一部分方法用 sklearn 宏平均，对另一部分用单类二分类计数，再放进同一张表比较。"
+    },
+    {
+      "id": "quantity_confusion",
+      "kind": "auditor",
+      "name_zh": "[审计方] 拿两个不同的量相比",
+      "summary": "The agent compares numbers that belong to different datasets, metrics, endpoints or tables (Dataset 1 vs Dataset 2; c-index vs AUROC; a PFS table read as OS).",
+      "finding_types": [
+        "number_mismatch",
+        "param_mismatch",
+        "fragile_conclusion",
+        "missing_artifact"
+      ],
+      "triggers": [
+        "Dataset ?1|Dataset ?2|data set",
+        "OS|PFS",
+        "c-index|AUROC|AUC"
+      ],
+      "detector": "verify_queue.py (a/b fields) + build_passport.py different_dataset / archive_identity",
+      "question": null,
+      "summary_zh": "智能体拿属于不同数据集、指标、终点或表格的数相比（数据集 1 对数据集 2；c-index 对 AUROC；把 PFS 表当 OS 表）。"
+    },
+    {
+      "id": "code_trace_miscount",
+      "kind": "auditor",
+      "name_zh": "[审计方] 读代码数错",
+      "summary": "The agent counts indices, positional arguments or confusion cells by reading code and gets them wrong (covariates[2:] skipped; 6th positional argument; TN = negatives - FP).",
+      "finding_types": [
+        "number_mismatch",
+        "param_mismatch",
+        "stat_inconsistency",
+        "sample_size"
+      ],
+      "triggers": [
+        "\\[-1\\]|\\[2:|length\\(",
+        "def \\w+\\(",
+        "TRUE POSITIVE|confusion"
+      ],
+      "detector": "deep_checks.py (r_trace, confusion) + build_passport.py positional / index_trace / confusion_recount",
+      "question": null,
+      "summary_zh": "智能体靠读代码去数下标、位置参数或混淆矩阵格子，数错了（covariates[2:] 跳过的列；第 6 个位置参数；TN = 阴性数 − FP）。"
+    }
+  ]
+}

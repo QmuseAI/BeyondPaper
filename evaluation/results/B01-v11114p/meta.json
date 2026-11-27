@@ -1,0 +1,24 @@
+{
+ "run_id": "B01-v11114p",
+ "paper_id": "B01",
+ "variant": "clean",
+ "version": "v1.11.14",
+ "saved": "2026-11-18",
+ "source_file": "pages/B01-v11114p.c4.json",
+ "note": "",
+ "n_findings": 29,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 0,
+  "grey": 25,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 0,
+  "grey": 25,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

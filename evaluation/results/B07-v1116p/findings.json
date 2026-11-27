@@ -1,0 +1,300 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "10.1098/rsos.201494",
+  "venue": "Royal Society Open Science (2021)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 3,
+  "yellow": 3,
+  "grey": 15,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 15,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 4,
+   "unmatched": 0
+  }
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Results p.4 vs materials/results/output (valuesChecked <- nrow(data_values))",
+   "evidence": "The paper reports 'n target values examined (after author involvement)' = 879 values (Results p.4); the authors' own stored output (materials/results/output (valuesChecked <- nrow(data_values))) gives 789. Our re-run gives 789, which matches the stored output.",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Results p.4 ('37 major numerical discrepancies remained among the 879 target values examined') vs Sample p.3 ('789 discrete numerical values ... designated as target values') and manuscript.Rmd:262",
+   "evidence": "The authors' own stored manuscript.tex prints 'After author involvement, 37 major numerical discrepancies remained amongst the 789 target values examined across all articles (5% CI [3,6])' and the Abstract 'out of 789 checked values'; the supplied paper.md Results sentence reads 'among the 879 target values examined'. The code that produces the denominator is `valuesChecked <- nrow(data_values)` (manuscript.Rmd:262) = 789 (data_values.csv has 789 rows; the stored run log prints \"new variable 'dataID' ... 789 unique values\"). 879 appears nowhere in the data, code or stored output. Check output: bp_work/checks/V1.out. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F2"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract vs Table 1 (row 'reproducible with author involvement')",
+   "evidence": "Supplied paper.md Abstract: 'reproducible with author involvement for 6 (34% [8,47]) articles'. The authors' stored manuscript.tex Abstract prints '6 (24%, CI [8, 47])' and Table 1 prints '6 (24%, CI [8, 47])'; 6/25 = 24%. The 34% matches no denominator and the CI [8,47] is the one computed for 6/25. Check output: bp_work/checks/V2.out.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F3"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "location": "Data analysis p.3 ('Ninety-five per cent confidence intervals (CIs) are displayed in square brackets') vs functions.R:3-8 and manuscript.Rmd:196-205",
+   "evidence": "Two interval methods are used in the released code: prop.test (Wilson score) in functions.R:3-8 for single proportions and MultinomCI(method='sisonglaz') in manuscript.Rmd:196-205 for the article-level table. The paper names neither method, so the reader cannot tell which interval belongs to which number; this is the likely source of the [20,59] vs [19,57] and [39,78] vs [8,47]/[20,59] differences.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F4"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Results p.4 vs Table 1 (articles fully reproducible after author contact)",
+   "evidence": "Results p.4: 'all target values in 15 (60%, CI [39,78]) articles were reproducible, with the remaining 10 (40%, CI [22,61])'. Table 1 cells for the same two quantities: 6 (24%, [8,47]) + 9 (36%, [20,59]) = 15 (60%) and 7 (28%, [12,51]) + 3 (12%, [0,35]) = 10 (40%). The point estimates agree but the intervals differ: [39,78] vs the Table-1 combination [20,59]/[8,47], and [22,61] vs [12,51]/[0,35]. The code computes the 15/10 intervals with MultinomCI and the Table-1 cells with the same MultinomCI call, so two different interval methods are in play. [Yellow, not red (build_passport.py): the two intervals nearly coincide; check whether they were computed with different interval methods before treating this as an error.]",
+   "source": "llm",
+   "severity_original": "red",
+   "severity_reasons": [
+    "close_intervals"
+   ],
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results p.4 ('A comparison sample of 30 articles from the same journal without open data badges, checked with the same protocol, contained at least one major numerical discrepancy in 21 (70%) articles ... two decision errors ... and one decision error with the opposite pattern')",
+   "evidence": "The materials contain no data file, code chunk or stored output for the 30-article comparison sample: data_articles.csv and data_values.csv cover only the 25 badged articles (25 rows / 789 rows), manuscript.Rmd and supplementary_information.Rmd contain no reference to a comparison sample, and the stored run log (materials/results/output) never prints it. The number 30/21/70% cannot be checked from the materials.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 2, Sec. Introduction, line 21",
+   "evidence": "'es were resolved in 11 of the 24 articles after consultation with origi': 24 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a "
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Sample, line 41",
+   "evidence": "'numerical values reported in 27 articles published between January 201': 27 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a d"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "22 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F10",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F11",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/manuscript.Rmd:168",
+   "evidence": "1 data-exclusion step(s): filter@168. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/supplementary_information.Rmd:7",
+   "evidence": "1 data-exclusion step(s): filter@7. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F13",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4; Discussion",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F14",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4; Discussion",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F15",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C7 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F16",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Figure 1; Data analysis",
+   "evidence": "Claim C8 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F17",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C9 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F18",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Figure 1 (forest plot) vs meta_analysis.R:68-82",
+   "evidence": "The meta-analysis is run with metaprop(..., method.ci='WSCC', sm='PRAW', method='Inverse', comb.random=TRUE, byvar=type). The paper says only 'random-effects mo"
+  },
+  {
+   "id": "F19",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Abstract vs Results p.4 (articles fully reproducible before author contact)",
+   "evidence": "Abstract: 'target values were reproducible without author involvement for 9 (36% [20,59]) articles'. Results p.4: 'all target values in 9 out of the 25 articles",
+   "severity_reasons": [
+    "gate_cap",
+    "disclosed_interval_methods"
+   ]
+  },
+  {
+   "id": "F20",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Design p.3 ('Numerical discrepancies were classified as minor (0% > PE < 10%) or major (PE >= 10%)') vs manuscript.Rmd:262-296 and preprocessing.R",
+   "evidence": "The Methods define the major/minor split by percentage error (PE >= 10%). The reported counts of major discrepancies are not computed from percentageError: manu",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ]
+  },
+  {
+   "id": "F21",
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Results p.4 ('between 1 and 30 (median = 7, interquartile range = 5) hours ... total time = 213 h')",
+   "evidence": "data_articles.csv has pilotTTC and copilotTTC columns, but no code chunk in manuscript.Rmd or supplementary_information.Rmd computes a median, an interquartile ",
+   "severity_reasons": [
+    "refuted_on_check"
+   ]
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 15 re-computed values match the paper."
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "6 of 6 estimate-CI reports are internally consistent."
+  },
+  {
+   "id": "F24",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'After author involvement, 60% (15/25) of the badged articles were fully analytically reproducible' holds in 100% of 12 universes. Single changes that fli"
+  }
+ ]
+}

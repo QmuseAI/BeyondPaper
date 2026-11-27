@@ -1,0 +1,24 @@
+{
+ "run_id": "B13-v1113",
+ "paper_id": "B13",
+ "variant": "blind",
+ "version": "v1.11.3",
+ "saved": "2026-11-17",
+ "source_file": "pages/B13-v1113.c3.json",
+ "note": "v1.11.3; V4 Pro selected, switched to V4 Flash partway; paper = AACR supplement only; agent patched an f-string SyntaxError in deep_checks.py locally; c3 copy, sha256 verified; raw sha baef7cea",
+ "n_findings": 26,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 5,
+  "grey": 19,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 5,
+  "grey": 19,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

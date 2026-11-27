@@ -1,0 +1,58 @@
+{
+ "paper": "Papalouka et al., MetaArXiv (REC forms)",
+ "items": [],
+ "known_false": [
+  {
+   "id": "A-B11-na",
+   "mechanism": "port_semantics",
+   "types": [
+    "number_mismatch",
+    "sample_size",
+    "rerun_mismatch"
+   ],
+   "match_any": [
+    "21 us",
+    "15 uk",
+    "23 forms",
+    "23 included",
+    "expenditure_rank",
+    " na "
+   ],
+   "description": "NA rows counted; R code drops them",
+   "status": "verified"
+  },
+  {
+   "id": "A-B11-sum",
+   "mechanism": "aggregation_slip",
+   "types": [
+    "number_mismatch",
+    "sample_size",
+    "rerun_mismatch"
+   ],
+   "match_any": [
+    "6/20",
+    "max 5"
+   ],
+   "description": "6 = 2+1+2+1 from stored Table 1",
+   "status": "verified"
+  },
+  {
+   "id": "A-B11-denom",
+   "mechanism": "denominator_choice",
+   "types": [
+    "number_mismatch",
+    "sample_size",
+    "rerun_mismatch"
+   ],
+   "match_any": [
+    "21.1",
+    "14.3",
+    "4/19",
+    "2/14"
+   ],
+   "description": "percent over institutions instead of 10 forms per country",
+   "status": "verified"
+  }
+ ],
+ "key": "B11"
+}

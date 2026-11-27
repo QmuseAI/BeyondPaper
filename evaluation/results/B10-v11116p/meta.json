@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v11116p",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B10-v11116p.c5.json",
+ "note": "new account; platform switched to Flash early (stage 1), stopped, resumed by message on Pro; one 'resume' click also ran briefly on Flash -> flash by rule; red/yellow only c5 sha256 8837c400 (counts from findings.json)",
+ "n_findings": 10,
+ "truncated": false,
+ "counts": {
+  "red": 3,
+  "yellow": 7,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 3,
+  "yellow": 7,
+  "grey": 18,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B02-v11111p",
+ "paper_id": "B02",
+ "variant": "injected",
+ "version": "v1.11.11",
+ "saved": "2026-11-18",
+ "source_file": "pages/B02-v11111p.c4.json",
+ "note": "",
+ "n_findings": 42,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 19,
+  "grey": 19,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 19,
+  "grey": 19,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

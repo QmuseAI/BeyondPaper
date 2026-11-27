@@ -1,0 +1,24 @@
+{
+ "run_id": "B03-v1115",
+ "paper_id": "B03",
+ "variant": "clean",
+ "version": "v1.11.5",
+ "saved": "2026-11-17",
+ "source_file": "pages/B03-v1115.c4.json",
+ "note": "v1.11.5; GLM-5.3 then DeepSeek V4 Flash; first turn stopped in stage 4, one continue with a command list (multiverse grid skipped); c4 copy, sha256 95ccfc64 verified; raw sha aff42779; transcribed copy sha 512e1c08 differs from page sha 95ccfc64 only in two truncated grey evidence snippets (F14/F15, whitespace); red/yellow identical",
+ "n_findings": 50,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 11,
+  "grey": 34,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 11,
+  "grey": 34,
+  "green": 3
+ },
+ "reproduction": "partial"
+}

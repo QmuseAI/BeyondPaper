@@ -1,0 +1,24 @@
+{
+ "run_id": "B07-v1119p",
+ "paper_id": "B07",
+ "variant": "injected",
+ "version": "v1.11.9",
+ "saved": "2026-11-18",
+ "source_file": "pages/B07-v1119p.c4.json",
+ "note": "first turn flash+pro (运行详情); reproduction not attempted (no R in sandbox)",
+ "n_findings": 17,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 3,
+  "grey": 10,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 3,
+  "grey": 10,
+  "green": 3
+ },
+ "reproduction": "not attempted"
+}

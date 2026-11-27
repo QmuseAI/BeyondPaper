@@ -1,0 +1,631 @@
+{
+ "paper": {
+  "title": "A New Feature Expansion Technique Combined with Shunt Gated Recurrent Unit Neural Network for Epileptic Seizure Diagnosis",
+  "doi": "not found (no published article located; capsule-derived text)",
+  "source": "capsule-6746514 (Code Ocean): metadata/metadata.yml, code/README.md, REPRODUCING.md, code/*.py, results/output"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 0,
+  "yellow": 13,
+  "grey": 20,
+  "green": 2
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "text": "PCC-WFE (Pearson-correlation-coefficient weighted feature expansion) produces a new single feature (Dataset 2) that improves traditional classifiers over the raw 178 features (Dataset 1).",
+   "location": "code/README.md; code/PCC_WFE.py; code/NewData_ML_Kfold.py vs code/RawData_ML_Kfold.py",
+   "light": "yellow",
+   "findings": [
+    "F10",
+    "F24",
+    "F31",
+    "F32"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C2",
+   "text": "The SGRU (shunt gated recurrent unit) classifier outperforms a plain GRU classifier on both Dataset 1 and Dataset 2.",
+   "location": "code/README.md; code/SGRU_GRU_Kfold.py",
+   "light": "yellow",
+   "findings": [
+    "F9",
+    "F11",
+    "F25",
+    "F31",
+    "F32"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C3",
+   "text": "The proposed pipeline (PCC-WFE + SGRU) achieves the best epileptic seizure diagnosis performance among the compared methods.",
+   "location": "metadata/metadata.yml description; code/README.md",
+   "light": "yellow",
+   "findings": [
+    "F11",
+    "F26",
+    "F31",
+    "F32"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C4",
+   "text": "On Dataset 2 (PCC-WFE feature), XGBoost reaches ACC 0.9513, Se 0.8913, PPV 0.9541; RF 0.9432/0.8683/0.9520; DT 0.9239/0.8435/0.9095; SVM 0.8780/0.6992/0.9212.",
+   "location": "results/output lines 41-44",
+   "light": "yellow",
+   "findings": [
+    "F9",
+    "F12",
+    "F27",
+    "F31"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C5",
+   "text": "The dataset is balanced: 11500 samples, 2300 per class, 178 features.",
+   "location": "results/output lines 47-49; data/Epileptic Seizure Recognition.csv",
+   "light": "grey",
+   "findings": [
+    "F28"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C6",
+   "text": "The capsule reproduces the published results (REPRODUCING.md states the capsule allows reproduction of the results published by the author).",
+   "location": "REPRODUCING.md",
+   "light": "grey",
+   "findings": [
+    "F29"
+   ],
+   "note": ""
+  },
+  {
+   "id": "C7",
+   "text": "The PCC-WFE new feature is a weighted sum of the 178 channels with positive correlation only, and is used as the single input feature of Dataset 2.",
+   "location": "code/PCC_WFE.py lines 10-60",
+   "light": "yellow",
+   "findings": [
+    "F10",
+    "F13",
+    "F30"
+   ],
+   "note": ""
+  }
+ ],
+ "findings": [
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Were preprocessing steps fitted on the training data only?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py; code/NewData_ML_Kfold.py",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> not_reported. 未描述任何纳入/排除规则;全部 11500 行直接进入 10 折交叉验证。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are inclusion/exclusion rules stated, with counts removed at each step?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/*.py",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. 未定义离群值规则,代码中无 z-score/IQR 过滤。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the outlier definition and removal rule stated (and applied before or after splitting)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/SGRU_GRU_Kfold.py; code/NewData_ML_Kfold.py",
+   "evidence": "[M1] Are random seeds stated, and are results reported over several seeds? -> not_reported. 无随机种子;单次运行结果。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are random seeds stated, and are results reported over several seeds?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py load_data()",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. PCC-WFE 特征在 KFold 之前用全部 11500 个样本(含标签)一次性构造,未在训练折内重新估计;属于预处理在划分前拟合。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "data/Epileptic Seizure Recognition.csv",
+   "evidence": "[M7] Were duplicates and near-duplicates between training and test sets removed? -> not_reported. 未检查训练/测试折之间的重复或近重复样本。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were duplicates and near-duplicates between training and test sets removed?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "code/PCC_WFE.py",
+   "evidence": "[M10] If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)? -> not_reported. 未做负对照(如打乱标签后的 PCC-WFE 特征、随机权重特征),无法判断增益是否来自特征构造本身。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C4"
+   ],
+   "location": "code/NewData_ML_Kfold.py:17",
+   "evidence": "XGBClassifier(...) called without random_state. Also at: code/NewData_ML_Kfold.py:29; code/RawData_ML_Kfold.py:17; code/RawData_ML_Kfold.py:29; code/pca_test.py:23; code/pca_test.py:35; code/wave_test.py:23; code/wave_test.py:35; code/SGRU_GRU_Kfold.py; code/NewData_ML_Kfold.py; code/RawData_ML_Kfold.py.",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which random seed(s) were used for the reported results?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "code/NewData_ML_Kfold.py:29",
+    "code/RawData_ML_Kfold.py:17",
+    "code/RawData_ML_Kfold.py:29",
+    "code/pca_test.py:23",
+    "code/pca_test.py:35",
+    "code/wave_test.py:23",
+    "code/wave_test.py:35",
+    "code/SGRU_GRU_Kfold.py; code/NewData_ML_Kfold.py; code/RawData_ML_Kfold.py"
+   ],
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C7"
+   ],
+   "location": "code/PCC_WFE.py load_data(); code/NewData_ML_Kfold.py",
+   "evidence": "PCC-WFE 的权重由全部 11500 个样本(含测试折)与标签 y 的相关系数计算,且在 KFold 之前一次性完成;随后 10 折交叉验证在已用全数据(含标签)构造的特征上进行。特征构造阶段使用了测试折的标签信息,构成标签泄漏,可能高估 Dataset 2 的性能。",
+   "source": "llm",
+   "question_for_authors": "PCC 权重是否应在每一折的训练集内重新估计?当前实现使用了全部样本的标签。",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "location": "results/output (49 lines); code/SGRU_GRU_Kfold.py",
+   "evidence": "作者存储输出 results/output 只包含 NewData_ML_Kfold.py(传统分类器)的逐折结果与均值,以及 fig_*.py 的启动行;SGRU_GRU_Kfold.py 的 ACC/Se/PPV 打印(代码第 180-200 行 print('D1-avg_acc:'...) 等)在存储输出中完全缺失。因此 C2(SGRU 优于 GRU)与 C3(所提方法最优)在胶囊内没有任何数值证据。",
+   "source": "llm",
+   "question_for_authors": "SGRU/GRU 的 10 折结果(ACC/Se/PPV)是否有存储输出?能否提供 results/ 下的完整日志?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "code/NewData_ML_Kfold.py evaluate(); code/perform.py",
+   "evidence": "传统分类器用 metrics.recall_score/precision_score(average='macro') 计算 Se/PPV,而 SGRU/GRU 用 perform.py 的二分类混淆矩阵(threshold=0.5)计算 Se/PPV。两类方法的 Se/PPV 定义不同(宏平均 vs 二分类),因此 results/output 中 XGBoost Se=0.8913 与 SGRU 的 Se 不可直接比较。",
+   "source": "llm",
+   "question_for_authors": "论文中 SGRU 与传统分类器的 Se/PPV 是否用同一口径计算?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "code/PCC_WFE.py pc() 第 14-18 行",
+   "evidence": "相关系数公式把样本数硬编码为 11500(a = 11500*sum(x*y)-sum(x)*sum(y) 等),而不是 len(x)。对当前数据集数值正确,但函数对任何子集/其他数据集都会给出错误的相关系数,属于不可移植的实现。",
+   "source": "llm",
+   "question_for_authors": "该函数是否只用于完整数据集?若用于子集,权重会错误。",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F13"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/rerun/repro_baseline.py (our re-run, sklearn 1.9/xgboost 3.2) vs bp_work/results/output line 41",
+   "evidence": "Our re-computation of 'ACC XGBoost Dataset 2 (mean of 10 folds)' gives 0.9314782608695651 (bp_work/rerun/repro_baseline.py (our re-run, sklearn 1.9/xgboost 3.2)), but the authors' stored output (bp_work/results/output line 41) gives 0.951304347826, which matches the paper (results/output line 41: 0.951304347826). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C4.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F14"
+  },
+  {
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "bp_work/rerun/repro_baseline.py vs bp_work/results/output line 42",
+   "evidence": "Our re-computation of 'ACC SVM Dataset 2 (mean)' gives 0.9669565217391304 (bp_work/rerun/repro_baseline.py), but the authors' stored output (bp_work/results/output line 42) gives 0.878, which matches the paper (results/output line 42: 0.878). The gap comes from our re-run (environment, port to another language, package version or seed), not from the paper; it is not reported as a paper problem. Related claims: C4.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F15"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "metadata/metadata.yml; code/README.md",
+   "evidence": "[G1] Is the exact data source identified (version, DOI, accession, download date)? -> partial. 数据集来源已给出(UCI Epileptic Seizure Recognition, https://archive.ics.uci.edu/ml/datasets/Epileptic+Seizure+Recognition),但未给出下载日期或版本快照。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the exact data source identified (version, DOI, accession, download date)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F16"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/*.py",
+   "evidence": "[G3] Is the handling of missing values stated? -> not_reported. 未提及缺失值处理;代码中无 impute/dropna 调用。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the handling of missing values stated?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F17"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/README.md",
+   "evidence": "[G5] Is the sample size justified (power analysis or other rationale)? -> not_reported. 未给出样本量依据或功效分析。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is the sample size justified (power analysis or other rationale)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F18"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. 同时比较 4 个分类器 × 3 个指标,未做多重比较校正。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is correction for multiple comparisons stated when many tests or metrics are reported?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F19"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py; code/perform.py",
+   "evidence": "[G7] Is each statistical test named, with sidedness and assumptions checked? -> not_reported. 未做任何统计检验(无 t 检验/置信区间),仅报告 10 折均值。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Is each statistical test named, with sidedness and assumptions checked?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F20"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py; code/SGRU_GRU_Kfold.py",
+   "evidence": "[M3] How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)? -> partial. 使用 KFold(n_splits=10) 随机划分;UCI 数据集每个样本来自同一患者的不同 EEG 片段(片段级划分),未按患者/受试者分组,存在同一患者片段同时出现在训练与测试折的风险。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F21"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py; code/SGRU_GRU_Kfold.py",
+   "evidence": "[M5] Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)? -> partial. 超参数(XGBoost max_depth=5/lr=0.1/n=10,RF n=10/max_depth=5,DT max_depth=5,SVM C=1.0 rbf,GRU 32 单元/100 epochs/lr=0.001)直接写死,未说明选择依据,也未在验证集上调参。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F22"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "code/NewData_ML_Kfold.py",
+   "evidence": "[M8] Were baselines given comparable tuning effort and the same data? -> partial. 所有分类器使用同一数据与同一 10 折,但超参数预算不同(XGBoost 10 棵树 vs RF 10 棵树,均未调参);SGRU 训练 100 epochs 而传统分类器无对应预算说明。",
+   "source": "script:checklist_to_findings.py",
+   "question_for_authors": "Were baselines given comparable tuning effort and the same data?",
+   "file": "ghost.findings.json",
+   "hand_written": false,
+   "id": "F23"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "code/README.md; code/PCC_WFE.py; code/NewData_ML_Kfold.py vs code/RawData_ML_Kfold.py",
+   "evidence": "Claim C1 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F24"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C2"
+   ],
+   "location": "code/README.md; code/SGRU_GRU_Kfold.py",
+   "evidence": "Claim C2 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F25"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "metadata/metadata.yml description; code/README.md",
+   "evidence": "Claim C3 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F26"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "results/output lines 41-44",
+   "evidence": "Claim C4 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F27"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C5"
+   ],
+   "location": "results/output lines 47-49; data/Epileptic Seizure Recognition.csv",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F28"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C6"
+   ],
+   "location": "REPRODUCING.md",
+   "evidence": "Claim C6 cannot be re-computed: no available data or code behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F29"
+  },
+  {
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "claim_ids": [
+    "C7"
+   ],
+   "location": "code/PCC_WFE.py lines 10-60",
+   "evidence": "Claim C7 cannot be re-computed: no available data behind its evidence.",
+   "source": "script:validate_ledger.py",
+   "question_for_authors": null,
+   "file": "ledger.findings.json",
+   "hand_written": false,
+   "id": "F30"
+  },
+  {
+   "module": "llm",
+   "type": "missing_artifact",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "location": "REPRODUCING.md; results/output",
+   "evidence": "未找到与该标题/作者匹配的已发表论文(Crossref、OpenAlex、web_search 均无结果),因此论文正文、表格与图注均不可得。本运行以胶囊(metadata.yml、code/README.md、REPRODUCING.md、code/*.py、results/output)作为论文文本;所有论文级主张(摘要/结果/讨论中的数值与结论)无法核对,按规则标灰:依据为复现包而非论文。",
+   "source": "llm",
+   "question_for_authors": "请提供该胶囊对应的已发表论文的 DOI 或全文链接,以便核对论文表格与胶囊输出是否一致。",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F31"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "claim_ids": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "location": "code/README.md; metadata/metadata.yml",
+   "evidence": "胶囊内没有任何文本描述 PCC-WFE 的动机、SGRU 的结构设计理由、与已有方法的对比表或统计检验;README 仅 4 句话。论文的方法学细节(如为何只用正相关通道、SGRU 的 shunt 连接定义)无法核对。",
+   "source": "llm",
+   "question_for_authors": "能否提供论文 Methods 部分,以核对 PCC-WFE 与 SGRU 的定义?",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F32"
+  },
+  {
+   "module": "multiverse",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "claim_ids": [],
+   "location": "baseline universe",
+   "evidence": "With the paper's own choices the claim 'XGBoost is the best traditional classifier on Dataset 2 (PCC-WFE feature)' does not hold on re-run (effect = -0.039565217391304475). [Grey (build_passport.py): the mismatch comes from our own port of the authors' code; the reproduction gate decides whether the paper is affected.]",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Which settings or data version produced the reported result?",
+   "severity_original": "red",
+   "severity_reasons": [
+    "port_rerun"
+   ],
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F33"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 7 re-computed values match the paper.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": null,
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F34"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "claim_ids": [],
+   "location": "whole text",
+   "evidence": "2 count mentions read; 0 flagged. Full list in counts_table.csv.",
+   "source": "script:counts_check.py",
+   "question_for_authors": null,
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F35"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 7,
+   "archive_ok": 0,
+   "port_gap": 2,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.0,
+  "baseline_holds": false,
+  "breaking_changes": [],
+  "n_ok": 8
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "low_value_repeat": 8,
+  "port_rerun": 1
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B16-v1113",
+ "paper_id": "B16",
+ "variant": "blind",
+ "version": "v1.11.3",
+ "saved": "2026-11-17",
+ "source_file": "pages/B16-v1113.c3.json",
+ "note": "v1.11.3; DeepSeek V4 Pro; EnviroPiNet + capsule 5400466; c3 copy with claims dropped, sha256 verified; raw sha a1c7faeb",
+ "n_findings": 51,
+ "truncated": false,
+ "counts": {
+  "red": 5,
+  "yellow": 18,
+  "grey": 26,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 5,
+  "yellow": 18,
+  "grey": 26,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

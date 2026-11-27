@@ -1,0 +1,24 @@
+{
+ "run_id": "B05-v11115p",
+ "paper_id": "B05",
+ "variant": "clean",
+ "version": "v1.11.15",
+ "saved": "2026-11-18",
+ "source_file": "/tmp/b05/B05-v11115p.c4.json",
+ "note": "Flash in early turns, finished on Pro after user rule (switch back to Pro, keep going); red/yellow only; sha c602b379",
+ "n_findings": 5,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 4,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 4,
+  "grey": 11,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

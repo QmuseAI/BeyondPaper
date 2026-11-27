@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v1114",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.4",
+ "saved": "2026-11-17",
+ "source_file": "pages/B10-v1114.c3.json",
+ "note": "v1.11.4; GLM-5.3 at end; c3 copy, sha256 a72fcc62 verified; raw sha 6164df5c",
+ "n_findings": 14,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 3,
+  "grey": 10,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 3,
+  "grey": 10,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

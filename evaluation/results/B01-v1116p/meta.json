@@ -1,0 +1,24 @@
+{
+ "run_id": "B01-v1116p",
+ "paper_id": "B01",
+ "variant": "clean",
+ "version": "v1.11.6",
+ "saved": "2026-11-18",
+ "source_file": "pages/B01-v1116p.c4.json",
+ "note": "v1.11.6 Pro rerun; first turn switched to GLM-5.3, stopped and continued on DeepSeek V4 Pro; reproduction full 28/28; c4 copy, sha256 845d11c6 verified; raw sha bea5617c",
+ "n_findings": 15,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 11,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 11,
+  "green": 2
+ },
+ "reproduction": "full"
+}

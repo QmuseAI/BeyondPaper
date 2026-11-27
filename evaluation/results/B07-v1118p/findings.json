@@ -1,0 +1,261 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "not reported in paper.md"
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 17,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 5,
+   "archive_ok": 0,
+   "port_gap": 1,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 4
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "decision_errors_as_major",
+    "value": "False",
+    "holds": false,
+    "effect": 4
+   }
+  ],
+  "n_ok": 32
+ },
+ "judgement_checks": {
+  "abstract_vs_body": "Abstract: 9 (36% [20,59]) reproducible without author involvement; Results p.4: 9 (36% CI [19,57]) for the same quantity. Same n, same denominator (25), different CI bounds.",
+  "claims_scan": "claims_scan flagged Abstract 34% vs body; Table 1 gives 6 (24%, [8,47]) for the same cell, so 34% in the Abstract is not the value the code prints (24%).",
+  "param_mismatch": "Methods (Design p.3) say major = PE >= 10% and minor = 0% > PE < 10%; code preprocessing.R classifies via comparisonOutcome in data_values.csv (MATCH/MINOR_ERROR/MAJOR_ERROR) and manuscript.Rmd adds DECISION_ERROR to majorErrors. No numeric threshold in code; classification is pre-coded in the data file.",
+  "figure_data_mismatch": "Fig. 1 forest plot is built by meta_analysis.R from stored proportions; Fig. 3 valueTypePlot from data_values.csv valueType counts; no figure prints numbers that can be compared cell by cell.",
+  "phantom_experiment": "Paper describes a comparison sample of 30 articles without open data badges (Results p.4) and SI sections C/E; no data file or code for the 30-article comparison sample exists in materials (data/raw has only the 25-article corpus)."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 10) vs body (paper.md line 58)",
+   "evidence": "The Abstract gives 34 ('...hor involvement for 9 (36% [20,59]) articles; reproducible with author involvement for 6 (34% [8,47]) articles; not fully reproducibl...'); the body never states 34. The body sentence about the same quantity (shared words: articles, author, involvement, reproducible) gives 25: '...Prior to seeking original author involvement, all target values in 9 out of the 25 articles (36%, CI [19,57]) were reproducible, with the remaining 16 articles (64%, CI [43,81]) containing at least one major numerical discrepancy....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim '37 major numerical discrepancies remained out of 789 checked values (5%, CI [3,6])' holds in 50% of 32 universes. Single changes that flip it: decision_errors_as_major=False.",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "id": "F3",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs materials/results/output (majorErrors + decisionErrors)",
+   "evidence": "Our re-computation of 'major numerical discrepancies remaining' gives 30 (re-computed), but the authors' stored output (materials/results/output (majorErrors + "
+  },
+  {
+   "id": "F4",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n articles not reproducible despite author involvement' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n articles not reproducible without response' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'values checked' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'percent major discrepancies' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 2, Sec. Introduction, line 21",
+   "evidence": "'es were resolved in 11 of the 24 articles after consultation with origi': 24 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a "
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Sample, line 41",
+   "evidence": "'numerical values reported in 27 articles published between January 201': 27 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a d"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "22 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Sample p.3 vs materials/results/output (filter: 25 rows remaining)",
+   "evidence": "The paper reports 'n articles contributing target values' = 27 articles (Sample p.3); the authors' own stored output (materials/results/output (filter: 25 rows "
+  },
+  {
+   "id": "F12",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/manuscript.Rmd:168",
+   "evidence": "1 data-exclusion step(s): filter@168. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/supplementary_information.Rmd:7",
+   "evidence": "1 data-exclusion step(s): filter@7. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F15",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F16",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C6 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F17",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4; SI fig S2",
+   "evidence": "Claim C7 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F18",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4; SI fig S3",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F19",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Fig. 1; Data analysis",
+   "evidence": "Claim C9 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 5 re-computed values match the paper."
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "6 of 6 estimate-CI reports are internally consistent."
+  }
+ ]
+}

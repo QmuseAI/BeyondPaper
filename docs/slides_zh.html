@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeyondPaper｜论文之后</title>
+<style>
+:root{
+  --bg:#f6f5f1; --ink:#1d2433; --muted:#5b6475; --line:#d9d6cc; --card:#ffffff;
+  --accent:#0f6e6a; --accent-soft:#e3f0ee;
+  --red:#c8463d; --yellow:#d9a21b; --grey:#9aa1ab; --green:#3f8f4f;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Source Han Sans SC",system-ui,sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#2a2f3a;font-family:var(--font);color:var(--ink);overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--bg);padding:64px 80px 56px;display:none;flex-direction:column}
+.slide.active{display:flex}
+.slide h1{font-size:44px;line-height:1.25;font-weight:700;letter-spacing:.5px}
+.slide h2{font-size:34px;line-height:1.3;font-weight:700;margin-bottom:28px}
+.slide h2 small{display:block;font-size:17px;font-weight:400;color:var(--muted);margin-top:8px}
+.kicker{font-size:15px;letter-spacing:3px;color:var(--accent);font-weight:600;margin-bottom:14px}
+p,li{font-size:21px;line-height:1.6}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-size:.86em}
+.foot{position:absolute;left:80px;right:80px;bottom:22px;display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 24px}
+.card h3{font-size:22px;margin-bottom:10px}
+.card p,.card li{font-size:18px;line-height:1.55}
+.card ul{padding-left:20px}
+.compact .card{padding:12px 18px}
+.compact .card h3{font-size:18px;margin-bottom:4px}
+.compact .card p{font-size:16px;line-height:1.45}
+.tag{display:inline-block;font-size:13px;font-weight:600;padding:2px 9px;border-radius:20px;margin-right:6px;vertical-align:2px}
+.t-red{background:#f6dedb;color:var(--red)} .t-yellow{background:#f7ecd0;color:#94700f}
+.t-grey{background:#e7e9ec;color:#5f6670} .t-green{background:#dcecdf;color:var(--green)}
+.t-acc{background:var(--accent-soft);color:var(--accent)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:0}
+.big{font-size:64px;font-weight:700;line-height:1;color:var(--accent)}
+.bigl{font-size:15px;color:var(--muted);margin-top:8px}
+table{border-collapse:collapse;width:100%;font-size:18px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:15px;color:var(--muted);font-weight:600}
+.todo{background:#fff3c4;color:#7a5a00;padding:0 4px;border-radius:3px}
+.quote{border-left:4px solid var(--accent);padding:6px 0 6px 18px;color:var(--muted);font-size:19px}
+.center{align-items:center;justify-content:center;text-align:center}
+.title-slide{background:linear-gradient(135deg,#0f3f45 0%,#0f6e6a 100%);color:#fff}
+.title-slide .muted{color:#cfe6e3}
+.code{font-family:var(--mono);font-size:15px;background:#1f2633;color:#dfe6ee;border-radius:8px;padding:14px 16px;line-height:1.55;white-space:pre}
+.code .c{color:#8fa1b3} .code .k{color:#7fd1c4} .code .r{color:#ff9b8f} .code .y{color:#f2cc6b}
+#progress{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);transition:width .25s}
+#counter{position:fixed;right:16px;bottom:10px;font-size:12px;color:#c7ccd6;font-family:var(--mono)}
+#hint{position:fixed;left:16px;bottom:10px;font-size:12px;color:#8e95a3}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 -->
+<section class="slide title-slide center">
+  <div class="kicker" style="color:#9fd6cf">SciencePal AI4Science Hackathon · 决赛</div>
+  <h1 style="font-size:60px">BeyondPaper｜论文之后</h1>
+  <p style="font-size:26px;margin-top:22px">把论文在压缩中丢掉的东西找回来</p>
+  <p class="muted" style="font-size:18px;margin-top:40px">一个跑在 SciencePal 上的研究解剖智能体：执行 · 查错 · 找回 · 追问</p>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <div class="kicker">问题</div>
+  <h2>论文是有损压缩</h2>
+  <div class="grid2" style="align-items:center;flex:1">
+    <svg viewBox="0 0 520 380" width="520" height="380" aria-label="研究到论文的压缩">
+      <rect x="10" y="20" width="200" height="340" rx="10" fill="#fff" stroke="#d9d6cc"/>
+      <text x="110" y="52" text-anchor="middle" font-size="17" font-weight="700" fill="#1d2433">一项研究</text>
+      <g font-size="15" fill="#1d2433">
+        <text x="30" y="92">数据、代码</text>
+        <text x="30" y="128">几百个分析选择</text>
+        <text x="30" y="164">试过又放弃的路</text>
+        <text x="30" y="200">没成功的实验</text>
+        <text x="30" y="236">"只在这台机器上能跑"</text>
+        <text x="30" y="272">选这个参数的原因</text>
+        <text x="30" y="308">样本是怎么挑的</text>
+      </g>
+      <path d="M215 60 L330 140 L330 240 L215 320 Z" fill="#e3f0ee" stroke="#0f6e6a" stroke-width="1.5"/>
+      <text x="268" y="196" text-anchor="middle" font-size="15" fill="#0f6e6a" font-weight="600">写作</text>
+      <rect x="340" y="130" width="170" height="120" rx="10" fill="#fff" stroke="#0f6e6a" stroke-width="2"/>
+      <text x="425" y="175" text-anchor="middle" font-size="17" font-weight="700" fill="#1d2433">论文</text>
+      <text x="425" y="205" text-anchor="middle" font-size="14" fill="#5b6475">10 页正文</text>
+      <text x="425" y="228" text-anchor="middle" font-size="14" fill="#5b6475">几张表、几张图</text>
+    </svg>
+    <div>
+      <p style="margin-bottom:18px">读者拿到的只是结果。丢掉的部分决定了这个结果能不能信、在什么条件下会失效：</p>
+      <ul style="padding-left:24px">
+        <li>失败的分析路径和负结果</li>
+        <li>没写出来的条件和选择</li>
+        <li>写进去但前后对不上的数字</li>
+        <li>文字说一套、代码做一套</li>
+      </ul>
+      <p class="muted" style="margin-top:22px;font-size:18px">下一个研究者通常要花几周重新踩一遍这些坑。</p>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>2</span></div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <div class="kicker">思路</div>
+  <h2>BeyondPaper 做四件事<small>输入：论文 + 作者公开的代码和数据。输出：带证据的结论台账、问题清单、失败路径、给审稿人和尽调者的一页纸、一个能追问的论文智能体。</small></h2>
+  <div class="grid4" style="flex:1">
+    <div class="card"><div class="tag t-acc">执行</div><h3 style="margin-top:12px">让论文跑起来</h3><p>在沙盒里重跑作者代码，结果先和作者自己的存档输出对照（复现门），再拿来评判论文。</p></div>
+    <div class="card"><div class="tag t-acc">查错</div><h3 style="margin-top:12px">文字、数字、代码、数据</h3><p>统计量重算、数字前后对照、Methods 对代码、测试集是否被用来选模型、文件是否写错。</p></div>
+    <div class="card"><div class="tag t-acc">找回</div><h3 style="margin-top:12px">论文没写的</h3><p>换一个合理的分析选择结论还在不在（多重宇宙）；隐藏条件；导出失败路径；同类论文里真出过的错（前车之鉴）。</p></div>
+    <div class="card"><div class="tag t-acc">追问</div><h3 style="margin-top:12px">下一步做什么</h3><p>把整篇论文变成一个经过测试的智能体，可以问 "what if"；按信息增益排出下一步实验。</p></div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>3</span></div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <div class="kicker">怎么做</div>
+  <h2>7 个阶段，9 个技能<small>能用脚本检查的一律用脚本；模型只做脚本覆盖不到的判断，并标注来源。</small></h2>
+  <svg viewBox="0 0 1120 300" width="1120" height="300" aria-label="流程">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0f6e6a"/></marker></defs>
+    <g font-family="inherit">
+      <g transform="translate(0,20)">
+        <rect width="145" height="110" rx="10" fill="#fff" stroke="#d9d6cc"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">1 结论台账</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">结论 → 证据 → 文件</text><text x="72" y="82" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-claim-ledger</text><text x="72" y="98" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-pitfall-atlas</text>
+      </g>
+      <g transform="translate(162,20)">
+        <rect width="145" height="110" rx="10" fill="#fff" stroke="#d9d6cc"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">2 一致性</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">统计、数字、复现门</text><text x="72" y="90" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-consistency-check</text>
+      </g>
+      <g transform="translate(324,20)">
+        <rect width="145" height="110" rx="10" fill="#fff" stroke="#d9d6cc"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">3 幽灵变量</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">泄漏、代码与数据</text><text x="72" y="90" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-ghost-variables</text>
+      </g>
+      <g transform="translate(486,20)">
+        <rect width="145" height="110" rx="10" fill="#fff" stroke="#d9d6cc"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">4 多重宇宙</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">换选择重跑</text><text x="72" y="90" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-multiverse</text>
+      </g>
+      <g transform="translate(648,20)">
+        <rect width="145" height="110" rx="10" fill="#fff" stroke="#d9d6cc"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">5 下一步实验</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">文献 + 信息增益排序</text><text x="72" y="90" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-next-experiment</text>
+      </g>
+      <g transform="translate(810,20)">
+        <rect width="145" height="110" rx="10" fill="#fff" stroke="#d9d6cc"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">6 接力包</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">灯号、失败路径</text><text x="72" y="82" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-relay-package</text><text x="72" y="98" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-null-result</text>
+      </g>
+      <g transform="translate(972,20)">
+        <rect width="145" height="110" rx="10" fill="#e3f0ee" stroke="#0f6e6a" stroke-width="1.5"/><text x="72" y="34" text-anchor="middle" font-size="16" fill="#0f6e6a" font-weight="700">7 论文智能体</text><text x="72" y="64" text-anchor="middle" font-size="14" fill="#1d2433">测试后才开放工具</text><text x="72" y="90" text-anchor="middle" font-size="11" fill="#5b6475" font-family="monospace">bp-paper-agent</text>
+      </g>
+      <g stroke="#0f6e6a" stroke-width="1.5" marker-end="url(#ar)">
+        <line x1="146" y1="75" x2="160" y2="75"/><line x1="308" y1="75" x2="322" y2="75"/><line x1="470" y1="75" x2="484" y2="75"/><line x1="632" y1="75" x2="646" y2="75"/><line x1="794" y1="75" x2="808" y2="75"/><line x1="956" y1="75" x2="970" y2="75"/>
+      </g>
+    </g>
+    <g font-size="15" fill="#1d2433">
+      <text x="0" y="190" font-weight="700">产出</text>
+      <text x="0" y="222" font-family="monospace" font-size="14">passport.md · findings.json · failure_paths.md · precedents.md · brief_investor.md · paper_agent/AGENT_CARD.md</text>
+      <text x="0" y="262" fill="#5b6475">每条发现带位置（页码/表格，或 文件:行号）。红 = 两个来源明确冲突；黄 = 证据不足或可能改变结论；灰 = 现有材料无法核实。</text>
+    </g>
+  </svg>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>4</span></div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <div class="kicker">执行</div>
+  <h2>复现门：我们算不出来，不等于论文错了</h2>
+  <div class="grid2" style="flex:1">
+    <div>
+      <table>
+        <tr><th>论文</th><th>作者存档输出</th><th>我们重跑</th><th>结论</th></tr>
+        <tr><td>a</td><td>—</td><td>a</td><td><span class="tag t-green">reproduced</span></td></tr>
+        <tr><td>a</td><td>a</td><td>—</td><td><span class="tag t-green">archive_ok</span></td></tr>
+        <tr><td>a</td><td>a</td><td>b</td><td><span class="tag t-grey">port_gap</span> 我们的问题</td></tr>
+        <tr><td>a</td><td>b</td><td>任意</td><td><span class="tag t-red">archive_mismatch</span> 作者两处不一致</td></tr>
+        <tr><td>a</td><td>—</td><td>b</td><td><span class="tag t-yellow">not_reproduced</span></td></tr>
+      </table>
+      <p class="muted" style="font-size:16px;margin-top:14px">沙盒里没有 R，R 代码只能移植到 Python 重算。移植带来的偏差不能算到作者头上。</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card">
+        <h3>10 月 v1.1</h3>
+        <p>原样论文上 47 条红/黄，其中 <b>10 条误报</b>，全部是"Python 移植算出的数和论文不一样"。</p>
+      </div>
+      <div class="card" style="border-color:var(--accent)">
+        <h3>加上复现门之后（Hardwicke 2021，R 代码）</h3>
+        <p>34 个数值复现，19 个移植偏差被判成灰色 <span class="mono">port_gap</span>，<b>0 条红灯</b>。这一类误报没有再出现。</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>5</span></div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <div class="kicker">查错 · 真实论文</div>
+  <h2>一篇 Nature Communications 胃癌代谢组学论文<small>Chen et al. 2024，作者公开了代码和数据。以下是智能体报出、我们逐条核实过的问题（表述为"需核实"，不涉及任何主观判断）。</small></h2>
+  <table>
+    <tr><th style="width:44px"></th><th>发现</th><th>依据</th></tr>
+    <tr><td><span class="dot" style="background:var(--red)"></span></td><td>Methods 写 L1 系数 0.01，代码里是 <span class="mono">alpha=0.005</span></td><td class="muted">Methods vs <span class="mono">run.ipynb</span></td></tr>
+    <tr><td><span class="dot" style="background:var(--red)"></span></td><td>预后模型在测试集上算置换重要性，再按测试集表现挑出 28 个特征</td><td class="muted"><span class="mono">perm.fit(Xtest, ytest)</span>，cell 7–10</td></tr>
+    <tr><td><span class="dot" style="background:var(--red)"></span></td><td>"外部测试集"的预测文件是测试集预测的一份拷贝</td><td class="muted">cell 14 写错了变量名</td></tr>
+    <tr><td><span class="dot" style="background:var(--yellow)"></span></td><td>discovery_set 包含全部 142 个测试样本</td><td class="muted">数据文件行级比对</td></tr>
+    <tr><td><span class="dot" style="background:var(--yellow)"></span></td><td>代码算的是 5–95 分位（90% 区间），论文写的是 95% CI</td><td class="muted">Methods vs 代码</td></tr>
+  </table>
+  <p style="margin-top:20px;font-size:19px">多重宇宙：40 种合理分析组合里结论成立 80%；改为重新划分训练/测试集时结论不成立。</p>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>6</span></div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <div class="kicker">查错 · 代码与数据</div>
+  <h2>只读文字查不到的错，藏在代码和数据文件里<small>v1.7 起由确定性脚本扫描，模型负责逐条确认或降级。</small></h2>
+  <div class="grid2" style="flex:1">
+    <div class="compact" style="display:flex;flex-direction:column;gap:12px">
+      <div class="card"><h3><span class="mono">test_set_reuse</span></h3><p>用测试集拟合或挑选模型（上一页第 2 条）。</p></div>
+      <div class="card"><h3><span class="mono">split_overlap</span></h3><p>测试集的行出现在训练/发现集文件里（上一页第 4 条）。</p></div>
+      <div class="card"><h3><span class="mono">stale_loop_variable</span></h3><p>循环结束后还在用循环变量，只取到最后一次的值。例：一篇 meta 分析的 <span class="mono">funnel.R:17</span>。</p></div>
+      <div class="card"><h3><span class="mono">duplicate_output</span></h3><p>同一个对象存成两个名字不同的文件（上一页第 3 条）。</p></div>
+    </div>
+    <div>
+<div class="code"><span class="c"># GC-prognosis-model/run.ipynb, code cell 7</span>
+perm.<span class="r">fit(Xtest, ytest)</span>     <span class="y">← test_set_reuse</span>
+
+<span class="c"># GC-diagnosis-model/run.ipynb, code cell 14
+# 算出了 pred_score4external_test，
+# 写进外部测试文件的却是</span> <span class="r">pred_score4test</span>
+                             <span class="y">← duplicate_output</span></div>
+      <p class="muted" style="font-size:16px;margin-top:16px">离线在 5 个作者代码包上直接跑：命中已核实的问题，另外 3 个包上新增报警为 0。</p>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>7</span></div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <div class="kicker">追问</div>
+  <h2>经过审计的论文智能体<small>Paper2Agent（Miao et al., Nature 2026）把论文变成可调用的工具；作者自己指出，它衡量的是 "faithful execution rather than analytical validity"。BeyondPaper 补上后一半。</small></h2>
+  <div class="grid2" style="flex:1">
+    <div class="card">
+      <h3>工具开放前先测试</h3>
+      <ul>
+        <li>T1 结论、发现、失败路径都能读出</li>
+        <li>T2 默认参数重跑 = 记录的基线（相对误差 1e-4）</li>
+        <li>T3 两次重跑结果相同</li>
+        <li>T4 已知的"破坏性改动"确实会翻转结论</li>
+      </ul>
+      <p style="margin-top:12px">T2、T3 不通过，<span class="mono">reproduce</span>/<span class="mono">whatif</span> 不开放。每个回答都带上结论灯号、复现等级和失效条件。</p>
+    </div>
+    <div>
+<div class="code"><span class="c"># Chen 2024，v1.11.16，在 SciencePal 里追问</span>
+<span class="k">&gt;</span> reproduce
+9/9 个输出 = 记录的基线
+<span class="k">&gt;</span> whatif alpha=0.02
+外部敏感度  0.683 <span class="y">→</span> 0.921
+<span class="k">&gt;</span> whatif k=15
+外部敏感度  0.683 <span class="y">→</span> 0.667（几乎不变）
+<span class="c">注意：主结论只在 37% 的分析组合里成立；
+发现集包含全部 142 个测试样本</span></div>
+      <p class="muted" style="font-size:16px;margin-top:14px">把 L1 惩罚从代码里的 0.005 改成 0.02，智能体真的重跑分析，而不是凭记忆回答。翻转结论的 what-if 会被写成新发现。</p>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>8</span></div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <div class="kicker">找回</div>
+  <h2>失败路径：论文没写下来的部分<small><span class="mono">failure_paths.md</span> 由脚本从整次运行导出，给下一个研究者。</small></h2>
+  <div class="grid4">
+    <div class="card"><div class="big">1</div><div class="bigl">让结论翻转的分析选择</div></div>
+    <div class="card"><div class="big">6</div><div class="bigl">没能复现、作者存档也无法佐证的数值</div></div>
+    <div class="card"><div class="big">4</div><div class="bigl">影响结论但论文没报告的条件</div></div>
+    <div class="card"><div class="big">3</div><div class="bigl">还没做的关键实验</div></div>
+  </div>
+  <p class="muted" style="font-size:16px;margin-top:10px">例：Stefanetti et al. 2020（meta 分析，R 代码）的一次运行。</p>
+  <div class="card" style="margin-top:26px">
+    <h3>给下一个研究者</h3>
+    <p>每一行都指向本次运行的文件（多重宇宙结果、复现闸门表、发现编号），不加新的判断。多篇论文的导出可以一起检索：<span class="mono">search_cards.py</span> 回答"这个分析选择有人试过吗、结果如何"。</p>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>9</span></div>
+</section>
+
+<!-- 9b -->
+<section class="slide">
+  <div class="kicker">找回 · 跨论文</div>
+  <h2>前车之鉴：一篇论文的错，是下一篇的检查清单<small>把人工核实过的问题归纳成“失败机制”。新论文开审前，按方法先列出同类论文里真出过的错；审完后，每条发现附上其他论文的先例。</small></h2>
+  <div class="grid2" style="flex:1">
+    <div>
+      <table>
+        <tr><th>机制</th><th>已核实案例</th><th>领域</th></tr>
+        <tr><td>正文、表格、输出抄写不一致</td><td>4</td><td>meta 分析、心理学</td></tr>
+        <tr><td>自相矛盾的区间</td><td>3</td><td>meta 分析、心理学</td></tr>
+        <tr><td>Methods 与代码不一致</td><td>2</td><td>代谢组学、meta 分析</td></tr>
+        <tr><td>用测试集做选择</td><td>1</td><td>代谢组学</td></tr>
+        <tr><td>沿用上一个循环的变量</td><td>1</td><td>meta 分析</td></tr>
+        <tr><td>90% 区间写成 95%</td><td>1</td><td>代谢组学</td></tr>
+        <tr><td colspan="3" class="muted" style="font-size:15px">共 12 种论文机制、17 条已核实案例（4 篇已发表论文）</td></tr>
+      </table>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card"><h3>留一法检验</h3><p>去掉 Chen 论文自己的案例，只凭其他论文的先例和它的代码，先验清单列出的 6 种机制里包含它实际出错的全部 5 种。</p></div>
+      <div class="card"><h3>审计方自己的坑也入库</h3><p>移植 R 时把 <span class="mono">NA</span> 当数据、表格求和出错、用错百分比分母……共 6 种，每次运行开头作为规则加载。</p></div>
+      <div class="card" style="border-color:var(--accent)"><h3>新案例要经人工收录</h3><p>智能体只能导出候选；人确认后才成为“已核实”，库才会增长。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>10</span></div>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <div class="kicker">评测</div>
+  <h2>在已知答案的论文上测<small>5 篇有公开代码和数据的论文，各做一个原样版本和一个人工注入错误的版本。</small></h2>
+  <div class="grid3" style="margin-bottom:26px">
+    <div class="card"><div class="big">20/20</div><div class="bigl">注入的 20 处错误，v1.11.16 五篇注入版各取一次运行，全部找到</div></div>
+    <div class="card"><div class="big">48/48</div><div class="bigl">训练集 10 次运行的红/黄灯全部属实，红灯 0 条误报</div></div>
+    <div class="card"><div class="big">10 → 0</div><div class="bigl">原样论文上"移植偏差"类误报</div></div>
+  </div>
+  <table>
+    <tr><th>论文（v1.11.16）</th><th>代码</th><th>注入错误</th><th>真实问题（原样版 + 注入版）</th></tr>
+    <tr><td>Stefanetti 2020 meta 分析</td><td>R</td><td>4/4</td><td>6/6</td></tr>
+    <tr><td>Chen 2024 胃癌代谢组学</td><td>Python</td><td>4/4</td><td>5/5</td></tr>
+    <tr><td>Hardwicke 2021 可复现性</td><td>R</td><td>4/4</td><td>–</td></tr>
+    <tr><td>Campbell 心理学</td><td>R</td><td>4/4</td><td>2/4</td></tr>
+    <tr><td>Thibault 2024 Delphi 研究</td><td>R</td><td>4/4</td><td>1/2</td></tr>
+  </table>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>11</span></div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <div class="kicker">盲测</div>
+  <h2>没见过的论文：0 条红色误报<small>5 篇论文（伦理申请表、EEG 癫痫、卒中神经网络、<i>Nat. Commun.</i>、<i>Sci. Rep.</i>），每条红/黄都对照作者的代码、数据和存档输出人工判定。DAPPER 肉瘤论文正文付费、下载不到，不计入。</small></h2>
+  <div class="grid2" style="flex:1">
+    <div class="card" style="border-color:var(--accent)">
+      <h3>v1.11.16，每篇论文一次运行</h3>
+      <div class="big">0</div><div class="bigl">红色误报（红灯 7 条：6 条属实，1 条待定）</div>
+      <p style="margin-top:14px">红/黄 28/31 属实，3 条黄色误报都在同一篇论文。</p>
+    </div>
+    <div class="card">
+      <h3>核实属实的例子</h3>
+      <ul>
+        <li>卒中神经网络：摘要、结果和表 2 的精确率、召回率、F1、准确率与作者存档输出对不上</li>
+        <li><i>Sci. Rep.</i>：Discussion 里的 sMAPE 与表 2 对不上（10 对 6、0.7 对 8、42 对 74）</li>
+        <li>EEG 癫痫：缩放器在交叉验证切分之前用全部 11500 个样本拟合</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>12</span></div>
+</section>
+
+<!-- 12b -->
+<section class="slide">
+  <div class="kicker">先审自己</div>
+  <h2>严重度复核：红灯要经得起脚本再查一遍<small>合并发现时由脚本逐条复核模型写下的红/黄灯，每一次改动都记入 <span class="mono">severity_changes.json</span>；v1.11 起每条手写灯号还要有一条执行过的核对命令。</small></h2>
+  <div class="grid2" style="flex:1">
+    <div>
+      <table style="font-size:16px">
+        <tr><th>规则</th><th>来自哪次运行</th></tr>
+        <tr><td>手写红/黄灯没有执行过的核对，或核对不成立 → <span class="tag t-grey">灰</span><br><span class="muted" style="font-size:14px">核对命令打印出作者存档值并确认冲突 → 恢复 <span class="tag t-red">红</span></span></td><td>B13、B12、B03</td></tr>
+        <tr><td>模型手写、引用作者文件、未过复现门的数字红灯 → <span class="tag t-yellow">黄</span></td><td>B11、B10</td></tr>
+        <tr><td>证据里只有一个数值，或依赖合计却没写出各项相加 → <span class="tag t-yellow">黄</span></td><td>B11</td></tr>
+        <tr><td>只有我们的移植重跑与论文不符 → <span class="tag t-grey">灰</span></td><td>B12、B14</td></tr>
+        <tr><td>网页 / 图形界面工具里做的分析；两种已披露的区间算法 → <span class="tag t-grey">灰</span></td><td>Chen、Hardwicke</td></tr>
+        <tr><td>同一冲突写了两遍 → 合并</td><td>B10、B16</td></tr>
+      </table>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card"><h3>已发表论文</h3>
+        <p style="font-size:26px;font-weight:700;color:var(--accent);margin:6px 0">19 处真实问题，全部找到</p>
+        <p>5 篇有公开代码和数据的论文，每一处都对照作者的代码、数据和存档输出人工核实。</p></div>
+      <div class="card" style="border-color:var(--accent)"><h3>v1.11.16，每篇论文一次运行（15 次）</h3>
+        <p style="font-size:26px;font-weight:700;color:var(--accent);margin:6px 0">红/黄 76/79 属实（96%）</p>
+        <p>训练集和盲测都是 0 条红色误报。每次改规则都回放全部已判定运行，核实过的问题没有一条被降级。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>13</span></div>
+</section>
+
+<!-- 12c -->
+<section class="slide">
+  <div class="kicker">三种读者</div>
+  <h2>同一份分析，给审稿人、编辑和尽调者的一页纸<small><span class="mono">build_brief.py --audience investor | reviewer | editor</span>：只重新组织本次运行的文件，不加新的判断。</small></h2>
+  <div class="grid2" style="flex:1">
+    <div class="card">
+      <h3>一页纸上有什么</h3>
+      <ol style="padding-left:22px">
+        <li>总体灯号、复现等级、多重宇宙稳健性</li>
+        <li>主要结论各自的灯号和依据</li>
+        <li>结论在什么条件下不成立</li>
+        <li>要对方补充的材料</li>
+        <li>要作者回答的 5 个问题</li>
+        <li>最能降低不确定性的验证</li>
+      </ol>
+      <p class="muted" style="font-size:15px;margin-top:10px">尽调版只说证据是否支撑结论，不评价商业价值；也不用直接面向作者"挑错"。</p>
+    </div>
+    <div class="card">
+      <h3>示例问题（Chen 等 2024 的已核实问题）</h3>
+      <ol style="padding-left:22px;font-size:17px">
+        <li>最终模型的 10 个特征是在哪些样本上选出来的？<span class="mono">discovery_set.xlsx</span> 是否包含测试样本？</li>
+        <li>预后模型的特征数 28 是按哪个数据集的 c-index 选的？</li>
+        <li>外部测试集的预测文件为什么与测试集文件完全相同？</li>
+        <li>报告的 "95% CI" 是 2.5/97.5 还是 5/95 分位？</li>
+        <li>L1 系数是 0.01 还是代码里的 0.005？</li>
+      </ol>
+    </div>
+  </div>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>14</span></div>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <div class="kicker">局限</div>
+  <h2>现在做不到的</h2>
+  <ul style="padding-left:26px;display:flex;flex-direction:column;gap:12px">
+    <li><b>模型不稳定，结果就不稳定。</b>模型稳定（全程 DeepSeek V4 Pro）时 BeyondPaper 表现很好；SciencePal 会在回合中途把 V4 Pro 换成 V4 Flash 或 GLM，有时没有提示，换来换去时每次结果都有一点偏差（v1.11.16 被换到 Flash 的两次运行各有 1 条红色误报，稳定的重跑没有；更早同一篇注入版 Flash 0/4、Pro 3/4）。要盯着运行，被换就改回 Pro 接着跑。</li>
+    <li>仍有漏报和误报：v1.11.16 在已知的 34 处真实问题里找到 26 处（漏了 Campbell、Thibault 的几处），盲测有 3 条黄色误报。对外公布任何一条之前，都要人工核实。</li>
+    <li>样本还小：改进是看着 5 篇测评论文和 6 篇盲测论文写的；最终结果每篇只取一次运行。</li>
+    <li>一次完整运行 10–60 分钟，平台会中断回合；结果以 bp_out 文件为准。现场只演示追问和结果页。</li>
+    <li>沙盒没有 R：R 代码靠 Python 移植，复现门兜底，多重宇宙在 R 论文上常常只能跑小规模。</li>
+    <li>只能处理公开了代码和数据的论文；只有 PDF 时，只做文字层面的检查。</li>
+  </ul>
+  <div class="foot"><span>BeyondPaper｜论文之后</span><span>15</span></div>
+</section>
+
+<!-- 13 -->
+<section class="slide title-slide center">
+  <h1 style="font-size:46px">把一篇论文的终点，<br>变成下一项研究的起点</h1>
+  <div class="grid3" style="margin-top:46px;text-align:left;width:1000px">
+    <div style="border-top:2px solid #9fd6cf;padding-top:12px"><p style="font-size:18px">更多盲测，<br>公开逐条判定</p></div>
+    <div style="border-top:2px solid #9fd6cf;padding-top:12px"><p style="font-size:18px">找回中间推理过程：<br>仓库历史和被注释掉的分析</p></div>
+    <div style="border-top:2px solid #9fd6cf;padding-top:12px"><p style="font-size:18px">未发表负结果卡片：<br>这个方法有人试过吗</p></div>
+  </div>
+  <p class="muted" style="margin-top:56px;font-size:18px">BeyondPaper｜论文之后 · 基于 SciencePal 构建</p>
+</section>
+
+</div>
+<div id="progress"></div>
+<div id="hint">← → 翻页 · F 全屏</div>
+<div id="counter"></div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var stage=document.getElementById('stage'), bar=document.getElementById('progress'), counter=document.getElementById('counter');
+  var i=0;
+  function fit(){var s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(el,k){el.classList.toggle('active',k===i)});
+    bar.style.width=((i+1)/slides.length*100)+'%';counter.textContent=(i+1)+' / '+slides.length;
+    if(history.replaceState)history.replaceState(null,'','#'+(i+1));}
+  document.addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>=0){e.preventDefault();show(i+1);}
+    else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>=0){e.preventDefault();show(i-1);}
+    else if(e.key==='Home')show(0); else if(e.key==='End')show(slides.length-1);
+    else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  document.addEventListener('click',function(e){if(e.clientX>window.innerWidth/3)show(i+1);else show(i-1);});
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',function(){show((parseInt(location.hash.slice(1),10)||1)-1);});
+  fit();show((parseInt(location.hash.slice(1),10)||1)-1);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+ "run_id": "B04-v11116p",
+ "paper_id": "B04",
+ "variant": "injected",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B04-v11116p.c4.json",
+ "note": "new account; GLM-5.3 for part of the first turn (platform switch), stopped and finished on Pro -> pro; c4 sha256 4fafd347; atlas data missing in first turn",
+ "n_findings": 32,
+ "truncated": false,
+ "counts": {
+  "red": 10,
+  "yellow": 7,
+  "grey": 13,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 10,
+  "yellow": 7,
+  "grey": 13,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

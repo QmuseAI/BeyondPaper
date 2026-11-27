@@ -1,0 +1,24 @@
+{
+ "run_id": "B16-v1111",
+ "paper_id": "B16",
+ "variant": "blind",
+ "version": "v1.11.1",
+ "saved": "2026-11-17",
+ "source_file": "pages/B16-v1111.c3.json",
+ "note": "v1.11.1; new paper EnviroPiNet (Sci Rep 2025) + capsule 5400466; first turn on GLM-5.3 stopped at stage 4, continued on DeepSeek V4 Pro; c3 copy of BP_FINDINGS_BLOCK.txt, sha256 verified",
+ "n_findings": 77,
+ "truncated": false,
+ "counts": {
+  "red": 3,
+  "yellow": 37,
+  "grey": 35,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 3,
+  "yellow": 37,
+  "grey": 35,
+  "green": 2
+ },
+ "reproduction": "full"
+}

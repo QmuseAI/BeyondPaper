@@ -1,0 +1,286 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "not reported in paper.md"
+ },
+ "counts": {
+  "red": 3,
+  "yellow": 6,
+  "grey": 10,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 12,
+   "archive_ok": 0,
+   "port_gap": 1,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 8
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "abstract_vs_body": "problem",
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "problem",
+   "claims_scan": "problem"
+  },
+  "abstract_vs_body": "Abstract '6 (34% [8,47])' vs Table 1 cell 6 (24%, [8,47]); 6/25=24%. Abstract 'CI [20,59]' vs Results 'CI [19,57]' for 9/25. Abstract '789 checked values' vs Results '879 target values'; data_values.csv has 789 rows.",
+  "param_mismatch": "Design p.3: major = PE >= 10%, alpha = 0.05; manuscript.Rmd line 131 same thresholds; preprocessing.R lines 78-103 implement the eyeball/decision-error relabelling as described. No parameter in the text contradicts the code.",
+  "figure_data_mismatch": "Figure 1 forest plot is produced by meta_analysis.R from Hardwicke2018_data.csv + the 25-article proportions; Figure 3 by plot_valueType.R from data_values.csv. Stored figure PNGs exist in results/manuscript_files/figure-latex/. No figure value contradicts the data tables.",
+  "phantom_experiment": "Results p.4 reports a comparison sample of 30 non-badge articles (21 with a major discrepancy, 70%) 'checked with the same protocol'. No data file, code chunk or stored output for these 30 articles exists in the materials (data/raw has only the 25-article corpus and the Kidwell/Hardwicke2018 files; grep for 'comparison' in code/ finds no analysis).",
+  "claims_scan": "claims_scan #0 phantom_experiment (30-article comparison sample) -> recorded as phantom_experiment finding. #1 34% vs 24% and #2 789 vs 879 -> recorded in the abstract_vs_body finding. #3 '27 articles' vs 25 distinct articleID in data_values.csv/data_articles.csv/bibliography.csv -> recorded as a sample_size finding."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract vs Results p.4",
+   "evidence": "'CI upper reproducible without author involvement' is reported with different values. Abstract: 59 % | Results p.4: 57 %. Agreeing reports: 1 location(s) [Abstract] vs 1 [Results p.4].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract vs Table 1 row yes/yes",
+   "evidence": "'percent reproducible with author involvement' is reported with different values. Abstract: 34 % | Table 1 row yes/yes: 24 %. Agreeing reports: 1 location(s) [Abstract] vs 1 [Table 1 row yes/yes].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "Abstract, Results p.4, Sample p.3 vs Results p.4",
+   "evidence": "'n target values checked' is reported with different values. Abstract: 789 values | Results p.4: 879 values. Agreeing reports: 3 location(s) [Abstract, Results p.4, Sample p.3] vs 1 [Results p.4].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 10) vs body (paper.md line 58)",
+   "evidence": "The Abstract gives 34 ('...hor involvement for 9 (36% [20,59]) articles; reproducible with author involvement for 6 (34% [8,47]) articles; not fully reproducibl...'); the body never states 34. The body sentence about the same quantity (shared words: articles, author, involvement, reproducible) gives 25: '...Prior to seeking original author involvement, all target values in 9 out of the 25 articles (36%, CI [19,57]) were reproducible, with the remaining 16 articles (64%, CI [43,81]) containing at least one major numerical discrepancy....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 10) vs Results (paper.md line 72)",
+   "evidence": "The same digits in a different order for values: 789 ('...Overall, 37 major numerical discrepancies remained out of 789 checked values (5% [3,6]), but original conclusions did not appear affected....') and 879 ('...After author involvement, 37 major numerical discrepancies remained among the 879 target values examined across all articles (5%, CI [3,6])....'). If both count the same set, one of them has transposed digits.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results (paper.md line 72)",
+   "evidence": "The text reports an additional study or analysis: 'A comparison sample of 30 articles from the same journal without open data badges, checked with the same protocol, contained at least one major numerical discrepancy in 21 (70%) articles.'. Its head count 30 appears nowhere else in the paper, the phrase 'comparison sample' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "Methods (paper.md line 41) vs data/raw/bibliography.csv column 'Article ID'",
+   "evidence": "The text gives 27 articles once ('...In total, 789 discrete numerical values reported in 27 articles published between January 2014 and May 2015 were designated as target values....'); the authors' table data/raw/bibliography.csv has 25 distinct values of 'Article ID', and the paper says '25 articles' 2 time(s) elsewhere.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "p. 3, Sec. Sample, line 41",
+   "evidence": "'numerical values reported in 27 articles published between January 201': 27 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a denominator elsewhere). A typo, or a different subgroup?",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F8"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract vs Table 1 row yes/yes; Abstract vs Results p.4",
+   "evidence": "Abstract: reproducible with author involvement 6 (34% [8,47]); Table 1 same cell 6 (24%, [8,47]); 6/25=24%. Abstract CI for 9/25 [20,59] vs Results [19,57]. Abstract 789 checked values vs Results 879 target values (data_values.csv = 789 rows). [Capped at yellow by build_passport.py: a hand-written number finding that involves the authors' files has not passed the reproduction gate. Add the value to recomputed.json (`value` for a count made from their data, `archived` for a number read from their stored output) and re-run numbers_crosscheck.py.]",
+   "source": "llm",
+   "judgement_key": "abstract_vs_body",
+   "severity_original": "red",
+   "severity_reasons": [
+    "gate_cap"
+   ],
+   "gate_capped": true,
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9",
+   "claims_auto_linked": true
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs results/manuscript.tex:285",
+   "evidence": "Our re-computation of 'n articles with target values' gives 25 (re-computed), but the authors' stored output (results/manuscript.tex:285) gives 27, which matche"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 2, Sec. Introduction, line 21",
+   "evidence": "'es were resolved in 11 of the 24 articles after consultation with origi': 24 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a "
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "22 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/manuscript.Rmd:168",
+   "evidence": "1 data-exclusion step(s): filter@168. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "code/supplementary_information.Rmd:7",
+   "evidence": "1 data-exclusion step(s): filter@7. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F16",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results; Discussion",
+   "evidence": "Claim C5 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F17",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results; Discussion",
+   "evidence": "Claim C6 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F18",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C7 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F19",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "5 multiply-reported quantities agree across locations; 12 re-computed values match the paper."
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "6 of 6 estimate-CI reports are internally consistent."
+  },
+  {
+   "id": "F22",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'After author involvement, 15 of 25 articles (60%) had fully reproducible target values' holds in 100% of 8 universes. Single changes that flip it: none."
+  }
+ ]
+}

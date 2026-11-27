@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v18",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.8",
+ "saved": "2026-11-16",
+ "source_file": "../pages/B10-v18.txt",
+ "note": "",
+ "n_findings": 42,
+ "truncated": false,
+ "counts": {
+  "red": 8,
+  "yellow": 10,
+  "grey": 23,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 8,
+  "yellow": 10,
+  "grey": 23,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

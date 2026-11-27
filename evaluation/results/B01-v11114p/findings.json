@@ -1,0 +1,345 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: An observational study",
+  "doi": "not reported in paper.md",
+  "source": "bp_work/paper.md (user-supplied)"
+ },
+ "counts": {
+  "red": 1,
+  "yellow": 0,
+  "grey": 25,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 5,
+   "archive_ok": 0,
+   "port_gap": 2,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 12
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 32
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "abstract_vs_body": "problem",
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "ok",
+   "claims_scan": "ok"
+  },
+  "abstract_vs_body": "Abstract: 9 (36% [20,59]); Results p.4: 9 out of 25 (36%, CI [19,57]). Same proportion, same denominator 25; stored manuscript.tex abstract prints [20, 59]. Wilson 9/25 = [20,55]; Sison-Glaz 9/25 = [20,57]; neither reproduces [19,57].",
+  "param_mismatch": "Methods Design p.3: major = PE >= 10%, minor = 0% > PE < 10%, alpha 0.05. Code preprocessing.R applies exactly these thresholds (comparisonOutcome factor levels MATCH/MINOR_ERROR/MAJOR_ERROR; decision errors from reportedValue vs .05). methods_code_check.py: methods named=0, code files=8, not found in code=0. No parameter stated in Methods is absent from the code.",
+  "figure_data_mismatch": "Figure 1 (forestPlot) is produced by meta_analysis.R from data_articles.csv counts (9/25 before, 15/25 after) and Hardwicke2018_data.csv (24/35 before, 35/35 after); stored results/manuscript_files/figure-latex/forestPlot-1.png exists. Figure 2/3 are built by plot_reproScatter.R / plot_valueType.R from data_values.csv, whose recomputed MAJOR+DECISION count is 37/789 = 5%, matching the text. No figure value contradicts the data.",
+  "phantom_experiment": "Every analysis described in the paper has code and data behind it: preprocessing.R (data_values.csv, data_articles.csv, Hardwicke2018_data.csv, Kidwell_data.csv), meta_analysis.R (forest plot), plot_reproScatter.R, plot_valueType.R, manuscript.Rmd, supplementary_information.Rmd. No point-and-click or web-tool analysis is claimed. SI sections C/E (script availability, vignettes) are narrative, not computed experiments.",
+  "claims_scan": "claims_scan.py found 0 candidate claims needing a data check; the 9 ledger claims are all backed by data_articles.csv / data_values.csv / Hardwicke2018_data.csv and the R scripts. The one script-flagged number issue (Abstract [20,59] vs Results [19,57]) is recorded under abstract_vs_body."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract vs Results p.4",
+   "evidence": "'CI upper, reproducible without author involvement' is reported with different values. Abstract: 59 % | Results p.4: 57 %. Agreeing reports: 1 location(s) [Abstract] vs 1 [Results p.4].",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "id": "F2",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs paper.md Results p.4 'CI [39,78]'",
+   "evidence": "Our re-computation of 'CI lower, reproducible after author contact' gives 41 (re-computed), but the authors' stored output (paper.md Results p.4 'CI [39,78]') g"
+  },
+  {
+   "id": "F3",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed vs paper.md Results p.4 'CI [39,78]'",
+   "evidence": "Our re-computation of 'CI upper, reproducible after author contact' gives 77 (re-computed), but the authors' stored output (paper.md Results p.4 'CI [39,78]') g"
+  },
+  {
+   "id": "F4",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n major numerical discrepancies remaining' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n articles reproducible without author involvement' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n articles reproducible with author involvement' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n articles not reproducible despite author involvement' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n articles not reproducible without author response' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'CI lower, reproducible without author involvement (Abstract)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'CI upper, reproducible without author involvement (Abstract)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'CI lower, reproducible without author involvement (Results p.4)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'CI upper, reproducible without author involvement (Results p.4)' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n Hardwicke 2018 articles' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n Hardwicke 2018 reproducible before author contact' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-computed",
+   "evidence": "Re-computed 'n Hardwicke 2018 reproducible after author contact' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 2, Sec. Introduction, line 21",
+   "evidence": "'es were resolved in 11 of the 24 articles after consultation with origi': 24 article(s) appears once, while 25 article(s) appears 3 times (and 25 is used as a "
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "21 count mentions read; 1 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/manuscript.Rmd:168",
+   "evidence": "1 data-exclusion step(s): filter@168. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/supplementary_information.Rmd:7",
+   "evidence": "1 data-exclusion step(s): filter@7. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F21",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4",
+   "evidence": "Claim C4 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F22",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4",
+   "evidence": "Claim C5 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F23",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Figure 1; Data analysis p.3",
+   "evidence": "Claim C7 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F24",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C8 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F25",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4; SI section C",
+   "evidence": "Claim C9 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F26",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Abstract vs Results p.4",
+   "evidence": "Abstract: 'reproducible without author involvement for 9 (36% [20,59])'; Results p.4: 'all target values in 9 out of the 25 articles (36%, CI [19,57])'. Same pr",
+   "severity_reasons": [
+    "gate_cap",
+    "disclosed_interval_methods"
+   ]
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "7 multiply-reported quantities agree across locations; 5 re-computed values match the paper."
+  },
+  {
+   "id": "F28",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "6 of 6 estimate-CI reports are internally consistent."
+  },
+  {
+   "id": "F29",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'After author involvement, fewer than 10% of the 789 target values remain major numerical discrepancies (37/789 = 5%)' holds in 100% of 32 universes. Sing"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B01-v11116p2",
+ "paper_id": "B01",
+ "variant": "clean",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B01-v11116p2.c4.json",
+ "note": "v1.11.16 Pro rerun (short Flash stretch mid-run, Pro continued and re-checked)",
+ "n_findings": 1,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 1,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 1,
+  "grey": 19,
+  "green": 2
+ },
+ "reproduction": "full"
+}

@@ -1,0 +1,3 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,yellow,stat_inconsistency,paper vs manuscript.Rmd:700,"The paper reports a median absolute change (""Of the 47 items included in both Round 1 and Round 2, four went from not reaching consensus to reaching consensus, the median absolute change in the percentage of participants",real:4.1,real,4.1: median absolute change computed as mean(abs)
+1,F2,yellow,fragile_conclusion,multiverse_summary.json,Claim '34 of 78 items reach consensus (>=75% essential) in the final sample of 103' holds in 67% of 24 universes. Single changes that flip it: consensus_threshold=0.7.,unlabeled,unclear,multiverse: threshold 0.7 flips 34/78

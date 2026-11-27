@@ -1,0 +1,105 @@
+{
+ "paper": "Stefanetti et al. 2020 Wellcome Open Res 5:84 v1 (meta-analysis)",
+ "items": [
+  {
+   "id": "2.1",
+   "mechanism": "impossible_interval",
+   "types": [
+    "stat_inconsistency",
+    "stat_decision_error",
+    "number_mismatch"
+   ],
+   "match_any": [
+    "-0.06",
+    "−0.06",
+    "-0.11",
+    "−0.11",
+    "creatine kinase"
+   ],
+   "description": "CK SMD -0.06 outside its CI [-0.23,-0.11]; Table 2 gives +0.11",
+   "status": "verified"
+  },
+  {
+   "id": "2.2",
+   "mechanism": "transcription_error",
+   "types": [
+    "number_mismatch",
+    "stat_inconsistency",
+    "stat_decision_error"
+   ],
+   "match_any": [
+    "-0.67",
+    "−0.67",
+    "-1.31",
+    "−1.31"
+   ],
+   "description": "STS SMD -0.67 in text vs -0.50 in Table 2; CI includes 0 with p=0.04",
+   "status": "verified"
+  },
+  {
+   "id": "2.3",
+   "mechanism": "transcription_error",
+   "types": [
+    "number_mismatch",
+    "magnitude_error"
+   ],
+   "match_any": [
+    "58.5",
+    "58·5",
+    "58.05"
+   ],
+   "description": "Abstract I2 58.5% vs 58.05%",
+   "status": "verified"
+  },
+  {
+   "id": "2.4",
+   "mechanism": "impossible_interval",
+   "types": [
+    "stat_inconsistency",
+    "stat_decision_error",
+    "number_mismatch"
+   ],
+   "match_any": [
+    "7.11",
+    "6.86"
+   ],
+   "description": "Table 3 6MWT CI (7.11 to 6.86) reversed",
+   "status": "verified"
+  },
+  {
+   "id": "2.5",
+   "mechanism": "stale_variable",
+   "types": [
+    "stale_loop_variable",
+    "param_mismatch",
+    "leakage_risk",
+    "figure_data_mismatch"
+   ],
+   "match_any": [
+    "funnel.r",
+    "dats",
+    "datr"
+   ],
+   "description": "funnel.R line 17 uses datS (before-after) in the usual-care loop",
+   "status": "verified"
+  },
+  {
+   "id": "2.6",
+   "mechanism": "methods_code_mismatch",
+   "types": [
+    "param_mismatch",
+    "phantom_experiment",
+    "missing_artifact",
+    "unverifiable_claim",
+    "missing_info"
+   ],
+   "match_any": [
+    "egger",
+    "regtest"
+   ],
+   "description": "Egger's test named in Methods, never run in code",
+   "status": "verified"
+  }
+ ],
+ "key": "P02"
+}

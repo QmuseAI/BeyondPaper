@@ -1,0 +1,2 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,red,number_mismatch,Abstract vs Results p.4,"'CI upper, reproducible without author involvement' is reported with different values. Abstract: 59 % | Results p.4: 57 %. Agreeing reports: 1 location(s) [Abstract] vs 1 [Results p.4].",unlabeled,new_real,"Abstract CI [20,59] vs Results [19,57] for 9/25 (original paper)"

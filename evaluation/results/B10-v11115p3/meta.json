@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v11115p3",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.15",
+ "saved": "2026-11-18",
+ "source_file": "/tmp/b10/B10-v11115p3.c4.json",
+ "note": "GLM switch mid-run (lost tools), resumed and finished on Pro -> pro",
+ "n_findings": 21,
+ "truncated": false,
+ "counts": {
+  "red": 2,
+  "yellow": 3,
+  "grey": 14,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 2,
+  "yellow": 3,
+  "grey": 14,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

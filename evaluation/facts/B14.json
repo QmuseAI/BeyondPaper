@@ -1,0 +1,106 @@
+{
+ "inventory": {
+  "n_files": 21,
+  "env_pinned": [
+   "environment/Dockerfile"
+  ],
+  "agent_files": []
+ },
+ "headers": {
+  "data/test_data.csv": [
+   "12",
+   "74",
+   "60",
+   "3",
+   "1"
+  ],
+  "data/train_data.csv": [
+   "12",
+   "70",
+   "105",
+   "13",
+   "1"
+  ],
+  "results/predict-output.txt": [
+   "RESULT = [[ 1.  1.  0.  1.  0.  1.  0.  1.  1.  0.  1.  1.  0.  0.  1.  0.  1.  1."
+  ]
+ },
+ "literal_arrays": {
+  "arrays": {}
+ },
+ "pipeline": {
+  "entry": [
+   "code/run.sh"
+  ],
+  "not_run": []
+ },
+ "weights": {
+  "weight_shapes": {
+   "results/output.chkp.index:W1": [
+    5,
+    4
+   ],
+   "results/output.chkp.index:W2": [
+    7,
+    5
+   ],
+   "results/output.chkp.index:W3": [
+    1,
+    7
+   ],
+   "results/output.chkp.index:b1": [
+    5,
+    1
+   ],
+   "results/output.chkp.index:b2": [
+    7,
+    1
+   ],
+   "results/output.chkp.index:b3": [
+    1,
+    1
+   ]
+  },
+  "layers": [
+   4,
+   5,
+   7,
+   1
+  ]
+ },
+ "params": {
+  "l2": [
+   [
+    0.002,
+    "code/nn.py:156"
+   ]
+  ]
+ },
+ "seeds": {
+  "code/nn.py": [
+   "seed=1"
+  ]
+ },
+ "confusion": {
+  "results/Output": {
+   "TP": 22,
+   "FP": 13,
+   "FN": 11,
+   "TN": 14,
+   "correct": 36,
+   "total": 60,
+   "stored_correct": 36,
+   "consistent": true
+  },
+  "results/predict-output.txt": {
+   "TP": 22,
+   "FP": 13,
+   "FN": 11,
+   "TN": 14,
+   "correct": 36,
+   "total": 60,
+   "stored_correct": 36,
+   "consistent": true
+  }
+ }
+}

@@ -1,0 +1,4 @@
+﻿finding_idx,finding_id,severity,type,location,evidence_short,auto_label,human_label,note
+0,F1,red,number_mismatch,"Table 2, Results p.2, Discussion p.3 vs Abstract","'specificity CarbaDetector internal' is reported with different values. Table 2: 85.0 % | Abstract: 84.4 %. Agreeing reports: 3 location(s) [Table 2, Results p.2, Discussion p.3] vs 1 [Abstract].",unlabeled,new_real,verified in PDF: Abstract training specificity 84.4% vs Table 2/Results 85.0% (124 vs 125 of 147)
+1,F2,yellow,missing_info,Methods p.5,[W5] Were blinding and randomisation of samples/animals/patients used and described? -> not_reported. Zone diameters were measured manually; no blinding of the reader to WGS results is stated.,unlabeled,unclear,checklist W5: reader blinding not stated; reporting point
+2,F3,yellow,missing_artifact,code/,Artifact A2 (code) is referred to by the paper but not provided.,unlabeled,new_real,code capsule not publicly accessible (same as v1111 F4)

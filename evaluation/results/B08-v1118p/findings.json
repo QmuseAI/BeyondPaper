@@ -1,0 +1,379 @@
+{
+ "paper": {
+  "title": "Self-Esteem, Relationship Threat, and Dependency Regulation: Independent Replication of Murray et al. (2002) Study 3",
+  "doi": "not reported (PsyArXiv preprint)",
+  "file": "bp_work/paper.md"
+ },
+ "counts": {
+  "red": 3,
+  "yellow": 8,
+  "grey": 18,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 0,
+   "archive_ok": 31,
+   "port_gap": 0,
+   "archive_mismatch": 6,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": null,
+ "judgement_checks": {
+  "param_mismatch": "Table 2 note says df = 196 for the inferred-number-of-negative-items model; main.Rmd line 239 fits m2 on newdata3 = na.omit(newdata2) and results/main.html summary(m2) prints 'Residual standard error: 2.409 on 151 degrees of freedom' (n=155). Paper df 196 vs stored 151.",
+  "figure_data_mismatch": "fig1-fig6 are produced by main.Rmd from newdata2/newdata3 (ggsave lines 330-387); the plotted points are the same 202 target participants as Table 3, and the fitted lines come from m1-m6. No separate figure data file exists; figures were not re-rendered (no R in sandbox), so only the code-to-figure link was checked.",
+  "phantom_experiment": "Results p.4: 'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all ps > .40).' No MTurk data, code or table in the capsule (bp_work/data holds only EDC_clean2.csv, 403 rows; main.Rmd has no MTurk chunk).",
+  "abstract_vs_body": "Abstract: 'Manipulation check effects replicated the original study, but no interaction ... for any primary study outcomes' - matches Results p.3-4 and Table 2/3 (all four interaction b between -0.019 and 0.046). Abstract does not mention the 412-participant MTurk study reported in Results.",
+  "claims_scan": "claims_scan.py flagged 1 candidate: the MTurk online replication (Results line 101) - recorded as phantom_experiment; counts.findings.json#0 (173 vs 156 in Footnote 1) and #1 (183 minimum) reviewed below."
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "red",
+   "location": "Results p.3 vs results/main.html summarise sd_manipcheck Experimental 1.42",
+   "evidence": "Values swapped between two quantities: the paper reports 'manipulation check SD experimental' = 1.25 and 'manipulation check SD control' = 1.42; the authors' stored output gives 1.42 and 1.25, i.e. the two values are exchanged. [Red (build_passport.py, swapped_pair).]",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "severity_original": "grey",
+   "severity_reasons": [
+    "swapped_pair"
+   ],
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "red",
+   "location": "line 374",
+   "evidence": "'orded for 156 participants \\[173 in the experimental condition\\]). Consist': subgroup count 173 exceeds the total of 156 participants.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "red",
+   "location": "line 336",
+   "evidence": "'| .571 (-.544,.032)': Estimate .571 lies outside its own 95% CI [-.544, .032].",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results (paper.md line 101)",
+   "evidence": "The text reports an additional study or analysis: 'We also repeated the study online with 412 participants recruited through MTurk and again found no interaction between self-esteem and condition (all *p*s > .40).'. Its head count 412 appears nowhere else in the paper, the phrase 'repeated the study' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "yellow",
+   "location": "line 37",
+   "evidence": "'Simonsohn's (2015) 2.5x rule for replication studies (i.e., recruiting 2.5 times more participants than the original) suggests a minimum of 183 participants.': 2.5 x 65 = 162.5, but the stated figure is 183.",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "hand_written": false,
+   "id": "F5"
+  },
+  {
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "line 99",
+   "evidence": "'M = 4.83, SD = 1.25) than those in the control condition ( M = 4.24, SD = 1.42; Cohen’s d = .64': the reported d = .64, but the two means and SDs give a standardized difference of about 0.44 (|4.83 - 4.24| / sqrt((1.25^2 + 1.42^2) / 2)).",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "hand_written": false,
+   "id": "F6"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Results p.3 vs results/main.html summarise()",
+   "evidence": "Results p.3 gives manipulation check experimental M = 4.83, SD = 1.25 and control M = 4.24, SD = 1.42; the authors' stored output (group_by(Cond) summarise) gives Control 4.25 / 1.25 and Experimental 4.83 / 1.42, i.e. the two SDs are swapped in the text (same quantity: manipulation check scale, same 202 participants).",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V5.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Results p.3 vs results/main.html summarise()",
+   "evidence": "Results p.3 gives inferred negative items control SD = 1.65; stored output gives Control sdNum 1.64 (Experimental 3.40 matches). Same quantity, same participants.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "location": "Table 2 note vs results/main.html summary(m2)",
+   "evidence": "Table 2 note gives df = 196 for the inferred-number-of-negative-items model; the released model m2 (main.Rmd line 239, newdata3 = na.omit(newdata2)) has 151 residual df in the authors' stored output, and its coefficients differ (intercept 3.442 vs 3.54802; condition b 1.623 vs 1.42536; interaction 0.011 vs 0.03059).",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results p.4 (paper.md line 101)",
+   "evidence": "The text reports an online MTurk replication with 412 participants (all ps > .40) but the capsule contains no MTurk data, code or table; only EDC_clean2.csv and main.Rmd for the lab study.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "yellow",
+   "location": "Results p.3 (Cohen's d) vs results/main.html mes()",
+   "evidence": "Results p.3 reports Cohen's d = .64 for the manipulation check; the stored mes(4.83, 4.24, 1.25, 1.42, 100, 102) call prints d = 0.44 [0.16, 0.72]. The d = .64 is not produced by the released effect-size call; with the stored SDs (control 1.25, experimental 1.42) the pooled SD gives d ~ 0.43.",
+   "source": "llm",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11",
+   "claims_auto_linked": true
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Results p.3 vs results/main.html summarise sdNum Control 1.64",
+   "evidence": "The paper reports 'inferred negative items SD control' = 1.65; the cell recorded as stored output gives 1.64, but 1.65 appears 1 time(s) in bp_work/results/main"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "25 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Table 2 vs results/main.html summary(m2) (Intercept) 3.54802",
+   "evidence": "The paper reports 'Table 2 inferred negative items intercept b' = 3.442 b (Table 2); the authors' own stored output (results/main.html summary(m2) (Intercept) 3"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Table 2 vs results/main.html summary(m2) dCond 1.42536",
+   "evidence": "The paper reports 'Table 2 inferred negative items condition b' = 1.623 b (Table 2); the authors' own stored output (results/main.html summary(m2) dCond 1.42536"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Table 2 vs results/main.html lm.beta(m2) dCond 0.282864521",
+   "evidence": "The paper reports 'Table 2 inferred negative items condition beta' = 0.293 beta (Table 2); the authors' own stored output (results/main.html lm.beta(m2) dCond 0"
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Table 2 vs results/main.html summary(m2) cSelfEsteem:dCond 0.03059",
+   "evidence": "The paper reports 'Table 2 inferred negative items interaction b' = 0.011 b (Table 2); the authors' own stored output (results/main.html summary(m2) cSelfEsteem"
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Table 2 note vs results/main.html summary(m2) 'on 151 degrees of freedom'",
+   "evidence": "The paper reports 'Table 2 df inferred negative items' = 196 df (Table 2 note); the authors' own stored output (results/main.html summary(m2) 'on 151 degrees of"
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "Footnote 1 vs results/main.html table(newdata2$dCond) 0=102 1=100",
+   "evidence": "The paper reports 'n participants in experimental condition (footnote)' = 173 participants (Footnote 1); the authors' own stored output (results/main.html table"
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment "
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "_raw/code/main.Rmd:183",
+   "evidence": "2 data-exclusion step(s): na.omit@183, na.omit@201. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods Participants",
+   "evidence": "[G2] Are inclusion/exclusion rules stated, with counts removed at each step? -> partial. 203 couples recruited, 1 couple removed (diagonal responding), 202 anal"
+  },
+  {
+   "id": "F23",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Methods",
+   "evidence": "[G4] Is the outlier definition and removal rule stated (and applied before or after splitting)? -> not_reported. No outlier rule; one couple removed for pattern",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ]
+  },
+  {
+   "id": "F24",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json",
+   "location": "Results",
+   "evidence": "[G6] Is correction for multiple comparisons stated when many tests or metrics are reported? -> not_reported. Four primary outcomes tested without multiplicity c"
+  },
+  {
+   "id": "F25",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C7 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F26",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Procedure p.2",
+   "evidence": "Claim C8 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F27",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Results p.4 (MTurk study)",
+   "evidence": "The MTurk replication (412 participants) is reported in one sentence with no design, measures, exclusions or per-outcome statistics; the capsule has no MTurk ma"
+  },
+  {
+   "id": "F28",
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Footnote 1 (paper.md line 374)",
+   "evidence": "Footnote 1 says wait times were recorded for 156 participants '[173 in the experimental condition]'; 173 exceeds the total 156 and the experimental group has 10",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ]
+  },
+  {
+   "id": "F29",
+   "module": "llm",
+   "type": "stat_inconsistency",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json",
+   "location": "Table 3, State Self-Esteem column, Self-Esteem row (paper.md line 336)",
+   "evidence": "Table 3 prints self-esteem b = .571 with 95% CI (-.544, .032); that CI is the manipulation-check self-esteem CI from Table 2 (stored output confint(m1) cSelfEst",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ]
+  },
+  {
+   "id": "F30",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "1 multiply-reported quantities agree across locations; 31 re-computed values match the paper."
+  },
+  {
+   "id": "F31",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "17 of 18 estimate-CI reports are internally consistent."
+  }
+ ]
+}

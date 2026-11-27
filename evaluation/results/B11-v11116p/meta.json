@@ -1,0 +1,24 @@
+{
+ "run_id": "B11-v11116p",
+ "paper_id": "B11",
+ "variant": "blind",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "pages/B11-v11116p.c4.json",
+ "note": "v1.11.16 Pro blind #1; red/yellow-only extract of bp_out/findings.json (none), sha256 verified in browser",
+ "n_findings": 0,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 0,
+  "grey": 4,
+  "green": 3
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 0,
+  "grey": 4,
+  "green": 3
+ },
+ "reproduction": "full"
+}

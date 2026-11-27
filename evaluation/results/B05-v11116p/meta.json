@@ -1,0 +1,24 @@
+{
+ "run_id": "B05-v11116p",
+ "paper_id": "B05",
+ "variant": "clean",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B05-v11116p.c4.json",
+ "note": "v1.11.16 Pro",
+ "n_findings": 2,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 2,
+  "grey": 15,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

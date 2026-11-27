@@ -1,0 +1,311 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "10.1098/rsos.201494",
+  "venue": "Royal Society Open Science (2021)"
+ },
+ "generated_by": "BeyondPaper build_passport.py",
+ "counts": {
+  "red": 1,
+  "yellow": 6,
+  "grey": 17,
+  "green": 2
+ },
+ "findings": [
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Abstract vs Table 1",
+   "evidence": "'percent reproducible with author involvement' is reported with different values. Abstract: 34 % | Table 1: 24 %. Agreeing reports: 1 location(s) [Abstract] vs 1 [Table 1].",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which value of 'percent reproducible with author involvement' is correct (34 % or 24 %)?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Results p.4 vs our re-run",
+   "evidence": "Re-computed 'n decision errors reported in text' = 1 values does not match reported 3 values (Results p.4); relative difference 66.7%. Source: our re-run. No stored output from the authors was recorded for this value; it has not passed the reproduction gate, so it stays yellow. Check that the denominator, subset and filters match the paper's before asking the authors.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which code version, data version, seed or settings produced the reported value?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...).",
+   "source": "script:leakage_scan.py",
+   "question_for_authors": "Which software and library versions were used?",
+   "file": "leakage.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "ghost",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C10",
+    "C2",
+    "C3",
+    "C4",
+    "C8",
+    "C9"
+   ],
+   "location": "code/manuscript.Rmd",
+   "evidence": "Rmd outputs (deep_checks.py): timeSummary computed in chunk(s) unnamed but never printed or written; the knitted output (results/manuscript.pdf) can only hold what is printed: caption. The stored result for timeSummary is therefore not in the materials.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Can the timeSummary table be added to the stored output?",
+   "check": "chunk scan of code/manuscript.Rmd",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "id": "F4",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Results p.4 vs data/raw/data_values.csv",
+   "evidence": "Results: 'two decision errors ... and one decision error with the opposite pattern' (3 in total). The released data contain 1 row with comparisonOutcome == DECISION_ERROR (dataID 459, reported 0.09 vs obtained 0.02); decisionErrors_nonsig (reported < .05, obtained >= .05) = 0. The authors' stored manuscript.tex line 412-414 prints '2 decision errors ... and 1 decision error with the opposite pattern', so the text and the stored output agree with each other but not with the released data file.",
+   "source": "llm",
+   "question_for_authors": "Which rows in data_values.csv correspond to the two decision errors with a reported non-significant p-value?",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F5"
+  },
+  {
+   "module": "llm",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C4"
+   ],
+   "location": "Sample p.3 vs data/raw/data_articles.csv",
+   "evidence": "Sample: '789 discrete numerical values reported in 27 articles'. data_articles.csv has 25 rows (25 distinct articleIDs), and data_values.csv covers the same 25 articles; the paper elsewhere reports 25 articles throughout. The authors' stored manuscript.tex line 285 also prints 27, so the discrepancy is between the paper and its own data file, not a transcription slip.",
+   "source": "llm",
+   "question_for_authors": "Were target values taken from 25 or 27 articles? Which two articles would be missing from data_articles.csv?",
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F6"
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'Fewer than half of the 25 badge articles are not fully reproducible after author contact (i.e. at least 50% are fully reproducible)' holds in 50% of 16 universes. Single changes that flip it: denominator=reusable.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under denominator=reusable?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F7"
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "llm",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "llm",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "llm",
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json"
+  }
+ ],
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 29,
+   "archive_ok": 0,
+   "port_gap": 2,
+   "archive_mismatch": 0,
+   "not_reproduced": 1,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 0.5,
+  "baseline_holds": true,
+  "breaking_changes": [
+   {
+    "fork": "denominator",
+    "value": "reusable",
+    "holds": false,
+    "effect": -7.142857142857146
+   }
+  ],
+  "n_ok": 16
+ },
+ "top_experiment": "X1",
+ "severity_changes": {
+  "checklist_off_topic": 1,
+  "different_quantity_declared": 2
+ },
+ "_c3_note": "claims dropped (10)"
+}

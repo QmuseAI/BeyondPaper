@@ -1,0 +1,266 @@
+{
+ "counts": {
+  "red": 2,
+  "yellow": 11,
+  "grey": 20,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 4,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 1,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 5
+  }
+ },
+ "findings": [
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Abstract p.1 / Results p.3 / Table 2 p.4 vs results/predict-output.txt",
+   "evidence": "Paper (all three places): precision 63%, recall 67%, F1 0.64, accuracy 60%. Authors' stored output results/predict-output.txt: PRECISION 62%, RECALL 66%, F1 62%, ACCURACY 60% (EQUAL 36, TOTAL POSITIVE 35, TRUE POSITIVE 22, ACTUAL POSITIVE 33, TOTAL 60). Recomputing from those counts: precision 22/35 = 62.9%, recall 22/33 = 66.7%, F1 = 2*62.9*66.7/(62.9+66.7) = 64.9%, accuracy 36/60 = 60.0%. The paper's 63/67/0.64 are the unrounded values; the stored file prints them truncated to 62/66/62. [Red (build_passport.py, archive_verified): the verification stage printed the authors' stored value with an executed check and upheld the conflict.]",
+   "source": "llm",
+   "question_for_authors": "Should Table 2 report the unrounded values (62.9%, 66.7%, F1 0.649) rather than 63%, 67%, 0.64, and why does the stored output print F1 62%?",
+   "judgement_key": "abstract_vs_body",
+   "severity_original": "red",
+   "severity_reasons": [
+    "archive_verified"
+   ],
+   "verified_by": "bp_work/checks/V2.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F1",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "red",
+   "claim_ids": [],
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'The network predicts door-to-needle delay >45 min on the validation set with accuracy above 60% and F1 above 0.64' holds in 40% of 60 universes. Single changes that flip it: seed=0; seed=2; seed=3; seed=4; lam=0.02; lr=0.5.",
+   "source": "script:multiverse.py",
+   "question_for_authors": "Was the result checked under seed=0; seed=2; seed=3; seed=4; lam=0.02; lr=0.5?",
+   "file": "multiverse.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "archive_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Abstract vs capsule-3269870/results/predict-output.txt (F1 62%)",
+   "evidence": "The paper reports 'F1 (validation)' = 0.64 (Abstract); the authors' own stored output (capsule-3269870/results/predict-output.txt (F1 62%)) gives 62. Our re-run gives 64.9, which matches neither. The gap is small (<5%): it may be run-to-run variation if the stored output came from a different run.",
+   "source": "script:numbers_crosscheck.py",
+   "question_for_authors": "Which run produced the reported value of 'F1 (validation)' (0.64), given that capsule-3269870/results/predict-output.txt (F1 62%) gives 62?",
+   "file": "numbers.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 109) vs body (paper.md line 144)",
+   "evidence": "The Abstract gives 45 ('...as assessed using the following parameters: a) Accuracy, defined as percentage of delay > 45 min correctly predicted. b) Sensitivity...'); the body never states 45. The body sentence about the same quantity (shared words: accuracy, correctly, predicted, sensitivity) gives 60: '...Measure Description Value Precision (Positive Predictive Value) True Positive / Predicted Positive 63% Recall (Sensitivity) True Positive / Total Positive 67% F1 2 x precision x recall / (precision + recall) 0.64 Accuracy Correctly predicte...'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 45 (Abstract) or 60 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Abstract (paper.md line 109) vs body (paper.md line 140)",
+   "evidence": "The Abstract gives 68 ('... and 1 which resulted in optimum performance on the training set (accuracy 60%, precision 68%, recall 71%, F1 0.68). b) L2 Regulariza...'); the body never states 68. The body sentence about the same quantity (shared words: accuracy, precision, recall) gives 63: '...The network after optimization showed precision (positive predictive value) 63%, recall (sensitivity) 67% and F1 0.64 on the validation set, with an overall accuracy of 60% (Table 2)....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "question_for_authors": "Which value is correct, 68 (Abstract) or 63 (body)?",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "number_mismatch",
+     "location": "Abstract (paper.md line 109) vs body (paper.md line 140)",
+     "severity": "yellow",
+     "file": "claims_scan.findings.json"
+    },
+    {
+     "type": "number_mismatch",
+     "location": "Abstract (paper.md line 109) vs body (paper.md line 140)",
+     "severity": "yellow",
+     "file": "claims_scan.findings.json"
+    }
+   ],
+   "id": "F5"
+  },
+  {
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C4",
+    "C5"
+   ],
+   "location": "paper p.3 vs capsule-3269870/code/nn.py:156",
+   "evidence": "Hyper-parameter scan (deep_checks.py): the paper says \"b)\t L2 Regularization was used to minimize overfitting which \nwas observed initially, a regularization parameter (lambda) of \n0.02 was chosen based on observing the result over a range of \nparameters \" (l2 = 0.02); the code sets `0.002* regularizer` at capsule-3269870/code/nn.py:156 (l2 = 0.002). Same parameter, different value.",
+   "source": "script:deep_checks.py",
+   "question_for_authors": "Which l2 produced the reported results, 0.02 or 0.002?",
+   "check": "regex scan",
+   "file": "deep.findings.json",
+   "hand_written": false,
+   "merged": [
+    {
+     "type": "param_mismatch",
+     "location": "Methods p.3 (Hyper Parameter Tuning) vs code/nn.py compute_cost()",
+     "severity": "yellow",
+     "file": "llm.findings.json"
+    }
+   ],
+   "id": "F6",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "ghost",
+   "type": "sample_size",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C4",
+    "C5"
+   ],
+   "location": "capsule-3269870/code/nn.py:16",
+   "evidence": "The first line of capsule-3269870/data/test_data.csv is already data (12,74,60,3,1), but capsule-3269870/code/nn.py:16 reads it with read_csv() and the default header setting, so that observation becomes the column names. The file has 61 data lines; the code sees 60. Every count, metric and split built on this table is one row short. Same pattern at 1 more place(s): nn.py:14.",
+   "source": "script:data_checks.py",
+   "question_for_authors": "Is the first row of test_data.csv meant to be data? With the default header setting it is dropped.",
+   "file": "data.findings.json",
+   "hand_written": false,
+   "also_at": [
+    "capsule-3269870/code/nn.py:14"
+   ],
+   "merged": [
+    {
+     "type": "sample_size",
+     "location": "capsule-3269870/code/nn.py:14",
+     "severity": "yellow",
+     "file": "data.findings.json",
+     "source": "script:data_checks.py"
+    }
+   ],
+   "id": "F7",
+   "claims_auto_linked": true
+  },
+  {
+   "module": "llm",
+   "type": "figure_data_mismatch",
+   "severity": "yellow",
+   "claim_ids": [],
+   "location": "Neural Network Architecture p.2 and Figure 2 vs code/nn.py initialize_parameters() and results/Output",
+   "evidence": "Paper: 'The number of neurons in each layer were 4, 6 and 1'. Code: L_Z = N = 5 (columns of the CSV), l_z2 = l_z + l_z/2 = 7, so W1 is [5,4], W2 [7,5], W3 [1,7]; the stored results/Output prints W1 as a 5x4 matrix and W2 as a 7x5 matrix, i.e. 5-7-1. The paper's 4-6-1 is the input-feature count (4) and 1.5x that (6), not the layer sizes actually trained.",
+   "source": "llm",
+   "question_for_authors": "Which architecture produced the reported metrics: 4-6-1 as stated, or 5-7-1 as in the released code and stored weights?",
+   "judgement_key": "figure_data_mismatch",
+   "verified_by": "bp_work/checks/V3.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F8"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1"
+   ],
+   "location": "Table 2 / Abstract vs bp_out/multiverse_results.csv (60 universes)",
+   "evidence": "Our numpy port of nn.py/predict.py reproduces the authors' pipeline but not their exact numbers (port: precision 60.4%, recall 85.3%, F1 70.7%, accuracy 60.7% on 61 rows; stored: 62/66/62/60 on 60 rows), so robustness is measured around our re-run. The claim 'accuracy > 60% and F1 > 0.64' holds in 24/60 universes (40%). Changing only the Xavier seed (1 -> 0,2,3,4) flips it in 4 of 4 alternatives (F1 64.0, 58.8, 53.1, 50.0); lambda 0.02 as stated in the Methods flips it (F1 71.6 but accuracy 55.7, because the model predicts every case positive); learning rate 0.5 flips it. Evaluating only the 30 rows never used during training raises the hold rate to 70% (mean F1 effect +6.7 vs +2.2 on all 60 rows).",
+   "source": "llm",
+   "question_for_authors": "What are the metrics over several random initialisations, and on the 30 validation cases that were not used for monitoring during training?",
+   "verified_by": "bp_work/checks/V8.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F9"
+  },
+  {
+   "module": "llm",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C5"
+   ],
+   "location": "Results p.3 / Table 2 vs baselines computed on the released validation file",
+   "evidence": "The paper reports no baseline. On the same 60 validation rows (data/test_data.csv, 33 positives = 55.0%): a constant 'always delay >45 min' rule gives accuracy 55.7%, precision 55.7%, recall 100%, F1 71.6%; a logistic regression on age alone gives accuracy 57.4%, F1 71.1%; on all four features 52.5% / 56.7%. The network's reported 60% accuracy and F1 0.64 are therefore not above a trivial constant predictor on F1, and only 4 points above it on accuracy. Over 20 Xavier seeds our port gives F1 mean 59.2 (sd 7.9, range 42.6-72.5) and accuracy mean 52.3 (range 41.0-63.9); F1 exceeds 0.64 in 6 of 20 seeds.",
+   "source": "llm",
+   "question_for_authors": "How do the reported metrics compare with a constant 'always delay' predictor and with a single-feature logistic regression on the same validation cases?",
+   "verified_by": "bp_work/checks/V9.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F10"
+  },
+  {
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "claim_ids": [
+    "C3"
+   ],
+   "location": "Methods p.2 ('the cut off that showed the best predictive performance')",
+   "evidence": "The 45-minute threshold is justified by 'best predictive performance', but no comparison with other cut-offs (e.g. 30, 40, 50, 60 min) is reported, and the capsule contains no script that sweeps thresholds. The threshold choice therefore cannot be checked, and it was made on the same data used for evaluation.",
+   "source": "llm",
+   "question_for_authors": "Which alternative door-to-needle cut-offs were compared, on which data, and what were their metrics?",
+   "verified_by": "bp_work/checks/V6.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F11"
+  },
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "claim_ids": [
+    "C4"
+   ],
+   "location": "Hyper Parameter Tuning p.3 (training-set metrics) vs results/Output",
+   "evidence": "Paper p.3: 'the number of neurons in each layer ... set at 4, 6 and 1 which resulted in optimum performance on the training set (accuracy 60%, precision 68%, recall 71%, F1 0.68)'. The authors' stored results/Output prints only the training cost per epoch (0.837 -> 0.632) and the learned weights; it contains no training-set accuracy, precision, recall or F1, and code/nn.py print_results() is called only for the validation predictions in predict.py. The training-set metrics in the paper therefore have no stored output behind them.",
+   "source": "llm",
+   "question_for_authors": "Can the training-set confusion counts behind accuracy 60%, precision 68%, recall 71% and F1 0.68 be provided?",
+   "verified_by": "bp_work/checks/V7.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F12"
+  },
+  {
+   "module": "llm",
+   "type": "test_set_reuse",
+   "severity": "yellow",
+   "claim_ids": [
+    "C1",
+    "C4"
+   ],
+   "location": "Hyper Parameter Tuning p.3 vs code/nn.py model()/predict()",
+   "evidence": "The paper says the hyper-parameters (learning rate 0.15, layer sizes, lambda) were chosen 'based on performance in the training and the validation sets', and the same validation set is the one reported in Table 2. In the released code the validation set is not the whole test file: nn.py takes validation_sz = int(M_app*0.5) = 30 and uses test_data.csv rows 0-29 for training-time monitoring (cost_test printed every 100 epochs in results/Output), while predict.py scores all 60 rows of test_data.csv. The reported metrics are therefore computed on a set that includes the 30 rows used for model selection.",
+   "source": "llm",
+   "question_for_authors": "Were the 30 rows used for monitoring during training (test_data.csv rows 1-30) part of the 60 cases on which precision/recall/F1/accuracy are reported, and were any hyper-parameters chosen using them?",
+   "verified_by": "bp_work/checks/V4.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F13"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "run_id": "B16-v11116p",
+ "paper_id": "B16",
+ "variant": "blind",
+ "version": "v1.11.16",
+ "saved": "2026-11-19",
+ "source_file": "/home/claude/runs/B16-v11116p.c4.json",
+ "note": "v1.11.16 Pro blind #1",
+ "n_findings": 17,
+ "truncated": false,
+ "counts": {
+  "red": 4,
+  "yellow": 13,
+  "grey": 0,
+  "green": 0
+ },
+ "counts_reported": {
+  "red": 4,
+  "yellow": 13,
+  "grey": 26,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

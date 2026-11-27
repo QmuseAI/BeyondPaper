@@ -1,0 +1,384 @@
+{
+ "paper": {
+  "title": "A New Feature Expansion Technique Combined with Shunt Gated Recurrent Unit Neural Network for Epileptic Seizure Diagnosis",
+  "doi": ""
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 10,
+  "grey": 22,
+  "green": 2
+ },
+ "reproduction": {
+  "level": "partial",
+  "counts": {
+   "reproduced": 19,
+   "archive_ok": 0,
+   "port_gap": 5,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 1
+  }
+ },
+ "multiverse": {
+  "robustness": 0.7777777777777778,
+  "baseline_holds": true,
+  "n_ok": 18
+ },
+ "severity_changes": {
+  "checklist_no_locus": 2,
+  "different_dataset": 1,
+  "different_quantity_declared": 2,
+  "low_value_repeat": 9,
+  "seed_present": 1
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "ghost",
+   "type": "figure_data_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-6746514/code/fig_6.py:8 vs capsule-6746514/code/fig_5.py:10",
+   "evidence": "Literal arrays (deep_checks.py): capsule-6746514/code/fig_6.py plots GRU scores[...][0] = 92.76 (Dataset 1); the per-fold values typed into capsule-6746514/code/fig_5.py (Acc4, labelled GRU) average 93.10 over 10 folds. The other GRU summary values match their arrays exactly, so this one does not come from the stored per-fold results."
+  },
+  {
+   "id": "F2",
+   "module": "ghost",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule-6746514/code/wave_test.py:84",
+   "evidence": "MinMaxScaler.fit_transform is called before the first split (line 87); if it sees test data, information leaks into training."
+  },
+  {
+   "id": "F3",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json",
+   "location": "PCC_WFE.py:60-63",
+   "evidence": "[M4] Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only? -> not_reported. MinMaxScaler and PCC-WFE weights fitted on all 11500 samples before the split."
+  },
+  {
+   "id": "F4",
+   "module": "ghost",
+   "type": "param_mismatch",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-6746514/code/NewData_ML_Kfold.py:12 vs capsule-6746514/code/perform.py",
+   "evidence": "Metric definitions (deep_checks.py): sensitivity/precision come from sklearn with recall_score average='macro' in one pipeline (capsule-6746514/code/NewData_ML_Kfold.py:12 recall_score average='macro'; capsule-6746514/code/NewData_ML_Kfold.py:13 precision_score average='macro'; capsule-6746514/code/RawData_ML_Kfold.py:12 recall_score average='macro') and from a binary TP/(TP+FN), TP/(TP+FP) count for one class in another (capsule-6746514/code/perform.py, checks/deep_checks_py311.py). Values with the same name are not the same quantity, so a table comparing them across methods is not like for like."
+  },
+  {
+   "id": "F5",
+   "module": "ghost",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:deep_checks.py",
+   "hand_written": false,
+   "file": "deep.findings.json",
+   "location": "capsule-6746514/code/SGRU_GRU_Kfold.py",
+   "evidence": "Pipeline coverage (deep_checks.py): capsule-6746514/code/SGRU_GRU_Kfold.py trains GRU, SGRU, which no script of the entry point (capsule-6746514/code/run) trains; the entry point never runs it and the stored output has no lines from it. The figure scripts plot numbers for GRU, SGRU as typed-in literals, so those numbers cannot be traced to a stored run. Also never run: capsule-6746514/code/pca_test.py, capsule-6746514/code/wave_test.py."
+  },
+  {
+   "id": "F6",
+   "module": "ghost",
+   "type": "seed_missing",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "capsule-6746514/code/NewData_ML_Kfold.py:17",
+   "evidence": "XGBClassifier(...) called without random_state. Also at: capsule-6746514/code/NewData_ML_Kfold.py:29; capsule-6746514/code/RawData_ML_Kfold.py:17; capsule-6746514/code/RawData_ML_Kfold.py:29; capsule-6746514/code/pca_test.py:23; capsule-6746514/code/pca_test.py:35; capsule-6746514/code/wave_test.py:23; capsule-6746514/code/wave_test.py:35; capsule-6746514/code/NewData_ML_Kfold.py:17-30; capsule-6746514/code/SGRU_GRU_Kfold.py:88-90; all scripts."
+  },
+  {
+   "id": "F7",
+   "module": "llm",
+   "type": "leakage_risk",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "capsule-6746514/code/PCC_WFE.py:60-63",
+   "evidence": "load_data() fits MinMaxScaler(feature_range=(-1,1)) on the whole dataset (all 11500 samples) before the 10-fold split, and the PCC-WFE weights are computed from the correlation of every channel with the label over all 11500 samples (PCC_WFE.py:9-40). Both the scaler and the feature construction therefore see the test folds; the reported cross-validated accuracies are not from a strictly held-out pipeline."
+  },
+  {
+   "id": "F8",
+   "module": "llm",
+   "type": "missing_info",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "capsule-6746514/code/NewData_ML_Kfold.py:41; capsule-6746514/code/SGRU_GRU_Kfold.py:47",
+   "evidence": "KFold(n_splits=10) is used without shuffle=True, so every fold is a contiguous block of the csv. The UCI Epileptic Seizure Recognition file is ordered by subject (each subject contributes 23 consecutive 1-second segments), so the folds are not random with respect to subject and the reported accuracies depend on the file order. The capsule does not state whether the rows were shuffled before the split."
+  },
+  {
+   "id": "F9",
+   "module": "llm",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json",
+   "location": "capsule-6746514/code/run; capsule-6746514/code/SGRU_GRU_Kfold.py; capsule-6746514/results/output",
+   "evidence": "The capsule entry point (code/run) runs only NewData_ML_Kfold.py and the fig_*.py scripts; SGRU_GRU_Kfold.py, which trains the GRU and SGRU models behind claims C2 and C3, is never executed and results/output contains no line from it (no 'D1-avg_acc' / 'D2-avg_acc1'). The GRU/SGRU numbers in Figures 6 and 8 are therefore typed-in literals in fig_6.py/fig_8.py with no stored run behind them."
+  },
+  {
+   "id": "F10",
+   "module": "multiverse",
+   "type": "fragile_conclusion",
+   "severity": "yellow",
+   "source": "script:multiverse.py",
+   "hand_written": false,
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'The PCC-WFE feature raises the accuracy of the traditional classifiers (mean over XGBoost, SVM, DT, RF) on Dataset 2 vs Dataset 1' holds in 78% of 18 universes. Single changes that flip it: seed=2."
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "port_gap",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F28",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F29",
+   "module": "llm",
+   "type": "figure_data_mismatch",
+   "severity": "grey",
+   "severity_original": "red",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F30",
+   "module": "llm",
+   "type": "figure_data_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_dataset"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F31",
+   "module": "llm",
+   "type": "param_mismatch",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "different_quantity_declared"
+   ],
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F32",
+   "module": "llm",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "llm",
+   "hand_written": true,
+   "file": "llm.findings.json"
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F34",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json"
+  }
+ ]
+}

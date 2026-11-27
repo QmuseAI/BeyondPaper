@@ -1,0 +1,483 @@
+{
+ "paper": {
+  "title": "CarbaDetector: a machine learning model for detecting carbapenemase-producing Enterobacterales from disk diffusion tests",
+  "doi": "10.1038/s41467-025-66183-z"
+ },
+ "counts": {
+  "red": 0,
+  "yellow": 4,
+  "grey": 40,
+  "green": 4
+ },
+ "reproduction": {
+  "level": "full",
+  "counts": {
+   "reproduced": 36,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 0
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "n_ok": 24
+ },
+ "severity_changes": {
+  "checklist_no_locus": 2,
+  "near_duplicate": 1
+ },
+ "findings": [
+  {
+   "id": "F1",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "paper text",
+   "evidence": "The paper names k-fold cross-validation (\"…imple decision tree based on only these diameters and the species. Using nested cross-validation, this yielded a model with 89.5% sensitivity (CI: 84.9–93.1%) and 86.4% speciﬁc…\"), but no matching call (/KFold|StratifiedKFold|GroupKFold|cross_val|cv\\s*=|trainControl|cv\\.glmnet|createFolds|n_splits/) was found outside comments in 1 code file(s)."
+  },
+  {
+   "id": "F2",
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "source": "script:methods_code_check.py",
+   "hand_written": false,
+   "file": "methods_code.findings.json",
+   "location": "paper text",
+   "evidence": "The paper names random forest (\"…ables, i.e., the difference between each pair of inhibition zone diameters. The random forest model including the additional engineered features (random forest expanded) yie…\"), but no matching call (/RandomForest|randomForest|ranger/) was found outside comments in 1 code file(s)."
+  },
+  {
+   "id": "F3",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "yellow",
+   "source": "script:leakage_scan.py",
+   "hand_written": false,
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...)."
+  },
+  {
+   "id": "F4",
+   "module": "ledger",
+   "type": "missing_artifact",
+   "severity": "yellow",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json",
+   "location": "code/",
+   "evidence": "Artifact A1 (code) is referred to by the paper but not provided."
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "unit_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F26",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F27",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F28",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F29",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F30",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F31",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F32",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F33",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F34",
+   "module": "ghost",
+   "type": "missing_info",
+   "severity": "grey",
+   "severity_original": "yellow",
+   "severity_reasons": [
+    "checklist_no_locus"
+   ],
+   "source": "script:checklist_to_findings.py",
+   "hand_written": false,
+   "file": "ghost.findings.json"
+  },
+  {
+   "id": "F35",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F36",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F37",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F38",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F39",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F40",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F41",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F42",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F43",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F44",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "hand_written": false,
+   "file": "ledger.findings.json"
+  },
+  {
+   "id": "F45",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "hand_written": false,
+   "file": "numbers.findings.json"
+  },
+  {
+   "id": "F46",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "green",
+   "source": "script:counts_check.py",
+   "hand_written": false,
+   "file": "counts.findings.json"
+  },
+  {
+   "id": "F47",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "hand_written": false,
+   "file": "ci.findings.json"
+  },
+  {
+   "id": "F48",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "hand_written": false,
+   "file": "multiverse.findings.json"
+  }
+ ]
+}

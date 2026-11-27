@@ -1,0 +1,596 @@
+{
+ "paper": {
+  "title": "Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: an observational study",
+  "doi": "10.24433/CO.1796004.v3",
+  "authors": "Hardwicke et al."
+ },
+ "counts": {
+  "red": 1,
+  "yellow": 3,
+  "grey": 47,
+  "green": 3
+ },
+ "reproduction": {
+  "level": "full",
+  "counts": {
+   "reproduced": 1,
+   "archive_ok": 0,
+   "port_gap": 0,
+   "archive_mismatch": 0,
+   "not_reproduced": 0,
+   "not_run": 0,
+   "unmatched": 36
+  }
+ },
+ "multiverse": {
+  "robustness": 1,
+  "baseline_holds": true,
+  "breaking_changes": [],
+  "n_ok": 36
+ },
+ "judgement_checks": {
+  "_verdicts": {
+   "abstract_vs_body": "problem",
+   "param_mismatch": "ok",
+   "figure_data_mismatch": "ok",
+   "phantom_experiment": "ok",
+   "claims_scan": "problem"
+  },
+  "abstract_vs_body": "Abstract: 6 (34% [8,47]) reproducible with author involvement; Table 1 and Results: 6 (24% [8,47]); 6/25=24%, so 34% in the Abstract is wrong",
+  "param_mismatch": "Methods: PE>=10% major, alpha 0.05, random-effects inverse-variance meta-analysis; code (manuscript.Rmd, meta_analysis.R) uses the same thresholds and meta::metaprop random effects",
+  "figure_data_mismatch": "Fig 2 caption says 41 p-values below 0.001 not shown; data_values.csv has 9 p-values printed as <.001 and 0 numeric below 0.001 - caption count not reproducible from the released value file (recorded as grey finding)",
+  "phantom_experiment": "The 30-article comparison sample without open data badges is described in Results p.4 as checked with the same protocol; it is a reported comparison sample, not an experiment missing from the materials (its raw data are not in the capsule - noted as missing_info)",
+  "claims_scan": "claims_scan flagged 3 candidates: phantom_experiment (comparison sample, explained above), number_mismatch Abstract 34% vs 24% (real, red finding added), number_mismatch 789 (false positive: same value in Abstract and Results)"
+ },
+ "findings": [
+  {
+   "module": "llm",
+   "type": "number_mismatch",
+   "severity": "red",
+   "location": "Abstract vs Table 1 / Results p.4",
+   "evidence": "Abstract: reproducible with author involvement for 6 (34% [8,47]) articles; Table 1 and Results give 6 (24% [8,47]); 6/25 = 24%, so the Abstract percentage 34% does not match its own numerator and denominator.",
+   "source": "llm",
+   "judgement_key": "abstract_vs_body",
+   "verified_by": "bp_work/checks/V1.out",
+   "file": "llm.findings.json",
+   "hand_written": true,
+   "id": "F1"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 10) vs body (paper.md line 58)",
+   "evidence": "The Abstract gives 34 ('...hor involvement for 9 (36% [20,59]) articles; reproducible with author involvement for 6 (34% [8,47]) articles; not fully reproducibl...'); the body never states 34. The body sentence about the same quantity (shared words: articles, author, involvement, reproducible) gives 25: '...Prior to seeking original author involvement, all target values in 9 out of the 25 articles (36%, CI [19,57]) were reproducible, with the remaining 16 articles (64%, CI [43,81]) containing at least one major numerical discrepancy....'. Confirm that both refer to the same quantity (same cohort, test set, metric) before keeping it.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F2"
+  },
+  {
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "yellow",
+   "location": "Abstract (paper.md line 10) vs Results (paper.md line 72)",
+   "evidence": "The same digits in a different order for values: 789 ('...Overall, 37 major numerical discrepancies remained out of 789 checked values (5% [3,6]), but original conclusions did not appear affected....') and 879 ('...After author involvement, 37 major numerical discrepancies remained among the 879 target values examined across all articles (5%, CI [3,6])....'). If both count the same set, one of them has transposed digits.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F3"
+  },
+  {
+   "module": "consistency",
+   "type": "phantom_experiment",
+   "severity": "yellow",
+   "location": "Results (paper.md line 72)",
+   "evidence": "The text reports an additional study or analysis: 'A comparison sample of 30 articles from the same journal without open data badges, checked with the same protocol, contained at least one major numerical discrepancy in 21 (70%) articles.'. Its head count 30 appears nowhere else in the paper, the phrase 'comparison sample' is used in no other sentence (the Methods do not describe it), the sentence cites no source, and the code, README and file names in the materials do not contain the number. Look for its data, code, table or supplementary item; if there is none, the analysis cannot be checked from what was released.",
+   "source": "script:claims_scan.py",
+   "file": "claims_scan.findings.json",
+   "hand_written": false,
+   "id": "F4"
+  },
+  {
+   "id": "F5",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'n_values' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F6",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'initial_major_articles' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F7",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'initial_major_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F8",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'initial_major_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F9",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'initial_major_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F10",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_noAI' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F11",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_noAI_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F12",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_noAI_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F13",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_noAI_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F14",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_withAI' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F15",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_withAI_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F16",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_withAI_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F17",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_withAI_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F18",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_noAI' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F19",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_noAI_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F20",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_noAI_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F21",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_noAI_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F22",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_withAI' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F23",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_withAI_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F24",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_withAI_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F25",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'noRepro_withAI_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F26",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_after' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F27",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_after_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F28",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_after_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F29",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'repro_after_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F30",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'major_remaining' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F31",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'major_remaining_pct' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F32",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'major_remaining_ci_low' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F33",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'major_remaining_ci_high' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F34",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'major_plus_decision_only' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F35",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'insuff_info_articles' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F36",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'no_response_articles' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F37",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'time_total_h' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F38",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'time_median_h' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F39",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'time_max_h' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F40",
+   "module": "consistency",
+   "type": "rerun_mismatch",
+   "severity": "grey",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "re-run from materials/data/raw",
+   "evidence": "Re-computed 'time_iqr_h' has no reported counterpart in the ledger."
+  },
+  {
+   "id": "F41",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 2, Sec. Introduction, line 21",
+   "evidence": "'es were resolved in 11 of the 24 articles after consultation with origi': 24 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a "
+  },
+  {
+   "id": "F42",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "p. 3, Sec. Sample, line 41",
+   "evidence": "'numerical values reported in 27 articles published between January 201': 27 article(s) appears once, while 25 article(s) appears 2 times (and 25 is used as a d"
+  },
+  {
+   "id": "F43",
+   "module": "consistency",
+   "type": "sample_size",
+   "severity": "grey",
+   "source": "script:counts_check.py",
+   "file": "counts.findings.json",
+   "location": "whole text",
+   "evidence": "22 count mentions read; 2 flagged. Full list in counts_table.csv."
+  },
+  {
+   "id": "F44",
+   "module": "ghost",
+   "type": "dependency_unpinned",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "bp_work/",
+   "evidence": "No dependency specification found (requirements.txt, environment.yml, renv.lock, ...). [Grey (build_passport.py, env_pinned): the materials pin the environment ",
+   "severity_reasons": [
+    "env_pinned"
+   ]
+  },
+  {
+   "id": "F45",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/manuscript.Rmd:168",
+   "evidence": "1 data-exclusion step(s): filter@168. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F46",
+   "module": "ghost",
+   "type": "exclusion_rule",
+   "severity": "grey",
+   "source": "script:leakage_scan.py",
+   "file": "leakage.findings.json",
+   "location": "materials/code/supplementary_information.Rmd:7",
+   "evidence": "1 data-exclusion step(s): filter@7. Candidate forks for the multiverse stage."
+  },
+  {
+   "id": "F47",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4",
+   "evidence": "Claim C4 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F48",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Abstract; Results p.4",
+   "evidence": "Claim C5 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F49",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4",
+   "evidence": "Claim C7 cannot be re-computed: no available data or code behind its evidence."
+  },
+  {
+   "id": "F50",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4; Fig. S3",
+   "evidence": "Claim C9 cannot be re-computed: no available code behind its evidence."
+  },
+  {
+   "id": "F51",
+   "module": "ledger",
+   "type": "unverifiable_claim",
+   "severity": "grey",
+   "source": "script:validate_ledger.py",
+   "file": "ledger.findings.json",
+   "location": "Results p.4; Fig. 1",
+   "evidence": "Claim C10 cannot be re-computed: no available data behind its evidence."
+  },
+  {
+   "id": "F52",
+   "module": "consistency",
+   "type": "number_mismatch",
+   "severity": "green",
+   "source": "script:numbers_crosscheck.py",
+   "file": "numbers.findings.json",
+   "location": "reported values",
+   "evidence": "0 multiply-reported quantities agree across locations; 1 re-computed values match the paper."
+  },
+  {
+   "id": "F53",
+   "module": "consistency",
+   "type": "stat_inconsistency",
+   "severity": "green",
+   "source": "script:ci_check.py",
+   "file": "ci.findings.json",
+   "location": "whole text",
+   "evidence": "6 of 6 estimate-CI reports are internally consistent."
+  },
+  {
+   "id": "F54",
+   "module": "multiverse",
+   "type": "robust_conclusion",
+   "severity": "green",
+   "source": "script:multiverse.py",
+   "file": "multiverse.findings.json",
+   "location": "multiverse_summary.json",
+   "evidence": "Claim 'After author involvement, at least 60% of the 25 open-data-badge articles are fully analytically reproducible' holds in 100% of 36 universes. Single chan"
+  }
+ ]
+}

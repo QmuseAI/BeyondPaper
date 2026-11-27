@@ -1,0 +1,24 @@
+{
+ "run_id": "B13-v1103",
+ "paper_id": "B13",
+ "variant": "blind",
+ "version": "v1.10.3",
+ "saved": "2026-11-17",
+ "source_file": "pages/B13-v1103.txt",
+ "note": "",
+ "n_findings": 24,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 9,
+  "grey": 13,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 9,
+  "grey": 13,
+  "green": 2
+ },
+ "reproduction": "partial"
+}

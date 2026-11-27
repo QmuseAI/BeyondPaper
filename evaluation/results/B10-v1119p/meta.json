@@ -1,0 +1,24 @@
+{
+ "run_id": "B10-v1119p",
+ "paper_id": "B10",
+ "variant": "injected",
+ "version": "v1.11.9",
+ "saved": "2026-11-18",
+ "source_file": "pages/B10-v1119p.c4.json",
+ "note": "GLM then Pro; stage 4 skipped by instruction",
+ "n_findings": 19,
+ "truncated": false,
+ "counts": {
+  "red": 1,
+  "yellow": 6,
+  "grey": 11,
+  "green": 1
+ },
+ "counts_reported": {
+  "red": 1,
+  "yellow": 6,
+  "grey": 11,
+  "green": 1
+ },
+ "reproduction": "partial"
+}

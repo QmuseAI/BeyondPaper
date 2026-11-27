@@ -1,0 +1,181 @@
+# BeyondPaper ghost-variable checklist.
+# applies_to: all | ml | computational | wetlab | materials | clinical
+# impact: high | medium | low  (high + not_reported -> yellow finding)
+# multiverse_fork: suggested analysis fork for bp-multiverse, or null
+
+items:
+  # ---------------- general ----------------
+  - id: G1
+    applies_to: [all]
+    question: Is the exact data source identified (version, DOI, accession, download date)?
+    why: Public databases change between releases; a different snapshot gives different results.
+    where_to_look: Data availability statement, Methods, SI
+    impact: high
+    multiverse_fork: null
+  - id: G2
+    applies_to: [all]
+    question: Are inclusion/exclusion rules stated, with counts removed at each step?
+    why: Undocumented filtering is a common source of irreproducible effects.
+    where_to_look: Methods, flow diagram, SI
+    impact: high
+    multiverse_fork: "alternative defensible exclusion rules"
+  - id: G3
+    applies_to: [all]
+    question: Is the handling of missing values stated?
+    why: Listwise deletion vs imputation can change estimates and n.
+    where_to_look: Methods, code
+    impact: medium
+    multiverse_fork: "drop vs mean/median imputation vs model-based imputation"
+  - id: G4
+    applies_to: [all]
+    question: Is the outlier definition and removal rule stated (and applied before or after splitting)?
+    why: Removing a few points can create or erase significance.
+    where_to_look: Methods, code (quantile, z-score, IQR filters)
+    impact: high
+    multiverse_fork: "no removal vs |z| > 3 vs |z| > 2.5 vs IQR rule"
+  - id: G5
+    applies_to: [all]
+    question: Is the sample size justified (power analysis or other rationale)?
+    why: Small samples inflate effect sizes of significant results.
+    where_to_look: Methods
+    impact: medium
+    multiverse_fork: null
+  - id: G6
+    applies_to: [all]
+    question: Is correction for multiple comparisons stated when many tests or metrics are reported?
+    why: Uncorrected families of tests produce false positives.
+    where_to_look: Statistics section
+    impact: medium
+    multiverse_fork: "none vs Bonferroni vs Benjamini-Hochberg"
+  - id: G7
+    applies_to: [all]
+    question: Is each statistical test named, with sidedness and assumptions checked?
+    why: Parametric vs non-parametric or one- vs two-tailed changes p-values.
+    where_to_look: Statistics section, figure legends
+    impact: medium
+    multiverse_fork: "t-test vs Welch vs Mann-Whitney / permutation test"
+
+  # ---------------- computational / ML ----------------
+  - id: M1
+    applies_to: [ml, computational]
+    question: Are random seeds stated, and are results reported over several seeds?
+    why: Single-seed results can be within run-to-run noise.
+    where_to_look: Methods, code, config files
+    impact: high
+    multiverse_fork: "5-10 seeds"
+  - id: M2
+    applies_to: [ml, computational]
+    question: Are software and library versions (and hardware, for GPU non-determinism) stated?
+    why: Library defaults change across versions.
+    where_to_look: Methods, requirements/environment files
+    impact: medium
+    multiverse_fork: null
+  - id: M3
+    applies_to: [ml]
+    question: How was the data split, and does the split respect groups (patients, compositions, scaffolds, time, sites)?
+    why: Random splits on grouped data leak information and overstate performance.
+    where_to_look: Methods, code (train_test_split, KFold, GroupKFold)
+    impact: high
+    multiverse_fork: "random vs group/cluster/scaffold/time split"
+  - id: M4
+    applies_to: [ml]
+    question: Were preprocessing steps (scaling, feature selection, imputation, PCA) fitted on training data only?
+    why: Fitting on the full data before splitting is a classic leakage.
+    where_to_look: Code order of fit/fit_transform vs split; Pipeline use
+    impact: high
+    multiverse_fork: "fit on all data vs fit inside the training fold"
+  - id: M5
+    applies_to: [ml]
+    question: Are hyperparameter search space, budget and selection criterion stated (selected on validation, not test)?
+    why: Tuning on the test set or unequal tuning budgets bias comparisons.
+    where_to_look: Methods, SI, config files
+    impact: high
+    multiverse_fork: "default vs tuned hyperparameters for every model"
+  - id: M6
+    applies_to: [ml]
+    question: Are initialisation, pretrained checkpoints or external pretraining data identified?
+    why: Pretraining data can overlap with the test set.
+    where_to_look: Methods, model cards
+    impact: medium
+    multiverse_fork: null
+  - id: M7
+    applies_to: [ml]
+    question: Were duplicates and near-duplicates between training and test sets removed?
+    why: Duplicates inflate test scores.
+    where_to_look: Data processing section, code
+    impact: high
+    multiverse_fork: "with vs without de-duplication"
+  - id: M8
+    applies_to: [ml]
+    question: Were baselines given comparable tuning effort and the same data?
+    why: Weak baselines exaggerate the gain of the proposed method.
+    where_to_look: Methods, SI
+    impact: high
+    multiverse_fork: "tuned baselines"
+  - id: M9
+    applies_to: [ml, computational]
+    question: Are metric definitions and aggregation stated (macro/micro, per-fold mean ± sd, number of runs)?
+    why: Different aggregations can reorder methods.
+    where_to_look: Results, table captions
+    impact: medium
+    multiverse_fork: "alternative standard metric"
+  - id: M10
+    applies_to: [ml, computational]
+    question: If the paper credits specific features or descriptors for the performance, is there a negative control (random or shuffled features, one-hot identity encoding, y-randomisation)?
+    why: Models given random per-entity features can match "meaningful" descriptors when the same entities appear in training and test (Chuang & Keiser, Science 2018; OECD QSAR validation principle 4).
+    where_to_look: Methods, SI, code (feature construction)
+    impact: high
+    multiverse_fork: "domain features vs one-hot identity vs random per-entity features (and y-randomisation)"
+
+  # ---------------- wet lab ----------------
+  - id: W1
+    applies_to: [wetlab]
+    question: Are reagent suppliers, catalogue and lot numbers stated?
+    why: Lot-to-lot variability (antibodies, sera) is a known source of failed replication.
+    where_to_look: Methods, key resources table
+    impact: high
+    multiverse_fork: null
+  - id: W2
+    applies_to: [wetlab, materials]
+    question: Are instrument models, settings and calibration stated?
+    why: Gains, thresholds and calibration drift change measured values.
+    where_to_look: Methods
+    impact: medium
+    multiverse_fork: null
+  - id: W3
+    applies_to: [wetlab, materials]
+    question: Are temperature, humidity, incubation/culture times and similar conditions stated?
+    why: Small environmental differences can change outcomes.
+    where_to_look: Methods
+    impact: medium
+    multiverse_fork: null
+  - id: W4
+    applies_to: [wetlab]
+    question: Are cell line source, authentication, passage number and mycoplasma testing stated?
+    why: Drift with passage and contamination change phenotypes.
+    where_to_look: Methods
+    impact: high
+    multiverse_fork: null
+  - id: W5
+    applies_to: [wetlab, clinical]
+    question: Were blinding and randomisation of samples/animals/patients used and described?
+    why: Unblinded assessment biases effect sizes.
+    where_to_look: Methods
+    impact: high
+    multiverse_fork: null
+  - id: W6
+    applies_to: [wetlab]
+    question: Are biological vs technical replicates distinguished, with n of each?
+    why: Technical replicates treated as independent inflate significance.
+    where_to_look: Figure legends, statistics section
+    impact: high
+    multiverse_fork: "analysis at the biological-replicate level"
+
+  # ---------------- materials / computational materials ----------------
+  - id: X1
+    applies_to: [materials]
+    question: Are synthesis conditions and sample history stated (or, for DFT, functional, cut-offs, k-points, U values, pseudopotentials)?
+    why: Processing history and DFT settings shift properties and labels used for ML.
+    where_to_look: Methods, SI, input files
+    impact: high
+    multiverse_fork: "alternative standard settings where data allow"

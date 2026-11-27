@@ -1,0 +1,24 @@
+{
+ "run_id": "B11-v1105",
+ "paper_id": "B11",
+ "variant": "blind",
+ "version": "v1.10.5",
+ "saved": "2026-11-17",
+ "source_file": "pages/B11-v1105.txt",
+ "note": "v1.10.5 first independent check; page = bp_out/BP_FINDINGS_BLOCK.txt (sha256 verified in browser)",
+ "n_findings": 14,
+ "truncated": false,
+ "counts": {
+  "red": 0,
+  "yellow": 4,
+  "grey": 8,
+  "green": 2
+ },
+ "counts_reported": {
+  "red": 0,
+  "yellow": 4,
+  "grey": 8,
+  "green": 2
+ },
+ "reproduction": "full"
+}
