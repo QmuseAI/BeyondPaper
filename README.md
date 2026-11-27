@@ -6,6 +6,8 @@ BeyondPaper runs as a custom agent on [SciencePal](https://sciencepal.ai) (HKAI-
 
 **Team:** Edge-of-Chaos — Jiapei Zhuang (project design, presentation and submission; Independent) and Yaocheng Chen (project design, technical implementation and experimental validation; Universidade de São Paulo).
 
+**Quick start:** [Open the four-choice replay and source page](https://qmuseai.github.io/BeyondPaper/).
+
 ## Watch three SciencePal replays
 
 These public links open **read-only conversation replays** without a SciencePal login. They are not video files or interactive Agent entry points. The real-paper replays identify the audited papers; findings are questions for human verification, not automatic verdicts on their authors.
