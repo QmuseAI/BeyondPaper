@@ -2,56 +2,1511 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="BeyondPaper：选择 SciencePal 研究回放，或查看项目源码与评测。">
-  <title>BeyondPaper｜研究回放与源码</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07172e">
+  <meta name="description" content="BeyondPaper：让论文成为可检验、可接续的研究系统。免登录查看 SciencePal 运行回放、GitHub 源码与完整项目介绍。">
+  <title>BeyondPaper｜研究回放、GitHub 源码与项目详细介绍</title>
   <style>
-    :root { color-scheme: light; --ink:#23334b; --muted:#64748b; --line:#dbe5ed; --teal:#269780; --blue:#3b82c4; --violet:#9066c9; --amber:#b78b44; }
+    :root {
+      color-scheme: light;
+      --navy: #07172e;
+      --navy-2: #0d2444;
+      --navy-card: #0e2546;
+      --ink: #0f213a;
+      --body: #33455e;
+      --muted: #5c6f88;
+      --line: #dbe5f0;
+      --bg-soft: #f6f9fc;
+      --teal: #0e8f79;
+      --teal-bright: #2dd4bf;
+      --blue: #2563eb;
+      --blue-bright: #60a5fa;
+      --violet: #7c3aed;
+      --violet-bright: #c4b5fd;
+      --amber: #c27803;
+      --amber-bright: #fbbf24;
+      --radius: 12px;
+      --shadow: 0 6px 22px rgba(7, 23, 46, 0.06);
+    }
     * { box-sizing: border-box; }
-    html { background:#fff; }
-    body { margin:0; color:var(--ink); font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif; }
-    main { width:min(100% - 32px,760px); margin:0 auto; padding:28px 0 36px; }
-    .eyebrow { color:var(--teal); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-    h1 { margin:8px 0 4px; font-size:clamp(31px,8vw,50px); line-height:1.08; letter-spacing:-.04em; }
-    .intro { margin:0 0 18px; color:var(--muted); font-size:14px; line-height:1.5; }
-    .lead { margin:0 0 15px; font-size:16px; font-weight:700; }
-    .cards { display:grid; gap:10px; }
-    a.card { display:block; position:relative; padding:15px 43px 15px 17px; border:1.3px solid var(--tone); border-radius:9px; background:var(--tint); color:inherit; text-decoration:none; }
-    a.card:hover, a.card:focus-visible { outline:2px solid var(--tone); outline-offset:2px; }
-    .badge { display:inline-block; margin-bottom:5px; color:var(--tone); font-size:11px; font-weight:700; letter-spacing:.04em; }
-    .card strong { display:block; font-size:18px; line-height:1.3; }
-    .card small { display:block; margin-top:3px; color:#3b4c63; font-size:12px; line-height:1.4; }
-    .card::after { content:"↗"; position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--tone); font-size:24px; }
-    .bio { --tone:var(--teal); --tint:#f0faf7; }
-    .quantum { --tone:var(--violet); --tint:#f7f3fc; }
-    .synthetic { --tone:var(--blue); --tint:#f1f7fc; }
-    .code { --tone:var(--amber); --tint:#fcf8ef; }
-    .note { margin:16px 0 0; padding-top:12px; border-top:1px solid var(--line); color:var(--muted); font-size:11px; line-height:1.55; }
-    @media (min-width:650px) { main { padding-top:45px; } .cards { grid-template-columns:1fr 1fr; gap:14px; } a.card { min-height:125px; padding-top:18px; } .intro { margin-bottom:30px; } }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: var(--body);
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, -apple-system, sans-serif;
+      font-size: 15.5px;
+      line-height: 1.76;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #1d5fa7; text-underline-offset: 3px; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--teal-bright); outline-offset: 2px; }
+    img { max-width: 100%; height: auto; display: block; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.86em;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #eef4fa;
+      color: #163254;
+      word-break: break-word;
+    }
+
+    .wrap { width: min(100% - 32px, 1060px); margin-inline: auto; }
+
+    /* Top dual-color accent bar */
+    .top-trim {
+      height: 5px;
+      background: linear-gradient(90deg, var(--teal-bright) 0%, var(--teal-bright) 50%, var(--blue-bright) 50%, var(--blue-bright) 100%);
+    }
+
+    /* Sticky mobile-scrollable navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 23, 46, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(96, 165, 250, 0.24);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      position: relative;
+    }
+    .nav-brand {
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-right: 6px;
+      border-right: 1px solid rgba(148, 184, 224, 0.25);
+    }
+    .nav-brand::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal-bright);
+      box-shadow: 0 0 8px var(--teal-bright);
+    }
+    .nav-scroll-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+    .nav-scroll-wrap::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 24px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(7, 23, 46, 0), rgba(7, 23, 46, 0.96));
+    }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+      padding-right: 22px;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a {
+      scroll-snap-align: start;
+      color: #cfe0f5;
+      text-decoration: none;
+      font-size: 12.8px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 184, 224, 0.16);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(45, 212, 191, 0.2);
+      border-color: rgba(45, 212, 191, 0.65);
+      color: #ffffff;
+    }
+
+    /* ==================== FIRST SCREEN (MOBILE-FIRST HERO + QUICK ACCESS) ==================== */
+    .hero {
+      background: radial-gradient(900px 420px at 85% 6%, rgba(45, 212, 191, 0.15), transparent 60%),
+                  radial-gradient(700px 400px at 10% 25%, rgba(96, 165, 250, 0.14), transparent 60%),
+                  linear-gradient(180deg, var(--navy) 0%, #091d3a 100%);
+      color: #e8f0fa;
+      padding: 20px 0 26px;
+      border-bottom: 1px solid #18365e;
+    }
+    .hero-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .eyebrow {
+      color: #9cb8d9;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .finals-pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(45, 212, 191, 0.14);
+      border: 1px solid var(--teal-bright);
+      color: var(--teal-bright);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .hero h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: clamp(32px, 8vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+    .hero-tagline {
+      margin: 6px 0 0;
+      font-size: clamp(16px, 4.2vw, 22px);
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .hero-sub {
+      margin: 6px 0 0;
+      color: #bed2ea;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    /* Quick-Access Deck (Immediate Above-the-Fold 2x2 Grid on Mobile & Desktop) */
+    .quick-label {
+      margin: 16px 0 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--teal-bright);
+      letter-spacing: 0.04em;
+    }
+    .quick-label span:last-child {
+      color: #9bb5d4;
+      font-weight: 500;
+      font-size: 11.5px;
+    }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .q-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      padding: 13px 13px 12px;
+      border-radius: 11px;
+      text-decoration: none;
+      color: #ffffff;
+      background: rgba(14, 37, 70, 0.92);
+      border: 1.4px solid var(--tone);
+      box-shadow: 0 6px 18px rgba(0, 8, 24, 0.28);
+      transition: transform 0.14s, background 0.14s;
+    }
+    .q-btn:active { transform: scale(0.985); }
+    .q-btn:hover { background: rgba(20, 50, 92, 0.98); transform: translateY(-1px); }
+    .q-btn .q-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+    .q-btn .q-tag {
+      font-size: 10.8px;
+      font-weight: 800;
+      color: var(--tone);
+      letter-spacing: 0.03em;
+    }
+    .q-btn .q-arrow {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--tone);
+      line-height: 1;
+    }
+    .q-btn strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.3;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .q-btn small {
+      display: block;
+      font-size: 11.8px;
+      line-height: 1.42;
+      color: #c2d4eb;
+    }
+    .qt-teal { --tone: var(--teal-bright); background: linear-gradient(155deg, rgba(45, 212, 191, 0.16), rgba(14, 37, 70, 0.95)); }
+    .qt-violet { --tone: var(--violet-bright); background: linear-gradient(155deg, rgba(196, 181, 253, 0.14), rgba(14, 37, 70, 0.95)); }
+    .qt-blue { --tone: var(--blue-bright); background: linear-gradient(155deg, rgba(96, 165, 250, 0.14), rgba(14, 37, 70, 0.95)); }
+    .qt-amber { --tone: var(--amber-bright); background: linear-gradient(155deg, rgba(251, 191, 36, 0.15), rgba(14, 37, 70, 0.95)); }
+
+    .hero-tip {
+      margin: 10px 0 0;
+      padding: 8px 11px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 184, 224, 0.18);
+      font-size: 12px;
+      line-height: 1.5;
+      color: #bfd3ec;
+    }
+
+    /* Prominent First-Screen Signpost to Full Project Intro */
+    .intro-cue {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: linear-gradient(90deg, rgba(45, 212, 191, 0.22), rgba(96, 165, 250, 0.18));
+      border: 1.3px solid rgba(45, 212, 191, 0.65);
+      color: #ffffff;
+    }
+    .intro-cue strong { display: block; font-size: 14px; color: #ffffff; line-height: 1.35; }
+    .intro-cue small { display: block; font-size: 11.8px; color: #d5e6f8; margin-top: 2px; }
+    .intro-cue .cue-down {
+      flex-shrink: 0;
+      padding: 5px 10px;
+      border-radius: 99px;
+      background: var(--teal-bright);
+      color: #052026;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* ==================== MAIN SECTIONS ==================== */
+    main section {
+      padding: 46px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 56px;
+    }
+    .section-soft { background: var(--bg-soft); }
+    .kicker {
+      margin: 0 0 6px;
+      color: var(--teal);
+      font-size: 11.8px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: clamp(22px, 5vw, 31px);
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.35;
+    }
+    p { margin: 0 0 13px; }
+    .lead {
+      max-width: 820px;
+      font-size: 15px;
+      color: var(--body);
+      margin-bottom: 20px;
+    }
+
+    /* Overview figure card */
+    .concept-frame {
+      margin: 0;
+      padding: 12px;
+      border-radius: 14px;
+      background: #011334;
+      border: 1.5px solid rgba(45, 212, 191, 0.45);
+      box-shadow: 0 12px 32px rgba(7, 23, 46, 0.16);
+    }
+    .concept-frame img { width: 100%; border-radius: 8px; }
+    .stage-pills {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(96, 165, 250, 0.22);
+    }
+    .stage-pill {
+      text-align: center;
+      padding: 6px 6px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .sp-1 { background: rgba(251, 191, 36, 0.14); color: #fde68a; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .sp-2 { background: rgba(96, 165, 250, 0.14); color: #bfdbfe; border: 1px solid rgba(96, 165, 250, 0.4); }
+    .sp-3 { background: rgba(45, 212, 191, 0.14); color: #99f6e4; border: 1px solid rgba(45, 212, 191, 0.4); }
+    .sp-4 { background: rgba(196, 181, 253, 0.14); color: #ddd6fe; border: 1px solid rgba(196, 181, 253, 0.4); }
+
+    .pillar-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .pillar-chip {
+      text-align: center;
+      padding: 11px 8px;
+      border-radius: 9px;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--ink);
+      background: #ffffff;
+      border: 1.5px solid rgba(37, 99, 235, 0.35);
+      box-shadow: var(--shadow);
+    }
+    .pillar-chip:nth-child(2) { border-color: rgba(14, 143, 121, 0.45); }
+    .pillar-chip:nth-child(3) { border-color: rgba(194, 120, 3, 0.4); }
+    .pillar-chip:nth-child(4) { border-color: rgba(124, 58, 237, 0.4); }
+
+    .team-bar {
+      margin-top: 14px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      font-size: 13.5px;
+      color: var(--body);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+    }
+    .team-bar strong { color: var(--teal); }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+
+    /* Cards & Panels */
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .card p:last-child { margin-bottom: 0; }
+    .quote-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 3.5px solid var(--teal);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .quote-card:nth-child(2) { border-top-color: var(--blue); }
+    .quote-card:nth-child(3) { border-top-color: var(--violet); }
+    .quote-who { font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 5px; }
+    .quote-text { font-size: 14.2px; color: var(--ink); font-weight: 600; margin: 0; }
+
+    .loop-ribbon {
+      margin: 18px 0 22px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: linear-gradient(90deg, #effaf7 0%, #eef5ff 100%);
+      border: 1px solid #bce4db;
+    }
+    .loop-steps { font-weight: 800; font-size: 14.5px; color: var(--ink); line-height: 1.7; }
+    .loop-steps .hl {
+      color: #0b6e5d;
+      background: rgba(45, 212, 191, 0.25);
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+    .loop-tag { font-size: 12.2px; font-weight: 700; color: #0b6e5d; margin-top: 4px; }
+
+    .num-tag {
+      display: inline-block;
+      font-size: 11.8px;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+      background: #eef4fa;
+      color: var(--ink);
+    }
+    .big-metric { font-size: 26px; font-weight: 800; color: var(--ink); line-height: 1.15; margin: 6px 0; }
+    .chart-box {
+      margin-top: 10px;
+      padding: 8px 8px 4px;
+      border-radius: 8px;
+      background: #f8fafd;
+      border: 1px solid #e2ebf5;
+    }
+
+    /* Second Half Banner */
+    .second-half {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0b1e3d 0%, #162952 100%);
+      color: #e8f0fa;
+      border: 1px solid rgba(196, 181, 253, 0.45);
+    }
+    .second-half .sh-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(196, 181, 253, 0.16);
+      border: 1px solid rgba(196, 181, 253, 0.55);
+      color: #ddd6fe;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .second-half h3 { color: #ffffff; font-size: clamp(18px, 4.2vw, 23px); margin-bottom: 8px; }
+    .second-half p { color: #d1e0f2; margin-bottom: 14px; font-size: 14.5px; }
+    .evolve-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .evolve-step {
+      padding: 12px 13px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 184, 224, 0.25);
+    }
+    .evolve-step.active { background: rgba(45, 212, 191, 0.12); border-color: var(--teal-bright); }
+    .evolve-step strong { display: block; color: #ffffff; font-size: 14px; margin-bottom: 3px; }
+    .evolve-step small { display: block; color: #bed2ea; font-size: 12.2px; line-height: 1.48; }
+
+    /* 3 Questions + 4 Stages */
+    .q-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 15px 17px;
+    }
+    .q-card:nth-child(2) { border-left-color: var(--teal); }
+    .q-card:nth-child(3) { border-left-color: var(--violet); }
+    .q-card p { margin: 0; font-size: 14.2px; }
+
+    .stage-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stage-card:nth-child(2) { border-top-color: var(--teal); }
+    .stage-card:nth-child(3) { border-top-color: var(--violet); }
+    .stage-card:nth-child(4) { border-top-color: var(--amber); }
+    .skill-list { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .skill-list li {
+      font-size: 12.8px;
+      line-height: 1.5;
+      color: var(--body);
+      padding: 7px 9px;
+      border-radius: 7px;
+      background: #f7fafd;
+      border: 1px solid #e6eef7;
+    }
+    .skill-list code { display: inline-block; margin-bottom: 2px; font-weight: 700; background: #e8f1fb; }
+
+    /* Tables with mobile scroll hint */
+    .scroll-hint {
+      display: none;
+      font-size: 11.8px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13.8px; min-width: 580px; }
+    th, td { padding: 11px 13px; text-align: left; border-bottom: 1px solid #e7eff7; vertical-align: top; }
+    th { background: #f3f7fc; color: var(--ink); font-weight: 800; font-size: 12.8px; }
+    tr:last-child td { border-bottom: none; }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11.8px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pill-green { background: #e6f7f1; color: #0b6e5d; }
+    .pill-gray { background: #eef2f6; color: #475569; }
+    .pill-red { background: #fee2e2; color: #b91c1c; }
+    .pill-amber { background: #fef3c7; color: #92400e; }
+
+    /* Stat cards */
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 16px 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat-card:nth-child(2) { border-top-color: var(--teal); }
+    .stat-card:nth-child(3) { border-top-color: var(--violet); }
+    .stat-card:nth-child(4) { border-top-color: var(--amber); }
+    .stat-num { font-size: clamp(28px, 6vw, 35px); font-weight: 800; line-height: 1.1; color: var(--blue); }
+    .stat-card:nth-child(2) .stat-num { color: var(--teal); }
+    .stat-card:nth-child(3) .stat-num { color: var(--violet); }
+    .stat-card:nth-child(4) .stat-num { color: var(--amber); }
+    .stat-label { font-weight: 800; color: var(--ink); margin-top: 6px; font-size: 14px; }
+    .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.45; }
+
+    /* Case study bar comparison */
+    .case-box {
+      background: #ffffff;
+      border: 1.5px solid rgba(14, 143, 121, 0.35);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .demo-badge { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: 0.04em; }
+    .bar-group { margin: 12px 0; }
+    .bar-row { margin-bottom: 11px; }
+    .bar-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .bar-track { height: 11px; border-radius: 99px; background: #e9f0f7; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 99px; }
+    .fill-base { background: var(--blue); width: 68.3%; }
+    .fill-whatif { background: var(--teal); width: 92.1%; }
+    .fill-b14 { background: var(--amber); width: 40%; }
+
+    /* Roles */
+    .role-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .role-card:nth-child(2) { border-top-color: var(--teal); }
+    .role-card:nth-child(3) { border-top-color: var(--amber); }
+    .role-card:nth-child(4) { border-top-color: var(--violet); }
+    .role-who { font-size: 11.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 4px; }
+    .role-card p { margin: 0; font-size: 14px; }
+
+    /* Ecosystem */
+    .eco-col {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .eco-arrow { text-align: center; font-size: 15px; font-weight: 800; color: var(--teal); margin: 9px 0; }
+    .eco-item { padding: 13px 14px; border-radius: 9px; background: #f7fafd; border: 1px solid #e2ebf5; }
+    .eco-item.highlight { background: #eefaf7; border-color: rgba(14, 143, 121, 0.45); }
+    .bridge-banner {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background: #f4f1ff;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    /* Roadmap + illustration */
+    .roadmap-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; align-items: center; }
+    .road-step {
+      padding: 15px 16px;
+      border-radius: var(--radius);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--teal);
+      margin-bottom: 10px;
+    }
+    .road-step:nth-child(2) { border-left-color: var(--blue); }
+    .road-step:nth-child(3) { border-left-color: var(--violet); margin-bottom: 0; }
+    .future-img { border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); background: #ffffff; padding: 8px; }
+
+    .split-feature {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .split-feature img { border-radius: 8px; border: 1px solid #d7e2ee; }
+
+    /* FAQ Accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    details.faq {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: 0 2px 10px rgba(7, 23, 46, 0.03);
+    }
+    details.faq[open] { border-color: rgba(14, 143, 121, 0.45); }
+    details.faq summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 14.8px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after { content: "+"; font-size: 20px; font-weight: 700; color: var(--teal); flex-shrink: 0; }
+    details.faq[open] summary::after { content: "−"; }
+    details.faq .faq-body {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #edf2f8;
+      font-size: 14px;
+      color: var(--body);
+    }
+
+    /* Finale */
+    .finale {
+      background: linear-gradient(180deg, #07172e 0%, #051124 100%);
+      color: #e8f0fa;
+      padding: 50px 0 46px;
+      border-bottom: none;
+    }
+    .finale-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: center; }
+    .finale-img { border-radius: 12px; overflow: hidden; border: 1.5px solid rgba(45, 212, 191, 0.4); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45); }
+    .finale h2 { color: #ffffff; margin-bottom: 12px; }
+    .finale p { color: #cfe0f5; font-size: 14.8px; }
+    .finale-quote {
+      margin: 16px 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--teal-bright);
+      background: rgba(45, 212, 191, 0.1);
+      border-radius: 0 10px 10px 0;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13.8px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--teal-bright); color: #052026; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.08); color: #ffffff; border: 1px solid rgba(194, 211, 232, 0.35); }
+
+    footer {
+      background: #040e1f;
+      color: #93abc9;
+      padding: 20px 0 28px;
+      font-size: 12.5px;
+      border-top: 1px solid rgba(96, 165, 250, 0.18);
+    }
+    footer a { color: var(--teal-bright); }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 18px; align-items: center; }
+
+    /* Responsive breakpoints */
+    @media (max-width: 860px) {
+      .grid-4, .pillar-strip, .stage-pills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3, .evolve-row, .roadmap-grid, .split-feature, .finale-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: calc(100% - 26px); }
+      .grid-2 { grid-template-columns: 1fr; }
+      /* Keep quick-grid & stat-cards 2x2 on phone so all 4 links/metrics fit cleanly above the fold! */
+      .quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .q-btn { padding: 11px 10px 10px; }
+      .q-btn strong { font-size: 14px; }
+      .q-btn small { font-size: 11px; }
+      .grid-4.stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .scroll-hint { display: block; }
+      main section { padding: 36px 0; }
+      .hero { padding: 16px 0 20px; }
+      .card, .case-box, .second-half { padding: 15px; }
+    }
   </style>
 </head>
 <body>
+  <div class="top-trim"></div>
+
+  <!-- Sticky Mobile-Scrollable Navigation -->
+  <nav class="sticky-nav" aria-label="章节导航">
+    <div class="wrap nav-inner">
+      <a class="nav-brand" href="#watch">BeyondPaper</a>
+      <div class="nav-scroll-wrap">
+        <div class="nav-links" id="navLinks">
+          <a href="#watch" class="active">演示与源码</a>
+          <a href="#overview">项目总览</a>
+          <a href="#why">科学观与痛点</a>
+          <a href="#workflow">方法与 9 Skill</a>
+          <a href="#trust">可信双防线</a>
+          <a href="#results">案例与实测</a>
+          <a href="#deliverables">交付物</a>
+          <a href="#uses">四类价值</a>
+          <a href="#extensions">跨领域拓展</a>
+          <a href="#future">生态与未来</a>
+          <a href="#faq">常见问答</a>
+          <a href="#finale">结语 42</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== FIRST SCREEN: REPLAYS + GITHUB + FULL INTRO SIGNPOST ==================== -->
+  <header class="hero" id="watch">
+    <div class="wrap">
+      <div class="hero-head">
+        <span class="eyebrow">Edge-of-Chaos · SciencePal AI4Science</span>
+        <span class="finals-pill">FINALS · 2026</span>
+      </div>
+      <h1>BeyondPaper</h1>
+      <p class="hero-tagline">让论文成为可检验、可接续的研究系统</p>
+      <p class="hero-sub">从论文主张出发，在沙箱中核对原始证据、检验分析边界，交付可接续的研究接力包。</p>
+
+      <div class="quick-label">
+        <span>直接体验 · 演示回放与 GitHub</span>
+        <span>免登录直达</span>
+      </div>
+
+      <div class="quick-grid">
+        <a class="q-btn qt-teal" href="https://sciencepal.ai/share/01267973-29c2-4ca8-a391-ed9047913754" target="_blank" rel="noopener noreferrer">
+          <div class="q-top"><span class="q-tag">01 · 决赛主例</span><span class="q-arrow">↗</span></div>
+          <strong>生物医学演示回放</strong>
+          <small>证据核查 · 9/9 基线复现 · 参数边界追问</small>
+        </a>
+
+        <a class="q-btn qt-violet" href="https://sciencepal.ai/share/3017ff1c-b901-4745-8c79-f22422c8f7b5" target="_blank" rel="noopener noreferrer">
+          <div class="q-top"><span class="q-tag">02 · 跨领域试点</span><span class="q-arrow">↗</span></div>
+          <strong>量子研究接力回放</strong>
+          <small>从疑点走向重算、独立复核与自我修正</small>
+        </a>
+
+        <a class="q-btn qt-blue" href="https://sciencepal.ai/share/fe46de62-f074-47d5-82dd-49537f4ca513" target="_blank" rel="noopener noreferrer">
+          <div class="q-top"><span class="q-tag">03 · 快速入门</span><span class="q-arrow">↗</span></div>
+          <strong>合成论文工作流</strong>
+          <small>2 分钟快速看懂 4 段可追溯核查链路</small>
+        </a>
+
+        <a class="q-btn qt-amber" href="https://github.com/QmuseAI/BeyondPaper" target="_blank" rel="noopener noreferrer">
+          <div class="q-top"><span class="q-tag">04 · 开源仓库</span><span class="q-arrow">↗</span></div>
+          <strong>GitHub 源码与评测</strong>
+          <small>9 个自研 Skill · 8,700 行脚本 · 评分日志</small>
+        </a>
+      </div>
+
+      <div class="hero-tip">
+        提示：前三项为 SciencePal 实测运行回放，过程较长，可直接点击播放条右侧“跳到结尾”浏览最终报告与追问。
+      </div>
+
+      <a class="intro-cue" href="#overview">
+        <div>
+          <strong>下面有完整项目介绍（共 10 章）</strong>
+          <small>含答辩图解、9 个自研 Skill、实测数据与问答 · 顶部导航可左右滑动跳转</small>
+        </div>
+        <span class="cue-down">下滑阅读 ↓</span>
+      </a>
+    </div>
+  </header>
+
   <main>
-    <div class="eyebrow">Edge-of-Chaos · AI4Science Hackathon</div>
-    <h1>BeyondPaper</h1>
-    <p class="intro">论文之后：让研究成果可检验、可接续。</p>
-    <p class="lead">选择一项，直接查看：</p>
-    <nav class="cards" aria-label="项目回放与源码">
-      <a class="card bio" href="https://sciencepal.ai/share/01267973-29c2-4ca8-a391-ed9047913754" target="_blank" rel="noopener noreferrer">
-        <span class="badge">01 · 决赛主版</span><strong>生物医学主例</strong><small>证据核查、基线复核与参数追问</small>
-      </a>
-      <a class="card quantum" href="https://sciencepal.ai/share/3017ff1c-b901-4745-8c79-f22422c8f7b5" target="_blank" rel="noopener noreferrer">
-        <span class="badge">02 · 人机协作补充试点</span><strong>量子研究接力</strong><small>从疑点走向重算与独立复核</small>
-      </a>
-      <a class="card synthetic" href="https://sciencepal.ai/share/fe46de62-f074-47d5-82dd-49537f4ca513" target="_blank" rel="noopener noreferrer">
-        <span class="badge">03 · 早期版入门演示</span><strong>合成论文案例</strong><small>用虚构论文快速了解工作流程</small>
-      </a>
-      <a class="card code" href="https://github.com/QmuseAI/BeyondPaper" target="_blank" rel="noopener noreferrer">
-        <span class="badge">04 · 开放材料</span><strong>GitHub 源码与评测</strong><small>智能体、技能、脚本和逐次结果</small>
-      </a>
-    </nav>
-    <p class="note">前三项是 SciencePal 免登录只读运行回放，并非剪辑视频或可输入新论文的 Agent。回放较长，可使用播放器的“跳到结尾”。真实论文回放会显示论文身份；自动发现须经人工核实。量子试点不计入决赛主版评测。</p>
+    <!-- ==================== 01 · OVERVIEW & HERO CONCEPT ==================== -->
+    <section id="overview" class="section-soft">
+      <div class="wrap">
+        <p class="kicker">01 · 项目总览</p>
+        <h2>把静态论文变成可核查、可追问、可接续的工作台</h2>
+        <p class="lead">BeyondPaper 将论文正文与公开代码、数据接入具身科研 Agent，通过确定性脚本与沙箱重跑核清证据边界，再交由研究者交互核查并开启下一步科学探索。</p>
+
+        <figure class="concept-frame">
+          <img src="assets/beyondpaper-concept.png" width="1672" height="941" alt="BeyondPaper 核心概念图：静态论文与公开代码数据进入具身 AI Agent，研究者在工作台交互核查证据后开启下一步研究路径">
+          <div class="stage-pills">
+            <div class="stage-pill sp-1">① 论文“42”与公开材料</div>
+            <div class="stage-pill sp-2">② Agent 拆解证据链</div>
+            <div class="stage-pill sp-3">③ 研究者交互核查</div>
+            <div class="stage-pill sp-4">④ 衔接下一步探索</div>
+          </div>
+        </figure>
+
+        <div class="pillar-strip" aria-label="四句定位">
+          <div class="pillar-chip">为初研立复现之梯</div>
+          <div class="pillar-chip">为期刊立审稿之尺</div>
+          <div class="pillar-chip">为资本立尽调之镜</div>
+          <div class="pillar-chip">为科研立后拓之标</div>
+        </div>
+
+        <div class="team-bar">
+          <strong>Edge-of-Chaos 团队</strong>
+          <span>Zhuang Jiapei · Independent</span>
+          <span>Chen Yaocheng · Institute of Astronomy, Geophysics and Atmospheric Sciences, University of São Paulo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 02 · WHY BEYOND PAPER ==================== -->
+    <section id="why">
+      <div class="wrap">
+        <p class="kicker">02 · 科学观与行业痛点</p>
+        <h2>What is Science？以及传统论文的“有损压缩”</h2>
+        <p class="lead">本次比赛的主题是 <em>AI in Action, Science Forward</em>。不同学科的检验形态各异，但内核一致：科学不是持续吐出“答案”，而是提出可检验的解释，让证据、反例与重复实验不断推动自我修正。</p>
+
+        <div class="grid-3">
+          <article class="quote-card">
+            <div class="quote-who">Karl Popper · 科学哲学家</div>
+            <p class="quote-text">科学理论的试金石，在于它是否敢于接受可证伪的严格检验。</p>
+          </article>
+          <article class="quote-card">
+            <div class="quote-who">Charles Darwin · 生物学家</div>
+            <p class="quote-text">无论多么偏爱一个假说，只要事实给出反证，就必须果断放弃它。</p>
+          </article>
+          <article class="quote-card">
+            <div class="quote-who">Carl Sagan · 天体物理学家</div>
+            <p class="quote-text">科学与其说是一套知识体系，不如说是一种内置自我修正机制的思维方式。</p>
+          </article>
+        </div>
+
+        <div class="loop-ribbon">
+          <div class="loop-steps">提出问题 → 形成假设 → <span class="hl">取得证据 → 执行检验 → 修正认识 → 提出新问题</span></div>
+          <div class="loop-tag">BeyondPaper 切入区间：打通最容易断裂的证据接力段</div>
+        </div>
+
+        <p>学术论文具有不可替代的公共记录价值，但在 AI 加速科研的当下，传统静态论文正面临三重结构性局限——<strong>论文记录了终点，却有损压缩了过程</strong>：</p>
+
+        <div class="grid-3" style="margin-top:14px;">
+          <article class="card">
+            <span class="num-tag">01 · 过程压缩 · 证据丢失</span>
+            <div class="big-metric">294 篇</div>
+            <p>一项研究背后的几百个分析选择与失败路线在定稿时被省略。后来者既面临代码跑通的<strong>复用门槛</strong>，更面临“结论何时成立”的<strong>认识门槛</strong>。Kapoor &amp; Narayanan（<em>Patterns</em>, 2023）梳理出 17 个学科领域 294 篇受数据泄漏影响的机器学习论文。</p>
+          </article>
+
+          <article class="card">
+            <span class="num-tag">02 · 稿件暴增 · 审核过载</span>
+            <div class="big-metric">+33% / 75%–90%</div>
+            <p>AI 降低了写作门槛，2026 Q1 主流期刊投稿同比再涨 33%，顶会投稿直逼两万，人类审稿池透支，顶刊案头拒稿率升至 75%–90%。</p>
+            <div class="chart-box" aria-label="ICLR 2022 至 2026 投稿量增长柱状图">
+              <svg viewBox="0 0 260 112" width="100%" height="auto" role="img" aria-label="ICLR 投稿量从 2022 年 3.4k 增至 2026 年 19.5k">
+                <text x="4" y="14" font-size="10.5" font-weight="700" fill="#33455e">ICLR 投稿量激增（2022–2026）</text>
+                <line x1="8" y1="92" x2="252" y2="92" stroke="#cbd5e1" stroke-width="1"/>
+                <rect x="18" y="80" width="30" height="12" rx="3" fill="#93c5fd"/>
+                <text x="33" y="76" font-size="9.5" text-anchor="middle" fill="#475569">3.4k</text>
+                <text x="33" y="105" font-size="9.5" text-anchor="middle" fill="#64748b">2022</text>
+                <rect x="66" y="75" width="30" height="17" rx="3" fill="#60a5fa"/>
+                <text x="81" y="71" font-size="9.5" text-anchor="middle" fill="#475569">4.9k</text>
+                <text x="81" y="105" font-size="9.5" text-anchor="middle" fill="#64748b">2023</text>
+                <rect x="114" y="66" width="30" height="26" rx="3" fill="#3b82f6"/>
+                <text x="129" y="62" font-size="9.5" text-anchor="middle" fill="#475569">7.3k</text>
+                <text x="129" y="105" font-size="9.5" text-anchor="middle" fill="#64748b">2024</text>
+                <rect x="162" y="51" width="30" height="41" rx="3" fill="#2563eb"/>
+                <text x="177" y="47" font-size="9.5" text-anchor="middle" fill="#475569">11.6k</text>
+                <text x="177" y="105" font-size="9.5" text-anchor="middle" fill="#64748b">2025</text>
+                <rect x="210" y="24" width="30" height="68" rx="3" fill="#0e8f79"/>
+                <text x="225" y="20" font-size="10" font-weight="800" text-anchor="middle" fill="#0e8f79">19.5k</text>
+                <text x="225" y="105" font-size="9.5" font-weight="700" text-anchor="middle" fill="#0f213a">2026</text>
+              </svg>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="num-tag">03 · 周期漫长 · 发表即过时</span>
+            <div class="big-metric">~321 天</div>
+            <p>旗舰期刊从投稿到接收动辄 8–10 个月（<em>Nature</em> 接收中位数约 321 天），论文刊出时更强的方法往往早已出现。今天存储瓶颈已缓解，<strong>“理解、核查与及时接续”的瓶颈却愈发突出</strong>。</p>
+          </article>
+        </div>
+
+        <div class="second-half">
+          <span class="sh-badge">核心判断 · AI for Science 的“下半场”</span>
+          <h3>AI for Science 的“下半场”是 AI-native 科研体系</h3>
+          <p>在算力、基座模型与自动化实验室的“上半场”之后，下半场的核心命题转向科研体系的系统性演进——<strong>研究成果如何被可验证地交付、检验、共享和接续</strong>（受鄂维南院士“平台科研”与科研范式演进讨论启发）。BeyondPaper 正是其中面向计算论文的知识与证据层原型。</p>
+          <div class="evolve-row">
+            <div class="evolve-step">
+              <strong>1. AI 辅助个人任务</strong>
+              <small>写代码、润色论文、检索文献——单点提效，但下游核查负担反而加剧。</small>
+            </div>
+            <div class="evolve-step">
+              <strong>2. AI-native 组织流程</strong>
+              <small>AI 深入任务拆解、执行、复核与知识沉淀，改变团队协作与把关方式。</small>
+            </div>
+            <div class="evolve-step active">
+              <strong>3. AI-native 科研共同体</strong>
+              <small>论文升级为可复算、可追问、可接续的证据对象，机器负责全面核查、人聚焦关键科学判断。</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 03 · CORE METHOD & 9 SKILLS ==================== -->
+    <section id="workflow" class="section-soft">
+      <div class="wrap">
+        <p class="kicker">03 · 核心方法与系统架构</p>
+        <h2>围绕主张连续追问三件事 · 9 个自研 Skill · 4 段工作流</h2>
+        <p class="lead">BeyondPaper 不输出草率的“对/错”裁决，而是围绕每条核心主张连续追问三个问题，并通过 9 个自研 Skill（47 个文件、约 8,700 行 Python 确定性脚本）串成 4 段可追溯工作流。</p>
+
+        <div class="grid-3" style="margin-bottom:20px;">
+          <article class="q-card">
+            <h3>1. 证据是否充分？</h3>
+            <p>将正文主张、图表数字、作者公开存档与源码逐一绑定；能重跑的数字，直接在沙箱中重新计算核对。</p>
+          </article>
+          <article class="q-card">
+            <h3>2. 结论边界在哪？</h3>
+            <p>在代码中实际存在的合理选择（随机种子、正则化系数、数据划分、特征数）上做多宇宙压测，定位翻转条件。</p>
+          </article>
+          <article class="q-card">
+            <h3>3. 下一步做什么？</h3>
+            <p>把证据缺口、敏感边界与失败路径转化为竞争假设与按期望信息增益（EIG）排序的后续实验清单。</p>
+          </article>
+        </div>
+
+        <div class="grid-4">
+          <article class="stage-card">
+            <h3>1. 读清楚</h3>
+            <ul class="skill-list">
+              <li><code>bp-claim-ledger</code><br>建立“主张—证据—文件”账本，盘点作者存档输出。</li>
+              <li><code>bp-pitfall-atlas</code><br>跨论文失误库（12 类机制、21 核实案例），开审前生成先验清单。</li>
+            </ul>
+          </article>
+
+          <article class="stage-card">
+            <h3>2. 复现比对</h3>
+            <ul class="skill-list">
+              <li><code>bp-consistency-check</code><br>脚本复算 p 值、GRIM、CI、Cohen's d 与 Methods/代码参数比对。</li>
+              <li><strong>复现校验比对</strong><br>先对照论文、作者存档与本次重跑三方结果，排除环境偏差。</li>
+            </ul>
+          </article>
+
+          <article class="stage-card">
+            <h3>3. 核查压测</h3>
+            <ul class="skill-list">
+              <li><code>bp-ghost-variables</code><br>扫描测试集混入训练、测试集选特征、同内容文件拷贝与残留变量。</li>
+              <li><code>bp-multiverse</code><br>构建合理参数网格重跑，量化结论成立比例并定位翻转条件。</li>
+            </ul>
+          </article>
+
+          <article class="stage-card">
+            <h3>4. 交付接力</h3>
+            <ul class="skill-list">
+              <li><code>bp-relay-package</code> &amp; <code>bp-null-result</code><br>输出复现护照、一页简报与失败路径卡片。</li>
+              <li><code>bp-next-experiment</code> &amp; <code>bp-paper-agent</code><br>EIG 排序下一实验；经基线与确定性测试后开放论文智能体。</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="card">
+            <h3>工程原则：脚本优先，模型聚焦阅读与判断</h3>
+            <p>凡是能精确计算、文件比对和统计复算的环节一律固化为确定性脚本，让模型专注于论文阅读、假设推理与边界追问。<a href="https://github.com/QmuseAI/BeyondPaper/tree/main/agent/skills" target="_blank" rel="noopener noreferrer">查看 9 个 Skill 源码 ↗</a></p>
+          </div>
+          <div class="card">
+            <h3>运行底座：SciencePal 平台</h3>
+            <p>SciencePal 承担自定义 Agent 编排、Linux 沙箱执行、文献检索与可回放展示。留一法验证表明，去掉胃癌主例自身记录后，<code>bp-pitfall-atlas</code> 仍覆盖了该论文实际出错的全部 5 种机制。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 04 · TRUST DOUBLE DEFENSE ==================== -->
+    <section id="trust">
+      <div class="wrap">
+        <p class="kicker">04 · 核心工程创新</p>
+        <h2>可信性双防线：先查自己，再判论文，证据可回放</h2>
+        <p class="lead">自动科研审计最难的是<strong>防止审计者冤枉论文</strong>。初赛时原样论文上全部 10 条误报均源于 R→Python 移植偏差，因此我们建立了“复现校验 + 逐条执行核验”双防线。</p>
+
+        <h3 style="margin-bottom:8px;">防线一：复现校验（Reproduction Gate）三方比对矩阵</h3>
+        <div class="scroll-hint">← 左右滑动查看完整表格 →</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>校验状态</th>
+                <th>论文陈述 × 作者存档 × 沙箱重跑</th>
+                <th>归因与处理原则</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>reproduced</code></td>
+                <td>三方数值完全一致</td>
+                <td><span class="pill pill-green">确认复现</span> 可作为后续追问基线</td>
+              </tr>
+              <tr>
+                <td><code>archive_ok</code></td>
+                <td>未重跑，但作者公开存档与论文一致</td>
+                <td><span class="pill pill-green">存档一致</span> 尊重作者存档记录</td>
+              </tr>
+              <tr>
+                <td><code>port_gap</code></td>
+                <td>作者存档与论文一致，仅本次重跑不同</td>
+                <td><span class="pill pill-gray">标灰 · 归因审计者</span> 移植/环境差异，绝不归罪论文</td>
+              </tr>
+              <tr>
+                <td><code>archive_mismatch</code></td>
+                <td>作者自己的存档输出与论文陈述不一致</td>
+                <td><span class="pill pill-red">构成冲突证据</span> 标为待核实冲突并附命令输出</td>
+              </tr>
+              <tr>
+                <td><code>not_reproduced</code></td>
+                <td>缺乏作者存档对照且重跑不一致</td>
+                <td><span class="pill pill-amber">至多标黄</span> 证据不足以直接标红，交人工复核</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="card" style="border-left:4px solid var(--amber);">
+            <h3>移植类误报归零：10 → 0</h3>
+            <p>引入复现校验后，原样论文上因 R→Python 移植导致的误报从 <strong>10 条降至 0 条</strong>（如 Hardwicke 2021 论文中 34 个数值复现、19 处移植差异准确标灰为 <code>port_gap</code>，0 误报）。</p>
+          </div>
+          <div class="card" style="border-left:4px solid var(--teal);">
+            <h3>防线二：逐条执行核验（verify_queue.py）</h3>
+            <p>模型提出的每条重要警示都必须附带沙箱实测命令与输出文件，核验不通过自动降灰；所有级别调整记录于 <code>severity_changes.json</code>，确保全程可回放审计。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 05 · CASE STUDY & BENCHMARK ==================== -->
+    <section id="results" class="section-soft">
+      <div class="wrap">
+        <p class="kicker">05 · 深度案例与定量验证</p>
+        <h2>从静态正文盲区到量化实测（主版 v1.11.16）</h2>
+
+        <div class="case-box" style="margin-bottom:24px;">
+          <span class="demo-badge" style="color:var(--teal);">真实主展示例 · 生物医学代谢组学论文</span>
+          <h3 style="font-size:19px; margin-top:4px;">静态正文看不见的证据，与锁定基线后的参数边界追问</h3>
+          <div class="grid-2" style="margin-top:12px; align-items:start;">
+            <div>
+              <p><strong>第一层：脚本核对出的代码与文件证据</strong></p>
+              <ul style="margin:0 0 10px; padding-left:1.2em; font-size:13.8px;">
+                <li>诊断模型 10 个特征在包含全部 <strong>142 个测试样本</strong>的发现集文件上筛选；</li>
+                <li>预后特征在测试集上计算置换重要性挑出（<code>perm.fit(Xtest, ytest)</code>）；</li>
+                <li>“外部测试集”预测文件与测试集预测文件完全同内容拷贝；</li>
+                <li>Methods 写 L1 为 <code>0.01</code>，代码实际运行 <code>0.005</code>；90% 分位写为 95% CI。</li>
+              </ul>
+              <p style="font-size:13.2px; margin:0;">
+                <a href="https://sciencepal.ai/share/01267973-29c2-4ca8-a391-ed9047913754" target="_blank" rel="noopener noreferrer">在 SciencePal 查看完整回放 ↗</a>
+              </p>
+            </div>
+
+            <div>
+              <p><strong>第二层：论文智能体先锁基线，再做反事实追问</strong></p>
+              <div class="bar-group">
+                <div class="bar-row">
+                  <div class="bar-head"><span>1. <code>reproduce</code> 复现原分析</span><span style="color:var(--blue);">9/9 基线一致 · 0.683</span></div>
+                  <div class="bar-track"><div class="bar-fill fill-base"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-head"><span>2. <code>whatif α = 0.02</code> 沙箱重跑</span><span style="color:var(--teal);">外部敏感度 0.921（k=15 仅 −0.016）</span></div>
+                  <div class="bar-track"><div class="bar-fill fill-whatif"></div></div>
+                </div>
+                <div class="bar-row" style="margin-top:14px;">
+                  <div class="bar-head"><span>对照 · 盲测卒中论文（B14）压测</span><span style="color:var(--amber);">60 组合中 40% 成立（稳健性待核实）</span></div>
+                  <div class="bar-track"><div class="bar-fill fill-b14"></div></div>
+                </div>
+              </div>
+              <p style="font-size:13px; color:var(--body); background:#f5faf8; padding:9px 11px; border-radius:8px; margin:0;">
+                <strong>解释边界：</strong><code>0.683 → 0.921</code> 揭示结论对正则化参数高度敏感，需结合特异度与独立队列综合判断，而非直接推论“新参数更优”或“论文被推翻”。B14 亦归类为稳健性问题而非草率定性“造假”。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:12px;">决赛主版 v1.11.16 定量评测（DeepSeek V4 Pro）</h3>
+        <div class="grid-4 stats-grid" style="margin-bottom:18px;">
+          <div class="stat-card">
+            <div class="stat-num">20/20</div>
+            <div class="stat-label">已知答案植入检出</div>
+            <div class="stat-sub">10 次运行 · 真实 26/34<br>红/黄灯 48/48 属实</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">28/31</div>
+            <div class="stat-label">未见盲测红黄属实</div>
+            <div class="stat-sub">5 篇有效（3 条黄误报）<br>1 篇缺全文单列排除</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">0</div>
+            <div class="stat-label">已判定红色误报</div>
+            <div class="stat-sub">盲测 7 红：6 属实 1 待核实<br>两组合计 0 / 23</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">10→0</div>
+            <div class="stat-label">移植类误报归零</div>
+            <div class="stat-sub">复现校验区分环境差异<br>先查自己再判论文</div>
+          </div>
+        </div>
+
+        <div class="scroll-hint">← 左右滑动查看完整评测表 →</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>评测集</th>
+                <th>样本与运行口径</th>
+                <th>主版 v1.11.16 实测结果</th>
+                <th>口径说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>已知答案基准</strong></td>
+                <td>5 篇原样版 + 5 篇人工植入版（10 次运行）</td>
+                <td>植入 <strong>20/20</strong>（9 红）；真实累计 <strong>26/34</strong>；红/黄灯 <strong>48/48</strong> 属实，0 红色误报</td>
+                <td>参与了规则迭代，用于回归验证，与盲测分开报告</td>
+              </tr>
+              <tr>
+                <td><strong>未见论文盲测</strong></td>
+                <td>开发后新增 5 篇有效未见论文（各 1 次）</td>
+                <td>红/黄灯 <strong>28/31</strong> 属实，3 黄误报（全在 B14）；7 红中 <strong>6 属实、1 待核实、0 红色误报</strong></td>
+                <td>独立外推检验；B13 因付费墙缺全文未完成单列排除</td>
+              </tr>
+              <tr>
+                <td><strong>两组合计</strong></td>
+                <td>15 次主版选定运行</td>
+                <td>人工逐条复核 <strong>76/79（约 96%）</strong> 属实，已判定红色误报 <strong>0/23</strong></td>
+                <td>详见 <a href="https://github.com/QmuseAI/BeyondPaper/blob/main/evaluation/scores_final/summary.md" target="_blank" rel="noopener noreferrer">summary.md ↗</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 06 · DELIVERABLES ==================== -->
+    <section id="deliverables">
+      <div class="wrap">
+        <p class="kicker">06 · 交付物</p>
+        <h2>一次审查，留下后来者可直接接力的“研究接力包”</h2>
+        <p class="lead">每次完整运行交付四类结构化、可追溯的材料，并把经人工核实的新失误机制沉淀回跨论文失误库 <code>bp-pitfall-atlas</code>。</p>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>1. 复现护照（<code>passport.md</code>）</h3>
+            <p>逐条记录核心主张的证据灯号、原文页码、代码行号、作者存档比对结果与复现等级，5 分钟摸清论文家底。</p>
+          </article>
+          <article class="card">
+            <h3>2. 失败路径与负结果（<code>failure_paths.md</code>）</h3>
+            <p>把论文没写出来的失效条件、参数翻转边界与无法复现环节显式保存并支持跨论文检索，避免重复踩坑。</p>
+          </article>
+          <article class="card">
+            <h3>3. 下一实验清单（EIG 排序）</h3>
+            <p>结合文献检索与审计缺口提出竞争假设，并按期望信息增益（EIG）排列最值得优先开展的验证实验。</p>
+          </article>
+          <article class="card">
+            <h3>4. 一页简报 &amp; 经测试论文智能体</h3>
+            <p>提供面向审稿或尽调的一页摘要，以及支持 <code>reproduce</code> / <code>whatif</code> / <code>claims</code> / <code>next</code> 的论文智能体——通过基线与确定性测试后才开放真实重跑。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 07 · FOUR ROLES ==================== -->
+    <section id="uses" class="section-soft">
+      <div class="wrap">
+        <p class="kicker">07 · 应用价值</p>
+        <h2>四句定位：同一条证据链，服务四类科研决策</h2>
+        <p class="lead">同一条可追溯证据链在四种科研决策中的自然投射，呼应科研“平权化”与打破“理论/实验、学科、科研/产业”三道边界的愿景。</p>
+
+        <div class="grid-4">
+          <article class="role-card">
+            <div class="role-who">初研者 / 研究生</div>
+            <h3>为初研立复现之梯</h3>
+            <p>主张与代码数据逐一绑定，标明复现状态与缺失材料，大幅降低起步成本，让证据扎实的年轻团队站上更公平的起跑线。</p>
+          </article>
+          <article class="role-card">
+            <div class="role-who">期刊 / 审稿人</div>
+            <h3>为期刊立审稿之尺</h3>
+            <p>先完成全面、可重复的数值与代码筛查，输出审稿一页简报与待回应清单，让人类审稿人聚焦核心科学判断。</p>
+          </article>
+          <article class="role-card">
+            <div class="role-who">产业转化 / 投资机构</div>
+            <h3>为资本立尽调之镜</h3>
+            <p>按“报告效果 → 材料核对 → 敏感边界 → 待补独立验证”的顺序呈现风险，缓解学术与产业之间的信息脱节。</p>
+          </article>
+          <article class="role-card">
+            <div class="role-who">科研共同体</div>
+            <h3>为科研立后拓之标</h3>
+            <p>不只停在“挑错”，而是沉淀结论边界、失败路径与竞争假设，直接指向下一轮最能减少不确定性的探索。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 08 · EXTENSIONS & QUANTUMAGENT-OS ==================== -->
+    <section id="extensions">
+      <div class="wrap">
+        <p class="kicker">08 · 跨领域拓展与人机协作试点</p>
+        <h2>走出单一学科：跨模型迁移与量子计算研究接力</h2>
+        <p class="lead">主版评测之外，我们开展了跨底层模型适配与量子计算人机协作接力试点（独立于主版统计），印证 BeyondPaper 核查的是<strong>跨学科共性的计算研究证据结构</strong>。</p>
+
+        <div class="grid-3">
+          <article class="card" style="border-top:3.5px solid var(--teal);">
+            <span class="demo-badge" style="color:var(--teal);">自我修正 1 · Q01 量子 ML</span>
+            <h3>扩大样本后主动撤回假阳性</h3>
+            <p>第一轮 60 点小测试集曾跑出“量子领先 +0.089”；扩大至 1,000 个独立测试点与 10 种子配对检验后优势消失，团队主动撤回了初步判断。</p>
+          </article>
+          <article class="card" style="border-top:3.5px solid var(--blue);">
+            <span class="demo-badge" style="color:var(--blue);">自我修正 2 · Q02 Willow 表面码</span>
+            <h3>核清解码器口径后更正误读</h3>
+            <p>前两轮算出的表面码参数 Λ 似低于论文的 2.04；第三轮核清 Table S1 与 Libra 解码器对应关系后重算得 <strong>2.035</strong>（与 2.04±0.02 一致）。</p>
+          </article>
+          <article class="card" style="border-top:3.5px solid var(--violet);">
+            <span class="demo-badge" style="color:var(--violet);">延伸研究与跨模型 · Q04 / Kimi / GLM</span>
+            <h3>从疑点走向短文草稿与跨模型迁移</h3>
+            <p>围绕 QNN 有效维数脚注疑点枚举 224 组配置形成带脚本短文草稿；并在 SciencePal 适配 Kimi K3 与 GLM 5.3，验证工程护栏可跨模型迁移。</p>
+          </article>
+        </div>
+
+        <div class="split-feature">
+          <img src="assets/quantumagent_os_readme.jpg" alt="团队在量子计算主业方向的独立开源项目 QuantumAgent-OS">
+          <div>
+            <p class="kicker" style="margin-bottom:4px;">为什么选择 BeyondPaper 参赛？</p>
+            <h3>从垂直领域工具，走向跨学科科研底座</h3>
+            <p>在体验 SciencePal 的过程中，我们也顺手在量子计算主业做了独立开源项目 <strong>QuantumAgent-OS</strong>，降低多框架量子电路与纠错的使用门槛。</p>
+            <p style="margin-bottom:0;">但决赛我们依然选择 <strong>BeyondPaper</strong>：垂直工具解决的是“上半场”单一领域的效率，而 BeyondPaper 切入的是“下半场”跨学科共性的底层命题——<strong>无论未来科研 Agent 产出多快，所有成果最终都要回答：证据能否核对？边界是否稳健？下一位研究者如何接续？</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 09 · ECOSYSTEM & FUTURE ==================== -->
+    <section id="future" class="section-soft">
+      <div class="wrap">
+        <p class="kicker">09 · 生态坐标与未来升级</p>
+        <h2>全球生态互补，走向可验证、可重组的知识结构</h2>
+
+        <div class="grid-2">
+          <div class="eco-col">
+            <span class="demo-badge" style="color:var(--blue);">脉络一 · 自动科研与知识推导过程</span>
+            <div class="eco-item" style="margin-top:8px;">
+              <strong>AutoResearch（Karpathy）</strong>
+              <p style="margin:4px 0 0; font-size:13.5px;">在清晰可控的预算与验证指标下高速自动迭代，大幅加速实验探索。</p>
+            </div>
+            <div class="eco-arrow">↓ 从追指标走向理解过程</div>
+            <div class="eco-item">
+              <strong>SciencePedia（arXiv:2510.26854）</strong>
+              <p style="margin:4px 0 0; font-size:13.5px;">将文献中被压缩的推理链显式化，构建长推理链知识库与反向知识搜索。</p>
+            </div>
+          </div>
+
+          <div class="eco-col">
+            <span class="demo-badge" style="color:var(--teal);">脉络二 · 实证论文的工具化与证据核查</span>
+            <div class="eco-item" style="margin-top:8px;">
+              <strong>Paper2Agent（<em>Nature</em>, 2026）</strong>
+              <p style="margin:4px 0 0; font-size:13.5px;">将开源论文代码转化为可交互 AI 工具，聚焦方法层面的忠实执行。</p>
+            </div>
+            <div class="eco-arrow">↓ 补齐分析有效性审计与接续</div>
+            <div class="eco-item highlight">
+              <strong>BeyondPaper（本项目）</strong>
+              <p style="margin:4px 0 0; font-size:13.5px;">在忠实复现的基础上再问一步：证据够不够？合理改动后稳不稳？失败路径与下一实验是什么？</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bridge-banner">
+          <strong>推导链 ↔ 证据链深度互补：</strong>SciencePedia 回答“为什么这样推导”，BeyondPaper 回答“用什么代码、数据和条件跑出来”。我们也呼吁科研界默认开源代码与数据，共建开放、可验证的公共科研底座（平台科研）。
+        </div>
+
+        <h3 style="margin:28px 0 12px;">下一阶段三步升级路线</h3>
+        <div class="roadmap-grid">
+          <div>
+            <div class="road-step">
+              <h3>1. 结构化研究轨迹</h3>
+              <p style="margin:0; font-size:13.8px;">显式记录每轮研究的竞争假设、前置条件、代码/数据版本、沙箱命令、输出及保留/撤回理由，全链路可查。</p>
+            </div>
+            <div class="road-step">
+              <h3>2. 面向证据与先例的反向检索</h3>
+              <p style="margin:0; font-size:13.8px;">吸收 SciencePedia 反向知识搜索思路，从主张反向检索支持/反驳运行、失败路径与跨论文先例，打通推导链与证据链。</p>
+            </div>
+            <div class="road-step">
+              <h3>3. 自动实验自我审查闸门</h3>
+              <p style="margin:0; font-size:13.8px;">为自动科研循环装上证据护栏——每轮不仅问“指标涨没涨”，更追问“是否真支持原假设、口径有无变化”。</p>
+            </div>
+          </div>
+          <div class="future-img">
+            <img src="assets/future_knowledge_structure.jpg" alt="未来知识结构概念图：科学知识从静态文档演进为可推理、可验证、可重组的活结构">
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+          <h3>当前工程边界与演进重点</h3>
+          <p style="margin-bottom:0; font-size:13.8px;">
+            <strong>① 材料公开度：</strong>依赖全文、代码或数据公开，缺失材料时如实标明缺口。
+            <strong>② 沙箱算力：</strong>当前 CPU Linux 沙箱尚无完整 R 与 GPU 环境，重算力与湿实验需外部接力。
+            <strong>③ 模型稳定性：</strong>平台级底层模型锁定与更大规模跨学科公开盲测是持续补齐重点。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 10 · FAQ ==================== -->
+    <section id="faq">
+      <div class="wrap">
+        <p class="kicker">10 · 深度问答（决赛答辩备份）</p>
+        <h2>展位交流常见追问</h2>
+
+        <div class="faq-list">
+          <details class="faq">
+            <summary>Q1：76/79（约 96%）会不会过拟合？B13 为何排除？</summary>
+            <div class="faq-body">
+              我们将两类评测严格分开：<strong>已知答案基准（10 次运行）</strong>参与了规则迭代（每次迭代做历史全量回放，确保不伤害已确认真问题）；独立外推证据是开发后新增的 <strong>5 篇有效未见盲测论文</strong>，红黄灯 28/31 属实、7 红灯中 6 属实 1 待核实、0 红色误报。第 6 篇盲测 B13 因全文付费墙无法获取且沙箱未完成，在 <code>meta.json</code> 中单列为 <code>excluded</code> 并保留原始记录。
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>Q2：whatif α=0.02 让外部敏感度跳到 0.921，是否推翻了论文？</summary>
+            <div class="faq-body">
+              不是。先跑 <code>reproduce</code> 确认 9/9 基线一致，再跑 <code>whatif α=0.02</code> 证明外部敏感度对该正则化参数高度敏感（对比 <code>k=15</code> 仅变化 −0.016）。评价新参数是否更优需结合特异度与独立前瞻队列验证。系统把可重算的证据和参数边界透明呈现给研究者，不替人类宣布“论文无效”。
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>Q3：换用其他底层大模型，这套框架还有效吗？</summary>
+            <div class="faq-body">
+              主评测之外，我们在 SciencePal 上分别基于 Kimi K3 与 GLM 5.3 配置适配了独立智能体，验证了框架可跨模型迁移；同时实测表明底层模型波动是最大方差来源，这恰恰体现了“8,700 行脚本优先 + 复现校验 + 逐条执行核验”的工程价值。
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>Q4：换到物理或量子计算等其他学科还能跑吗？</summary>
+            <div class="faq-body">
+              可以。BeyondPaper 核查的是跨学科共性的计算研究证据结构（主张—文件—存档—重算—参数敏感性）。在补充盲测中，未作修改的 v1.11.16 完整跑完了量子机器学习基准论文 Q01，重算了作者存档排名并识别出“量子与经典调参预算不对等”的核心后续方向。
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>Q5：如何避免 AI 自动给论文贴“造假”标签的伦理风险？</summary>
+            <div class="faq-body">
+              所有输出均严格界定为“对照作者公开材料发现的待核实线索”，附原文页码、代码行号与沙箱命令输出，绝不输出“造假”裁决；复现校验将移植误差标灰，逐条核验将无实证猜测降灰，稳健性问题与事实冲突严格区分。任何高影响决策前仍需领域专家逐条复核。
+            </div>
+          </details>
+
+          <details class="faq">
+            <summary>Q6：下一步最务实的落地场景是什么？</summary>
+            <div class="faq-body">
+              近期最务实的两个切口：一是面向高投入立项/投资前的<strong>技术尽调</strong>（生物医药、计算材料、AI4Science 转化团队对关键论文做证据与边界筛查）；二是课题组内部<strong>投稿前自检与初研复现入门</strong>。
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 11 · FINALE (DEEP THOUGHT 42) ==================== -->
+    <section class="finale" id="finale">
+      <div class="wrap">
+        <div class="finale-grid">
+          <div class="finale-img">
+            <img src="assets/deep_thought_42.jpg" alt="《银河系漫游指南》超级计算机深思给出答案 42">
+          </div>
+          <div>
+            <p class="kicker" style="color:var(--teal-bright);">11 · 结语与初心</p>
+            <h2>不做只吐出“42”的黑盒 AI</h2>
+            <p>《银河系漫游指南》里，超级计算机“深思”算了 750 万年给出终极答案——<strong>42</strong>，可没人真正理解它回答的究竟是什么问题。</p>
+            <p>汽车解放了双脚，但我们依然为了热爱去奔跑；如果 AI 替你把游戏全自动通关，通关的那一刻，游戏的乐趣也随之消失。<strong>基于人类好奇心的自由探索，始终是颠覆性创新的核心。</strong></p>
+            <div class="finale-quote">
+              把论文的终点，变成下一轮可检验研究的起点。<br>
+              把繁琐的复现与核查苦役交给 AI，把提出真问题、感受探索惊奇与做出科学判断的乐趣，永远留给科学家。
+            </div>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="#watch">回到顶部看回放 ↑</a>
+              <a class="btn btn-secondary" href="https://github.com/QmuseAI/BeyondPaper" target="_blank" rel="noopener noreferrer">访问 GitHub 仓库 ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><strong>BeyondPaper</strong> · Edge-of-Chaos 团队 · Zhuang Jiapei &amp; Chen Yaocheng · SciencePal Global AI4Science Hackathon Finals</div>
+      <div><a href="https://github.com/QmuseAI/BeyondPaper" target="_blank" rel="noopener noreferrer">GitHub 源码</a> · <a href="https://github.com/QmuseAI/BeyondPaper/blob/main/evaluation/scores_final/summary.md" target="_blank" rel="noopener noreferrer">评测摘要</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Auto-highlight current section in the horizontally scrollable sticky mobile nav
+    (function () {
+      const nav = document.getElementById("navLinks");
+      if (!nav || !("IntersectionObserver" in window)) return;
+      const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+      const map = new Map();
+      links.forEach((a) => {
+        const id = a.getAttribute("href").slice(1);
+        const el = document.getElementById(id);
+        if (el) map.set(el, a);
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const active = map.get(entry.target);
+          if (!active) return;
+          links.forEach((l) => l.classList.remove("active"));
+          active.classList.add("active");
+          active.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        });
+      }, { rootMargin: "-25% 0px -65% 0px", threshold: 0 });
+      map.forEach((_, el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>
