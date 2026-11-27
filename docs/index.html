@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="BeyondPaper：选择 SciencePal 研究回放，或查看项目源码与评测。">
+  <title>BeyondPaper｜研究回放与源码</title>
+  <style>
+    :root { color-scheme: light; --ink:#23334b; --muted:#64748b; --line:#dbe5ed; --teal:#269780; --blue:#3b82c4; --violet:#9066c9; --amber:#b78b44; }
+    * { box-sizing: border-box; }
+    html { background:#fff; }
+    body { margin:0; color:var(--ink); font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif; }
+    main { width:min(100% - 32px,760px); margin:0 auto; padding:28px 0 36px; }
+    .eyebrow { color:var(--teal); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+    h1 { margin:8px 0 4px; font-size:clamp(31px,8vw,50px); line-height:1.08; letter-spacing:-.04em; }
+    .intro { margin:0 0 18px; color:var(--muted); font-size:14px; line-height:1.5; }
+    .lead { margin:0 0 15px; font-size:16px; font-weight:700; }
+    .cards { display:grid; gap:10px; }
+    a.card { display:block; position:relative; padding:15px 43px 15px 17px; border:1.3px solid var(--tone); border-radius:9px; background:var(--tint); color:inherit; text-decoration:none; }
+    a.card:hover, a.card:focus-visible { outline:2px solid var(--tone); outline-offset:2px; }
+    .badge { display:inline-block; margin-bottom:5px; color:var(--tone); font-size:11px; font-weight:700; letter-spacing:.04em; }
+    .card strong { display:block; font-size:18px; line-height:1.3; }
+    .card small { display:block; margin-top:3px; color:#3b4c63; font-size:12px; line-height:1.4; }
+    .card::after { content:"↗"; position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--tone); font-size:24px; }
+    .bio { --tone:var(--teal); --tint:#f0faf7; }
+    .quantum { --tone:var(--violet); --tint:#f7f3fc; }
+    .synthetic { --tone:var(--blue); --tint:#f1f7fc; }
+    .code { --tone:var(--amber); --tint:#fcf8ef; }
+    .note { margin:16px 0 0; padding-top:12px; border-top:1px solid var(--line); color:var(--muted); font-size:11px; line-height:1.55; }
+    @media (min-width:650px) { main { padding-top:45px; } .cards { grid-template-columns:1fr 1fr; gap:14px; } a.card { min-height:125px; padding-top:18px; } .intro { margin-bottom:30px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Edge-of-Chaos · AI4Science Hackathon</div>
+    <h1>BeyondPaper</h1>
+    <p class="intro">论文之后：让研究成果可检验、可接续。</p>
+    <p class="lead">选择一项，直接查看：</p>
+    <nav class="cards" aria-label="项目回放与源码">
+      <a class="card bio" href="https://sciencepal.ai/share/01267973-29c2-4ca8-a391-ed9047913754" target="_blank" rel="noopener noreferrer">
+        <span class="badge">01 · 决赛主版</span><strong>生物医学主例</strong><small>证据核查、基线复核与参数追问</small>
+      </a>
+      <a class="card quantum" href="https://sciencepal.ai/share/3017ff1c-b901-4745-8c79-f22422c8f7b5" target="_blank" rel="noopener noreferrer">
+        <span class="badge">02 · 人机协作补充试点</span><strong>量子研究接力</strong><small>从疑点走向重算与独立复核</small>
+      </a>
+      <a class="card synthetic" href="https://sciencepal.ai/share/fe46de62-f074-47d5-82dd-49537f4ca513" target="_blank" rel="noopener noreferrer">
+        <span class="badge">03 · 早期版入门演示</span><strong>合成论文案例</strong><small>用虚构论文快速了解工作流程</small>
+      </a>
+      <a class="card code" href="https://github.com/QmuseAI/BeyondPaper" target="_blank" rel="noopener noreferrer">
+        <span class="badge">04 · 开放材料</span><strong>GitHub 源码与评测</strong><small>智能体、技能、脚本和逐次结果</small>
+      </a>
+    </nav>
+    <p class="note">前三项是 SciencePal 免登录只读运行回放，并非剪辑视频或可输入新论文的 Agent。回放较长，可使用播放器的“跳到结尾”。真实论文回放会显示论文身份；自动发现须经人工核实。量子试点不计入决赛主版评测。</p>
+  </main>
+</body>
+</html>
