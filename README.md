@@ -6,6 +6,18 @@ BeyondPaper runs as a custom agent on [SciencePal](https://sciencepal.ai) (HKAI-
 
 **Team:** Edge-of-Chaos — Jiapei Zhuang (project design, presentation and submission; Independent) and Yaocheng Chen (project design, technical implementation and experimental validation; Universidade de São Paulo).
 
+## Watch three SciencePal replays
+
+These public links open **read-only conversation replays** without a SciencePal login. They are not video files or interactive Agent entry points. The real-paper replays identify the audited papers; findings are questions for human verification, not automatic verdicts on their authors.
+
+| Replay | What it shows | Version / scope |
+|---|---|---|
+| [Synthetic-paper walkthrough](https://sciencepal.ai/share/fe46de62-f074-47d5-82dd-49537f4ca513) | A short introductory workflow using a fictional paper. | Early v1.1 demonstration; not evidence for the final scores below. |
+| [Biomedical case](https://sciencepal.ai/share/01267973-29c2-4ca8-a391-ed9047913754) | Evidence checking, baseline reproduction and a what-if parameter question. | Final v1.11.16 case; main exhibition example. |
+| [Quantum follow-up](https://sciencepal.ai/share/3017ff1c-b901-4745-8c79-f22422c8f7b5) | Recalculation and independent checks following a question raised by a paper audit. | Human–AI collaborative supplementary pilot; not part of the v1.11.16 benchmark. |
+
+Explore the [`agent/`](agent/) configuration and skills or the [`evaluation/`](evaluation/) scripts and adjudicated results in this repository. The full final-run replay list appears further down this README.
+
 ## Results at a glance (v1.11.16, final)
 
 These results were obtained under normal running conditions, with most steps run by DeepSeek V4 Pro. SciencePal switches models automatically during a run; whenever it did, we stopped the run, switched back to V4 Pro, continued, and had V4 Pro recheck what had been written during the switch. One run per paper variant; the list of runs is in `evaluation/README.md`.
